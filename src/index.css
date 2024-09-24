@@ -1,0 +1,21 @@
+@import "./reset.css";
+
+@font-face {
+  font-family: "SpoqaHanSansNeo-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: SpoqaHanSansNeo-Regular;
+  background-color: #d4d4d4;
+}
+
+.container {
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: white;
+}
