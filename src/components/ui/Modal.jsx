@@ -16,10 +16,14 @@ const Modal = ({
   return (
     <div className={styles["modal-overlay"]}>
       <div className={styles["modal-content"]}>
-        <h2>{title}</h2>
+        <h2 className={styles["modal-title"]}>{title}</h2>
         <div className={styles["modal-buttons"]}>
-          <button onClick={onCancel}>{cancelText}</button>
-          <button onClick={onConfirm}>{confirmText}</button>
+          <button className={styles["button-cancel"]} onClick={onCancel}>
+            {cancelText}
+          </button>
+          <button className={styles["button-confirm"]} onClick={onConfirm}>
+            {confirmText}
+          </button>
         </div>
       </div>
     </div>
