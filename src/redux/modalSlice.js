@@ -2,11 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isOpen: false,
-  title: "",
+  modalType: "confirm",
+  modalTitle: "",
   confirmButtonText: "",
   cancelButtonText: "",
-  confirmAction: null,
-  cancelAction: null,
+  confirmActionId: null,
+  cancelActionId: null,
+  options: [],
+  optionActions: [],
 };
 
 const modalSlice = createSlice({
@@ -14,22 +17,17 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     openModal: (state, action) => {
-      const { modalTitle, onConfirm, onCancel, confirmText, cancelText } =
-        action.payload;
-      state.isOpen = true;
-      state.title = modalTitle;
-      state.confirmButtonText = confirmText;
-      state.cancelButtonText = cancelText;
-      state.confirmAction = onConfirm;
-      state.cancelAction = onCancel;
+      return {
+        ...state,
+        isOpen: true,
+        ...action.payload,
+      };
     },
     closeModal: (state) => {
-      state.isOpen = false;
-      state.title = "";
-      state.confirmButtonText = "";
-      state.cancelButtonText = "";
-      state.confirmAction = null;
-      state.cancelAction = null;
+      return {
+        ...state,
+        isOpen: false,
+      };
     },
   },
 });
