@@ -1,9 +1,5 @@
-function App() {
-  return (
-    <>
-      <h1>sns</h1>
-    </>
-  );
-}
+import React from "react";
 
-export default App;
+export default function App() {
+  return <div>App</div>;
+}
