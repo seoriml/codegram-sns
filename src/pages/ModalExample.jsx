@@ -1,47 +1,60 @@
 import React from "react";
-import Modal from "../components/ui/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import { openModal, closeModal } from "../redux/modalSlice";
+import { useDispatch } from "react-redux";
+import { openModal } from "../redux/modalSlice";
+import ConfirmModal from "../components/ui/modal/ConfirmModal";
+import OptionsModal from "../components/ui/modal/OptionsModal";
 
-const App = () => {
+const ModalExample2 = () => {
   const dispatch = useDispatch();
-  const { isOpen, title, confirmButtonText, cancelButtonText } = useSelector(
-    (state) => state.modal
-  );
 
-  const handleOpenModal = () => {
+  // ConfirmModal
+  const actionHandlersConfirm = {
+    delete: () => alert("게시글이 삭제되었습니다!"),
+  };
+  const handleOpenConfirmModal = () => {
     dispatch(
       openModal({
         modalTitle: "게시글을 삭제할까요?",
-        confirmText: "삭제",
-        cancelText: "취소",
+        confirmButtonText: "삭제",
+        cancelButtonText: "취소",
+        confirmActionId: "delete",
       })
     );
   };
 
-  const handleConfirm = () => {
-    alert("삭제되었습니다!");
-    dispatch(closeModal());
+  // OptionModal
+  const actionHandlersOptions = {
+    option1: () => alert("옵션 1이 선택되었습니다!"),
+    option2: () => console.log("옵션 2가 선택되었습니다!"),
   };
 
-  const handleCancel = () => {
-    alert("취소되었습니다!");
-    dispatch(closeModal());
+  const handleOpenOptionsModal = () => {
+    const options = [
+      { text: "옵션 1", color: "red", actionId: "option1" },
+      { text: "옵션 2", actionId: "option2" },
+    ];
+
+    dispatch(
+      openModal({
+        modalType: "options",
+        options: options,
+      })
+    );
   };
 
   return (
     <div>
-      <button onClick={handleOpenModal}>모달열기</button>
-      <Modal
-        isOpen={isOpen}
-        title={title}
-        onCancel={handleCancel}
-        onConfirm={handleConfirm}
-        cancelText={cancelButtonText}
-        confirmText={confirmButtonText}
-      />
+      <h1>모달 예시</h1>
+      <div>
+        <button onClick={handleOpenConfirmModal}>컨펌 모달 열기</button>
+        <ConfirmModal actionHandlers={actionHandlersConfirm} />
+      </div>
+      <div>
+        <button onClick={handleOpenOptionsModal}>옵션 모달 열기</button>
+        <OptionsModal actionHandlers={actionHandlersOptions} />
+      </div>
     </div>
   );
 };
 
-export default App;
+export default ModalExample2;
