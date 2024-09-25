@@ -1,5 +1,10 @@
 import React from "react";
+import Layout from "./components/ui/Layout";
 
-export default function App() {
-  return <div>App</div>;
+function App() {
+  return (
+    <Layout>
+      <h1>sns</h1>
+    </Layout>
+  );
 }
