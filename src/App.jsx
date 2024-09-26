@@ -3,6 +3,8 @@ import Layout from "./components/ui/Layout";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
+import ApiTest from "./redux/ApiTest";
+
 function App() {
   return (
     <Provider store={store}>
@@ -12,3 +14,5 @@ function App() {
     </Provider>
   );
 }
+
+export default App;
