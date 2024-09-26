@@ -1,21 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./BottomNavigation.module.scss";
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
-import { Provider } from "react-redux";
 import { setActiveTab } from "../../../redux/actions";
-import store from "../../../redux/store";
 // 아이콘
 import homeIcon from "../../../assets/images/tab_icon_home.svg";
 import chatIcon from "../../../assets/images/tab_icon_chat.svg";
 import postIcon from "../../../assets/images/tab_icon_post.svg";
 import profileIcon from "../../../assets/images/tab_icon_profile.svg";
-// 페이지 컴포넌트
-import Home from "../../../pages/home/Home";
-// import Chat from ""; // 채팅 구현X
-import Post from "../../../pages/post/Post";
-import Profile from "../../../pages/profile/MyProfile";
 
 // 하단 탭 구성 요소 배열
 const tabItem = [
@@ -60,26 +53,4 @@ const BottomTab = () => {
   );
 };
 
-// 라우팅
-const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/post" element={<Post />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-      <BottomTab />
-    </Router>
-  );
-};
-
-// 리덕스
-export default function BottomNavigation() {
-  return (
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
-}
+export default BottomTab;
