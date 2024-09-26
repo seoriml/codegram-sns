@@ -7,13 +7,13 @@ import { Provider } from "react-redux";
 import { setActiveTab } from "./redux/actions";
 import store from "../../../redux/store";
 // 아이콘
-import homeIcon from "../../assets/images/tab_icon_home.svg";
-import chatIcon from "../../assets/images/tab_icon_chat.svg";
-import postIcon from "../../assets/images/tab_icon_post.svg";
-import profileIcon from "../../assets/images/tab_icon_profile.svg";
+import homeIcon from "../../../assets/images/tab_icon_home.svg";
+import chatIcon from "../../../assets/images/tab_icon_chat.svg";
+import postIcon from "../../../assets/images/tab_icon_post.svg";
+import profileIcon from "../../../assets/images/tab_icon_profile.svg";
 // 페이지 컴포넌트
 import Home from "../../../pages/home/Home";
-import Chat from ""; // 채팅 구현X
+// import Chat from ""; // 채팅 구현X
 import Post from "../../../pages/post/Post";
 import Profile from "../../../pages/profile/MyProfile";
 
