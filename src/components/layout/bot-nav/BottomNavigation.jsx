@@ -4,7 +4,7 @@ import styles from "./BottomNavigation.module.scss";
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { Provider } from "react-redux";
-import { setActiveTab } from "./redux/actions";
+import { setActiveTab } from "../../../redux/actions";
 import store from "../../../redux/store";
 // 아이콘
 import homeIcon from "../../../assets/images/tab_icon_home.svg";
