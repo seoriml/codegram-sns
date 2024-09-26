@@ -3,6 +3,8 @@ import Layout from "./components/ui/Layout";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import BottomNavigation from "./components/layout/bot-nav/BottomNavigation";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   return (
