@@ -1,4 +1,5 @@
 import React from "react";
+import arrowIcon from "../../../assets/images/icon_arrow_left.svg";
 
 const BackButton = () => {
   const handleBack = () => {
@@ -7,7 +8,7 @@ const BackButton = () => {
 
   return (
     <button type="button" onClick={handleBack}>
-      뒤로가기
+      <img src={arrowIcon} alt="이미지업로드버튼" />
     </button>
   );
 };

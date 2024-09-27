@@ -1,4 +1,5 @@
 import React from "react";
+import fileUploadIcon from "../../../assets/images/file_upload_button_fill.svg";
 
 const ImageUploadButton = ({ onChange }) => {
   const handleImageChange = (e) => {
@@ -23,8 +24,8 @@ const ImageUploadButton = ({ onChange }) => {
         style={{ display: "none" }}
         multiple
       />
-      <label htmlFor="imageUpload" className="upload-button">
-        이미지 업로드
+      <label htmlFor="imageUpload" style={{ cursor: "pointer" }}>
+        <img src={fileUploadIcon} alt="이미지업로드버튼" />
       </label>
     </div>
   );
