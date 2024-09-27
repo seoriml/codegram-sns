@@ -31,4 +31,10 @@ body {
   --color-font-black: #000;
   --color-font-gray: #767676;
   --color-font-gray-light: #C4C4C4;
+
+  --font-size-large: 18px;
+  --font-size-title: 16px;
+  --font-size-regular: 14px; 
+  --font-size-detail: 12px;
+  --font-size-small: 10px;
 }
