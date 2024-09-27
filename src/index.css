@@ -37,4 +37,9 @@ body {
   --font-size-regular: 14px; 
   --font-size-detail: 12px;
   --font-size-small: 10px;
+  
+  --border-radius-large: 45px;
+  --border-radius-regular: 35px;
+  --border-radius-small: 32px;
+  --border-radius-post: 10px;
 }
