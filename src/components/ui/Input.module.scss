@@ -1,15 +1,23 @@
-.input-container {
+.inputContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: 80%;
-  max-width: 800px;
+  width: 100%;
+  max-width: 500px;
+  &::after {
+    content: var(--warning-message);
+    padding-top: 6px;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 400;
+    color: #eb5757;
+  }
 }
-.input-label {
+.inputLabel {
   color: #767676;
   font-size: 12px;
+  padding-bottom: 20px;
 }
-.input-field {
+.inputField {
   border: 0;
   border-bottom: 1px solid #dbdbdb;
   font-size: 14px;
