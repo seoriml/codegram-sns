@@ -3,7 +3,7 @@ import BackButton from "../ui/button/BackButton";
 import ImageUploadButton from "../ui/button/ImageUploadButton";
 import useAPI from "../../hooks/useAPI";
 
-const PostForm = ({ onSubmit = () => {} }) => {
+const PostForm = () => {
   const { post } = useAPI();
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
@@ -22,7 +22,7 @@ const PostForm = ({ onSubmit = () => {} }) => {
         }
       );
 
-      if (response && response.payload.user && response.payload.user.token) {
+      if (response.payload.user.token) {
         localStorage.setItem("token", response.payload.user.token);
       } else {
         console.error("로그인 실패: 토큰이 없습니다.");
@@ -31,7 +31,6 @@ const PostForm = ({ onSubmit = () => {} }) => {
       console.error("로그인 중 오류 발생:", err);
     }
   };
-
   useEffect(() => {
     loginUser();
   }, []);
@@ -83,11 +82,6 @@ const PostForm = ({ onSubmit = () => {} }) => {
        setContent("");
        setImages([]);
        setPreviews([]);
-      if (typeof onSubmit === "function") {
-        onSubmit();
-      } else {
-        console.error("onSubmit이 함수가 아닙니다.");
-      }
     } catch (err) {
       console.error("게시글 업로드 중 오류 발생:", err);
     }
@@ -99,10 +93,12 @@ const PostForm = ({ onSubmit = () => {} }) => {
     await uploadPost();
   };
 
+  //게시글 내용 변경 함수
   const handleContentChange = (e) => {
     setContent(e.target.value);
   };
 
+  //이미지 변경 함수
   const handleImageChange = (file) => {
     if (images.length < 3) {
       setImages((prevImages) => [...prevImages, file]);
@@ -113,6 +109,7 @@ const PostForm = ({ onSubmit = () => {} }) => {
     }
   };
 
+  //이미지 제거 함수
   const removeImage = (index) => {
     const newImages = images.filter((_, i) => i !== index);
     const newPreviews = previews.filter((_, i) => i !== index);
