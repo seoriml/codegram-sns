@@ -3,10 +3,8 @@ import BackButton from "../ui/button/BackButton";
 import ImageUploadButton from "../ui/button/ImageUploadButton";
 import useAPI from "../../hooks/useAPI";
 
-const PostForm = ({ onSubmit }) => {
-  const { data, loading, error, post } = useAPI();
-
-  // 상태 관리: 게시글 내용, 이미지 배열, 이미지 미리보기 배열
+const PostForm = ({ onSubmit = () => {} }) => {
+  const { post } = useAPI();
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
@@ -24,32 +22,51 @@ const PostForm = ({ onSubmit }) => {
         }
       );
 
-      console.log("응답 데이터:", response);
-
       if (response && response.payload.user && response.payload.user.token) {
-        const userData = response.payload.user;
-        localStorage.setItem("token", userData.token);
+        localStorage.setItem("token", response.payload.user.token);
       } else {
-        console.error("로그인 실패: 토큰이 없습니다.", response.user);
+        console.error("로그인 실패: 토큰이 없습니다.");
       }
     } catch (err) {
       console.error("로그인 중 오류 발생:", err);
     }
   };
+
   useEffect(() => {
     loginUser();
   }, []);
 
-  // 게시글 업로드 함수
-  const uploadPost = async () => {
-    const token = localStorage.getItem("token");
+  //이미지 업로드 함수
+  const uploadImages = async (images) => {
+    if (!Array.isArray(images) || images.length === 0) {
+      console.error("이미지가 없습니다", images);
+      return "";
+    }
 
-    const imageString = images
-      .map((image) => URL.createObjectURL(image))
-      .join(",");
+    const formData = new FormData();
+    images.forEach((image) => {
+      formData.append("image", image);
+    });
 
     try {
-      // 게시글 업로드 요청
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/image/uploadfiles`, {
+        method: "POST",
+        body: formData,
+      });
+      const json = await response.json();
+      return json.map((img) => img.filename).join(",") || "";
+    } catch (err) {
+      console.error("이미지 업로드 중 오류 발생:", err);
+      return "";
+    }
+  };
+
+  //게시글 등록 함수
+  const uploadPost = async () => {
+    const token = localStorage.getItem("token");
+    const imageString = await uploadImages(images);
+
+    try {
       const response = await post(
         `${import.meta.env.VITE_API_URL}/post`,
         {
@@ -61,42 +78,41 @@ const PostForm = ({ onSubmit }) => {
         "application/json",
         token
       );
-      const json = await response.json();
-      console.log("게시글 업로드 성공:", json);
-      onSubmit();
+      console.log("게시글 업로드 성공:", response);
+      alert("게시글이 성공적으로 업로드되었습니다!");
+       setContent("");
+       setImages([]);
+       setPreviews([]);
+      if (typeof onSubmit === "function") {
+        onSubmit();
+      } else {
+        console.error("onSubmit이 함수가 아닙니다.");
+      }
     } catch (err) {
       console.error("게시글 업로드 중 오류 발생:", err);
     }
   };
 
-  // 폼 제출 핸들러
+  //폼제출
   const handleSubmit = async (e) => {
     e.preventDefault();
     await uploadPost();
   };
 
-  // 게시글 내용 변경 핸들러
   const handleContentChange = (e) => {
     setContent(e.target.value);
   };
 
-  // 이미지 변경 핸들러
   const handleImageChange = (file) => {
-    // 최대 3장 이미지 제한
     if (images.length < 3) {
-      setImages((images) => [...images, file]); // 이미지 배열에 추가
-
-      // 미리보기 이미지 URL 생성
-      if (file) {
-        const imageUrl = URL.createObjectURL(file);
-        setPreviews((previews) => [...previews, imageUrl]); // 미리보기 배열에 추가
-      }
+      setImages((prevImages) => [...prevImages, file]);
+      const imageUrl = URL.createObjectURL(file);
+      setPreviews((prevPreviews) => [...prevPreviews, imageUrl]);
     } else {
       alert("최대 3장의 이미지만 업로드할 수 있습니다.");
     }
   };
 
-  // 이미지 제거 핸들러
   const removeImage = (index) => {
     const newImages = images.filter((_, i) => i !== index);
     const newPreviews = previews.filter((_, i) => i !== index);
@@ -120,12 +136,7 @@ const PostForm = ({ onSubmit }) => {
         {previews.length > 0 && (
           <div>
             {previews.map((preview, index) => (
-              <div
-                key={index}
-                style={{
-                  position: "relative",
-                }}
-              >
+              <div key={index} style={{ position: "relative" }}>
                 <img
                   src={preview}
                   alt={`업로드 이미지 ${index + 1}`}
