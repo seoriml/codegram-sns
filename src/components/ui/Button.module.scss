@@ -1,3 +1,13 @@
+.root {
+  --padding-left-right-login: 140px;
+  --padding-left-right-feed: 30px;
+  --padding-left-right-profile: 40px;
+  --padding-left-right-follow: 11px; 
+  --padding-left-right-post: 25px;
+  --border-blue: 1px solid var(--color-element-blue);
+  --border-gray: 1px solid var(--color-element-gray);
+}
+
 // 1. 버튼 기본타입
 .buttonBasic {
   max-width: 322px;
@@ -45,6 +55,7 @@
 .fontSizeSmall { font-size: var(--font-size-small) }
 
 // 6. 버튼 폰트굵기
+.fontWeightNormal { font-weight: normal}
 .fontWeightBold { font-weight: var(--font-bold) }
 
 // 7. 버튼 폰트색상
