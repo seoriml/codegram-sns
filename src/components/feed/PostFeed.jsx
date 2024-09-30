@@ -75,7 +75,7 @@ export default function Feed() {
         <ul>
           {feed.map((post) => (
             <li key={post.id}>
-              <Link to={`/details/${post.id}`}>
+              <Link to={`/detail/${post.id}`}>
                 <PostItem post={post} />
               </Link>
             </li>

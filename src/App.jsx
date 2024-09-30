@@ -5,9 +5,10 @@ import store from "./redux/store";
 import BottomTab from "./components/layout/bot-nav/BottomNavigation";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
-import Post from "./pages/post/Post";
+import PostCreate from "./pages/post/PostCreatePage";
 import Profile from "./pages/profile/MyProfile";
 import PostDetailPage from "./pages/post/PostDetailPage";
+import PostEditPage from "./pages/post/PostEditPage";
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
         <Router>
           <Routes>
             <Route path="/home" element={<Home />} />
-            <Route path="/details/:id" element={<PostDetailPage />} />
+            <Route path="/detail/:id" element={<PostDetailPage />} />
+            <Route path="/edit/:id" element={<PostEditPage />} />
             {/* <Route path="/chat" element={<Chat />} /> */}
-            <Route path="/post" element={<Post />} />
+            <Route path="/post" element={<PostCreate />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
           <BottomTab />

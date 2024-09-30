@@ -28,7 +28,7 @@ const PostItem = ({ post }) => {
         <p>{post.content}</p>
         {post.image && (
           <img
-            src={post.image}
+            src={`${import.meta.env.VITE_API_URL}/${post.image}`}
             alt="게시물 이미지"
             style={{ maxWidth: "100%", height: "auto" }}
           />
