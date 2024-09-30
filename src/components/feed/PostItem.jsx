@@ -1,5 +1,6 @@
 // components/PostItem.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 
 // 날짜 포맷팅 함수
 const formatDate = (dateString) => {
@@ -23,7 +24,9 @@ const PostItem = ({ post }) => {
         <h3>{post.author.username}</h3>
         <p>@{post.author.accountname}</p>
       </div>
-      <button onClick={() => navigate(`/post/edit/${post.id}`)}>수정</button>
+      <Link to={`/edit/${post.id}`}>
+        <button>수정</button>
+      </Link>
       <div>
         <p>{post.content}</p>
         {post.image && (
