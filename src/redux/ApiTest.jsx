@@ -5,14 +5,20 @@ export default function ApiTest() {
   const { data, loading, error, post } = useAPI();
 
   useEffect(() => {
-    post(`${import.meta.env.VITE_API_URL}/user`, {
+    // post(`${import.meta.env.VITE_API_URL}/user`, {
+    //   user: {
+    //     username: "String2",
+    //     email: "test@test2.com",
+    //     password: "String21312",
+    //     accountname: "String2",
+    //     intro: "String2",
+    //     image: "",
+    //   },
+    // });
+    post(`${import.meta.env.VITE_API_URL}/user/login`, {
       user: {
-        username: "String2",
         email: "test@test2.com",
         password: "String21312",
-        accountname: "String2",
-        intro: "String2",
-        image: "",
       },
     });
   }, []);
