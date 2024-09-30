@@ -2,11 +2,22 @@ import React from 'react';
 import styles from './Button.module.scss';
 
 export default function Button({
-  children, onClick,
-  type, padding, border, borderRadius,
-  fontSize, fontWeight, fontColor, backgroundColor
+  children,
+  onClick,
+  disabled,
+  type = 'buttonBasic',
+  padding = 'paddingProfile',
+  border = 'borderBlue',
+  borderRadius = 'borderRadiusRegular',
+  fontSize = 'fontSizeRegular',
+  fontWeight = 'fontWeightBold',
+  fontColor = 'fontWhite',
+  backgroundColor = 'colorEnable'
 })
 {
+  // Button 컴포넌트 props 확인
+  // console.log({ props })
+
   const buttonType = {
     buttonBasic: 'buttonBasic'
   }
@@ -54,21 +65,23 @@ export default function Button({
     colorCommon: 'colorCommon'
   }
 
-  const buttonStyle = `${
-    styles[
-      buttonType[type],
-      buttonPadding[padding],
-      buttonBorder[border],
-      buttonBorderRadius[borderRadius],
-      buttonFontSize[fontSize],
-      buttonFontWeight[fontWeight],
-      buttonFontColor[fontColor],
-      buttonColor[backgroundColor]
-    ]
-  }`;
+  const buttonStyle = `
+    ${styles[buttonType[type]]}
+    ${styles[buttonPadding[padding]]}
+    ${styles[buttonBorder[border]]}
+    ${styles[buttonBorderRadius[borderRadius]]}
+    ${styles[buttonFontSize[fontSize]]} 
+    ${styles[buttonFontWeight[fontWeight]]}
+    ${styles[buttonFontColor[fontColor]]}
+    ${styles[buttonColor[backgroundColor]]}
+  `;
 
   return (
-    <button className={buttonStyle} onClick={onClick}>
+    <button
+      className = {buttonStyle}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </button>
   )
