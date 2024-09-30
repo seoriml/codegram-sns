@@ -4,35 +4,19 @@ import ImageUploadButton from "../ui/button/ImageUploadButton";
 import useAPI from "../../hooks/useAPI";
 
 const PostForm = () => {
-  const { post } = useAPI();
+  const { data, loading, error, post } = useAPI();
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
 
-  // 로그인 함수
-  const loginUser = async () => {
-    try {
-      const response = await post(
-        `${import.meta.env.VITE_API_URL}/user/login`,
-        {
-          user: {
-            email: "test@test2.com",
-            password: "String21312",
-          },
-        }
-      );
-
-      if (response.payload.user.token) {
-        localStorage.setItem("token", response.payload.user.token);
-      } else {
-        console.error("로그인 실패: 토큰이 없습니다.");
-      }
-    } catch (err) {
-      console.error("로그인 중 오류 발생:", err);
-    }
-  };
+  //로그인 함수
   useEffect(() => {
-    loginUser();
+    post(`${import.meta.env.VITE_API_URL}/user/login`, {
+      user: {
+        email: "test@test2.com",
+        password: "String21312",
+      },
+    });
   }, []);
 
   //이미지 업로드 함수
@@ -46,18 +30,15 @@ const PostForm = () => {
     images.forEach((image) => {
       formData.append("image", image);
     });
-
-    try {
+    
+     {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/image/uploadfiles`, {
         method: "POST",
         body: formData,
       });
       const json = await response.json();
       return json.map((img) => img.filename).join(",") || "";
-    } catch (err) {
-      console.error("이미지 업로드 중 오류 발생:", err);
-      return "";
-    }
+    } 
   };
 
   //게시글 등록 함수
@@ -65,7 +46,7 @@ const PostForm = () => {
     const token = localStorage.getItem("token");
     const imageString = await uploadImages(images);
 
-    try {
+    {
       const response = await post(
         `${import.meta.env.VITE_API_URL}/post`,
         {
@@ -82,9 +63,7 @@ const PostForm = () => {
        setContent("");
        setImages([]);
        setPreviews([]);
-    } catch (err) {
-      console.error("게시글 업로드 중 오류 발생:", err);
-    }
+    } 
   };
 
   //폼제출
