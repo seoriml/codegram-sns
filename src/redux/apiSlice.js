@@ -20,6 +20,10 @@ export const executeRequest = createAsyncThunk(
         throw new Error(`HTTP error.! status: ${response.status}`);
       }
       const result = await response.json();
+      if (result?.user?.token) {
+        localStorage.setItem("userID", result.user.token);
+      }
+      //   localStorage.clear();
       console.log(result);
       return result;
     } catch (error) {
