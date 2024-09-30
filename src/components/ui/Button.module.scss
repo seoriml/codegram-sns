@@ -1,105 +1,57 @@
-/* ---------- 로그인 페이지 버튼 ---------- */ 
-.login-blue-button {
+// 1. 버튼 기본타입
+.buttonBasic {
   max-width: 322px;
-  width: 322px;
-  height: 45px;
-  border-radius: 45px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #FFF;
-  background-color: #0088FF;
-}
-.login-skyblue-button {
-  max-width: 322px;
-  width: 322px;
-  height: 45px;
-  border-radius: 45px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #FFF;
-  background-color: #A6D5FF;
-}
-.login-white-button {
-  max-width: 322px;
-  width: 322px;
-  height: 45px;
-  border: 1px solid #0088FF;
-  border-radius: 45px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #767676;
-  background-color: #FFF;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
-/* ---------- 메인 피드 페이지/에러 페이지 버튼 ---------- */
-.page-blue-button {
-  max-width: 120px;
-  width: 120px;
-  height: 45px;
-  border-radius: 45px;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #0088FF;
+// 2. 버튼 좌우패딩
+.paddingLogin {
+  padding-left: var(--padding-left-right-login);
+  padding-right: var(--padding-left-right-login);
+}
+.paddingFeed {
+  padding-left: var(--padding-left-right-feed);
+  padding-right: var(--padding-left-right-feed);
+}
+.paddingProfile {
+  padding-left: var(--padding-left-right-profile);
+  padding-right: var(--padding-left-right-profile); 
+}
+.paddingFollow {
+  padding-left: var(--padding-left-right-follow);
+  padding-right: var(--padding-left-right-follow);
+}
+.paddingPost {
+  padding-left: var(--padding-left-right-post);
+  padding-right: var(--padding-left-right-post);
 }
 
-/* ---------- 프로파일 페이지 버튼 ---------- */
-.profile-blue-button {
-  max-width: 120px;
-  width: 120px;
-  height: 35px;
-  border-radius: 35px;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #0088FF;
-}
-.profile-gray-button {
-  max-width: 120px;
-  width: 120px;
-  height: 35px;
-  border: 1px solid #DBDBDB;
-  border-radius: 35px;
-  font-size: 14px;
-  color: #767676;
-  background-color: #FFF;
-}
+// 3. 버튼 보더색상
+.borderBlue { border: var(--border-blue) }
+.borderGray { border: var(--border-gray) }
 
-/* ---------- 팔로우 목록 페이지 버튼 ---------- */
-.follow-list-blue-button {
-  max-width: 56px;
-  width: 56px;
-  height: 28px;
-  border-radius: 28px;
-  font-size: 12px;
-  color: #FFF;
-  background-color: #0088FF;
-}
-.follow-list-gray-button {
-  max-width: 56px;
-  width: 56px;
-  height: 28px;
-  border: 1px solid #DBDBDB;
-  border-radius: 28px;
-  font-size: 12px;
-  color: #767676;
-  background-color: #FFF;
-}
+// 4. 버튼 보더둥글기
+.borderRadiusLarge { border-radius: var(--border-radius-large) }
+.borderRadiusRegular { border-radius: var(--border-radius-regular) }
+.borderRadiusSmall { border-radius: var(--border-radius-small) }
+.borderRadiusPost { border-radius: var(--border-radius-post) }
 
-/* ---------- 프로필 저장/게시글 저장 및 등록 페이지 버튼 ---------- */
-.post-blue-button {
-  max-width: 90px;
-  width: 90px;
-  height: 32px;
-  border-radius: 32px;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #0088FF;
-}
-.post-skyblue-button {
-  max-width: 90px;
-  width: 90px;
-  height: 32px;
-  border-radius: 32px;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #A6D5FF;
-}
+// 5. 버튼 폰트크기
+.fontSizeLarge { font-size: var(--font-size-large) }
+.fontSizeTitle { font-size: var(--font-size-title) }
+.fontSizeRegular { font-size: var(--font-size-regular) }
+.fontSizeDetail { font-size: var(--font-size-detail) }
+.fontSizeSmall { font-size: var(--font-size-small) }
+
+// 6. 버튼 폰트굵기
+.fontWeightBold { font-weight: var(--font-bold) }
+
+// 7. 버튼 폰트색상
+.fontWhite { color: var(--color-component-white) }
+.fontGray { color: var(--color-font-gray) }
+
+// 8. 버튼 배경색상
+.colorEnable { background-color: var(--color-element-blue) }
+.colorDisable { background-color: var(--color-element-skyblue) }
+.colorCommon { background-color: var(--color-component-white) }
