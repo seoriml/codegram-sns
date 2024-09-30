@@ -13,6 +13,8 @@ const formatDate = (dateString) => {
 };
 
 const PostItem = ({ post }) => {
+  const imageArray = post.image ? post.image.split(",") : [];
+
   return (
     <div>
       <div>
@@ -29,13 +31,19 @@ const PostItem = ({ post }) => {
       </Link>
       <div>
         <p>{post.content}</p>
-        {post.image && (
-          <img
-            src={`${import.meta.env.VITE_API_URL}/${post.image}`}
-            alt="게시물 이미지"
-            style={{ maxWidth: "100%", height: "auto" }}
-          />
-        )}
+        {imageArray.length > 0 &&
+          imageArray.map((image, index) => (
+            <img
+              key={index}
+              src={
+                image.startsWith("http")
+                  ? image
+                  : `${import.meta.env.VITE_API_URL}/${image}`
+              }
+              alt={`게시물 이미지 ${index + 1}`}
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+          ))}
       </div>
       <div>
         <p>{formatDate(post.createdAt)}</p>
