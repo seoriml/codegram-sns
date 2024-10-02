@@ -1,18 +1,14 @@
-.root {
-  --padding-left-right-login: 140px;
-  --padding-left-right-feed: 30px;
-  --padding-left-right-profile: 40px;
-  --padding-left-right-follow: 11px; 
-  --padding-left-right-post: 25px;
-  --border-blue: 1px solid var(--color-element-blue);
-  --border-gray: 1px solid var(--color-element-gray);
-}
-
-// 1. 버튼 기본타입
+// 1. 버튼 기본타입 : 프로파일 페이지의 프로필 수정, 게시글 작성 버튼
 .buttonBasic {
   max-width: 322px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  width: 80% 70%;
+  padding: 8px 26px 8px 26px;
+  border: 1px solid var(--color-element-gray);
+  border-radius: var(--border-radius-regular);
+  font-size: var(--font-size-regular);
+  font-weight: normal;
+  color: var(--color-font-gray);
+  background-color: var(--color-component-white);
 }
 
 // 2. 버튼 좌우패딩

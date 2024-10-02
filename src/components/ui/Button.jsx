@@ -1,11 +1,9 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
-export default function Button({
-  children,
-  onClick,
-  disabled,
-  type = 'buttonBasic',
+export default function ButtonComponent({
+  children, onClick, disabled,
+  buttonBasic = 'buttonBasic',
   padding = 'paddingProfile',
   border = 'borderBlue',
   borderRadius = 'borderRadiusRegular',
@@ -19,7 +17,7 @@ export default function Button({
   // console.log({ props })
 
   const buttonType = {
-    buttonBasic: 'buttonBasic'
+    buttonBasic
   }
 
   const buttonPadding = {
@@ -41,7 +39,7 @@ export default function Button({
     borderRadiusSmall: 'borderRadiusSmall',
     borderRadiusPost: 'borderRadiusPost'
   }
-  
+
   const buttonFontSize = {
     fontSizeLarge: 'fontSizeLarge',
     fontSizeTitle: 'fontSizeTitle',
@@ -49,11 +47,11 @@ export default function Button({
     fontSizeDetail: 'fontSizeDetail',
     fontSizeSmall: 'fontSizeSmall'  
   }
-  
+
   const buttonFontWeight = {
     fontWeightBold: 'fontWeightBold'
   }
-  
+
   const buttonFontColor = {
     fontWhite: 'fontWhite',
     fontGray: 'fontGray'
@@ -66,7 +64,7 @@ export default function Button({
   }
 
   const buttonStyle = `
-    ${styles[buttonType[type]]}
+    ${styles[buttonType[buttonBasic]]}
     ${styles[buttonPadding[padding]]}
     ${styles[buttonBorder[border]]}
     ${styles[buttonBorderRadius[borderRadius]]}
