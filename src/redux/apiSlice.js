@@ -14,16 +14,14 @@ export const executeRequest = createAsyncThunk(
       if (body) {
         options.body = JSON.stringify(body);
       }
-      console.log(options);
+      // console.log(options);
       const response = await fetch(url, options);
+      console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error.! status: ${response.status}`);
       }
       const result = await response.json();
-      if (result?.user?.token) {
-        localStorage.setItem("userID", result.user.token);
-      }
-      //   localStorage.clear();
+
       console.log(result);
       return result;
     } catch (error) {
@@ -37,10 +35,23 @@ const apiSlice = createSlice({
   name: "api",
   initialState: {
     data: null,
+    token: localStorage.getItem("userToken"),
+    isLoggedIn: !!localStorage.getItem("userToken"),
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setCredentials: (state, action) => {
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+      localStorage.setItem("userToken", action.payload.token);
+    },
+    logout: (state) => {
+      state.token = null;
+      state.isLoggedIn = false;
+      localStorage.removeItem("userToken");
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(executeRequest.pending, (state) => {
@@ -50,6 +61,11 @@ const apiSlice = createSlice({
       .addCase(executeRequest.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
+        // if (action.payload?.token) {
+        //   state.token = action.payload.token;
+        //   state.isLoggedIn = true;
+        //   localStorage.setItem("userToken", action.payload.token);
+        // }
       })
       .addCase(executeRequest.rejected, (state, action) => {
         state.loading = false;
@@ -58,4 +74,8 @@ const apiSlice = createSlice({
   },
 });
 
+export const { setCredentials, logout } = apiSlice.actions;
 export default apiSlice.reducer;
+
+// export const selectCurrentToken = (state) => state.auth.token;
+// export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;

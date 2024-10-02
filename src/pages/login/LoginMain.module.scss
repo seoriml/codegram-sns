@@ -1,0 +1,42 @@
+.container {
+  background-color: var(--color-element-blue);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logoContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 110px;
+  height: 110px;
+  background-image: url("../../assets/images/symbol_logo_white.svg");
+  background-repeat: no-repeat;
+  background-position: center, 60%;
+}
+
+.btnContainer {
+  background-color: var(--color-component-white);
+  height: 38vh;
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.btn1 {
+  display: block;
+  width: 80%;
+  padding: 10px;
+  margin: 50px 46px;
+  border: none;
+  border-radius: 32px;
+  background-color: var(--color-element-blue);
+  text-align: center;
+}

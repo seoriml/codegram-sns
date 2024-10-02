@@ -4,7 +4,7 @@ import { executeRequest } from "../redux/apiSlice";
 
 const useAPI = () => {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.api);
+  const { data, loading, error, token, isLoggedIn } = useSelector((state) => state.api);
 
   // 이미지 호출할 땐 content-type에 "multipart/form-data"
 
@@ -32,7 +32,7 @@ const useAPI = () => {
     [executeRequestThunk]
   );
 
-  return { data, loading, error, get, post, put, del };
+  return { token, isLoggedIn, data, loading, error, get, post, put, del };
 };
 
 export default useAPI;
