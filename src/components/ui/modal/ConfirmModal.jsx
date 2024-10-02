@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { closeModal } from "../../../redux/modalSlice"; // closeModal 액션을 import
-import styles from "./Modal.module.scss"; // 모달 스타일을 import
+import { closeConfirmModal } from "../../../redux/confirmModalSlice";
+import styles from "./Modal.module.scss";
 
 const ConfirmModal = ({ actionHandlers }) => {
   const dispatch = useDispatch();
@@ -11,11 +11,11 @@ const ConfirmModal = ({ actionHandlers }) => {
     confirmButtonText,
     cancelButtonText,
     confirmActionId,
-  } = useSelector((state) => state.modal); // confirmActionId를 여기서 가져옵니다.
+  } = useSelector((state) => state.confirmModal);
 
   // 모달을 닫기 위한 핸들러
   const handleClose = () => {
-    dispatch(closeModal());
+    dispatch(closeConfirmModal());
   };
 
   // 확인 버튼 핸들러
@@ -23,7 +23,7 @@ const ConfirmModal = ({ actionHandlers }) => {
     if (actionHandlers[confirmActionId]) {
       actionHandlers[confirmActionId](); // ID에 맞는 액션 핸들러 호출
     }
-    handleClose(); // 모달 닫기
+    handleClose();
   };
 
   return (

@@ -7,22 +7,20 @@ const initialState = {
   cancelButtonText: "",
   confirmActionId: null,
   cancelActionId: null,
-  options: [],
-  optionActions: [],
 };
 
-const modalSlice = createSlice({
-  name: "modal",
+const confirmModalSlice = createSlice({
+  name: "confirmModal",
   initialState,
   reducers: {
-    openModal: (state, action) => {
+    openConfirmModal: (state, action) => {
       return {
         ...state,
         isOpen: true,
         ...action.payload,
       };
     },
-    closeModal: (state) => {
+    closeConfirmModal: (state) => {
       return {
         ...state,
         isOpen: false,
@@ -31,6 +29,7 @@ const modalSlice = createSlice({
   },
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const { openConfirmModal, closeConfirmModal } =
+  confirmModalSlice.actions;
 
-export default modalSlice.reducer;
+export default confirmModalSlice.reducer;
