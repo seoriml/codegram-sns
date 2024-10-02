@@ -21,34 +21,36 @@ const tabItem = [
 // 하단 탭 컴포넌트 정의
 const BottomTab = () => {
   const dispatch = useDispatch();
-  const activeTab = useSelector((state) => state.activeTab);
+  const activeTab = useSelector((state) => state.tab.activeTab);
 
   // 하단 탭 내용 정의
   return (
-    <div className={styles.tab}>
-      {tabItem.map(({ path, text, icon, tab }) => (
-        <Link
-          key={tab}
-          to={path}
-          onClick={() => dispatch(setActiveTab(tab))}
-          className={styles.link}
-        >
-          <img
-            src={icon}
-            alt={text}
-            className={`${styles.icon} ${
-              activeTab === tab ? styles.activeIcon : ""
-            }`}
-          />
-          <div
-            className={`${styles.text} ${
-              activeTab === tab ? styles.activeText : ""
-            }`}
+    <div className={styles.content}>
+      <div className={styles.tab}>
+        {tabItem.map(({ path, text, icon, tab }) => (
+          <Link
+            key={tab}
+            to={path}
+            onClick={() => dispatch(setActiveTab(tab))}
+            className={styles.link}
           >
-            {text}
-          </div>
-        </Link>
-      ))}
+            <img
+              src={icon}
+              alt={text}
+              className={`${styles.icon} ${
+                activeTab === tab ? styles.activeIcon : ""
+              }`}
+            />
+            <div
+              className={`${styles.text} ${
+                activeTab === tab ? styles.activeText : ""
+              }`}
+            >
+              {text}
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
