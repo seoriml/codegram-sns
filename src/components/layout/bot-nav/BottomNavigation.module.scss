@@ -1,3 +1,7 @@
+.content {
+  padding-bottom: 70px;
+}
+
 .tab {
   display: flex;
   justify-content: space-around;
@@ -6,19 +10,19 @@
   bottom: 0;
   width: 100%;
   max-width: 480px;
-
   background-color: #ffffff;
   border-top: 1px solid #dbdbdb;
   color: #767676;
   text-decoration-line: none;
   padding: 10px 0;
   margin: 0 auto;
+  height: 60px;
 }
 
 .icon {
   width: 24px;
   height: 24px;
-  &.active {
+  &.activeIcon {
     filter: invert(30%) sepia(91%) saturate(6400%) hue-rotate(200deg)
       brightness(90%) contrast(102%);
   }
@@ -27,7 +31,7 @@
 .text {
   font-size: 10px;
   color: #767676;
-  &.active {
+  &.activeText {
     color: #0088ff;
   }
 }
