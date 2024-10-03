@@ -59,7 +59,7 @@ export default function PostEditPage() {
   // 게시물 수정 로직
   const handleUpdatePost = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("userToken");
 
     // 새로 업로드할 이미지와 기존 이미지 분리
     const newImages = images.filter((img) => typeof img !== "string");
