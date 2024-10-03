@@ -10,7 +10,9 @@ const ImageUploadButton = ({ onChange }) => {
         return;
       }
 
-      Array.from(files).forEach((file) => onChange(file));
+      onChange(files);
+
+      e.target.value = "";
     }
   };
 
