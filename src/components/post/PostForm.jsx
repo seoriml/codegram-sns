@@ -17,11 +17,18 @@ const PostForm = ({
   };
 
   // 이미지 변경 함수
-  const handleImageChange = (file) => {
-    if (images.length + previews.length < 4) {
-      const imageUrl = URL.createObjectURL(file); // 파일의 URL 생성
-      setImages((prevImages) => [...prevImages, file]);
-      setPreviews((prevPreviews) => [...prevPreviews, imageUrl]);
+  const handleImageChange = (files) => {
+    if (files.length + previews.length < 4) {
+      Array.from(files).forEach((file) => {
+        const findImage = images.find((el) => el.name === file.name);
+        if (findImage) {
+          alert("동일한 이미지가 존재합니다.");
+          return;
+        }
+        const imageUrl = URL.createObjectURL(file); // 파일의 URL 생성
+        setImages((prevImages) => [...prevImages, file]);
+        setPreviews((prevPreviews) => [...prevPreviews, imageUrl]);
+      });
     } else {
       alert("최대 3장의 이미지만 업로드할 수 있습니다.");
     }
