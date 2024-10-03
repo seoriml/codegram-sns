@@ -34,7 +34,7 @@ export default function PostCreatePage() {
   // 게시글 업로드 함수
   const handleUploadPost = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("userToken");
     const imageString = await uploadImages(images);
 
     const response = await post(
@@ -49,8 +49,11 @@ export default function PostCreatePage() {
       token
     );
 
-    console.log("게시글 업로드 성공:", response);
-    alert("게시글이 성공적으로 업로드되었습니다!");
+    console.log("res", response);
+    if (response.meta.rejectedWithValue) {
+      alert(`error: ${response.payload}`);
+    }
+
     setContent("");
     setImages([]);
     setPreviews([]);

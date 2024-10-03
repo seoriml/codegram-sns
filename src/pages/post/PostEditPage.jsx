@@ -12,7 +12,7 @@ export default function PostEditPage() {
 
   // 게시물 상세 정보 가져오기 함수
   const getPostDetail = async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("userToken");
     const response = await get(
       `${import.meta.env.VITE_API_URL}/post/${id}`,
       "application/json",

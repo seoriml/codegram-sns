@@ -29,7 +29,7 @@ const PostItem = ({ post }) => {
 
   // 게시글 삭제 함수
   const handleDelete = async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("userToken");
     {
       const response = await del(
         `${import.meta.env.VITE_API_URL}/post/${post.id}`,
