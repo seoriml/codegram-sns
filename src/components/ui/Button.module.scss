@@ -1,4 +1,4 @@
-// 1. 버튼 기본타입 : 프로파일 페이지의 프로필 수정, 게시글 작성 버튼
+// 버튼 기본타입 → 프로파일 페이지 : 프로필 수정, 게시글 작성 버튼
 .buttonBasic {
   max-width: 322px;
   width: 80% 70%;
@@ -9,56 +9,97 @@
   font-weight: normal;
   color: var(--color-font-gray);
   background-color: var(--color-component-white);
+  white-space: nowrap;
 }
 
-// 2. 버튼 좌우패딩
-.paddingLogin {
-  padding-left: var(--padding-left-right-login);
-  padding-right: var(--padding-left-right-login);
-}
-.paddingFeed {
-  padding-left: var(--padding-left-right-feed);
-  padding-right: var(--padding-left-right-feed);
-}
-.paddingProfile {
-  padding-left: var(--padding-left-right-profile);
-  padding-right: var(--padding-left-right-profile); 
-}
-.paddingFollow {
-  padding-left: var(--padding-left-right-follow);
-  padding-right: var(--padding-left-right-follow);
-}
-.paddingPost {
-  padding-left: var(--padding-left-right-post);
-  padding-right: var(--padding-left-right-post);
+// 로그인 페이지 : 활성화/비활성화 버튼
+.buttonLoign {
+  padding: 13px 135px 13px 135px;
+  border: none;
+  border-radius: var(--border-radius-large);
+  font-size: var(--font-size-regular);
+  font-weight: bold;
+  color: var(--color-component-white);
+  background-color: var(--color-element-blue);
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-element-skyblue);
+  }
 }
 
-// 3. 버튼 보더색상
-.borderBlue { border: var(--border-blue) }
-.borderGray { border: var(--border-gray) }
+// 로그인 페이지 : 회원가입 버튼
+.buttonSignup {
+  padding: 13px 135px 13px 135px;
+  border: 1px solid  var(--color-element-blue);
+  border-radius: var(--border-radius-large);
+  font-size: var(--font-size-regular);
+  font-weight: bold;
+  color: var(--color-font-gray);
+  background-color: var(--color-component-white);
+}
 
-// 4. 버튼 보더둥글기
-.borderRadiusLarge { border-radius: var(--border-radius-large) }
-.borderRadiusRegular { border-radius: var(--border-radius-regular) }
-.borderRadiusSmall { border-radius: var(--border-radius-small) }
-.borderRadiusPost { border-radius: var(--border-radius-post) }
+// 페이지 버튼 : 페이지에 버튼만 있는 화면
+.buttonPage {
+  padding: 13px 30px 13px 30px;
+  border: none;
+  border-radius: var(--border-radius-large);
+  font-size: var(--font-size-regular);
+  color: var(--color-component-white);
+  background-color: var(--color-element-blue);
+}
 
-// 5. 버튼 폰트크기
-.fontSizeLarge { font-size: var(--font-size-large) }
-.fontSizeTitle { font-size: var(--font-size-title) }
-.fontSizeRegular { font-size: var(--font-size-regular) }
-.fontSizeDetail { font-size: var(--font-size-detail) }
-.fontSizeSmall { font-size: var(--font-size-small) }
+// 프로파일 페이지 : 팔로우 버튼
+.buttonFollow {
+  padding: 8px 40px 8px 40px;
+  border: none;
+  border-radius: var(--border-radius-regular);
+  font-size: var(--font-size-regular);
+  color: var(--color-component-white);
+  background-color: var(--color-element-blue);
+}
 
-// 6. 버튼 폰트굵기
-.fontWeightNormal { font-weight: normal }
-.fontWeightBold { font-weight: var(--font-bold) }
+// 프로파일 페이지 : 언팔로우 버튼
+.buttonUnFollow {
+  padding: 8px 34px 8px 34px;
+  border: 1px solid var(--color-element-gray);
+  border-radius: var(--border-radius-regular);
+  font-size: var(--font-size-regular);
+  font-weight: normal;
+  color: var(--color-font-gray);
+  background-color: var(--color-component-white);
+  white-space: nowrap;
+}
 
-// 7. 버튼 폰트색상
-.fontWhite { color: var(--color-component-white) }
-.fontGray { color: var(--color-font-gray) }
+// 팔로워 페이지 : 작은 팔로우 버튼
+.buttonFollower {
+  padding: 7px 11px 7px 11px;
+  border: none;
+  border-radius: var(--border-radius-regular);
+  font-size: var(--font-size-detail);
+  color: var(--color-component-white);
+  background-color: var(--color-element-blue);
+}
 
-// 8. 버튼 배경색상
-.colorEnable { background-color: var(--color-element-blue) }
-.colorDisable { background-color: var(--color-element-skyblue) }
-.colorCommon { background-color: var(--color-component-white) }
+// 팔로워 페이지 : 작은 취소 버튼
+.buttonCancel {
+  padding: 7px 11px 7px 11px;
+  border: 1px solid var(--color-element-gray);
+  border-radius: var(--border-radius-regular);
+  font-size: var(--font-size-detail);
+  color: var(--color-font-gray);
+  background-color: var(--color-component-white);
+}
+
+// 게시글 작성 페이지 : 저장, 업로드 버튼
+.buttonPost {
+  padding: 7px 33px 7px 33px;
+  border: none;
+  border-radius: var(--border-radius-small);
+  font-size: var(--font-size-regular);
+  color: var(--color-component-white);
+  background-color: var(--color-element-blue);
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-element-skyblue);
+  }
+}
