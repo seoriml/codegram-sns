@@ -1,6 +1,6 @@
 // components/Feed.jsx
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import useAPI from "../../hooks/useAPI";
 import EmptyFeed from "./EmptyFeed";
 import PostItem from "./PostItem";
@@ -75,9 +75,7 @@ export default function Feed() {
         <ul>
           {feed.map((post) => (
             <li key={post.id}>
-              <Link to={`/detail/${post.id}`}>
-                <PostItem post={post} />
-              </Link>
+              <PostItem post={post} />
             </li>
           ))}
         </ul>

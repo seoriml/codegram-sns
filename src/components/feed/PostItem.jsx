@@ -1,6 +1,16 @@
 // components/PostItem.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import useAPI from "../../hooks/useAPI";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  openOptionsModal,
+  closeOptionsModal,
+} from "../../redux/optionsModalSlice";
+import { openConfirmModal } from "../../redux/confirmModalSlice";
+import OptionsModal from "../ui/modal/OptionsModal";
+import ConfirmModal from "../ui/modal/ConfirmModal";
+import moreIcon from "../../assets/images/icon_more_vertical_mini.svg";
 
 // 날짜 포맷팅 함수
 const formatDate = (dateString) => {
@@ -8,12 +18,77 @@ const formatDate = (dateString) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-
   return `${year}년 ${month}월 ${day}일`;
 };
 
 const PostItem = ({ post }) => {
+  const { del } = useAPI();
   const imageArray = post.image ? post.image.split(",") : [];
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // 게시글 삭제 함수
+  const handleDelete = async () => {
+    const token = localStorage.getItem("userToken");
+    {
+      const response = await del(
+        `${import.meta.env.VITE_API_URL}/post/${post.id}`,
+        "application/json",
+        token
+      );
+      if (response.payload.status === 200) {
+        alert("삭제되었습니다.");
+        navigate("/home");
+      } else if (response.payload.status === 404) {
+        alert("존재하지 않는 게시글입니다.");
+        navigate("/home");
+      } else {
+        alert(`${response.payload.message || "게시글 삭제에 실패했습니다."}`);
+      }
+    }
+  };
+
+  // 삭제,수정,닫기 옵션모달
+  const actionHandlersOptions = {
+    optionDelete: () => {
+      handleOpenConfirmModal();
+    },
+    optionEdit: () => {
+      navigate(`/edit/${post.id}`);
+      dispatch(closeOptionsModal());
+    },
+  };
+  const handleOpenOptionsModal = () => {
+    const options = [
+      { text: "삭제", actionId: "optionDelete" },
+      { text: "수정", actionId: "optionEdit" },
+    ];
+    dispatch(
+      openOptionsModal({
+        options: options,
+      })
+    );
+  };
+
+  // 삭제 컨펌모달
+  const actionHandlersConfirm = {
+    confirmDelete: async () => {
+      await handleDelete();
+      dispatch(closeOptionsModal());
+    },
+  };
+
+  const handleOpenConfirmModal = () => {
+    dispatch(
+      openConfirmModal({
+        modalType: "confirm",
+        modalTitle: "게시글을 삭제할까요?",
+        confirmButtonText: "삭제",
+        cancelButtonText: "취소",
+        confirmActionId: "confirmDelete",
+      })
+    );
+  };
 
   return (
     <div>
@@ -26,28 +101,32 @@ const PostItem = ({ post }) => {
         <h3>{post.author.username}</h3>
         <p>@{post.author.accountname}</p>
       </div>
-      <Link to={`/edit/${post.id}`}>
-        <button>수정</button>
+      <button onClick={handleOpenOptionsModal}>
+        <img src={moreIcon} alt="이미지업로드버튼" />
+      </button>
+      <Link to={`/detail/${post.id}`}>
+        <div>
+          <p>{post.content}</p>
+          {imageArray.length > 0 &&
+            imageArray.map((image, index) => (
+              <img
+                key={index}
+                src={
+                  image.startsWith("http")
+                    ? image
+                    : `${import.meta.env.VITE_API_URL}/${image}`
+                }
+                alt={`게시물 이미지 ${index + 1}`}
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+            ))}
+        </div>
       </Link>
-      <div>
-        <p>{post.content}</p>
-        {imageArray.length > 0 &&
-          imageArray.map((image, index) => (
-            <img
-              key={index}
-              src={
-                image.startsWith("http")
-                  ? image
-                  : `${import.meta.env.VITE_API_URL}/${image}`
-              }
-              alt={`게시물 이미지 ${index + 1}`}
-              style={{ maxWidth: "100%", height: "auto" }}
-            />
-          ))}
-      </div>
       <div>
         <p>{formatDate(post.createdAt)}</p>
       </div>
+      <OptionsModal actionHandlers={actionHandlersOptions} />
+      <ConfirmModal actionHandlers={actionHandlersConfirm} />
     </div>
   );
 };

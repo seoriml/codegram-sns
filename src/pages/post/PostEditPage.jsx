@@ -12,7 +12,7 @@ export default function PostEditPage() {
 
   // 게시물 상세 정보 가져오기 함수
   const getPostDetail = async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("userToken");
     const response = await get(
       `${import.meta.env.VITE_API_URL}/post/${id}`,
       "application/json",
@@ -59,7 +59,7 @@ export default function PostEditPage() {
   // 게시물 수정 로직
   const handleUpdatePost = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("userToken");
 
     // 새로 업로드할 이미지와 기존 이미지 분리
     const newImages = images.filter((img) => typeof img !== "string");
