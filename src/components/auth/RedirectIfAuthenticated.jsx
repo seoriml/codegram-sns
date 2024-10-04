@@ -8,7 +8,7 @@ export default function RedirectIfAuthenticated({ children }) {
   useEffect(() => {
     const tokenLocalStorage = localStorage.getItem("userToken");
 
-    if ((tokenLocalStorage || token, isLoggedIn)) {
+    if (tokenLocalStorage || token || isLoggedIn) {
       navigate("/home", { replace: true });
     }
   }, [navigate]);
