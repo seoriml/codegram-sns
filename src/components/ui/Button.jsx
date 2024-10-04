@@ -20,6 +20,6 @@ const ButtonComponent = ({ children, onClick, disabled, buttonType='buttonBasic'
 export default ButtonComponent;
 
 // 사용 예시
-// <ButtonComponent onClick={() => console.log('로그인 버튼 클릭')} buttonType="buttonLoign" disabled="disabled">
+// <ButtonComponent onClick={() => console.log('로그인 버튼 클릭')} buttonType="buttonLogin" disabled="disabled">
 //   로그인
 // </ButtonComponent>
