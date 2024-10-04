@@ -36,14 +36,20 @@ const PostItem = ({ post }) => {
         "application/json",
         token
       );
-      if (response.payload.status === 200) {
+
+      if (response.meta?.rejectedWithValue) {
+        if (response.payload === "HTTP error.! status: 403") {
+          alert("잘못된 요청입니다. 로그인 정보를 확인하세요.");
+          navigate("/home");
+        } else if (response.payload === "HTTP error.! status: 404") {
+          alert("존재하지 않는 게시글입니다.");
+          navigate("/home");
+        } else {
+          alert(`${response.payload.message || "게시글 삭제에 실패했습니다."}`);
+        }
+      } else {
         alert("삭제되었습니다.");
         navigate("/home");
-      } else if (response.payload.status === 404) {
-        alert("존재하지 않는 게시글입니다.");
-        navigate("/home");
-      } else {
-        alert(`${response.payload.message || "게시글 삭제에 실패했습니다."}`);
       }
     }
   };
