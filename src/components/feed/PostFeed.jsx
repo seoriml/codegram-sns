@@ -1,9 +1,10 @@
 // components/Feed.jsx
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom"; // Link 컴포넌트 추가
 import useAPI from "../../hooks/useAPI";
 import EmptyFeed from "./EmptyFeed";
 import PostItem from "./PostItem";
+import searchIcon from "../../assets/images/icon_search.svg";
 
 export default function Feed() {
   const [feed, setFeed] = useState([]);
@@ -27,7 +28,7 @@ export default function Feed() {
   //   }
   // };
 
-  //피드 데이터 가져오기 함수 (현재 데이터가 없어서 주석처리하고 목데이터 사용)
+  //피드 데이터 가져오기 함수
   const getFeed = async () => {
     const token = localStorage.getItem("userToken");
     {
@@ -47,6 +48,12 @@ export default function Feed() {
 
   return (
     <div>
+      <div>
+        <h1>코드그램 피드</h1>
+        <Link to="/search">
+          <img src={searchIcon} alt="검색버튼" />
+        </Link>
+      </div>
       {feed && feed.length === 0 ? (
         <EmptyFeed />
       ) : (
