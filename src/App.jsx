@@ -13,14 +13,15 @@ import LoginEmail from "./pages/login/LoginEmail";
 import Signup from "./pages/signup/Signup";
 import PostDetailPage from "./pages/post/PostDetailPage";
 import PostEditPage from "./pages/post/PostEditPage";
+import RedirectIfAuthenticated from "./components/auth/RedirectIfAuthenticated";
+import ProfileSetup from "./pages/profile/ProfileSetup";
 
 function App() {
   const { isLoggedIn } = useAPI();
-  // console.log(isLoggedIn);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    localStorage.removeItem("userToken");
+    // localStorage.removeItem("userToken");
     const token = localStorage.getItem("userToken");
     if (token) {
       dispatch(setCredentials({ token }));
@@ -31,9 +32,38 @@ function App() {
     <Layout>
       <Router>
         <Routes>
-          <Route path="/" element={<LoginMain />} />
-          <Route path="/login" element={<LoginEmail />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/"
+            element={
+              <RedirectIfAuthenticated>
+                <LoginMain />
+              </RedirectIfAuthenticated>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RedirectIfAuthenticated>
+                <LoginEmail />
+              </RedirectIfAuthenticated>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <RedirectIfAuthenticated>
+                <Signup />
+              </RedirectIfAuthenticated>
+            }
+          />
+          <Route
+            path="/profile/setup"
+            element={
+              <RedirectIfAuthenticated>
+                <ProfileSetup />
+              </RedirectIfAuthenticated>
+            }
+          />
           <Route path="/home" element={<Home />} />
           <Route path="/detail/:id" element={<PostDetailPage />} />
           <Route path="/edit/:id" element={<PostEditPage />} />
