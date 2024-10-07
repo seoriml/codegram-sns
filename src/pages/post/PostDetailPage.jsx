@@ -9,7 +9,7 @@ export default function PostDetailPage() {
   const [post, setPost] = useState(null);
   const { data, loading, error, get } = useAPI();
 
-  // 게시물 상세 정보 가져오기 함수
+  // 게시물 상세 정보 가져오기 함수.
   const getPostDetail = async () => {
     const token = localStorage.getItem("userToken");
     {
