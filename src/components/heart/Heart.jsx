@@ -1,23 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import emptyHeart from "../../assets/images/icon_heart.svg";
 import fillHeart from "../../assets/images/icon_heart_fill.svg";
-import Button from "../ui/Button"
 
 export default function HeartComponent() {
-  const [like, setLike] = useState("");
-  function clickLike() {
-    if (like === "") {
-      setLike("Like");
-    } else {
-      setLike("");
-    }
+  const [heart, setHeart] = useState(false);
+  const [unHeart, setUnHeart] = useState(true);
+  const [heartCount, setHeartCount] = useState(0);
+
+  const handleHeart = () => {
+    setHeart(true);
+    setUnHeart(false);
+    setHeartCount(prev => prev + 1);
+  }
+
+  const handleUnHeart = () => {
+    setHeart(false);
+    setUnHeart(true);
+    setHeartCount(prev => Math.max(prev - 1, 0));
   }
 
   return (
     <>
-      <img src={emptyHeart} alt="좋아요를 안한 게시글" />
-      <img src={fillHeart} alt="좋아요를 한 게시글" width="20px" height="20px" />
-      <Button buttonType='buttonFollower' onClick={clickLike}>{like}</Button>
+      {unHeart ? (
+        <button onClick={handleHeart}>
+          <img src={emptyHeart} alt="좋아요를 안 한 게시글입니다." />
+          <span>{heartCount}</span>
+        </button>
+      ) : (
+        <button onClick={handleUnHeart}>
+          <img src={fillHeart} alt="좋아요를 한 게시글입니다" />
+          <span>{heartCount}</span>
+        </button>
+      )}
     </>
   )
 }
