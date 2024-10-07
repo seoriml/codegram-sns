@@ -49,9 +49,10 @@ export default function PostCreatePage() {
       token
     );
 
-    console.log("res", response);
     if (response.meta.rejectedWithValue) {
       alert(`error: ${response.payload}`);
+    } else {
+      alert("게시글이 업로드되었습니다.");
     }
 
     setContent("");
