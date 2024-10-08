@@ -17,6 +17,7 @@ import PostDetailPage from "./pages/post/PostDetailPage";
 import PostEditPage from "./pages/post/PostEditPage";
 import RedirectIfAuthenticated from "./components/auth/RedirectIfAuthenticated";
 import ProfileSetup from "./pages/profile/ProfileSetup";
+import SearchPage from "./pages/search/SearchPage";
 
 function App() {
   const { isLoggedIn } = useAPI();
@@ -67,6 +68,7 @@ function App() {
             }
           />
           <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="/detail/:id" element={<PostDetailPage />} />
           <Route path="/edit/:id" element={<PostEditPage />} />
           {/* <Route path="/chat" element={<Chat />} /> */}
