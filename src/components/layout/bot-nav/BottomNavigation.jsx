@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./BottomNavigation.module.scss";
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveTab } from "../../../redux/actions";
+import { setActiveTab } from "../../../redux/bottomSlice";
 // 아이콘
 import homeIcon from "../../../assets/images/tab_icon_home.svg";
 import chatIcon from "../../../assets/images/tab_icon_chat.svg";
@@ -14,14 +14,14 @@ import profileIcon from "../../../assets/images/tab_icon_profile.svg";
 const tabItem = [
   { path: "/home", text: "홈", icon: homeIcon, tab: "home" },
   { path: "/chat", text: "채팅", icon: chatIcon, tab: "chat" },
-  { path: "/post", text: "게시물 작성", icon: postIcon, tab: "post" },
+  { path: "/post/create", text: "게시물 작성", icon: postIcon, tab: "post" },
   { path: "/profile", text: "프로필", icon: profileIcon, tab: "profile" },
 ];
 
 // 하단 탭 컴포넌트 정의
 const BottomTab = () => {
   const dispatch = useDispatch();
-  const activeTab = useSelector((state) => state.tab.activeTab);
+  const activeTab = useSelector((state) => state.bottom.activeTab);
 
   // 하단 탭 내용 정의
   return (

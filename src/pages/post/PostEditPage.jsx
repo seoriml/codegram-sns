@@ -86,9 +86,20 @@ export default function PostEditPage() {
       "application/json",
       token
     );
-
-    console.log("게시글 수정 성공:", response);
-    alert("게시글이 성공적으로 수정되었습니다!");
+    if (response.meta?.rejectedWithValue) {
+      if (response.payload === "HTTP error.! status: 403") {
+        alert("잘못된 요청입니다. 로그인 정보를 확인하세요.");
+        navigate("/home");
+      } else if (response.payload === "HTTP error.! status: 404") {
+        alert("존재하지 않는 게시글입니다.");
+        navigate("/home");
+      } else {
+        alert(`${response.payload.message || "게시글 수정에 실패했습니다."}`);
+      }
+    } else {
+      alert("수정되었습니다.");
+      navigate("/home");
+    }
   };
 
   return (
