@@ -1,0 +1,40 @@
+.searchContainer {
+  width: 100%;
+  margin-left: 20px;
+
+  .searchInput {
+    width: 100%;
+    padding: 7px 16px;
+    border: none;
+    background-color: var(--color-component-gray);
+    border-radius: 50px;
+    font-size: var(--font-size-regular);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.userResultsWrapper {
+  padding: 16px var(--side-padding-feed);
+
+  .userResultItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    .profileImg {
+      width: 50px;
+      height: 50px;
+    }
+    .username {
+      font-size: var(--font-size-regular);
+    }
+    .accountname {
+      font-size: var(--font-size-detail);
+      color: var(--color-font-gray);
+      padding-top: 6px;
+    }
+  }
+}

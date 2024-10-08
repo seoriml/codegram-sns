@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../feed/PostFeed.module.scss";
 import buttonStyles from "../ui/Button.module.scss";
-import logoIcon from "../../assets/images/symbol_logo_gray.svg"; // 이미지 경로를 올바르게 설정
+import logoIcon from "../../assets/images/symbol_logo_gray.svg";
 import { Link } from "react-router-dom";
 
 export default function EmptyFeed() {

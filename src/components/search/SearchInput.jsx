@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useAPI from "../../hooks/useAPI";
+import styles from "../../components/search/Search.module.scss";
 
 const SearchInput = ({ setResults }) => {
   const [keyword, setKeyword] = useState("");
@@ -22,12 +23,13 @@ const SearchInput = ({ setResults }) => {
   };
 
   return (
-    <div>
+    <div className={styles.searchContainer}>
       <input
+        className={styles.searchInput}
         type="text"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
-        placeholder="계정검색"
+        placeholder="계정 검색"
         onKeyDown={handleKeyDown}
       />
     </div>
