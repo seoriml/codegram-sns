@@ -1,0 +1,77 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 42px;
+  padding: 0 var(--side-padding-feed);
+  border-bottom: 1px solid var(--color-element-gray);
+
+  .title {
+    font-size: var(--font-size-large);
+  }
+}
+
+.postsWrapper {
+  padding: 20px var(--side-padding-feed);
+
+  .feedItem {
+    display: flex;
+    gap: 12px;
+    padding-bottom: 24px;
+
+    .profileImg {
+      width: 42px;
+      height: 42px;
+      border-radius: 42px;
+      background-color: var(--color-element-gray);
+    }
+
+    .postContent {
+      width: 100%;
+
+      .author {
+        height: 42px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .username {
+          font-size: var(--font-size-regular);
+        }
+        .accountname {
+          font-size: var(--font-size-detail);
+          color: var(--color-font-gray);
+        }
+        .openModal {
+          width: 18px;
+        }
+      }
+
+      .textContent {
+        font-size: var(--font-size-regular);
+        padding: var(--side-padding-feed) 0;
+      }
+
+      .date {
+        font-size: var(--font-size-small);
+        color: var(--color-font-gray);
+      }
+    }
+  }
+}
+
+.emptyFeed {
+  height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: var(--font-size-regular);
+  color: var(--color-font-gray);
+
+  img {
+    width: 74px;
+  }
+}

@@ -11,6 +11,8 @@ import { openConfirmModal } from "../../redux/confirmModalSlice";
 import OptionsModal from "../ui/modal/OptionsModal";
 import ConfirmModal from "../ui/modal/ConfirmModal";
 import moreIcon from "../../assets/images/icon_more_vertical_mini.svg";
+import defaultProfileIcon from "../../assets/images/user_profile.svg";
+import styles from "../feed/PostFeed.module.scss";
 
 // 날짜 포맷팅 함수
 const formatDate = (dateString) => {
@@ -96,23 +98,34 @@ const PostItem = ({ post }) => {
     );
   };
 
+  const profileImageSrc =
+    post.author.image === "http://146.56.183.55:5050/Ellipse.png"
+      ? defaultProfileIcon
+      : post.author.image;
+
   return (
-    <div>
-      <div>
-        <img
-          src={post.author.image}
-          alt={`${post.author.username}의 프로필`}
-          style={{ width: "42px", borderRadius: "100%", background: "#ccc" }}
-        />
-        <h3>{post.author.username}</h3>
-        <p>@{post.author.accountname}</p>
-      </div>
-      <button onClick={handleOpenOptionsModal}>
-        <img src={moreIcon} alt="이미지업로드버튼" />
-      </button>
-      <Link to={`/detail/${post.id}`}>
-        <div>
-          <p>{post.content}</p>
+    <div className={styles.feedItem}>
+      <img
+        className={styles.profileImg}
+        src={profileImageSrc}
+        alt={`${post.author.username}의 프로필사진`}
+      />
+      <div className={styles.postContent}>
+        <div className={styles.author}>
+          <div>
+            <h3 className={styles.username}>{post.author.username}</h3>
+            <p className={styles.accountname}>@{post.author.accountname}</p>
+          </div>
+          <button
+            className={styles.openModal}
+            onClick={handleOpenOptionsModal}
+            aria-label="옵션 열기"
+          >
+            <img src={moreIcon} alt="더보기" />
+          </button>
+        </div>
+        <Link to={`/detail/${post.id}`}>
+          <p className={styles.textContent}>{post.content}</p>
           {imageArray.length > 0 &&
             imageArray.map((image, index) => (
               <img
@@ -126,10 +139,8 @@ const PostItem = ({ post }) => {
                 style={{ maxWidth: "100%", height: "auto" }}
               />
             ))}
-        </div>
-      </Link>
-      <div>
-        <p>{formatDate(post.createdAt)}</p>
+        </Link>
+        <p className={styles.date}>{formatDate(post.createdAt)}</p>
       </div>
       <OptionsModal actionHandlers={actionHandlersOptions} />
       <ConfirmModal actionHandlers={actionHandlersConfirm} />
