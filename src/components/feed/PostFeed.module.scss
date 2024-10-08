@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px var(--side-padding-feed);
+  border-bottom: 1px solid var(--color-element-gray);
+}
+
+.title {
+  font-size: var(--font-size-large);
+}
+
+.postsWrapper {
+  padding: 20px var(--side-padding-feed);
+}
+
+.feedItem {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 24px;
+}
+
+.profileImg {
+  width: 42px;
+  height: 42px;
+  border-radius: 42px;
+  background-color: var(--color-element-gray);
+}
+.author {
+  height: 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.author button {
+  width: 18px;
+}
+
+.username {
+  font-size: var(--font-size-regular);
+}
+.accountname {
+  font-size: var(--font-size-detail);
+  color: var(--color-font-gray);
+}
+
+.content {
+  font-size: var(--font-size-regular);
+  padding-top: var(--side-padding-feed);
+}
+
+.uploadImg {
+  padding-top: var(--side-padding-feed);
+}
+
+.date {
+  font-size: var(--font-size-small);
+  color: var(--color-font-gray);
+}

@@ -11,6 +11,7 @@ import { openConfirmModal } from "../../redux/confirmModalSlice";
 import OptionsModal from "../ui/modal/OptionsModal";
 import ConfirmModal from "../ui/modal/ConfirmModal";
 import moreIcon from "../../assets/images/icon_more_vertical_mini.svg";
+import styles from "../feed/PostFeed.module.scss";
 
 // 날짜 포맷팅 함수
 const formatDate = (dateString) => {
@@ -97,25 +98,28 @@ const PostItem = ({ post }) => {
   };
 
   return (
-    <div>
+    <div className={styles.feedItem}>
+      <img
+        className={styles.profileImg}
+        src={post.author.image}
+        alt={`${post.author.username}의 프로필사진`}
+      />
       <div>
-        <img
-          src={post.author.image}
-          alt={`${post.author.username}의 프로필`}
-          style={{ width: "42px", borderRadius: "100%", background: "#ccc" }}
-        />
-        <h3>{post.author.username}</h3>
-        <p>@{post.author.accountname}</p>
-      </div>
-      <button onClick={handleOpenOptionsModal}>
-        <img src={moreIcon} alt="이미지업로드버튼" />
-      </button>
-      <Link to={`/detail/${post.id}`}>
-        <div>
-          <p>{post.content}</p>
+        <div className={styles.author}>
+          <div>
+            <h3 className={styles.username}>{post.author.username}</h3>
+            <p className={styles.accountname}>@{post.author.accountname}</p>
+          </div>
+          <button onClick={handleOpenOptionsModal} aria-label="옵션 열기">
+            <img src={moreIcon} alt="더보기" />
+          </button>
+        </div>
+        <Link to={`/detail/${post.id}`}>
+          <p className={styles.content}>{post.content}</p>
           {imageArray.length > 0 &&
             imageArray.map((image, index) => (
               <img
+                className={styles.uploadImg}
                 key={index}
                 src={
                   image.startsWith("http")
@@ -126,10 +130,8 @@ const PostItem = ({ post }) => {
                 style={{ maxWidth: "100%", height: "auto" }}
               />
             ))}
-        </div>
-      </Link>
-      <div>
-        <p>{formatDate(post.createdAt)}</p>
+        </Link>
+        <p className={styles.date}>{formatDate(post.createdAt)}</p>
       </div>
       <OptionsModal actionHandlers={actionHandlersOptions} />
       <ConfirmModal actionHandlers={actionHandlersConfirm} />
