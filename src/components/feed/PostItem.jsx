@@ -125,7 +125,6 @@ const PostItem = ({ post }) => {
           {imageArray.length > 0 &&
             imageArray.map((image, index) => (
               <img
-                className={styles.uploadImg}
                 key={index}
                 src={
                   image.startsWith("http")

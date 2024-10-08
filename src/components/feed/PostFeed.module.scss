@@ -46,11 +46,7 @@
 
 .content {
   font-size: var(--font-size-regular);
-  padding-top: var(--side-padding-feed);
-}
-
-.uploadImg {
-  padding-top: var(--side-padding-feed);
+  padding: var(--side-padding-feed) 0;
 }
 
 .date {
