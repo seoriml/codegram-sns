@@ -110,18 +110,22 @@ const PostItem = ({ post }) => {
         src={profileImageSrc}
         alt={`${post.author.username}의 프로필사진`}
       />
-      <div>
+      <div className={styles.postContent}>
         <div className={styles.author}>
           <div>
             <h3 className={styles.username}>{post.author.username}</h3>
             <p className={styles.accountname}>@{post.author.accountname}</p>
           </div>
-          <button onClick={handleOpenOptionsModal} aria-label="옵션 열기">
+          <button
+            className={styles.openModal}
+            onClick={handleOpenOptionsModal}
+            aria-label="옵션 열기"
+          >
             <img src={moreIcon} alt="더보기" />
           </button>
         </div>
         <Link to={`/detail/${post.id}`}>
-          <p className={styles.content}>{post.content}</p>
+          <p className={styles.textContent}>{post.content}</p>
           {imageArray.length > 0 &&
             imageArray.map((image, index) => (
               <img

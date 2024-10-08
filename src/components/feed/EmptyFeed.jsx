@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+import styles from "../feed/PostFeed.module.scss";
+import buttonStyles from "../ui/Button.module.scss";
+import logoIcon from "../../assets/images/symbol_logo_gray.svg"; // 이미지 경로를 올바르게 설정
+import { Link } from "react-router-dom";
 
 export default function EmptyFeed() {
   return (
-    <div>
-      게시물이 없습니다.
+    <div className={styles.emptyFeed}>
+      <img src={logoIcon} alt="코드그램 아이콘" />
+      <p>유저를 검색해 팔로우 해보세요!</p>
+      <Link to="/search" className={buttonStyles.buttonPage}>
+        검색하기
+      </Link>
     </div>
-  )
+  );
 }

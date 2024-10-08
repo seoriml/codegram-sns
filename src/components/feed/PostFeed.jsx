@@ -102,10 +102,9 @@ export default function Feed() {
               ))}
             </React.Fragment>
           ))}
+          {isFetchingNextPage && <p>로딩중...</p>}
         </ul>
       )}
-
-      {isFetchingNextPage && <p>로딩중...</p>}
     </div>
   );
 }
