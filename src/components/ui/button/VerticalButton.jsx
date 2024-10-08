@@ -21,8 +21,8 @@ const VerticalButton = () => {
       openOptionsModal({
         modalType: "options",
         options: [
-          { text: "설정 및 개인정보", actionId: "settings", color: "#000" },
-          { text: "로그아웃", actionId: "logout", color: "#000" },
+          { text: "설정 및 개인정보", actionId: "settings" },
+          { text: "로그아웃", actionId: "logout" },
         ],
       })
     );
@@ -37,7 +37,6 @@ const VerticalButton = () => {
       // 로그아웃 확인 모달 열기
       dispatch(
         openConfirmModal({
-          modalType: "confirm",
           modalTitle: "로그아웃하시겠어요?",
           confirmButtonText: "로그아웃",
           cancelButtonText: "취소",
