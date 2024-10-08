@@ -8,7 +8,7 @@ import iconAlbumOn from "../../../assets/images/icon_post_album_on.svg";
 import iconAlbumOff from "../../../assets/images/icon_post_album_off.svg";
 import styles from "./ProfileInfo.module.scss";
 
-const ProfileTabs = () => {
+const ProfileTabs = ({ accountname }) => {
   const [isListView, setIsListView] = useState(true); // 기본값: 리스트 뷰
   const [posts, setPosts] = useState([]);
   const { get } = useAPI();
@@ -17,7 +17,7 @@ const ProfileTabs = () => {
   const fetchPosts = async () => {
     const token = localStorage.getItem("userToken");
     const response = await get(
-      `${import.meta.env.VITE_API_URL}/post/feed`,
+      `${import.meta.env.VITE_API_URL}/post/${accountname}/userpost`,
       "application/json",
       token
     );
@@ -26,9 +26,10 @@ const ProfileTabs = () => {
 
   // 컴포넌트가 처음 렌더링될 때 데이터 가져오기
   useEffect(() => {
-    fetchPosts();
-  }, []);
-
+    if (accountname) {
+      fetchPosts();
+    }
+  }, [accountname]);
   // 리스트 뷰와 그리드 뷰 간 전환
   const tabView = (view) => {
     setIsListView(view);
