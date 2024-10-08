@@ -11,6 +11,7 @@ import { openConfirmModal } from "../../redux/confirmModalSlice";
 import OptionsModal from "../ui/modal/OptionsModal";
 import ConfirmModal from "../ui/modal/ConfirmModal";
 import moreIcon from "../../assets/images/icon_more_vertical_mini.svg";
+import defaultProfileIcon from "../../assets/images/user_profile.svg";
 import styles from "../feed/PostFeed.module.scss";
 
 // 날짜 포맷팅 함수
@@ -97,11 +98,16 @@ const PostItem = ({ post }) => {
     );
   };
 
+  const profileImageSrc =
+    post.author.image === "http://146.56.183.55:5050/Ellipse.png"
+      ? defaultProfileIcon
+      : post.author.image;
+
   return (
     <div className={styles.feedItem}>
       <img
         className={styles.profileImg}
-        src={post.author.image}
+        src={profileImageSrc}
         alt={`${post.author.username}의 프로필사진`}
       />
       <div>
