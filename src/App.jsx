@@ -21,7 +21,6 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // localStorage.removeItem("userToken");
     const token = localStorage.getItem("userToken");
     if (token) {
       dispatch(setCredentials({ token }));

@@ -39,6 +39,12 @@ const apiSlice = createSlice({
     isLoggedIn: !!localStorage.getItem("userToken"),
     loading: false,
     error: null,
+    loginData: null,
+    myInfoData: null,
+    postFollow: null,
+    postUnFollow: null,
+    userSearch: null,
+    feed: null,
   },
   reducers: {
     setCredentials: (state, action) => {
@@ -51,6 +57,23 @@ const apiSlice = createSlice({
       state.isLoggedIn = false;
       localStorage.removeItem("userToken");
     },
+    // ex) dispatch(setMyInfoData(result.payload.user))
+    // 프로필 수정창에 들어갔을때 myInfoData에서 데이터 불러오면 된다
+    setMyInfoData: (state, action) => {
+      state.myInfoData = action.payload;
+    },
+    // ex) dispatch(setPostFollow(result.payload.profile))
+    setPostFollow: (state, action) => {
+      state.postFollow = action.payload;
+    },
+    // ex) dispatch(setPostUnFollow(result.payload.profile))
+    setPostUnFollow: (state, action) => {
+      state.postUnFollow = action.payload;
+    },
+    // ex) dispatch(setUserSearch(result.payload))
+    setUserSearch: (state, action) => {
+      state.userSearch = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -61,11 +84,9 @@ const apiSlice = createSlice({
       .addCase(executeRequest.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
-        // if (action.payload?.token) {
-        //   state.token = action.payload.token;
-        //   state.isLoggedIn = true;
-        //   localStorage.setItem("userToken", action.payload.token);
-        // }
+        if (action.payload?.user?.token) {
+          state.loginData = action.payload.user;
+        }
       })
       .addCase(executeRequest.rejected, (state, action) => {
         state.loading = false;
