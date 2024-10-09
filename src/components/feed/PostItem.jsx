@@ -2,7 +2,7 @@
 import React from "react";
 import useAPI from "../../hooks/useAPI";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   openOptionsModal,
   closeOptionsModal,
@@ -23,7 +23,10 @@ const formatDate = (dateString) => {
   return `${year}년 ${month}월 ${day}일`;
 };
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, selectedPost, setSelectedPost }) => {
+  const location = useLocation();
+  const path = location.pathname;
+
   const { del } = useAPI();
   const imageArray = post.image ? post.image.split(",") : [];
   const dispatch = useDispatch();
@@ -67,6 +70,9 @@ const PostItem = ({ post }) => {
     },
   };
   const handleOpenOptionsModal = () => {
+    if (!path.includes("detail")) {
+      setSelectedPost();
+    }
     const options = [
       { text: "삭제", actionId: "optionDelete" },
       { text: "수정", actionId: "optionEdit" },
@@ -142,8 +148,12 @@ const PostItem = ({ post }) => {
         </Link>
         <p className={styles.date}>{formatDate(post.createdAt)}</p>
       </div>
-      <OptionsModal actionHandlers={actionHandlersOptions} />
-      <ConfirmModal actionHandlers={actionHandlersConfirm} />
+      {(path.includes("detail") || selectedPost === post.id) && (
+        <>
+          <OptionsModal actionHandlers={actionHandlersOptions} />
+          <ConfirmModal actionHandlers={actionHandlersConfirm} />
+        </>
+      )}
     </div>
   );
 };
