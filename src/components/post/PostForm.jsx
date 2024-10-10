@@ -49,8 +49,12 @@ const PostForm = ({
 
   // previews가 문자열인 경우 배열로 변환
   const previewArray = Array.isArray(previews)
-    ? previews
-    : previews.split(",").filter((url) => url);
+    ? previews.filter((url) => url !== `${import.meta.env.VITE_API_URL}/`)
+    : previews
+        .split(",")
+        .filter((url) => url && url !== `${import.meta.env.VITE_API_URL}/`);
+
+  console.log("previewArray ", previewArray);
 
   // 엔터 키로 줄바꿈하고 제출 방지
   const handleKeyDown = (e) => {
