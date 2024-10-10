@@ -147,7 +147,8 @@ const PostItem = ({ post, selectedPost, setSelectedPost }) => {
                     : `${import.meta.env.VITE_API_URL}/${image}`
                 }
                 alt={`게시물 이미지 ${index + 1}`}
-                style={{ maxWidth: "100%", height: "auto" }}
+                className={styles.images}
+                // style={{ maxWidth: "100%", height: "auto" }}
               />
             ))}
         </Link>
