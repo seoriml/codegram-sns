@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import useAPI from "../../hooks/useAPI";
@@ -11,6 +11,8 @@ const LIMIT = 10; // 한 번에 불러올 게시물 수
 
 export default function Feed() {
   const { get, post } = useAPI();
+
+  const [selectedPost, setSelectedPost] = useState(null);
 
   // 테스트용 팔로우함수
   // const follow = async () => {
@@ -97,7 +99,11 @@ export default function Feed() {
             <React.Fragment key={pageIndex}>
               {page.posts.map((post) => (
                 <li key={post.id}>
-                  <PostItem post={post} />
+                  <PostItem
+                    post={post}
+                    selectedPost={selectedPost}
+                    setSelectedPost={() => setSelectedPost(post.id)}
+                  />
                 </li>
               ))}
             </React.Fragment>
