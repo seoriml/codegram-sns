@@ -13,6 +13,7 @@ import ConfirmModal from "../ui/modal/ConfirmModal";
 import moreIcon from "../../assets/images/icon_more_vertical_mini.svg";
 import defaultProfileIcon from "../../assets/images/user_profile.svg";
 import styles from "../feed/PostFeed.module.scss";
+import HeartComponent from "../heart/HeartComponent";
 
 // 날짜 포맷팅 함수
 const formatDate = (dateString) => {
@@ -146,6 +147,11 @@ const PostItem = ({ post, selectedPost, setSelectedPost }) => {
               />
             ))}
         </Link>
+        <HeartComponent
+          hearts={post.heartCount}
+          postId={post.id}
+          hearted={post.hearted}
+        />
         <p className={styles.date}>{formatDate(post.createdAt)}</p>
       </div>
       {(path.includes("detail") || selectedPost === post.id) && (
