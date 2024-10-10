@@ -99,11 +99,11 @@
 
 // 게시글 작성 페이지 : 저장, 업로드 버튼
 .buttonPost {
-  padding: 7px 33px 7px 33px;
-  border: none;
+  width: 90px;
+  height: 32px;
+  line-height: 16px;
   border-radius: var(--border-radius-small);
   font-size: var(--font-size-regular);
-  white-space: nowrap;
   color: var(--color-component-white);
   background-color: var(--color-element-blue);
   &:disabled {

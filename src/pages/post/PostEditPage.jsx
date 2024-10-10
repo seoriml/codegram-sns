@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { json, useParams } from "react-router-dom";
 import PostForm from "../../components/post/PostForm";
 import useAPI from "../../hooks/useAPI";
 
@@ -9,6 +9,7 @@ export default function PostEditPage() {
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
+  const [author, setAuthor] = useState();
 
   // 게시물 상세 정보 가져오기 함수
   const getPostDetail = async () => {
@@ -27,6 +28,7 @@ export default function PostEditPage() {
     });
     setImages(postImages);
     setPreviews(postImages);
+    setAuthor(response.payload.post.author);
   };
 
   useEffect(() => {
@@ -113,6 +115,7 @@ export default function PostEditPage() {
           setImages={setImages}
           previews={previews}
           setPreviews={setPreviews}
+          author={author}
         />
       ) : (
         <p>게시물 정보를 로딩 중입니다...</p>
