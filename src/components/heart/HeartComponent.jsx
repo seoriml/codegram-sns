@@ -1,7 +1,8 @@
+// src/components/heart/HeartComponent.jsx
 import React, { useState } from 'react';
+import useAPI from '../../hooks/useAPI';
 import emptyHeart from "../../assets/images/icon_heart.svg";
 import fillHeart from "../../assets/images/icon_heart_fill.svg";
-import useAPI from '../../hooks/useAPI';
 
 
 function HeartComponent({ hearts, postId, hearted }) {
@@ -9,6 +10,7 @@ function HeartComponent({ hearts, postId, hearted }) {
   const { post, del } = useAPI();
   const token = localStorage.getItem('userToken');
 
+  // 게시물 좋아요
   const handleHeart = async () => {
     console.log({ token });
     try {
@@ -26,6 +28,7 @@ function HeartComponent({ hearts, postId, hearted }) {
     }
   }
 
+  // 게시물 좋아요 취소
   const handleUnHeart = async () => {
     console.log({ token });
     try {
