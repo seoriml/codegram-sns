@@ -10,13 +10,12 @@ import styles from "../feed/PostFeed.module.scss";
 const LIMIT = 10; // 한 번에 불러올 게시물 수
 
 export default function Feed() {
-  const { get, post } = useAPI();
+  const { get, post, token } = useAPI();
 
   const [selectedPost, setSelectedPost] = useState(null);
 
   // 테스트용 팔로우함수
   // const follow = async () => {
-  //   const token = localStorage.getItem("userToken");
   //   const testUserId = "String2";
 
   //   const response = await post(
@@ -34,7 +33,6 @@ export default function Feed() {
 
   // 피드 데이터를 불러오는 함수
   const fetchFeed = async ({ pageParam = 0 }) => {
-    const token = localStorage.getItem("userToken");
     const response = await get(
       `${
         import.meta.env.VITE_API_URL

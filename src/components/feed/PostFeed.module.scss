@@ -53,6 +53,12 @@
         padding: var(--side-padding-feed) 0;
       }
 
+      .images {
+        border-radius: var(--border-radius-post);
+        border: 0.5px solid var(--color-element-gray);
+        text-align: center;
+      }
+
       .date {
         font-size: var(--font-size-small);
         color: var(--color-font-gray);
