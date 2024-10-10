@@ -54,8 +54,6 @@ const PostForm = ({
         .split(",")
         .filter((url) => url && url !== `${import.meta.env.VITE_API_URL}/`);
 
-  console.log("previewArray ", previewArray);
-
   // 엔터 키로 줄바꿈하고 제출 방지
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {

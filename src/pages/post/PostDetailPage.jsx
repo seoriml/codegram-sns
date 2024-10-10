@@ -7,11 +7,10 @@ import PostDetailComponent from "../../components/post/PostDetail";
 export default function PostDetailPage() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
-  const { data, loading, error, get } = useAPI();
+  const { data, loading, error, get, token } = useAPI();
 
   // 게시물 상세 정보 가져오기 함수.
   const getPostDetail = async () => {
-    const token = localStorage.getItem("userToken");
     {
       const response = await get(
         `${import.meta.env.VITE_API_URL}/post/${id}`,

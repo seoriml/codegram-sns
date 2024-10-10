@@ -28,14 +28,18 @@ const PostItem = ({ post, selectedPost, setSelectedPost }) => {
   const location = useLocation();
   const path = location.pathname;
 
-  const { del } = useAPI();
-  const imageArray = post.image ? post.image.split(",") : [];
+  const { del, token } = useAPI();
+  const imageArray = post.image
+    ? post.image
+        .split(",")
+        .filter((url) => url && url !== `${import.meta.env.VITE_API_URL}/`)
+    : [];
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // 게시글 삭제 함수
   const handleDelete = async () => {
-    const token = localStorage.getItem("userToken");
     {
       const response = await del(
         `${import.meta.env.VITE_API_URL}/post/${post.id}`,
