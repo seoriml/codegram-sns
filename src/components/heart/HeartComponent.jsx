@@ -7,22 +7,27 @@ import fillHeart from "../../assets/images/icon_heart_fill.svg";
 
 function HeartComponent({ hearts, postId, hearted }) {
   const [heartCount, setHeartCount] = useState(hearts);
+  const [localHearted, setLocalHearted] = useState(hearted);
   const { post, del } = useAPI();
   const token = localStorage.getItem('userToken');
 
   // 게시물 좋아요
   const handleHeart = async () => {
-    console.log({ token });
+    // 즉시 로컬 상태 업데이트
+    setHeartCount(prevCount => prevCount + 1);
+    setLocalHearted(true);
     try {
-      const response = await post (
-        `${import.meta.env.VITE_API_URL}/post/${postId}/heart`, // postId → 게시글 번호
+      await post (
+        `${import.meta.env.VITE_API_URL}/post/${postId}/heart`,
         "",
         "application/json",
         token
       );
-      console.log(response);
     }
     catch (error) {
+      // 게시물 좋아요 API 호출 실패 시 로컬 상태 되돌리기
+      setHeartCount(prevCount => prevCount - 1);
+      setLocalHearted(false);
       alert("좋아요 API 요청 중 에러 발생");
       console.error("좋아요 API 요청 중 에러 발생:", error);
     }
@@ -30,16 +35,20 @@ function HeartComponent({ hearts, postId, hearted }) {
 
   // 게시물 좋아요 취소
   const handleUnHeart = async () => {
-    console.log({ token });
+    // 즉시 로컬 상태 업데이트
+    setHeartCount(prevCount => prevCount - 1);
+    setLocalHearted(false);
     try {
-      const response = await del (
-        `${import.meta.env.VITE_API_URL}/post/${postId}/unheart`, // postId → 게시글 번호
+      await del (
+        `${import.meta.env.VITE_API_URL}/post/${postId}/unheart`,
         "application/json",
         token
       );
-      console.log(response);
     }
     catch (error) {
+      // 게시물 좋아요 취소 API 호출 실패 시 로컬 상태 되돌리기
+      setHeartCount(prevCount => prevCount + 1);
+      setLocalHearted(true);
       alert("좋아요 취소 API 요청 중 에러 발생");
       console.error("좋아요 취소 API 요청 중 에러 발생:", error);
     }
@@ -47,7 +56,7 @@ function HeartComponent({ hearts, postId, hearted }) {
 
   return (
     <>
-      {hearted ? (
+      {localHearted ? (
         <button onClick={handleUnHeart}>
           <img src={fillHeart} alt="이미 좋아요를 한 게시글입니다." />
           <span>{heartCount}</span>
@@ -61,4 +70,5 @@ function HeartComponent({ hearts, postId, hearted }) {
     </>
   )
 }
+
 export default HeartComponent;
