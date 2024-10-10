@@ -148,7 +148,6 @@ const PostItem = ({ post, selectedPost, setSelectedPost }) => {
                 }
                 alt={`게시물 이미지 ${index + 1}`}
                 className={styles.images}
-                // style={{ maxWidth: "100%", height: "auto" }}
               />
             ))}
         </Link>
