@@ -6,7 +6,6 @@ import EmptyFeed from "./EmptyFeed";
 import PostItem from "./PostItem";
 import searchIcon from "../../assets/images/icon_search.svg";
 import styles from "../feed/PostFeed.module.scss";
-import { setCommentCount } from "../../redux/commentSlice";
 
 const LIMIT = 10; // 한 번에 불러올 게시물 수
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import useAPI from "../../../hooks/useAPI";
 import {
   setCommentCount,
@@ -9,35 +10,64 @@ import {
 import { openOptionsModal } from "../../../redux/optionsModalSlice";
 import OptionsModal from "../../ui/modal/OptionsModal";
 
+const LIMIT = 10; // 한 번에 불러올 댓글 수
+
 export default function CommentList({ postId }) {
   const dispatch = useDispatch();
   const { get, post, del, token } = useAPI();
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([]); //////
   const [newComment, setNewComment] = useState("");
   const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
 
   // 댓글 목록 불러오기
-  useEffect(() => {
-    const getCommentsList = async () => {
-      const response = await get(
-        `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
-        "application/json",
-        token
-      );
+  const getCommentsList = async ({ pageParam = 0 }) => {
+    const response = await get(
+      `${
+        import.meta.env.VITE_API_URL
+      }/post/${postId}/comments/?limit=${LIMIT}&skip=${pageParam}`,
+      "application/json",
+      token
+    );
 
-      if (response && response.payload.comments) {
-        setComments(response.payload.comments);
-      } else {
-        console.error("댓글 목록 불러오기 실패:", response);
-        alert("댓글 목록 불러오기에 실패했습니다.");
+    if (response && response.payload.comments) {
+      return {
+        comments: response.payload.comments,
+        nextSkip: pageParam + LIMIT,
+      };
+    } else {
+      throw new Error("댓글 목록 불러오기 실패");
+    }
+  };
+
+  // useInfiniteQuery를 사용하여 댓글 목록 불러오기
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
+    useInfiniteQuery({
+      queryKey: ["comments", postId],
+      queryFn: getCommentsList,
+      getNextPageParam: (lastPage) => {
+        return lastPage.comments.length < LIMIT ? undefined : lastPage.nextSkip;
+      },
+    });
+
+  // 스크롤 이벤트로 무한 스크롤 감지
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight - 100 &&
+        hasNextPage &&
+        !isFetchingNextPage
+      ) {
+        fetchNextPage();
       }
     };
 
-    getCommentsList();
-  }, [postId]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  // 댓글 작성
+  // 댓글 등록
   const handleAddComment = async () => {
     if (!newComment) {
       alert("댓글을 입력해주세요.");
@@ -56,13 +86,10 @@ export default function CommentList({ postId }) {
     );
 
     if (response && response.payload.comment) {
-      setComments((prevComments) => [
-        response.payload.comment,
-        ...prevComments,
-      ]);
+      dispatch(incrementCommentCount(postId)); // Redux에서 댓글 수 증가
       alert("댓글이 추가되었습니다.");
       setNewComment("");
-      dispatch(incrementCommentCount(postId));
+      refetch();
     } else {
       alert("댓글 추가에 실패했습니다.");
     }
@@ -77,22 +104,22 @@ export default function CommentList({ postId }) {
     );
 
     if (response && response.payload.status === "200") {
-      console.log("response.status", response.status);
       const updatedComments = comments.filter(
         (comment) => comment.id !== commentId
       );
       setComments(updatedComments);
       dispatch(decrementCommentCount(postId));
+      refetch();
       alert("댓글이 삭제되었습니다.");
     } else {
-      alert(response.message || "댓글 삭제에 실패했습니다.");
+      alert("댓글 삭제에 실패했습니다.");
     }
   };
 
   // 댓글 수 업데이트
   useEffect(() => {
     dispatch(setCommentCount({ postId, count: comments.length }));
-  }, [dispatch, postId]);
+  }, [dispatch, postId, comments.length]);
 
   // 삭제 옵션 모달 열기
   const handleOpenOptionsModal = (commentId) => {
@@ -111,21 +138,36 @@ export default function CommentList({ postId }) {
   return (
     <div>
       <h3>댓글목록</h3>
-      <ul>
-        {comments.length > 0 ? (
-          comments.map((comment) => (
-            <li key={comment.id}>
-              <p>{comment.content}</p>
-              <button onClick={() => handleOpenOptionsModal(comment.id)}>
-                삭제
-              </button>
-            </li>
-          ))
-        ) : (
-          <p>댓글이 없습니다.</p>
-        )}
-      </ul>
       <div>
+        <ul>
+          {data?.pages.flatMap((page) => page.comments).length > 0 ? (
+            data.pages
+              .flatMap((page) => page.comments)
+              .map((comment) => (
+                <li key={comment.id}>
+                  <p>{comment.content}</p>
+                  <button onClick={() => handleOpenOptionsModal(comment.id)}>
+                    삭제
+                  </button>
+                </li>
+              ))
+          ) : (
+            <p>댓글이 없습니다.</p>
+          )}
+        </ul>
+      </div>
+      <div
+        style={{
+          position: "fixed",
+          bottom: "50px",
+          left: "50%",
+          transform: "translate(-50%, 0)",
+          width: "100%",
+          maxWidth: "480px",
+          background: "aliceblue",
+          zIndex: 100,
+        }}
+      >
         <input
           type="text"
           value={newComment}
