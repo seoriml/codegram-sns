@@ -42,7 +42,6 @@ export default function Feed() {
       token
     );
     return {
-      // posts: response.payload.posts,
       posts: response.payload.posts.map((post) => ({
         ...post,
         commentCount: post.comments.length, // 댓글 수를 포함

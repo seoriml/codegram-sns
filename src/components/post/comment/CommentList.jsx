@@ -15,6 +15,7 @@ export default function CommentList({ postId }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
 
   // 댓글 목록 불러오기
   useEffect(() => {
@@ -96,6 +97,7 @@ export default function CommentList({ postId }) {
   // 삭제 옵션 모달 열기
   const handleOpenOptionsModal = (commentId) => {
     setSelectedCommentId(commentId);
+    setIsCommentModalOpen(true);
     const options = [{ text: "삭제", actionId: "optionDelete" }];
     dispatch(openOptionsModal({ options }));
   };
@@ -132,7 +134,9 @@ export default function CommentList({ postId }) {
         />
         <button onClick={handleAddComment}>게시</button>
       </div>
-      <OptionsModal actionHandlers={actionHandlersOptions} />
+      {isCommentModalOpen && (
+        <OptionsModal actionHandlers={actionHandlersOptions} />
+      )}
     </div>
   );
 }

@@ -60,7 +60,11 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
         }
       } else {
         alert("삭제되었습니다.");
-        navigate("/home");
+        if (path.includes("detail")) {
+          navigate(-1);
+        } else {
+          window.location.reload();
+        }
       }
     }
   };
