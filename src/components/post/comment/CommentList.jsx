@@ -9,6 +9,7 @@ import {
 } from "../../../redux/commentSlice";
 import { openOptionsModal } from "../../../redux/optionsModalSlice";
 import OptionsModal from "../../ui/modal/OptionsModal";
+import defaultProfileIcon from "../../../assets/images/user_profile.svg";
 
 const LIMIT = 10; // 한 번에 불러올 댓글 수
 
@@ -153,27 +154,36 @@ export default function CommentList({ postId }) {
   };
 
   return (
-    <div>
-      <h3>댓글목록</h3>
-      <div>
-        <ul>
-          {data?.pages.flatMap((page) => page.comments).length > 0 ? (
-            data.pages
-              .flatMap((page) => page.comments)
-              .map((comment) => (
-                <li key={comment.id}>
-                  <p>{comment.content}</p>
+    <>
+      <ul>
+        {data?.pages.flatMap((page) => page.comments).length > 0 ? (
+          data.pages
+            .flatMap((page) => page.comments)
+            .map((comment) => (
+              <li key={comment.id}>
+                <div>
+                  <img
+                    src={
+                      comment.author.image ===
+                      "http://146.56.183.55:5050/Ellipse.png"
+                        ? defaultProfileIcon
+                        : comment.author.image
+                    }
+                    alt={`${comment.author.username}의 프로필사진`}
+                  />
+                  <span>{comment.author.username}</span>
                   <time>{timeAgo(comment.createdAt)}</time>
                   <button onClick={() => handleOpenOptionsModal(comment.id)}>
                     삭제
                   </button>
-                </li>
-              ))
-          ) : (
-            <p>댓글이 없습니다.</p>
-          )}
-        </ul>
-      </div>
+                </div>
+                <p>{comment.content}</p>
+              </li>
+            ))
+        ) : (
+          <li>댓글이 없습니다.</li>
+        )}
+      </ul>
       <div
         style={{
           position: "fixed",
@@ -197,6 +207,6 @@ export default function CommentList({ postId }) {
       {isCommentModalOpen && (
         <OptionsModal actionHandlers={actionHandlersOptions} />
       )}
-    </div>
+    </>
   );
 }
