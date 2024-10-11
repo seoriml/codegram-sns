@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import useAPI from "../../../hooks/useAPI";
+import {
+  setCommentCount,
+  incrementCommentCount,
+  decrementCommentCount,
+} from "../../../redux/commentSlice"; // 슬라이스에서 액션 가져오기
 
 export default function CommentList({ postId, updateCommentCount }) {
+  const dispatch = useDispatch();
   const { get, post, token } = useAPI();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
@@ -16,7 +23,6 @@ export default function CommentList({ postId, updateCommentCount }) {
       );
 
       setComments(response.payload.comments);
-      updateCommentCount(response.payload.comments.length); // 댓글 수 업데이트
     }
   };
 
@@ -47,6 +53,7 @@ export default function CommentList({ postId, updateCommentCount }) {
         ...prevComments,
         response.payload.comment.content,
       ]);
+      dispatch(incrementCommentCount(postId)); // 댓글 수 증가
       await getCommentsList(); // 댓글 목록 새로 고침
       updateCommentCount(response.payload.comments.length); // 댓글 수 업데이트
       setNewComment("");
@@ -54,6 +61,19 @@ export default function CommentList({ postId, updateCommentCount }) {
     } else {
       alert("댓글 추가에 실패했습니다.");
     }
+  };
+
+  useEffect(() => {
+    // 댓글 수를 업데이트
+    dispatch(setCommentCount({ postId: post.id, count: comments.length }));
+  }, [comments.length, dispatch, post.id]);
+
+  const handleDeleteComment = (commentId) => {
+    const updatedComments = comments.filter(
+      (comment) => comment.id !== commentId
+    ); // 댓글 삭제
+    setComments(updatedComments); // 로컬 상태 업데이트
+    dispatch(decrementCommentCount(post.id)); // 댓글 수 감소
   };
 
   return (

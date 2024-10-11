@@ -6,6 +6,7 @@ import EmptyFeed from "./EmptyFeed";
 import PostItem from "./PostItem";
 import searchIcon from "../../assets/images/icon_search.svg";
 import styles from "../feed/PostFeed.module.scss";
+import { setCommentCount } from "../../redux/commentSlice";
 
 const LIMIT = 10; // 한 번에 불러올 게시물 수
 
@@ -41,7 +42,11 @@ export default function Feed() {
       token
     );
     return {
-      posts: response.payload.posts,
+      // posts: response.payload.posts,
+      posts: response.payload.posts.map((post) => ({
+        ...post,
+        commentCount: post.comments.length, // 댓글 수를 포함
+      })),
       nextSkip: pageParam + LIMIT, // 다음 페이지를 위한 skip 값 계산
     };
   };
@@ -101,6 +106,7 @@ export default function Feed() {
                     post={post}
                     selectedPost={selectedPost}
                     setSelectedPost={() => setSelectedPost(post.id)}
+                    commentCount={post.commentCount}
                   />
                 </li>
               ))}
