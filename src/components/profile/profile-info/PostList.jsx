@@ -6,10 +6,6 @@ import ConfirmModal from "../../ui/modal/ConfirmModal";
 const PostList = ({ posts }) => {
   const [selectedPost, setSelectedPost] = useState(null);
 
-  const handleSelectPost = (postId) => {
-    setSelectedPost(postId);
-  };
-
   return (
     <div
       style={{
@@ -24,7 +20,7 @@ const PostList = ({ posts }) => {
             key={post.id}
             post={post}
             selectedPost={selectedPost}
-            setSelectedPost={() => handleSelectPost(post.id)}
+            setSelectedPost={() => setSelectedPost(post.id)}
             OptionsModalComponent={OptionsModal}
             ConfirmModalComponent={ConfirmModal}
           />
