@@ -8,8 +8,8 @@ import BackButton from "../../ui/button/BackButton";
 import VerticalButton from "../../ui/button/VerticalButton";
 import styles from "./ProfileInfo.module.scss";
 
-const ProfileInfo = ({ accountname, isMyProfile }) => {
-  const { data, get, error } = useApi();
+const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
+  const { data, get, error, token } = useApi();
   const [profile, setProfile] = useState(null);
   const [followersCount, setFollowersCount] = useState(0);
   const [followingsCount, setFollowingsCount] = useState(0);
@@ -18,7 +18,6 @@ const ProfileInfo = ({ accountname, isMyProfile }) => {
   useEffect(() => {
     // API를 통해 프로필 정보 가져오기
     const fetchProfile = async () => {
-      const token = localStorage.getItem("userToken");
       const reqUrl = isMyProfile ? `user/myinfo` : `profile/${accountname}`;
       await get(
         `${import.meta.env.VITE_API_URL}/${reqUrl}`,
@@ -27,7 +26,7 @@ const ProfileInfo = ({ accountname, isMyProfile }) => {
       );
     };
     fetchProfile();
-  }, [get, accountname]);
+  }, [get, accountname, isMyProfile]);
 
   useEffect(() => {
     // 데이터를 성공적으로 가져온 경우
@@ -37,10 +36,13 @@ const ProfileInfo = ({ accountname, isMyProfile }) => {
       setFollowersCount(profile.followerCount); // 초기 팔로워 수 설정
       console.log(setFollowersCount);
       setFollowingsCount(profile.followingCount); // 초기 팔로잉 수 설정
+      if (onProfileLoad) {
+        onProfileLoad(profile);
+      }
     } else if (error) {
       setErrorMessage("해당 계정이 존재하지 않습니다.");
     }
-  }, [data, error]);
+  }, [data, error, isMyProfile, onProfileLoad]);
 
   // 프로필 정보가 없고 에러가 있을 경우 에러 메시지 출력
   if (error) {
