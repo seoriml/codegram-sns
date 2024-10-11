@@ -60,7 +60,11 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
         }
       } else {
         alert("삭제되었습니다.");
-        navigate("/home");
+        if (path.includes("detail")) {
+          navigate(-1);
+        } else {
+          window.location.reload();
+        }
       }
     }
   };
@@ -161,7 +165,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
             />
             <Link to={`/detail/${post.id}`}>
               <img src={commentsIcon} alt="댓글 수" />
-              {post.comments.length}
+              {commentCount} {/* Redux 상태에서 가져온 댓글 수 사용 */}
             </Link>
           </div>
           <p className={styles.date}>{formatDate(post.createdAt)}</p>

@@ -4,6 +4,7 @@ import confirmModalReducer from "./confirmModalSlice";
 import apiReducer from "./apiSlice";
 import validationReducer from "./validationSlice";
 import bottomReducer from "./bottomSlice";
+import commentReducer from "./commentSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     api: apiReducer,
     validation: validationReducer,
     bottom: bottomReducer,
+    comments: commentReducer,
   },
 });
 
