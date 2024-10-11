@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import useAPI from "../../hooks/useAPI";
@@ -6,11 +7,15 @@ import EmptyFeed from "./EmptyFeed";
 import PostItem from "./PostItem";
 import searchIcon from "../../assets/images/icon_search.svg";
 import styles from "../feed/PostFeed.module.scss";
+import { setCommentCount } from "../../redux/commentSlice";
 
 const LIMIT = 10; // 한 번에 불러올 게시물 수
 
 export default function Feed() {
   const { get, post, token } = useAPI();
+  const dispatch = useDispatch();
+  // 댓글 상태를 Redux에서 가져오기
+  const commentCounts = useSelector((state) => state.comments);
 
   const [selectedPost, setSelectedPost] = useState(null);
 
@@ -58,6 +63,21 @@ export default function Feed() {
       },
     });
 
+  //댓글 수 업데이트
+  useEffect(() => {
+    if (data) {
+      data.pages.forEach((page) => {
+        page.posts.forEach((post) => {
+          if (commentCounts[post.id] !== post.comments.length) {
+            dispatch(
+              setCommentCount({ postId: post.id, count: post.comments.length })
+            );
+          }
+        });
+      });
+    }
+  }, [dispatch, data, commentCounts]);
+
   // 스크롤 이벤트로 무한 스크롤 감지
   useEffect(() => {
     const handleScroll = () => {
@@ -95,16 +115,18 @@ export default function Feed() {
         <ul className={styles.postsWrapper}>
           {data.pages.map((page, pageIndex) => (
             <React.Fragment key={pageIndex}>
-              {page.posts.map((post) => (
-                <li key={post.id}>
-                  <PostItem
-                    post={post}
-                    selectedPost={selectedPost}
-                    setSelectedPost={() => setSelectedPost(post.id)}
-                    commentCount={post.comments.length}
-                  />
-                </li>
-              ))}
+              {page.posts.map((post) => {
+                return (
+                  <li key={post.id}>
+                    <PostItem
+                      post={post}
+                      selectedPost={selectedPost}
+                      setSelectedPost={() => setSelectedPost(post.id)}
+                      commentCount={commentCounts[post.id]}
+                    />
+                  </li>
+                );
+              })}
             </React.Fragment>
           ))}
           {isFetchingNextPage && <p>로딩중...</p>}
