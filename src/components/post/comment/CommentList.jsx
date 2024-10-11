@@ -5,30 +5,36 @@ import {
   setCommentCount,
   incrementCommentCount,
   decrementCommentCount,
-} from "../../../redux/commentSlice"; // 슬라이스에서 액션 가져오기
+} from "../../../redux/commentSlice";
+import { openOptionsModal } from "../../../redux/optionsModalSlice";
+import OptionsModal from "../../ui/modal/OptionsModal";
 
-export default function CommentList({ postId, updateCommentCount }) {
+export default function CommentList({ postId }) {
   const dispatch = useDispatch();
-  const { get, post, token } = useAPI();
+  const { get, post, del, token } = useAPI();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
 
   // 댓글 목록 불러오기
-  const getCommentsList = async () => {
-    {
+  useEffect(() => {
+    const getCommentsList = async () => {
       const response = await get(
         `${import.meta.env.VITE_API_URL}/post/${postId}/comments`,
         "application/json",
         token
       );
 
-      setComments(response.payload.comments);
-    }
-  };
+      if (response && response.payload.comments) {
+        setComments(response.payload.comments);
+      } else {
+        console.error("댓글 목록 불러오기 실패:", response);
+        alert("댓글 목록 불러오기에 실패했습니다.");
+      }
+    };
 
-  useEffect(() => {
     getCommentsList();
-  }, []);
+  }, [postId]);
 
   // 댓글 작성
   const handleAddComment = async () => {
@@ -50,30 +56,54 @@ export default function CommentList({ postId, updateCommentCount }) {
 
     if (response && response.payload.comment) {
       setComments((prevComments) => [
+        response.payload.comment,
         ...prevComments,
-        response.payload.comment.content,
       ]);
-      dispatch(incrementCommentCount(postId)); // 댓글 수 증가
-      await getCommentsList(); // 댓글 목록 새로 고침
-      updateCommentCount(response.payload.comments.length); // 댓글 수 업데이트
-      setNewComment("");
       alert("댓글이 추가되었습니다.");
+      setNewComment("");
+      dispatch(incrementCommentCount(postId));
     } else {
       alert("댓글 추가에 실패했습니다.");
     }
   };
 
-  useEffect(() => {
-    // 댓글 수를 업데이트
-    dispatch(setCommentCount({ postId: post.id, count: comments.length }));
-  }, [comments.length, dispatch, post.id]);
+  // 댓글 삭제
+  const handleDeleteComment = async (commentId) => {
+    const response = await del(
+      `${import.meta.env.VITE_API_URL}/post/${postId}/comments/${commentId}`,
+      "application/json",
+      token
+    );
 
-  const handleDeleteComment = (commentId) => {
-    const updatedComments = comments.filter(
-      (comment) => comment.id !== commentId
-    ); // 댓글 삭제
-    setComments(updatedComments); // 로컬 상태 업데이트
-    dispatch(decrementCommentCount(post.id)); // 댓글 수 감소
+    if (response && response.payload.status === "200") {
+      console.log("response.status", response.status);
+      const updatedComments = comments.filter(
+        (comment) => comment.id !== commentId
+      );
+      setComments(updatedComments);
+      dispatch(decrementCommentCount(postId));
+      alert("댓글이 삭제되었습니다.");
+    } else {
+      alert(response.message || "댓글 삭제에 실패했습니다.");
+    }
+  };
+
+  // 댓글 수 업데이트
+  useEffect(() => {
+    dispatch(setCommentCount({ postId, count: comments.length }));
+  }, [dispatch, postId]);
+
+  // 삭제 옵션 모달 열기
+  const handleOpenOptionsModal = (commentId) => {
+    setSelectedCommentId(commentId);
+    const options = [{ text: "삭제", actionId: "optionDelete" }];
+    dispatch(openOptionsModal({ options }));
+  };
+
+  const actionHandlersOptions = {
+    optionDelete: () => {
+      handleDeleteComment(selectedCommentId);
+    },
   };
 
   return (
@@ -84,6 +114,9 @@ export default function CommentList({ postId, updateCommentCount }) {
           comments.map((comment) => (
             <li key={comment.id}>
               <p>{comment.content}</p>
+              <button onClick={() => handleOpenOptionsModal(comment.id)}>
+                삭제
+              </button>
             </li>
           ))
         ) : (
@@ -99,6 +132,7 @@ export default function CommentList({ postId, updateCommentCount }) {
         />
         <button onClick={handleAddComment}>게시</button>
       </div>
+      <OptionsModal actionHandlers={actionHandlersOptions} />
     </div>
   );
 }
