@@ -7,6 +7,7 @@ import Home from "./pages/home/Home";
 import PostCreatePage from "./pages/post/PostCreatePage";
 import Profile from "./pages/profile/MyProfile";
 import YourProfile from "./pages/profile/YourProfile";
+import MyProfile from "./pages/profile/MyProfile";
 import ProfileEditPage from "./pages/profile/ProfileEdit";
 import LoginMain from "./pages/login/LoginMain";
 import useAPI from "./hooks/useAPI";
@@ -18,6 +19,7 @@ import PostEditPage from "./pages/post/PostEditPage";
 import RedirectIfAuthenticated from "./components/auth/RedirectIfAuthenticated";
 import ProfileSetup from "./pages/profile/ProfileSetup";
 import SearchPage from "./pages/search/SearchPage";
+import ChatRoomPage from "./pages/chat/ChatRoomPage";
 
 function App() {
   const { isLoggedIn } = useAPI();
@@ -71,11 +73,12 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/detail/:id" element={<PostDetailPage />} />
           <Route path="/edit/:id" element={<PostEditPage />} />
-          {/* <Route path="/chat" element={<Chat />} /> */}
+          <Route path="/chat" element={<ChatRoomPage />} />
           <Route path="/post/create" element={<PostCreatePage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/edit" element={<ProfileEditPage />} />
           <Route path="/profile/:accountName" element={<YourProfile />} />
+          <Route path="/profile/:accountName" element={<MyProfile />} />
         </Routes>
         {isLoggedIn && <BottomTab />}
       </Router>
