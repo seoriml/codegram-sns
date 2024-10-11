@@ -41,10 +41,7 @@ export default function Feed() {
       token
     );
     return {
-      posts: response.payload.posts.map((post) => ({
-        ...post,
-        commentCount: post.comments.length, // 댓글 수를 포함
-      })),
+      posts: response.payload.posts,
       nextSkip: pageParam + LIMIT, // 다음 페이지를 위한 skip 값 계산
     };
   };
@@ -104,7 +101,7 @@ export default function Feed() {
                     post={post}
                     selectedPost={selectedPost}
                     setSelectedPost={() => setSelectedPost(post.id)}
-                    commentCount={post.commentCount}
+                    commentCount={post.comments.length}
                   />
                 </li>
               ))}
