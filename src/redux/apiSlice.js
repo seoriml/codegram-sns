@@ -92,7 +92,7 @@ const apiSlice = createSlice({
         state.loading = false;
         state.data = action.payload;
         if (action.payload?.user?.token) {
-          state.loginData = action.payload;
+          state.loginData = action.payload.user;
         }
       })
       .addCase(executeRequest.rejected, (state, action) => {
