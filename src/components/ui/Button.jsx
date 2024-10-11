@@ -1,8 +1,13 @@
-import React from 'react';
-import styles from './Button.module.scss';
+import React from "react";
+import styles from "./Button.module.scss";
 
-const ButtonComponent = ({ children, onClick, disabled, buttonType='buttonBasic' }) => {
-
+const ButtonComponent = ({
+  children,
+  onClick,
+  disabled,
+  buttonType = "buttonBasic",
+  style,
+}) => {
   // 항상 적용되는 버튼 기본타입은 buttonBasic 입니다.
   // 만약 buttonType이 buttonLogin 이라면
   // 해당 컴포넌트 버튼 타입은 styles.buttonLogin가 적용됩니다.
@@ -11,7 +16,12 @@ const ButtonComponent = ({ children, onClick, disabled, buttonType='buttonBasic'
   `;
 
   return (
-    <button className={buttonStyle} onClick={onClick} disabled={disabled}>
+    <button
+      className={buttonStyle}
+      onClick={onClick}
+      disabled={disabled}
+      style={style}
+    >
       {children}
     </button>
   );

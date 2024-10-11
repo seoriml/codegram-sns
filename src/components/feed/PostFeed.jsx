@@ -1,19 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import useAPI from "../../hooks/useAPI";
 import EmptyFeed from "./EmptyFeed";
 import PostItem from "./PostItem";
 import searchIcon from "../../assets/images/icon_search.svg";
+import styles from "../feed/PostFeed.module.scss";
 
 const LIMIT = 10; // 한 번에 불러올 게시물 수
 
 export default function Feed() {
-  const { get, post } = useAPI();
+  const { get, post, token } = useAPI();
+
+  const [selectedPost, setSelectedPost] = useState(null);
 
   // 테스트용 팔로우함수
   // const follow = async () => {
-  //   const token = localStorage.getItem("userToken");
   //   const testUserId = "String2";
 
   //   const response = await post(
@@ -31,7 +33,6 @@ export default function Feed() {
 
   // 피드 데이터를 불러오는 함수
   const fetchFeed = async ({ pageParam = 0 }) => {
-    const token = localStorage.getItem("userToken");
     const response = await get(
       `${
         import.meta.env.VITE_API_URL
@@ -81,8 +82,8 @@ export default function Feed() {
 
   return (
     <div>
-      <div>
-        <h1>코드그램 피드</h1>
+      <div className={styles.header}>
+        <h1 className={styles.title}>코드그램 피드</h1>
         <Link to="/search">
           <img src={searchIcon} alt="검색버튼" />
         </Link>
@@ -91,20 +92,24 @@ export default function Feed() {
       {data.pages[0].posts.length === 0 ? (
         <EmptyFeed />
       ) : (
-        <ul>
+        <ul className={styles.postsWrapper}>
           {data.pages.map((page, pageIndex) => (
             <React.Fragment key={pageIndex}>
               {page.posts.map((post) => (
                 <li key={post.id}>
-                  <PostItem post={post} />
+                  <PostItem
+                    post={post}
+                    selectedPost={selectedPost}
+                    setSelectedPost={() => setSelectedPost(post.id)}
+                    commentCount={post.comments.length}
+                  />
                 </li>
               ))}
             </React.Fragment>
           ))}
+          {isFetchingNextPage && <p>로딩중...</p>}
         </ul>
       )}
-
-      {isFetchingNextPage && <p>로딩중...</p>}
     </div>
   );
 }

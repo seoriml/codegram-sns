@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import PostForm from "../../components/post/PostForm";
 import useAPI from "../../hooks/useAPI";
 
 export default function PostEditPage() {
   const { id } = useParams();
-  const { get, put } = useAPI();
+  const { get, put, token } = useAPI();
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
+  const [author, setAuthor] = useState();
+
+  const navigate = useNavigate();
 
   // 게시물 상세 정보 가져오기 함수
   const getPostDetail = async () => {
@@ -27,6 +31,7 @@ export default function PostEditPage() {
     });
     setImages(postImages);
     setPreviews(postImages);
+    setAuthor(response.payload.post.author);
   };
 
   useEffect(() => {
@@ -59,7 +64,12 @@ export default function PostEditPage() {
   // 게시물 수정 로직
   const handleUpdatePost = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("userToken");
+
+    // 유효성 검사
+    if (!content.trim() && images.length === 0) {
+      alert("게시글 내용 또는 이미지를 입력해 주세요.");
+      return;
+    }
 
     // 새로 업로드할 이미지와 기존 이미지 분리
     const newImages = images.filter((img) => typeof img !== "string");
@@ -98,7 +108,7 @@ export default function PostEditPage() {
       }
     } else {
       alert("수정되었습니다.");
-      navigate("/home");
+      navigate(-1);
     }
   };
 
@@ -113,6 +123,7 @@ export default function PostEditPage() {
           setImages={setImages}
           previews={previews}
           setPreviews={setPreviews}
+          author={author}
         />
       ) : (
         <p>게시물 정보를 로딩 중입니다...</p>

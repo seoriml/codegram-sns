@@ -2,7 +2,7 @@
 import React from "react";
 import useAPI from "../../hooks/useAPI";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   openOptionsModal,
   closeOptionsModal,
@@ -11,6 +11,10 @@ import { openConfirmModal } from "../../redux/confirmModalSlice";
 import OptionsModal from "../ui/modal/OptionsModal";
 import ConfirmModal from "../ui/modal/ConfirmModal";
 import moreIcon from "../../assets/images/icon_more_vertical_mini.svg";
+import defaultProfileIcon from "../../assets/images/user_profile.svg";
+import styles from "../feed/PostFeed.module.scss";
+import HeartComponent from "../heart/HeartComponent";
+import commentsIcon from "../../assets/images/icon_chat.svg";
 
 // 날짜 포맷팅 함수
 const formatDate = (dateString) => {
@@ -21,15 +25,22 @@ const formatDate = (dateString) => {
   return `${year}년 ${month}월 ${day}일`;
 };
 
-const PostItem = ({ post }) => {
-  const { del } = useAPI();
-  const imageArray = post.image ? post.image.split(",") : [];
+const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
+  const location = useLocation();
+  const path = location.pathname;
+
+  const { del, token } = useAPI();
+  const imageArray = post.image
+    ? post.image
+        .split(",")
+        .filter((url) => url && url !== `${import.meta.env.VITE_API_URL}/`)
+    : [];
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // 게시글 삭제 함수
   const handleDelete = async () => {
-    const token = localStorage.getItem("userToken");
     {
       const response = await del(
         `${import.meta.env.VITE_API_URL}/post/${post.id}`,
@@ -49,7 +60,11 @@ const PostItem = ({ post }) => {
         }
       } else {
         alert("삭제되었습니다.");
-        navigate("/home");
+        if (path.includes("detail")) {
+          navigate(-1);
+        } else {
+          window.location.reload();
+        }
       }
     }
   };
@@ -65,6 +80,9 @@ const PostItem = ({ post }) => {
     },
   };
   const handleOpenOptionsModal = () => {
+    if (!path.includes("detail")) {
+      setSelectedPost();
+    }
     const options = [
       { text: "삭제", actionId: "optionDelete" },
       { text: "수정", actionId: "optionEdit" },
@@ -96,44 +114,70 @@ const PostItem = ({ post }) => {
     );
   };
 
+  const profileImageSrc =
+    post.author.image === "http://146.56.183.55:5050/Ellipse.png"
+      ? defaultProfileIcon
+      : post.author.image;
+
   return (
-    <div>
-      <div>
+    <>
+      <div className={styles.feedItem}>
         <img
-          src={post.author.image}
-          alt={`${post.author.username}의 프로필`}
-          style={{ width: "42px", borderRadius: "100%", background: "#ccc" }}
+          className={styles.profileImg}
+          src={profileImageSrc}
+          alt={`${post.author.username}의 프로필사진`}
         />
-        <h3>{post.author.username}</h3>
-        <p>@{post.author.accountname}</p>
-      </div>
-      <button onClick={handleOpenOptionsModal}>
-        <img src={moreIcon} alt="이미지업로드버튼" />
-      </button>
-      <Link to={`/detail/${post.id}`}>
-        <div>
-          <p>{post.content}</p>
-          {imageArray.length > 0 &&
-            imageArray.map((image, index) => (
-              <img
-                key={index}
-                src={
-                  image.startsWith("http")
-                    ? image
-                    : `${import.meta.env.VITE_API_URL}/${image}`
-                }
-                alt={`게시물 이미지 ${index + 1}`}
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-            ))}
+        <div className={styles.postContent}>
+          <div className={styles.author}>
+            <div>
+              <h3 className={styles.username}>{post.author.username}</h3>
+              <p className={styles.accountname}>@{post.author.accountname}</p>
+            </div>
+            <button
+              className={styles.openModal}
+              onClick={handleOpenOptionsModal}
+              aria-label="옵션 열기"
+            >
+              <img src={moreIcon} alt="더보기" />
+            </button>
+          </div>
+          <Link to={`/detail/${post.id}`}>
+            <p className={styles.textContent}>{post.content}</p>
+            {imageArray.length > 0 &&
+              imageArray.map((image, index) => (
+                <img
+                  key={index}
+                  src={
+                    image.startsWith("http")
+                      ? image
+                      : `${import.meta.env.VITE_API_URL}/${image}`
+                  }
+                  alt={`게시물 이미지 ${index + 1}`}
+                  className={styles.images}
+                />
+              ))}
+          </Link>
+          <div>
+            <HeartComponent
+              hearts={post.heartCount}
+              postId={post.id}
+              hearted={post.hearted}
+            />
+            <Link to={`/detail/${post.id}`}>
+              <img src={commentsIcon} alt="댓글 수" />
+              {commentCount} {/* Redux 상태에서 가져온 댓글 수 사용 */}
+            </Link>
+          </div>
+          <p className={styles.date}>{formatDate(post.createdAt)}</p>
         </div>
-      </Link>
-      <div>
-        <p>{formatDate(post.createdAt)}</p>
+        {(path.includes("detail") || selectedPost === post.id) && (
+          <>
+            <OptionsModal actionHandlers={actionHandlersOptions} />
+            <ConfirmModal actionHandlers={actionHandlersConfirm} />
+          </>
+        )}
       </div>
-      <OptionsModal actionHandlers={actionHandlersOptions} />
-      <ConfirmModal actionHandlers={actionHandlersConfirm} />
-    </div>
+    </>
   );
 };
 
