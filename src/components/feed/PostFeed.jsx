@@ -101,7 +101,6 @@ export default function Feed() {
                     post={post}
                     selectedPost={selectedPost}
                     setSelectedPost={() => setSelectedPost(post.id)}
-                    commentCount={post.comments.length}
                   />
                 </li>
               ))}

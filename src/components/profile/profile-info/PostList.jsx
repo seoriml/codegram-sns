@@ -27,7 +27,6 @@ const PostList = ({ posts }) => {
             setSelectedPost={() => handleSelectPost(post.id)}
             OptionsModalComponent={OptionsModal}
             ConfirmModalComponent={ConfirmModal}
-            commentCount={post.comments.length}
           />
         ))}
     </div>
