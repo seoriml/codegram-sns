@@ -39,6 +39,11 @@ const apiSlice = createSlice({
     isLoggedIn: !!localStorage.getItem("userToken"),
     loading: false,
     error: null,
+    loginData: null, // 로그인하면 저장되는 데이터, 프로필 수정창 들어갈때 여기서 값 받아서 사용하면된다.
+    feedData: null, // home 화면에 뜨는 전체 피드 데이터
+    profileData: null, // 사용자 프로필 데이터
+    feedByUser: null, // 사용자별 피드 데이터
+    codeByUser: null, // 사용자별 코드 데이터
   },
   reducers: {
     setCredentials: (state, action) => {
@@ -51,6 +56,31 @@ const apiSlice = createSlice({
       state.isLoggedIn = false;
       localStorage.removeItem("userToken");
     },
+    toggleLike: (state, action) => {
+      const post = state.find((post) => post.id === action.payload);
+      if (post) {
+        post.isLiked = !post.isLiked;
+        post.likes += post.isLiked ? 1 : -1;
+      }
+    },
+    setFeedData: (state, action) => {
+      state.feedData = action.payload;
+    },
+    setProfile: (state, action) => {
+      state.profile = action.payload;
+    },
+    setFeedByUser: (state, action) => {
+      state.feedByUser = action.payload;
+    },
+    setCodeByUser: (state, action) => {
+      state.codeByUser = action.payload;
+    },
+    setHeart: (state, action) => {
+      const isHearted = state.feedData.posts;
+      state.feedData.hearted = true;
+      state.feedData.heartCount + 1;
+    },
+    setUnHeart: (state, action) => {},
   },
   extraReducers: (builder) => {
     builder
@@ -61,11 +91,9 @@ const apiSlice = createSlice({
       .addCase(executeRequest.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
-        // if (action.payload?.token) {
-        //   state.token = action.payload.token;
-        //   state.isLoggedIn = true;
-        //   localStorage.setItem("userToken", action.payload.token);
-        // }
+        if (action.payload?.user?.token) {
+          state.loginData = action.payload;
+        }
       })
       .addCase(executeRequest.rejected, (state, action) => {
         state.loading = false;
@@ -74,7 +102,8 @@ const apiSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout } = apiSlice.actions;
+export const { setCredentials, logout, setFeedData, setCodeByUser, setFeedByUser, setHeart, setProfile, setUnHeart } =
+  apiSlice.actions;
 export default apiSlice.reducer;
 
 // export const selectCurrentToken = (state) => state.auth.token;
