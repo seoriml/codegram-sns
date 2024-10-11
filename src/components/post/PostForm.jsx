@@ -1,6 +1,10 @@
 import React from "react";
 import BackButton from "../ui/button/BackButton";
 import ImageUploadButton from "../ui/button/ImageUploadButton";
+import styles from "./PostForm.module.scss";
+import ButtonComponent from "../ui/Button";
+import removeIcon from "../../assets/images/icon_close.svg";
+import defaultProfileIcon from "../../assets/images/user_profile.svg";
 
 const PostForm = ({
   onSubmit,
@@ -10,6 +14,7 @@ const PostForm = ({
   setImages,
   previews,
   setPreviews,
+  author,
 }) => {
   // 게시글 내용 변경 함수
   const handleContentChange = (e) => {
@@ -44,48 +49,79 @@ const PostForm = ({
 
   // previews가 문자열인 경우 배열로 변환
   const previewArray = Array.isArray(previews)
-    ? previews
-    : previews.split(",").filter((url) => url);
+    ? previews.filter((url) => url !== `${import.meta.env.VITE_API_URL}/`)
+    : previews
+        .split(",")
+        .filter((url) => url && url !== `${import.meta.env.VITE_API_URL}/`);
+
+  // 엔터 키로 줄바꿈하고 제출 방지
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      setContent((prev) => prev + "\n");
+    }
+  };
+
+  const profileImageSrc =
+    author?.image === "http://146.56.183.55:5050/Ellipse.png"
+      ? defaultProfileIcon
+      : author?.image;
 
   return (
     <form onSubmit={onSubmit}>
-      <div>
+      <div className={styles.header}>
         <BackButton />
-        <button type="submit">업로드</button>
+        <ButtonComponent buttonType="buttonPost" type="submit">
+          업로드
+        </ButtonComponent>
       </div>
-      <div>
-        <textarea
-          id="content"
-          value={content}
-          onChange={handleContentChange}
-          placeholder="게시글 입력하기"
-        />
-        {previewArray.length > 0 && (
-          <div>
-            {previewArray.map((preview, index) => (
-              <div key={index} style={{ position: "relative" }}>
-                <img
-                  src={preview}
-                  alt={`업로드 이미지 ${index + 1}`}
-                  style={{ maxWidth: "100%", maxHeight: "300px" }}
-                />
-                <button
-                  type="button"
-                  onClick={() => removeImage(index)}
-                  style={{
-                    position: "absolute",
-                    top: "5px",
-                    right: "5px",
-                  }}
-                >
-                  X
-                </button>
-              </div>
-            ))}
-          </div>
+
+      <div className={styles.body}>
+        {author && (
+          <img
+            className={styles.profileImg}
+            src={profileImageSrc}
+            alt={`${author?.username}의 프로필사진`}
+          />
         )}
+        <div className={styles.uploadContainer}>
+          <div className={styles.contentsWrapper}>
+            <textarea
+              id="content"
+              value={content}
+              onChange={handleContentChange}
+              placeholder=" 게시글 입력하기..."
+              onKeyDown={handleKeyDown}
+            />
+            {previewArray.length > 0 && (
+              <>
+                {previewArray.map((preview, index) => (
+                  <div className={styles.previewWrapper} key={index}>
+                    <img
+                      src={preview}
+                      alt={`업로드 이미지 ${index + 1}`}
+                      className={styles.previewImages}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(index)}
+                      className={styles.removeButton}
+                    >
+                      <img src={removeIcon} alt="이미지 삭제" />
+                    </button>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+          <div className={styles.imageUploadButton}>
+            <ImageUploadButton
+              onChange={handleImageChange}
+              existingFiles={images}
+            />
+          </div>
+        </div>
       </div>
-      <ImageUploadButton onChange={handleImageChange} existingFiles={images} />
     </form>
   );
 };

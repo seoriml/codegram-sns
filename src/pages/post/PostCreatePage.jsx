@@ -3,7 +3,7 @@ import PostForm from "../../components/post/PostForm";
 import useAPI from "../../hooks/useAPI";
 
 export default function PostCreatePage() {
-  const { post } = useAPI();
+  const { post, token } = useAPI();
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
@@ -34,7 +34,13 @@ export default function PostCreatePage() {
   // 게시글 업로드 함수
   const handleUploadPost = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("userToken");
+
+    // 유효성 검사
+    if (!content.trim() && images.length === 0) {
+      alert("게시글 내용 또는 이미지를 입력해 주세요.");
+      return;
+    }
+
     const imageString = await uploadImages(images);
 
     const response = await post(
@@ -49,9 +55,10 @@ export default function PostCreatePage() {
       token
     );
 
-    console.log("res", response);
     if (response.meta.rejectedWithValue) {
       alert(`error: ${response.payload}`);
+    } else {
+      alert("게시글이 업로드되었습니다.");
     }
 
     setContent("");

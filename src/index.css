@@ -21,25 +21,27 @@ body {
 }
 
 :root {
-  --color-background-body: #D4D4D4;
-  --color-component-gray: #F2F2F2;
-  --color-component-white: #FFF;
-  --color-error-red: #EB5757;
-  --color-element-blue: #0088FF;
-  --color-element-skyblue: #A6D5FF;
-  --color-element-gray: #DBDBDB;
+  --color-background-body: #d4d4d4;
+  --color-component-gray: #f2f2f2;
+  --color-component-white: #fff;
+  --color-error-red: #eb5757;
+  --color-element-blue: #0088ff;
+  --color-element-skyblue: #a6d5ff;
+  --color-element-gray: #dbdbdb;
   --color-font-black: #000;
   --color-font-gray: #767676;
-  --color-font-gray-light: #C4C4C4;
+  --color-font-gray-light: #c4c4c4;
 
   --font-size-large: 18px;
   --font-size-title: 16px;
-  --font-size-regular: 14px; 
+  --font-size-regular: 14px;
   --font-size-detail: 12px;
   --font-size-small: 10px;
-  
+
   --border-radius-large: 45px;
   --border-radius-regular: 35px;
   --border-radius-small: 32px;
   --border-radius-post: 10px;
+
+  --side-padding-feed: 16px;
 }
