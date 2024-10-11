@@ -163,7 +163,7 @@ export default function CommentList({ postId }) {
               .map((comment) => (
                 <li key={comment.id}>
                   <p>{comment.content}</p>
-                  <p>{timeAgo(comment.createdAt)}</p>
+                  <time>{timeAgo(comment.createdAt)}</time>
                   <button onClick={() => handleOpenOptionsModal(comment.id)}>
                     삭제
                   </button>
@@ -189,7 +189,7 @@ export default function CommentList({ postId }) {
         <input
           type="text"
           value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+          onInput={(e) => setNewComment(e.target.value)}
           placeholder="댓글 입력하기"
         />
         <button onClick={handleAddComment}>게시</button>
