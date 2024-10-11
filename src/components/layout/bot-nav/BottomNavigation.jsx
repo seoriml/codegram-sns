@@ -13,7 +13,7 @@ import profileIcon from "../../../assets/images/tab_icon_profile.svg";
 // 하단 탭 구성 요소 배열
 const tabItem = [
   { path: "/home", text: "홈", icon: homeIcon, tab: "home" },
-  { path: "/chat", text: "채팅", icon: chatIcon, tab: "chat" },
+  { path: "/chat", text: "챗봇", icon: chatIcon, tab: "chat" },
   { path: "/post/create", text: "게시물 작성", icon: postIcon, tab: "post" },
   { path: "/profile", text: "프로필", icon: profileIcon, tab: "profile" },
 ];
@@ -28,26 +28,9 @@ const BottomTab = () => {
     <div className={styles.content}>
       <div className={styles.tab}>
         {tabItem.map(({ path, text, icon, tab }) => (
-          <Link
-            key={tab}
-            to={path}
-            onClick={() => dispatch(setActiveTab(tab))}
-            className={styles.link}
-          >
-            <img
-              src={icon}
-              alt={text}
-              className={`${styles.icon} ${
-                activeTab === tab ? styles.activeIcon : ""
-              }`}
-            />
-            <div
-              className={`${styles.text} ${
-                activeTab === tab ? styles.activeText : ""
-              }`}
-            >
-              {text}
-            </div>
+          <Link key={tab} to={path} onClick={() => dispatch(setActiveTab(tab))} className={styles.link}>
+            <img src={icon} alt={text} className={`${styles.icon} ${activeTab === tab ? styles.activeIcon : ""}`} />
+            <div className={`${styles.text} ${activeTab === tab ? styles.activeText : ""}`}>{text}</div>
           </Link>
         ))}
       </div>
