@@ -12,7 +12,7 @@ const SearchResultItem = ({ user }) => {
   return (
     <li>
       <Link
-        to={`/post/${user.accountname}/userpost`}
+        to={`/profile/${user.accountname}`}
         className={styles.userResultItem}
       >
         <img
