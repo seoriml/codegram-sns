@@ -165,8 +165,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
             />
             <Link to={`/detail/${post.id}`}>
               <img src={commentsIcon} alt="댓글 수" />
-              {commentCount || post.comments.length}
-              {/* detail에서는 Redux 상태에서 가져온 commentCount 사용 */}
+              {commentCount}
             </Link>
           </div>
           <p className={styles.date}>{formatDate(post.createdAt)}</p>
