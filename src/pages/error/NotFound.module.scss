@@ -2,22 +2,21 @@ body{
   -ms-overflow-style: none;
   .errorContainer {
     display: flex;
+    min-height: 100vh;
+    box-sizing: border-box;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    padding-top: 238px;
-    padding-bottom: 353px;
+    text-align: center;
+    gap: 20px;
     .errorBalloon {
-      padding-bottom: 30px;
-      padding-left: 132px;
-      padding-right: 132px;
+      max-width: 100%;
+      height: auto;
     }
     .errorText {
-      padding-bottom: 20px;
-      padding-left: 112px;
-      padding-right: 112px;
       font-size: var(--font-size-regular);
       color: var(--color-font-gray);
+      word-break: keep-all;
     }
   }
 }
