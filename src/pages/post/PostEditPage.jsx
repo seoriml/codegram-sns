@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { json, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PostForm from "../../components/post/PostForm";
 import useAPI from "../../hooks/useAPI";
 
@@ -10,6 +11,8 @@ export default function PostEditPage() {
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
   const [author, setAuthor] = useState();
+
+  const navigate = useNavigate();
 
   // 게시물 상세 정보 가져오기 함수
   const getPostDetail = async () => {
@@ -105,7 +108,7 @@ export default function PostEditPage() {
       }
     } else {
       alert("수정되었습니다.");
-      navigate("/home");
+      navigate(-1);
     }
   };
 
