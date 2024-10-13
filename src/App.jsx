@@ -20,7 +20,6 @@ import RedirectIfAuthenticated from "./components/auth/RedirectIfAuthenticated";
 import ProfileSetup from "./pages/profile/ProfileSetup";
 import SearchPage from "./pages/search/SearchPage";
 import ChatRoomPage from "./pages/chat/ChatRoomPage";
-import NotFound from "./pages/error/NotFound";
 
 function App() {
   const { isLoggedIn } = useAPI();
@@ -80,7 +79,6 @@ function App() {
           <Route path="/profile/edit" element={<ProfileEditPage />} />
           <Route path="/profile/:accountName" element={<YourProfile />} />
           <Route path="/profile/:accountName" element={<MyProfile />} />
-          <Route path="*" element={<NotFound />} />
         </Routes>
         {isLoggedIn && <BottomTab />}
       </Router>
