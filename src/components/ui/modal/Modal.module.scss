@@ -1,6 +1,6 @@
 //Modal.module.css
 
-.modal-overlay {
+.modalOverlay {
   margin: 0 auto;
   position: fixed;
   top: 0;
@@ -15,7 +15,7 @@
   z-index: 1000;
 }
 
-.modal-content {
+.modalContent {
   background-color: white;
   border-radius: 10px;
   max-width: 250px;
@@ -28,17 +28,18 @@
   z-index: 1001;
 }
 
-.modal-title {
+.modalTitle {
   font-size: 16px;
   width: 100%;
   padding: 20px;
   border-bottom: 1px solid #dbdbdb;
 }
 
-.modal-buttons {
+.modalButtons {
   width: 100%;
+  display: flex;
 }
-.modal-buttons button:first-child {
+.modalButtons button:first-child {
   border-right: 1px solid #dbdbdb;
 }
 
@@ -48,6 +49,6 @@ button {
   font-size: 14px;
 }
 
-.button-confirm {
+.buttonConfirm {
   color: #0088ff;
 }
