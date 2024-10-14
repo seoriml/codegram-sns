@@ -78,13 +78,11 @@ const ProfileTabs = ({ accountname }) => {
           src={isListView ? iconListOn : iconListOff}
           alt="리스트 뷰 아이콘"
           onClick={() => tabView(true)}
-          className={styles.tabIcon}
         />
         <img
           src={isListView ? iconAlbumOff : iconAlbumOn}
           alt="앨범 뷰 아이콘"
           onClick={() => tabView(false)}
-          className={styles.tabIcon}
         />
       </div>
 

@@ -60,7 +60,7 @@ const VerticalButton = () => {
 
   return (
     <div>
-      <button onClick={handleClick}>
+      <button onClick={handleClick} style={{ width: "100%" }}>
         <img src={moreIcon} alt="더보기" />
       </button>
       <OptionsModal actionHandlers={handleOptionActions} />
