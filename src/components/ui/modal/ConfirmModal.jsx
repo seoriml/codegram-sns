@@ -28,15 +28,12 @@ const ConfirmModal = ({ actionHandlers }) => {
 
   return (
     isOpen && (
-      <div className={styles["modal-overlay"]}>
-        <div className={styles["modal-content"]}>
-          <div className={styles["modal-title"]}>{modalTitle}</div>
-          <div className={styles["modal-buttons"]}>
+      <div className={styles.modalOverlay}>
+        <div className={styles.modalContent}>
+          <div className={styles.modalTitle}>{modalTitle}</div>
+          <div className={styles.modalButtons}>
             <button onClick={handleClose}>{cancelButtonText}</button>
-            <button
-              onClick={handleConfirm}
-              className={styles["button-confirm"]}
-            >
+            <button onClick={handleConfirm} className={styles.buttonConfirm}>
               {confirmButtonText}
             </button>
           </div>
