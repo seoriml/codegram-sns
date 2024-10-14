@@ -6,6 +6,7 @@ import useAPI from "../../hooks/useAPI";
 import EmptyFeed from "./EmptyFeed";
 import PostItem from "./PostItem";
 import searchIcon from "../../assets/images/icon_search.svg";
+import logoIcon from "../../assets/images/symbol_logo_codegram_title.svg";
 import styles from "../feed/PostFeed.module.scss";
 import { setCommentCount } from "../../redux/commentSlice";
 
@@ -103,7 +104,9 @@ export default function Feed() {
   return (
     <div>
       <div className={styles.header}>
-        <h1 className={styles.title}>코드그램 피드</h1>
+        <h1 className={styles.title}>
+          <img src={logoIcon} alt="코드그램" />
+        </h1>
         <Link to="/search">
           <img src={searchIcon} alt="검색버튼" />
         </Link>
