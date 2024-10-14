@@ -63,6 +63,21 @@
         font-size: var(--font-size-small);
         color: var(--color-font-gray);
       }
+
+      .heartComments {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: var(--color-font-gray);
+        font-size: var(--font-size-detail);
+        button,
+        .commentCount {
+          width: none;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+      }
     }
   }
 }

@@ -157,13 +157,13 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
                 />
               ))}
           </Link>
-          <div>
+          <div className={styles.heartComments}>
             <HeartComponent
               hearts={post.heartCount}
               postId={post.id}
               hearted={post.hearted}
             />
-            <Link to={`/detail/${post.id}`}>
+            <Link to={`/detail/${post.id}`} className={styles.commentCount}>
               <img src={commentsIcon} alt="댓글 수" />
               {commentCount}
             </Link>
