@@ -1,11 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import modalReducer from "./modalSlice";
-import tabReducer from "./reducers";
+import optionsModalReducer from "./optionsModalSlice";
+import confirmModalReducer from "./confirmModalSlice";
+import apiReducer from "./apiSlice";
+import validationReducer from "./validationSlice";
+import bottomReducer from "./bottomSlice";
+import commentReducer from "./commentSlice";
 
 const store = configureStore({
   reducer: {
-    modal: modalReducer,
-    tab: tabReducer,
+    optionsModal: optionsModalReducer,
+    confirmModal: confirmModalReducer,
+    api: apiReducer,
+    validation: validationReducer,
+    bottom: bottomReducer,
+    comments: commentReducer,
   },
 });
 

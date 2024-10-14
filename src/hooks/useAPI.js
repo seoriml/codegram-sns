@@ -1,52 +1,38 @@
-import React, { useCallback, useState } from "react";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { executeRequest } from "../redux/apiSlice";
 
 const useAPI = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { data, loading, error, token, isLoggedIn } = useSelector((state) => state.api);
 
-  const contentTypeImg = "multipart/form-data";
-  const contentType = "application/json";
+  // 이미지 호출할 땐 content-type에 "multipart/form-data"
 
-  const executeRequest = useCallback(async (url, method = "GET", body = null, headers = {}) => {
-    setLoading(true);
-    setError(null);
+  const executeRequestThunk = useCallback(
+    (url, method = "GET", body = null, contentType = null, token = null) => {
+      return dispatch(executeRequest({ url, method, body, contentType, token }));
+    },
+    [dispatch]
+  );
 
-    try {
-      const options = {
-        method,
-        headers: {
-          "content-Type": contentType,
-          ...headers,
-        },
-      };
-      if (body) {
-        options.body = JSON.stringify(body);
-      }
-      console.log(options);
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error(`HTTP error.! status: ${response.status}`);
-      }
-      const result = await response.json();
-      console.log(result);
-      setData(result);
-      return result;
-    } catch (error) {
-      console.error("API 요청 중 에러 발생:", error);
-      setError(error.message || "An error occurred");
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const get = useCallback(
+    (url, contentType, token) => executeRequestThunk(url, "GET", null, contentType, token),
+    [executeRequestThunk]
+  );
+  const post = useCallback(
+    (url, body, contentType, token) => executeRequestThunk(url, "POST", body, contentType, token),
+    [executeRequestThunk]
+  );
+  const put = useCallback(
+    (url, body, contentType, token) => executeRequestThunk(url, "PUT", body, contentType, token),
+    [executeRequestThunk]
+  );
+  const del = useCallback(
+    (url, contentType, token) => executeRequestThunk(url, "DELETE", null, contentType, token),
+    [executeRequestThunk]
+  );
 
-  const get = useCallback((url, headers) => executeRequest(url, "GET", null, headers), [executeRequest]);
-  const post = useCallback((url, body, headers) => executeRequest(url, "POST", body, headers), [executeRequest]);
-  const put = useCallback((url, body, headers) => executeRequest(url, "PUT", body, headers), [executeRequest]);
-  const del = useCallback((url, headers) => executeRequest(url, "DELETE", null, headers), [executeRequest]);
-
-  return [data, loading, error, get, post, put, del];
+  return { token, isLoggedIn, data, loading, error, get, post, put, del };
 };
 
 export default useAPI;
