@@ -1,8 +1,34 @@
-# CodeGram
+# CodeGram 💬
+개발자들이 직접 작성한 코드, 프로젝트, 기술과 일상을 공유하고, 피드백을 주고받을 수 있는 웹앱 커뮤니티입니다!<br>
+팔로우/팔로잉 기능을 통해 관심 있는 개발자를 구독하고, 게시글에 답글을 달거나 좋아요를 누르며 상호작용할 수 있습니다.
 
-## 프로젝트 개요
-- 프로젝트명: 코드그램 (Codegram)
-- 주제: 웹앱형식의 개발자 SNS 플랫폼으로, 개발자들이 코드, 프로젝트, 기술 및 일상을 공유하고 피드백을 주고받을 수 있는 커뮤니티.
+## 목차
+- [개요](#개요)
+- [개요](#개요)
+- [개요](#개요)
+- [파일 및 폴더구조](#파일-및-폴더구조)
+
+## 개요
+- 프로젝트 이름: 코드그램 (Codegram)
+- 프로젝트 기간: 2024.09.23 - 2024.10.22
+- 멤버: 이서림, 이다빈, 윤혜림, 양현우
+- 개발 언어
+  <!-- HTML5 아이콘 배지 -->
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+  <!-- CSS3 아이콘 배지 -->
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
+  <!-- JavaScript 아이콘 배지 -->
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/>
+  <!-- React.js 아이콘 배지 -->
+  <img src="https://img.shields.io/badge/React.js-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/><br>
+  <!-- Redux 아이콘 배지 -->
+  <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white" />
+  <!-- Sass 아이콘 배지 -->
+  <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=Sass&logoColor=white" />
+  <!-- Node.js 아이콘 배지 -->
+  <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white"/>
+  <!-- Vite 아이콘 배지 -->
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white" />
 
 ## 명명 규칙
 변수 및 함수 클래스
@@ -15,18 +41,19 @@
 
 ## 타입 리스트
 ```
-• feat: 기능 개발
-• fix: 버그 및 에러 수정
-• refactor: 리팩토링
-• design: UI 디자인 변경 및 이미지
-• comment: 주석 추가 및 변경
-• style: 스타일 변경
-• docs: README 문서 수정
-• test: 테스트 코드 추가/수정
-• chore: 기타 변경사항 및 빌드 스크립트
-• init: 초기 파일 생성
-• rename: 파일/폴더명 수정
-• remove: 파일 삭제
+→ feat: 기능 개발
+→ fix: 버그 수정
+→ refactor: 리팩토링
+→ design: CSS 등 사용자 UI 디자인 변경
+→ comment: 필요한 주석 추가 및 변경
+→ style: 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)
+→ docs: 문서 수정 (문서 추가, 수정, 삭제, README)
+→ test: 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)
+→ test: 테스트 코드 추가/수정
+→ chore : 기타 변경사항 (빌드 스크립트 수정, assets, 패키지 매니저 등)
+→ init: 초기 파일 생성
+→ rename: 파일 혹은 폴더명을 수정하거나 옮기는 작업만 한 경우
+→ remove: 파일을 삭제하는 작업만 수행한 경우
 ```
 
 ## 컴포넌트 구성
