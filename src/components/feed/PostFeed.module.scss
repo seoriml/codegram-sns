@@ -12,17 +12,18 @@
 }
 
 .postsWrapper {
-  padding: 20px var(--side-padding-feed);
-
   .feedItem {
     display: flex;
     gap: 12px;
+    padding: 20px var(--side-padding-feed);
     padding-bottom: 24px;
 
     .profileImg {
-      width: 42px;
-      height: 42px;
-      border-radius: 42px;
+      width: 100%;
+      height: 100%;
+      max-width: 42px;
+      max-height: 42px;
+      border-radius: 100%;
       background-color: var(--color-element-gray);
     }
 
@@ -65,13 +66,14 @@
       }
 
       .heartComments {
+        max-width: 98px;
+        padding-bottom: 16px;
         display: flex;
         align-items: center;
         gap: 16px;
         color: var(--color-font-gray);
         button,
         .commentCount {
-          width: none;
           display: flex;
           align-items: center;
           gap: 6px;
