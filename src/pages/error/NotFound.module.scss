@@ -1,0 +1,25 @@
+body{
+  -ms-overflow-style: none;
+  .errorContainer {
+    display: flex;
+    min-height: 100vh;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    .errorBalloon {
+      max-width: 100%;
+      height: auto;
+    }
+    .errorText {
+      font-size: var(--font-size-regular);
+      color: var(--color-font-gray);
+      word-break: keep-all;
+    }
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
