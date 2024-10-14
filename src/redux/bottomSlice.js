@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  activeTab: localStorage.getItem("activeTab") || "home",
+  activeTab: "home",
 };
 
 const bottomSlice = createSlice({
