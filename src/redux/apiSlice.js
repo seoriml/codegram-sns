@@ -56,13 +56,6 @@ const apiSlice = createSlice({
       state.isLoggedIn = false;
       localStorage.removeItem("userToken");
     },
-    toggleLike: (state, action) => {
-      const post = state.find((post) => post.id === action.payload);
-      if (post) {
-        post.isLiked = !post.isLiked;
-        post.likes += post.isLiked ? 1 : -1;
-      }
-    },
     setFeedData: (state, action) => {
       state.feedData = action.payload;
     },
@@ -75,12 +68,6 @@ const apiSlice = createSlice({
     setCodeByUser: (state, action) => {
       state.codeByUser = action.payload;
     },
-    setHeart: (state, action) => {
-      const isHearted = state.feedData.posts;
-      state.feedData.hearted = true;
-      state.feedData.heartCount + 1;
-    },
-    setUnHeart: (state, action) => {},
   },
   extraReducers: (builder) => {
     builder
@@ -93,6 +80,7 @@ const apiSlice = createSlice({
         state.data = action.payload;
         if (action.payload?.user?.token) {
           state.loginData = action.payload.user;
+          state.profileData = action.payload.user;
         }
       })
       .addCase(executeRequest.rejected, (state, action) => {
