@@ -31,67 +31,67 @@
 .basicType {
   @include commonStyles;
   @include widthHeight(120px, 45px);
-  @include border(none, 45px);
-  @include font(400, 14px, #FFF);
-  @include backgroundColor(#0088FF);
+  @include border(none, var( --border-radius-large));
+  @include font(400, var(--font-size-regular), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
 };
 // 이메일로 로그인, 로그인, 다음, 코드그램 시작하기 버튼타입
 .loginType {
   @include commonStyles;
   @include widthHeight(322px, 45px);
-  @include border(none, 45px);
-  @include font(700, 14px, #FFF);
-  @include backgroundColor(#0088FF);
-  &:disabled { @include disabledButton(not-allowed, #A6D5FF) };
+  @include border(none, var(--border-radius-large));
+  @include font(700, var(--font-size-regular), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
+  &:disabled { @include disabledButton(not-allowed, var(--color-element-skyblue)) };
 };
 // 회원가입 버튼타입
 .signUpType {
   @include commonStyles;
   @include widthHeight(322px, 45px);
-  @include border(1px solid #0088FF, 45px);
-  @include font(700, 14px, #767676);
-  @include backgroundColor(#FFF);
+  @include border(1px solid var(--color-element-blue), var(--border-radius-large));
+  @include font(700, var(--font-size-regular), var(--color-font-gray));
+  @include backgroundColor(var(--color-component-white));
 };
 // 팔로우 버튼타입
 .followType {
   @include commonStyles;
   @include widthHeight(120px, 35px);
-  @include border(none, 35px);
-  @include font(500, 14px, #FFF);
-  @include backgroundColor(#0088FF);
+  @include border(none, var(--border-radius-regular));
+  @include font(500, var(--font-size-regular), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
 };
 // 언팔로우, 프로필 수정, 링크 등록 버튼타입
 .profileType {
   @include commonStyles;
   @include widthHeight(120px, 35px);
-  @include border(1px solid #DBDBDB, 35px);
-  @include font(500, 14px, #767676);
-  @include backgroundColor(#FFF);
+  @include border(1px solid var(--color-element-gray), var(--border-radius-regular));
+  @include font(500, var(--font-size-regular), var(--color-font-gray));
+  @include backgroundColor(var(--color-component-white));
 };
 // 미니 팔로우 버튼타입
 .miniFollowType {
   @include commonStyles;
   @include widthHeight(56px, 28px);
-  @include border(none, 28px);
-  @include font(400, 12px, #FFF);
-  @include backgroundColor(#0088FF);
+  @include border(none, var(--border-radius-mini));
+  @include font(400, var(--font-size-detail), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
 };
 // 미니 취소 버튼타입
 .miniCancelType {
   @include commonStyles;
   @include widthHeight(56px, 28px);
-  @include border(1px solid #DBDBDB, 28px);
-  @include font(400, 12px, #767676);
-  @include backgroundColor(#FFF);
+  @include border(1px solid var(--color-element-gray), var(--border-radius-mini));
+  @include font(400, var(--font-size-detail), var(--color-font-gray));
+  @include backgroundColor(var(--color-component-white));
 };
 // 저장, 업로드 버튼타입
 .saveType {
   @include commonStyles;
   @include widthHeight(90px, 32px);
-  @include border(none, 32px);
-  @include font(500, 14px, #FFF);
-  @include backgroundColor(#0088FF);
-  &:disabled { @include disabledButton(not-allowed, #A6D5FF) };
+  @include border(none, var(--border-radius-small));
+  @include font(500, var(--font-size-regular), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
+  &:disabled { @include disabledButton(not-allowed, var(--color-element-skyblue)) };
 };
 // 뒤로가기 버튼
 .backButton { width: 22px };
