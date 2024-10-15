@@ -1,6 +1,6 @@
 // Type으로 끝나는 class명은 컴포넌트에서 buttonStyles로 지정해 주세요!
-// 전체 공통 스타일
-.commonExtend {
+// @mixin 믹스인이름 (인자로 들어갈 수 있는 변수명) {css}
+@mixin commonStyles {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,118 +8,90 @@
   text-align: center;
   white-space: nowrap;
 };
+@mixin widthHeight($width, $height) {
+  width: $width;
+  height: $height;
+};
+@mixin font($fontWeight, $fontSize, $color) {
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+  color: $color;
+};
+@mixin border($border, $borderRadius) {
+  border: $border;
+  border-radius: $borderRadius;
+};
+@mixin backgroundColor($backgroundColor) { background-color: $backgroundColor };
+@mixin disabledButton($cursor, $backgroundColor) {
+  cursor: $cursor;
+  background-color: $backgroundColor;
+}
 
-// 검색하기, 이전 페이지 버튼
+// 검색하기, 이전 페이지 버튼타입
 .basicType {
-  @extend .commonExtend;
-  width: 120px;
-  height: 45px;
-  border: none;
-  border-radius: 45px;
-  font-weight: normal;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #0088FF;
+  @include commonStyles;
+  @include widthHeight(120px, 45px);
+  @include border(none, 45px);
+  @include font(400, 14px, #FFF);
+  @include backgroundColor(#0088FF);
 };
-
-// 이메일로 로그인, 로그인, 다음, 코드그램 시작하기 버튼
+// 이메일로 로그인, 로그인, 다음, 코드그램 시작하기 버튼타입
 .loginType {
-  @extend .commonExtend;
-  width: 322px;
-  height: 45px;
-  border: none;
-  border-radius: 45px;
-  font-weight: bold;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #0088FF;
-  &:disabled {
-    cursor: not-allowed;
-    background-color: #A6D5FF;
-  };
+  @include commonStyles;
+  @include widthHeight(322px, 45px);
+  @include border(none, 45px);
+  @include font(700, 14px, #FFF);
+  @include backgroundColor(#0088FF);
+  &:disabled { @include disabledButton(not-allowed, #A6D5FF) };
 };
-
-// 회원가입 버튼
+// 회원가입 버튼타입
 .signUpType {
-  @extend .commonExtend;
-  width: 322px;
-  height: 45px;
-  border: 1px solid #0088FF;
-  border-radius: 45px;
-  font-weight: bold;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #FFF;
+  @include commonStyles;
+  @include widthHeight(322px, 45px);
+  @include border(1px solid #0088FF, 45px);
+  @include font(700, 14px, #767676);
+  @include backgroundColor(#FFF);
 };
-
-// 팔로우 버튼
+// 팔로우 버튼타입
 .followType {
-  @extend .commonExtend;
-  width: 120px;
-  height: 35px;
-  border: none;
-  border-radius: 35px;
-  font-weight: normal;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #0088FF;
+  @include commonStyles;
+  @include widthHeight(120px, 35px);
+  @include border(none, 35px);
+  @include font(500, 14px, #FFF);
+  @include backgroundColor(#0088FF);
 };
-
-// 언팔로우, 프로필 수정, 링크 등록 버튼
+// 언팔로우, 프로필 수정, 링크 등록 버튼타입
 .profileType {
-  @extend .commonExtend;
-  width: 120px;
-  height: 35px;
-  border: 1px solid #DBDBDB;
-  border-radius: 35px;
-  font-weight: normal;
-  font-size: 14px;
-  color: #767676;
-  background-color: #FFF;
+  @include commonStyles;
+  @include widthHeight(120px, 35px);
+  @include border(1px solid #DBDBDB, 35px);
+  @include font(500, 14px, #767676);
+  @include backgroundColor(#FFF);
 };
-
-// 미니 팔로우 버튼
+// 미니 팔로우 버튼타입
 .miniFollowType {
-  @extend .commonExtend;
-  width: 56px;
-  height: 28px;
-  border: none;
-  border-radius: 28px;
-  font-weight: normal;
-  font-size: 12px;
-  color: #FFF;
-  background-color: #0088FF;
+  @include commonStyles;
+  @include widthHeight(56px, 28px);
+  @include border(none, 28px);
+  @include font(400, 12px, #FFF);
+  @include backgroundColor(#0088FF);
 };
-
-// 미니 취소 버튼
+// 미니 취소 버튼타입
 .miniCancelType {
-  @extend .commonExtend;
-  width: 56px;
-  height: 28px;
-  border: 1px solid #DBDBDB;
-  border-radius: 32px;
-  font-weight: normal;
-  font-size: 12px;
-  color: #767676;
-  background-color: #FFF;
+  @include commonStyles;
+  @include widthHeight(56px, 28px);
+  @include border(1px solid #DBDBDB, 28px);
+  @include font(400, 12px, #767676);
+  @include backgroundColor(#FFF);
 };
-
-// 저장, 업로드 버튼
+// 저장, 업로드 버튼타입
 .saveType {
-  @extend .commonExtend;
-  width: 90px;
-  height: 32px;
-  border: none;
-  border-radius: 32px;
-  font-weight: normal;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #0088FF;
-  &:disabled {
-    cursor: not-allowed;
-    background-color: #A6D5FF;
-  };
+  @include commonStyles;
+  @include widthHeight(90px, 32px);
+  @include border(none, 32px);
+  @include font(500, 14px, #FFF);
+  @include backgroundColor(#0088FF);
+  &:disabled { @include disabledButton(not-allowed, #A6D5FF) };
 };
-
 // 뒤로가기 버튼
 .backButton { width: 22px };
