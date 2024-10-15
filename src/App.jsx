@@ -21,6 +21,7 @@ import ProfileSetup from "./pages/profile/ProfileSetup";
 import SearchPage from "./pages/search/SearchPage";
 import ChatRoomPage from "./pages/chat/ChatRoomPage";
 import NotFound from "./pages/error/NotFound";
+import ProductCreatePage from "./pages/product/ProductCreatePage";
 
 function App() {
   const { isLoggedIn } = useAPI();
@@ -79,6 +80,7 @@ function App() {
           <Route path="/profile/edit" element={<ProfileEditPage />} />
           <Route path="/profile/:accountName" element={<YourProfile />} />
           <Route path="/profile/:accountName" element={<MyProfile />} />
+          <Route path="/product/create" element={<ProductCreatePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isLoggedIn && <BottomTab />}
