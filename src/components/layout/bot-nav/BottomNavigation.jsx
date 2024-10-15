@@ -28,9 +28,26 @@ const BottomTab = () => {
     <div className={styles.content}>
       <div className={styles.tab}>
         {tabItem.map(({ path, text, icon, tab }) => (
-          <Link key={tab} to={path} onClick={() => dispatch(setActiveTab(tab))} className={styles.link}>
-            <img src={icon} alt={text} className={`${styles.icon} ${activeTab === tab ? styles.activeIcon : ""}`} />
-            <div className={`${styles.text} ${activeTab === tab ? styles.activeText : ""}`}>{text}</div>
+          <Link
+            key={tab}
+            to={path}
+            onClick={() => dispatch(setActiveTab(tab))}
+            className={styles.link}
+          >
+            <img
+              src={icon}
+              alt={text}
+              className={`${styles.icon} ${
+                activeTab === tab ? styles.activeIcon : ""
+              }`}
+            />
+            <div
+              className={`${styles.text} ${
+                activeTab === tab ? styles.activeText : ""
+              }`}
+            >
+              {text}
+            </div>
           </Link>
         ))}
       </div>

@@ -1,5 +1,3 @@
-// 프로필 이미지, 사용자 이름, 팔로워/팔로잉 수
-
 import React, { useEffect, useState } from "react";
 import useApi from "../../../hooks/useAPI";
 import ProfileImage from "../../../assets/images/user_profile.svg";
@@ -60,24 +58,32 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
         <VerticalButton />
       </div>
 
-      {/* 프로필 이미지 */}
-      <img
-        src={profile?.image || ProfileImage}
-        alt={`${profile?.username || "사용자"}의 프로필 이미지`}
-        className={styles.profileImage}
-      />
+      <div className={styles.profileTopSection}>
+        {/*팔로워/*/}
+        <div className={styles.profileFollow}>
+          <div className={styles.followersCount}></div>
+          {followersCount}
+          <p className={styles.label}>followers</p>
+        </div>
+
+        {/* 프로필 이미지 */}
+        <img
+          src={profile?.image || ProfileImage}
+          alt={`${profile?.username || "사용자"}의 프로필 이미지`}
+          className={styles.profileImage}
+        />
+        {/*팔로잉*/}
+        <div className={styles.profileFollow}>
+          <div className={styles.followingsCount}>{followingsCount} </div>
+          <p className={styles.label}>followings</p>
+        </div>
+      </div>
 
       {/* 사용자 정보 */}
       <div className={styles.profileDetails}>
         <h2 className={styles.profileUsername}>{profile.username}</h2>
         <p className={styles.profileAccountname}>@{profile.accountname}</p>
         <p className={styles.profileIntro}>{profile.intro}</p>
-      </div>
-
-      {/*팔로워/팔로잉*/}
-      <div className={styles.profileFollow}>
-        <span>{followersCount} followers</span>
-        <span>{followingsCount} followings</span>
       </div>
 
       <ProfileAction

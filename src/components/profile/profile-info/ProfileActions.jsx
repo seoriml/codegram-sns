@@ -13,8 +13,9 @@ const ProfileAction = ({
   isfollow,
   setFollowersCount,
   followersCount,
+  setFollowingCount,
 }) => {
-  const { post, del, data, error } = useAPI();
+  const { post, del, data, error, token } = useAPI();
   const [isFollowed, setIsFollowed] = useState(isfollow);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -27,10 +28,9 @@ const ProfileAction = ({
     }
 
     // API를 통해 팔로우/언팔로우 정보 가져오기
-    const token = localStorage.getItem("userToken");
     const reqUrl = isFollowed
-      ? `${accountname}/unfollow`
-      : `${accountname}/follow`;
+      ? `profile/${accountname}/unfollow`
+      : `profile/${accountname}/follow`;
 
     if (isFollowed) {
       // 언팔로우 요청
@@ -72,16 +72,16 @@ const ProfileAction = ({
   return (
     <div className={styles.profileAction}>
       {isMyProfile ? (
-        <>
+        <div className={styles.myProfileButton}>
           <ButtonComponent buttonType="buttonBasic" onClick={handleProfileEdit}>
             프로필 수정
           </ButtonComponent>
           <ButtonComponent buttonType="buttonBasic" onClick={handlePostCreate}>
             게시글 작성
           </ButtonComponent>
-        </>
+        </div>
       ) : (
-        <>
+        <div className={styles.yourProfileButton}>
           <ButtonComponent
             buttonType={isFollowed ? "buttonUnFollow" : "buttonFollow"}
             onClick={handleFollowClick}
@@ -91,7 +91,7 @@ const ProfileAction = ({
           {errorMessage && <p>{errorMessage}</p>} {/* 에러 메시지 출력 */}
           {error && <p>{error.message}</p>}{" "}
           {/* API 호출에서 발생한 에러 출력 */}
-        </>
+        </div>
       )}
     </div>
   );
