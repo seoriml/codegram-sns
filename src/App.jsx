@@ -8,6 +8,8 @@ import PostCreatePage from "./pages/post/PostCreatePage";
 import Profile from "./pages/profile/MyProfile";
 import YourProfile from "./pages/profile/YourProfile";
 import MyProfile from "./pages/profile/MyProfile";
+import Followers from "./pages/followers-followings/Followers";
+import Followings from "./pages/followers-followings/Followings";
 import ProfileEditPage from "./pages/profile/ProfileEdit";
 import LoginMain from "./pages/login/LoginMain";
 import useAPI from "./hooks/useAPI";
@@ -27,6 +29,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // localStorage.removeItem("userToken");
     const token = localStorage.getItem("userToken");
     if (token) {
       dispatch(setCredentials({ token }));
@@ -77,8 +80,18 @@ function App() {
           <Route path="/post/create" element={<PostCreatePage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/edit" element={<ProfileEditPage />} />
-          <Route path="/profile/:accountName" element={<YourProfile />} />
-          <Route path="/profile/:accountName" element={<MyProfile />} />
+          <Route path="/profile/:accountname" element={<YourProfile />} />
+          <Route path="/profile/:accountname" element={<MyProfile />} />
+          {/* 팔로우 리스트 페이지 */}
+          <Route
+            path="/profile/:accountname/followers"
+            element={<Followers />}
+          />
+          {/* 팔로잉 리스트 페이지 */}
+          <Route
+            path="/profile/:accountname/followings"
+            element={<Followings />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isLoggedIn && <BottomTab />}
