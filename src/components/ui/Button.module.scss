@@ -15,11 +15,11 @@
   width: 120px;
   height: 45px;
   border: none;
-  border-radius: var(--border-radius-large);
-  font-size: var(--font-size-regular);
+  border-radius: 45px;
   font-weight: normal;
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+  font-size: 14px;
+  color: #FFF;
+  background-color: #0088FF;
 };
 
 // 이메일로 로그인, 로그인, 다음, 코드그램 시작하기 버튼
@@ -27,14 +27,15 @@
   @extend .commonExtend;
   width: 322px;
   height: 45px;
-  border-radius: var(--border-radius-large);
-  font-size: var(--font-size-regular);
+  border: none;
+  border-radius: 45px;
   font-weight: bold;
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+  font-size: 14px;
+  color: #FFF;
+  background-color: #0088FF;
   &:disabled {
     cursor: not-allowed;
-    background-color: var(--color-element-skyblue);
+    background-color: #A6D5FF;
   };
 };
 
@@ -43,12 +44,12 @@
   @extend .commonExtend;
   width: 322px;
   height: 45px;
-  border: 1px solid var(--color-element-blue);
-  border-radius: var(--border-radius-large);
-  font-size: var(--font-size-regular);
+  border: 1px solid #0088FF;
+  border-radius: 45px;
   font-weight: bold;
-  color: var(--color-font-gray); 
-  background-color: var(--color-component-white);
+  font-size: 14px;
+  color: #FFF;
+  background-color: #FFF;
 };
 
 // 팔로우 버튼
@@ -56,10 +57,12 @@
   @extend .commonExtend;
   width: 120px;
   height: 35px;
-  border-radius: var(--border-radius-regular);
-  font-size: var(--font-size-regular);
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+  border: none;
+  border-radius: 35px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #FFF;
+  background-color: #0088FF;
 };
 
 // 언팔로우, 프로필 수정, 링크 등록 버튼
@@ -67,11 +70,12 @@
   @extend .commonExtend;
   width: 120px;
   height: 35px;
-  border: 1px solid var(--color-element-gray);
-  border-radius: var(--border-radius-regular);
-  font-size: var(--font-size-regular);
-  color: var(--color-font-gray);
-  background-color: var(--color-component-white);
+  border: 1px solid #DBDBDB;
+  border-radius: 35px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #767676;
+  background-color: #FFF;
 };
 
 // 미니 팔로우 버튼
@@ -79,22 +83,25 @@
   @extend .commonExtend;
   width: 56px;
   height: 28px;
-  border-radius: var(--border-radius-mini);
-  font-size: var(--font-size-detail);
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+  border: none;
+  border-radius: 28px;
+  font-weight: normal;
+  font-size: 12px;
+  color: #FFF;
+  background-color: #0088FF;
 };
 
-// 미니 언팔로우 버튼
+// 미니 취소 버튼
 .miniCancelType {
   @extend .commonExtend;
   width: 56px;
   height: 28px;
-  border: 1px solid var(--color-element-gray);
-  border-radius: var(--border-radius-mini);
-  font-size: var(--font-size-detail);
-  color: var(--color-font-gray); 
-  background-color: var(--color-component-white);
+  border: 1px solid #DBDBDB;
+  border-radius: 32px;
+  font-weight: normal;
+  font-size: 12px;
+  color: #767676;
+  background-color: #FFF;
 };
 
 // 저장, 업로드 버튼
@@ -102,17 +109,17 @@
   @extend .commonExtend;
   width: 90px;
   height: 32px;
-  border-radius: var(--border-radius-small);
-  font-size: var(--font-size-regular);
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+  border: none;
+  border-radius: 32px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #FFF;
+  background-color: #0088FF;
   &:disabled {
     cursor: not-allowed;
-    background-color: var(--color-element-skyblue);
+    background-color: #A6D5FF;
   };
 };
 
-// 뒤로가기 아이콘 버튼
-.backButton {
-  width: 22px;
-};
+// 뒤로가기 버튼
+.backButton { width: 22px };
