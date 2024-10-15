@@ -8,8 +8,8 @@ import PostCreatePage from "./pages/post/PostCreatePage";
 import Profile from "./pages/profile/MyProfile";
 import YourProfile from "./pages/profile/YourProfile";
 import MyProfile from "./pages/profile/MyProfile";
-import Followers from "./pages/followers_followings/Followers";
-import Followings from "./pages/followers_followings/Followings";
+import Followers from "./pages/followersFollowings/Followers";
+import Followings from "./pages/followersFollowings/Followings";
 import ProfileEditPage from "./pages/profile/ProfileEdit";
 import LoginMain from "./pages/login/LoginMain";
 import useAPI from "./hooks/useAPI";
@@ -82,12 +82,10 @@ function App() {
           <Route path="/profile/edit" element={<ProfileEditPage />} />
           <Route path="/profile/:accountname" element={<YourProfile />} />
           <Route path="/profile/:accountname" element={<MyProfile />} />
-          {/* 팔로우 리스트 페이지 */}
           <Route
             path="/profile/:accountname/followers"
             element={<Followers />}
           />
-          {/* 팔로잉 리스트 페이지 */}
           <Route
             path="/profile/:accountname/followings"
             element={<Followings />}
