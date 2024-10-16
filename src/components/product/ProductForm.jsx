@@ -24,9 +24,38 @@ export default function ProductForm({
   const imagePreviewUrl =
     productImage instanceof File ? URL.createObjectURL(productImage) : null;
 
+  // 폼 유효성 검사 함수
+  const validateForm = () => {
+    if (!productImage) {
+      alert("대표 이미지를 업로드해주세요.");
+      return false;
+    }
+    if (!itemName.trim()) {
+      alert("사이트 이름을 입력해주세요.");
+      return false;
+    }
+    if (!link.trim()) {
+      alert("링크를 입력해주세요.");
+      return false;
+    }
+    if (!/^https?:\/\/\S+$/.test(link)) {
+      alert("유효한 URL을 입력해주세요.");
+      return false;
+    }
+    return true;
+  };
+
+  // 폼제출
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    onSubmit(e);
+  };
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <div>
           <BackButton />
           <ButtonComponent buttonType="buttonPost" type="submit">
