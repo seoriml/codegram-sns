@@ -91,6 +91,7 @@ function App() {
             path="/profile/:accountname/followings"
             element={<Followings />}
           />
+          <Route path="/product/create" element={<ProductCreatePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isLoggedIn && <BottomTab />}
