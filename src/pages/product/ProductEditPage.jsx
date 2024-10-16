@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProductForm from "../../components/product/ProductForm";
 import useAPI from "../../hooks/useAPI";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ProductEditPage() {
   const { id } = useParams();
@@ -11,15 +11,15 @@ export default function ProductEditPage() {
   const [link, setLink] = useState("");
   const price = 1;
 
-  // 게시물 상세 정보 가져오기 함수
+  const navigate = useNavigate();
+
+  // 상품 상세 정보 가져오기 함수
   const getProductDetail = async () => {
     const response = await get(
       `${import.meta.env.VITE_API_URL}/product/detail/${id}`,
       "application/json",
       token
     );
-    console.log(response);
-
     setProductImage(response.payload.product.itemImage);
     setItemName(response.payload.product.itemName);
     setLink(response.payload.product.link);
@@ -46,17 +46,19 @@ export default function ProductEditPage() {
     return json.filename;
   };
 
-  // 게시글 업로드 함수
-  const handleUploadProduct = async (e) => {
+  // 상품 수정 함수
+  const handleEditProduct = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return;
+    let filename;
+    // 이미지가 변경된 경우에만 업로드
+    if (productImage instanceof File) {
+      filename = await uploadImage(productImage);
+    } else {
+      filename = productImage;
     }
-
-    const filename = await uploadImage(productImage);
     const response = await post(
-      `${import.meta.env.VITE_API_URL}/product`,
+      `${import.meta.env.VITE_API_URL}/product/${id}`,
       {
         product: {
           itemName,
@@ -72,17 +74,15 @@ export default function ProductEditPage() {
     if (response.meta.rejectedWithValue) {
       console.log(`error: ${response.payload}`);
     } else {
-      alert("링크가 등록되었습니다.");
-      setItemName("");
-      setLink("");
-      setProductImage(null);
+      alert("수정되었습니다.");
+      navigate(-1);
     }
   };
 
   return (
     <div>
       <ProductForm
-        onSubmit={handleUploadProduct}
+        onSubmit={handleEditProduct}
         itemName={itemName}
         setItemName={setItemName}
         link={link}
