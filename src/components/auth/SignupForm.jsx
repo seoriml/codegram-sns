@@ -98,7 +98,7 @@ export default function SignupForm() {
       <ButtonComponent
         children="다음"
         disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
-        buttonType="buttonLogin"
+        buttonType="loginType"
         style={{
           marginTop: "14px",
           position: "relative",

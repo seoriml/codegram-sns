@@ -14,7 +14,9 @@ export default function AuthForm() {
   const [username, setUsername] = useState("");
   const [accountName, setAccountName] = useState("");
   const [intro, setIntro] = useState("");
-  const [profileImage, setProfileImage] = useState(ProfileImagePlaceholder);
+  const [profileImagePreview, setProfileImagePreview] = useState(ProfileImagePlaceholder);
+  const [img, setImg] = useState();
+  const [profileImg, setProfileImg] = useState("");
   const [warningMessage, setWarningMessage] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [accountNameError, setAccountNameError] = useState("");
@@ -56,17 +58,6 @@ export default function AuthForm() {
     }
   };
 
-  const handleImageChange = (files) => {
-    if (files && files[0]) {
-      const file = files[0];
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfileImage(e.target.result); // 업로드한 이미지 미리보기 설정
-      };
-      reader.readAsDataURL(file); // 파일을 읽어와서 데이터 URL로 변환
-    }
-  };
-
   const handleUsernameChange = (e) => {
     const value = e.target.value;
     setUsername(value);
@@ -85,9 +76,39 @@ export default function AuthForm() {
     setIntro(value);
     validateIntro(value);
   };
+  const handleImageChange = (files) => {
+    if (files && files[0]) {
+      const file = files[0];
+      setImg(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfileImagePreview(e.target.result); // 업로드한 이미지 미리보기 설정
+      };
+      reader.readAsDataURL(file); // 파일을 읽어와서 데이터 URL로 변환
+    }
+    setProfileImg(uploadImage(img));
+  };
+
+  // 이미지 업로드 함수
+  const uploadImage = async (img) => {
+    const formData = new FormData();
+    formData.append("image", img);
+    console.log(img);
+
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/image/uploadfile`, {
+      method: "post",
+      // headers: {
+      //   "content-type": "multipart/form-data",
+      // },
+      body: formData,
+    });
+    const result = await response.json();
+    return result;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(profileImg);
     const result = await post(`${import.meta.env.VITE_API_URL}/user/accountnamevalid`, {
       user: {
         accountname: accountName,
@@ -102,7 +123,7 @@ export default function AuthForm() {
           password: passwordValue,
           accountname: accountName,
           intro: intro,
-          image: profileImage || "",
+          image: `${import.meta.env.VITE_API_URL}/${profileImg.filename}` || "",
         },
       });
       console.log(result2);
@@ -129,7 +150,7 @@ export default function AuthForm() {
       <form onSubmit={handleSubmit}>
         <div className={styles.profileEditMain}>
           <div className={styles.profileEditImages}>
-            <img className={styles.profileEditImg} src={profileImage} alt="프로필 이미지" />
+            <img className={styles.profileEditImg} src={profileImagePreview} alt="프로필 이미지" />
             <div className={styles.imageUploadWrapper}>
               <ImageUploadButton onChange={handleImageChange} />
             </div>
@@ -170,7 +191,7 @@ export default function AuthForm() {
             !intro ||
             !!warningMessage
           }
-          buttonType="buttonLogin"
+          buttonType="loginType"
           style={{
             marginTop: "14px",
             textAlign: "center",

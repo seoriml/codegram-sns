@@ -86,7 +86,7 @@ export default function LoginForm() {
       <ButtonComponent
         children="로그인"
         disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
-        buttonType="buttonLogin"
+        buttonType="loginType"
         style={{
           marginTop: "14px",
           position: "relative",
