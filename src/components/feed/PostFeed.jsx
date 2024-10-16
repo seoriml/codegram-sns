@@ -9,6 +9,7 @@ import searchIcon from "../../assets/images/icon_search.svg";
 import logoIcon from "../../assets/images/symbol_logo_codegram_title.svg";
 import styles from "../feed/PostFeed.module.scss";
 import { setCommentCount } from "../../redux/commentSlice";
+import Loading from "../ui/Loading";
 
 const LIMIT = 10; // 한 번에 불러올 게시물 수
 
@@ -98,7 +99,11 @@ export default function Feed() {
 
   // data가 로드되지않았거나 api호출 실패했을때 조건부렌더링
   if (!data || !data.pages) {
-    return <p>데이터를 불러오는 데 문제가 발생했습니다.</p>;
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   return (

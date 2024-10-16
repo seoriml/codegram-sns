@@ -1,7 +1,7 @@
 // components/PostItem.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAPI from "../../hooks/useAPI";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   openOptionsModal,
@@ -38,6 +38,18 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const profileData = useSelector((state) => state.api.profileData);
+
+  useEffect(() => {
+    if (profileData) {
+      sessionStorage.setItem("sessionProfileData", JSON.stringify(profileData));
+    }
+  }, [profileData]);
+
+  const sessionProfileData = JSON.parse(
+    sessionStorage.getItem("sessionProfileData")
+  );
 
   // 게시글 삭제 함수
   const handleDelete = async () => {
@@ -119,6 +131,10 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
       ? defaultProfileIcon
       : post.author.image;
 
+  const isMyPost =
+    sessionProfileData?.username === post.author.username ||
+    sessionProfileData?.accountname === post.author.accountname;
+
   return (
     <>
       <div className={styles.feedItem}>
@@ -133,13 +149,15 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
               <h3 className={styles.username}>{post.author.username}</h3>
               <p className={styles.accountname}>@{post.author.accountname}</p>
             </div>
-            <button
-              className={styles.openModal}
-              onClick={handleOpenOptionsModal}
-              aria-label="옵션 열기"
-            >
-              <img src={moreIcon} alt="더보기" />
-            </button>
+            {isMyPost && (
+              <button
+                className={styles.openModal}
+                onClick={handleOpenOptionsModal}
+                aria-label="옵션 열기"
+              >
+                <img src={moreIcon} alt="더보기" />
+              </button>
+            )}
           </div>
           <Link to={`/detail/${post.id}`}>
             <p className={styles.textContent}>{post.content}</p>
