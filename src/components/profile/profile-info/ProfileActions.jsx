@@ -73,17 +73,17 @@ const ProfileAction = ({
     <div className={styles.profileAction}>
       {isMyProfile ? (
         <div className={styles.myProfileButton}>
-          <ButtonComponent buttonType="buttonBasic" onClick={handleProfileEdit}>
+          <ButtonComponent buttonType="profileType" onClick={handleProfileEdit}>
             프로필 수정
           </ButtonComponent>
-          <ButtonComponent buttonType="buttonBasic" onClick={handlePostCreate}>
+          <ButtonComponent buttonType="profileType" onClick={handlePostCreate}>
             게시글 작성
           </ButtonComponent>
         </div>
       ) : (
         <div className={styles.yourProfileButton}>
           <ButtonComponent
-            buttonType={isFollowed ? "buttonUnFollow" : "buttonFollow"}
+            buttonType={isFollowed ? "profileType" : "followType"}
             onClick={handleFollowClick}
           >
             {isFollowed ? "언팔로우" : "팔로우"}

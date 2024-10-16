@@ -114,7 +114,7 @@ const ProfileEdit = () => {
         <BackButton />
         <ButtonComponent
           onClick={handleSubmit}
-          buttonType="buttonPost"
+          buttonType="saveType"
           disabled={!username || !accountName || !intro}
         >
           저장

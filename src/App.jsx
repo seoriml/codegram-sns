@@ -8,6 +8,8 @@ import PostCreatePage from "./pages/post/PostCreatePage";
 import Profile from "./pages/profile/MyProfile";
 import YourProfile from "./pages/profile/YourProfile";
 import MyProfile from "./pages/profile/MyProfile";
+import Followers from "./pages/followersFollowings/followers";
+import Followings from "./pages/followersFollowings/followings";
 import ProfileEditPage from "./pages/profile/ProfileEdit";
 import LoginMain from "./pages/login/LoginMain";
 import useAPI from "./hooks/useAPI";
@@ -21,12 +23,15 @@ import ProfileSetup from "./pages/profile/ProfileSetup";
 import SearchPage from "./pages/search/SearchPage";
 import ChatRoomPage from "./pages/chat/ChatRoomPage";
 import NotFound from "./pages/error/NotFound";
+import ProductCreatePage from "./pages/product/ProductCreatePage";
+import ProductEditPage from "./pages/product/ProductEditPage";
 
 function App() {
   const { isLoggedIn } = useAPI();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // localStorage.removeItem("userToken");
     const token = localStorage.getItem("userToken");
     if (token) {
       dispatch(setCredentials({ token }));
@@ -77,8 +82,18 @@ function App() {
           <Route path="/post/create" element={<PostCreatePage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/edit" element={<ProfileEditPage />} />
-          <Route path="/profile/:accountName" element={<YourProfile />} />
-          <Route path="/profile/:accountName" element={<MyProfile />} />
+          <Route path="/profile/:accountname" element={<YourProfile />} />
+          <Route path="/profile/:accountname" element={<MyProfile />} />
+          <Route
+            path="/profile/:accountname/followers"
+            element={<Followers />}
+          />
+          <Route
+            path="/profile/:accountname/followings"
+            element={<Followings />}
+          />
+          <Route path="/product/create" element={<ProductCreatePage />} />
+          <Route path="/product/edit/:id" element={<ProductEditPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isLoggedIn && <BottomTab />}
