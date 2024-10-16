@@ -34,7 +34,6 @@ export default function ProductCreatePage() {
   const handleUploadProduct = async (e) => {
     e.preventDefault();
     const filename = await uploadImage(productImage);
-    console.log("imagePath", imagePath);
 
     const response = await post(
       `${import.meta.env.VITE_API_URL}/product`,
