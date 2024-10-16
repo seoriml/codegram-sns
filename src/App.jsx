@@ -24,6 +24,7 @@ import SearchPage from "./pages/search/SearchPage";
 import ChatRoomPage from "./pages/chat/ChatRoomPage";
 import NotFound from "./pages/error/NotFound";
 import ProductCreatePage from "./pages/product/ProductCreatePage";
+import ProductEditPage from "./pages/product/ProductEditPage";
 
 function App() {
   const { isLoggedIn } = useAPI();
@@ -92,6 +93,7 @@ function App() {
             element={<Followings />}
           />
           <Route path="/product/create" element={<ProductCreatePage />} />
+          <Route path="/product/edit/:id" element={<ProductEditPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isLoggedIn && <BottomTab />}
