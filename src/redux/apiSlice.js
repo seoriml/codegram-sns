@@ -60,7 +60,7 @@ const apiSlice = createSlice({
       state.feedData = action.payload;
     },
     setProfile: (state, action) => {
-      state.profile = action.payload;
+      state.profileData = action.payload;
     },
     setFeedByUser: (state, action) => {
       state.feedByUser = action.payload;
@@ -90,8 +90,16 @@ const apiSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout, setFeedData, setCodeByUser, setFeedByUser, setHeart, setProfile, setUnHeart } =
-  apiSlice.actions;
+export const {
+  setCredentials,
+  logout,
+  setFeedData,
+  setCodeByUser,
+  setFeedByUser,
+  setHeart,
+  setProfile,
+  setUnHeart,
+} = apiSlice.actions;
 export default apiSlice.reducer;
 
 // export const selectCurrentToken = (state) => state.auth.token;
