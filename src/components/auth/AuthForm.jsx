@@ -5,11 +5,16 @@ import { useNavigate, redirect } from "react-router-dom";
 import useAPI from "./../../hooks/useAPI";
 import { updateValidState2 } from "../../redux/validationSlice";
 import { setCredentials } from "../../redux/apiSlice";
+import ButtonComponent from "../ui/Button";
+import ProfileImagePlaceholder from "../../assets/images/user_profile.svg";
+import ImageUploadButton from "../ui/button/ImageUploadButton";
+import styles from "./AuthForm.module.scss";
 
 export default function AuthForm() {
   const [username, setUsername] = useState("");
   const [accountName, setAccountName] = useState("");
   const [intro, setIntro] = useState("");
+  const [profileImage, setProfileImage] = useState(ProfileImagePlaceholder);
   const [warningMessage, setWarningMessage] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [accountNameError, setAccountNameError] = useState("");
@@ -51,6 +56,17 @@ export default function AuthForm() {
     }
   };
 
+  const handleImageChange = (files) => {
+    if (files && files[0]) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfileImage(e.target.result); // 업로드한 이미지 미리보기 설정
+      };
+      reader.readAsDataURL(file); // 파일을 읽어와서 데이터 URL로 변환
+    }
+  };
+
   const handleUsernameChange = (e) => {
     const value = e.target.value;
     setUsername(value);
@@ -86,7 +102,7 @@ export default function AuthForm() {
           password: passwordValue,
           accountname: accountName,
           intro: intro,
-          image: "",
+          image: profileImage || "",
         },
       });
       console.log(result2);
@@ -111,6 +127,14 @@ export default function AuthForm() {
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <div className={styles.profileEditMain}>
+          <div className={styles.profileEditImages}>
+            <img className={styles.profileEditImg} src={profileImage} alt="프로필 이미지" />
+            <div className={styles.imageUploadWrapper}>
+              <ImageUploadButton onChange={handleImageChange} />
+            </div>
+          </div>
+        </div>
         <Input
           name="username"
           label="사용자 이름"
@@ -135,9 +159,8 @@ export default function AuthForm() {
           placeholder="자신을 소개해 주세요.!"
           onChange={handleIntroChange}
         />
-        <button
-          type="submit"
-          style={{ border: "1px solid black", margin: "10px" }}
+        <ButtonComponent
+          children="코드그램 바로가기"
           disabled={
             !!usernameError ||
             !!accountNameError ||
@@ -147,9 +170,16 @@ export default function AuthForm() {
             !intro ||
             !!warningMessage
           }
-        >
-          코드그램 시작하기
-        </button>
+          buttonType="buttonLogin"
+          style={{
+            marginTop: "14px",
+            textAlign: "center",
+            position: "relative",
+            left: "calc(50% - (322px / 2))",
+            width: "100%",
+            padding: "13px 0",
+          }}
+        />
       </form>
     </>
   );

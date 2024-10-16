@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, redirect } from "react-router-dom";
 import useAPI from "./../../hooks/useAPI";
 import { setCredentials } from "../../redux/apiSlice";
+import styles from "./LoginForm.module.scss";
+import ButtonComponent from "../ui/Button";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -58,6 +60,7 @@ export default function LoginForm() {
       navigate("/home");
     } else {
       setWarningMessage("*" + result.payload.message);
+      setPassword("");
     }
   };
 
@@ -80,13 +83,19 @@ export default function LoginForm() {
         onChange={handlePasswordChange}
         onBlur={() => validatePassword(password)}
       />
-      <button
-        type="submit"
-        style={{ border: "1px solid black", margin: "10px" }}
+      <ButtonComponent
+        children="로그인"
         disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
-      >
-        Login button
-      </button>
+        buttonType="buttonLogin"
+        style={{
+          marginTop: "14px",
+          position: "relative",
+          left: "calc(50% - (322px / 2))",
+          width: "100%",
+          textAlign: "center",
+          padding: "13px 0",
+        }}
+      />
     </form>
   );
 }

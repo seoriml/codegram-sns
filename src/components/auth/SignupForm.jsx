@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, redirect } from "react-router-dom";
 import useAPI from "./../../hooks/useAPI";
 import { updateValidState } from "../../redux/validationSlice";
+import ButtonComponent from "../ui/Button";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -68,6 +69,7 @@ export default function SignupForm() {
       navigate("/profile/setup");
     } else {
       setWarningMessage("*" + result.payload.message);
+      setPassword("");
     }
   };
 
@@ -93,13 +95,19 @@ export default function SignupForm() {
         onChange={handlePasswordChange}
         onBlur={() => validatePassword(password)}
       />
-      <button
-        type="submit"
-        style={{ border: "1px solid black", margin: "10px" }}
+      <ButtonComponent
+        children="다음"
         disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
-      >
-        다음
-      </button>
+        buttonType="buttonLogin"
+        style={{
+          marginTop: "14px",
+          position: "relative",
+          left: "calc(50% - (322px / 2))",
+          width: "100%",
+          textAlign: "center",
+          padding: "13px 0",
+        }}
+      />
     </form>
   );
 }
