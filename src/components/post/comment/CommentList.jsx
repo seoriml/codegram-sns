@@ -226,9 +226,10 @@ export default function CommentList({ postId }) {
         <img
           className={styles.profileImg}
           src={
-            sessionProfileData.image === "http://146.56.183.55:5050/Ellipse.png"
+            sessionProfileData?.image ===
+            "http://146.56.183.55:5050/Ellipse.png"
               ? defaultProfileIcon
-              : sessionProfileData.image
+              : sessionProfileData?.image
           }
         />
         <input
