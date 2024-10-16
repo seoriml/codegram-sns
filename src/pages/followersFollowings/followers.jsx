@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import FollowerList from "../../components/follower/FollowerList";
 import useAPI from "../../hooks/useAPI";
 import BackButton from "../../components/ui/button/BackButton";
+import styles from "../../components/follower/Follower.module.scss";
 
 const Followers = () => {
   const { accountname } = useParams();
@@ -65,16 +66,14 @@ const Followers = () => {
 
   return (
     <div>
-      <div>
+      <div className={styles.followersHeader}>
         <BackButton />
-        <h1>팔로워</h1>
+        <h1 className={styles.followerName}>팔로워</h1>
       </div>
       {error ? (
-        <p>해당 계정이 존재하지 않습니다.</p>
-      ) : followers.length === 0 ? (
-        <p>팔로워가 없습니다.</p>
+        <p className={styles.followerText}>해당 계정이 존재하지 않습니다.</p>
       ) : (
-        <FollowerList followers={followers} />
+        followers.length > 0 && <FollowerList followers={followers} />
       )}
       {isFetchingNextPage && <p>로딩 중...</p>}
     </div>
