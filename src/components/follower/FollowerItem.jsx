@@ -12,11 +12,8 @@ const FollowerItem = ({ profile }) => {
       : profile.image;
 
   return (
-    <li>
-      <Link
-        to={`/profile/${profile.accountname}`}
-        className={styles.FollowerItem}
-      >
+    <li className={styles.followerItem}>
+      <Link to={profileLink} className={styles.followerInfo}>
         <img
           src={profileImageSrc}
           alt={`${profile.username}의 프로필사진`}
@@ -28,8 +25,9 @@ const FollowerItem = ({ profile }) => {
         </div>
       </Link>
       <ButtonComponent
-        buttonType={isFollowed ? "buttonCancel" : "buttonFollower"}
+        buttonType={isFollowed ? "miniCancelType" : "miniFollowType"}
         onClick={() => setIsFollowed((prev) => !prev)}
+        className={styles.followerButton}
       >
         {isFollowed ? "취소" : "팔로우"}
       </ButtonComponent>
