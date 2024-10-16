@@ -5,7 +5,6 @@ import apiReducer from "./apiSlice";
 import validationReducer from "./validationSlice";
 import bottomReducer from "./bottomSlice";
 import commentReducer from "./commentSlice";
-import scrollHeaderReducer from "./scrollHeaderSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,7 +14,6 @@ const store = configureStore({
     validation: validationReducer,
     bottom: bottomReducer,
     comments: commentReducer,
-    scrollHeader: scrollHeaderReducer,
   },
 });
 
