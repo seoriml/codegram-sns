@@ -223,7 +223,14 @@ export default function CommentList({ postId }) {
         )}
       </ul>
       <div className={styles.inputCommentWrapper}>
-        <img className={styles.profileImg} src={defaultProfileIcon} />
+        <img
+          className={styles.profileImg}
+          src={
+            sessionProfileData.image === "http://146.56.183.55:5050/Ellipse.png"
+              ? defaultProfileIcon
+              : sessionProfileData.image
+          }
+        />
         <input
           className={styles.inputComment}
           type="text"
