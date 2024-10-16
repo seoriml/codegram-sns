@@ -11,6 +11,7 @@
 ## 개요
 - 프로젝트 이름: 코드그램 (Codegram)
 - 프로젝트 기간: 2024.09.23 - 2024.10.22
+- 프로젝트 일정 관리 : Jira
 - 멤버: 이서림, 이다빈, 윤혜림, 양현우
 - 개발 언어
   <!-- HTML5 아이콘 배지 -->
@@ -30,13 +31,13 @@
   <!-- Vite 아이콘 배지 -->
   <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white" />
 
-## 명명 규칙
+<!-- ## 명명 규칙
 변수 및 함수 클래스
 - 변수: camelCase (예: userName, postCount)
 - 함수: camelCase (예: fetchUserData, handleSubmit)
 - 클래스 및 ID: camelCase
 ### 상수
-- UPPER_SNAKE_CASE (예: MAX_LENGTH, API_URL)
+- UPPER_SNAKE_CASE (예: MAX_LENGTH, API_URL) -->
 
 
 ## 타입 리스트
@@ -56,7 +57,7 @@
 → remove: 파일을 삭제하는 작업만 수행한 경우
 ```
 
-## 컴포넌트 구성
+<!-- ## 컴포넌트 구성
 UI 컴포넌트
 - Button: 여러 유형의 버튼을 위한 공통 컴포넌트
 - Modal: 모달 공통 컴포넌트
@@ -90,10 +91,8 @@ develop 브랜치: 기능 개발이 끝나면 이 브랜치에 병합.
 모든 팀원은 개발 브랜치에서 기능별로 자신이 작업한 부분을 pull request (PR)로 제출
 팀원 전원이 해당 PR을 검토하고 문제가 없을 시 승인
 승인된 PR은 develop 브랜치에 병합하여 통합 테스트 진행
-테스트 완료 후 main 브랜치에 병합하여 실제 배포
+테스트 완료 후 main 브랜치에 병합하여 실제 배포 -->
 
-## 기타
-프로젝트 일정은 Jira를 통해 관리
 
 ## 파일 및 폴더구조
 ```
@@ -103,116 +102,124 @@ develop 브랜치: 기능 개발이 끝나면 이 브랜치에 병합.
 ┃ ┣ 📂assets
 ┃ ┃ ┗ 📂images
 ┃ ┣ 📂components
-┃ ┃ ┣ 📂auth
-┃ ┃ ┃ ┣ AuthForm.jsx
-┃ ┃ ┃ ┗ AuthHeader.jsx
-┃ ┃ ┣ 📂follower
-┃ ┃ ┃ ┣ FollowerItem.jsx
-┃ ┃ ┃ ┗ FollowerList.jsx
-┃ ┃ ┣ 📂home
-┃ ┃ ┃ ┣ EmptyFeed.jsx
-┃ ┃ ┃ ┗ PostFeed.jsx
-┃ ┃ ┣ 📂layout
-┃ ┃ ┃ ┣ 📂bot-nav
-┃ ┃ ┃ ┃ ┣ BottomNavigation.jsx
-┃ ┃ ┃ ┃ ┗ BottomNavigation.module.scss
-┃ ┃ ┃ ┗ 📂top-nav
-┃ ┃ ┃ ┃ ┣ TopBasicNav.jsx
-┃ ┃ ┃ ┃ ┣ TopChatNav.jsx
-┃ ┃ ┃ ┃ ┣ TopMainNav.jsx
-┃ ┃ ┃ ┃ ┣ TopSearchNav.jsx
-┃ ┃ ┃ ┃ ┗ TopUploadNav.jsx
-┃ ┃ ┣ 📂post
-┃ ┃ ┃ ┣ 📂post
-┃ ┃ ┃ ┃ ┣ 📂comment
-┃ ┃ ┃ ┃ ┃ ┣ Comment.jsx
-┃ ┃ ┃ ┃ ┃ ┣ Comment.module.scss
-┃ ┃ ┃ ┃ ┃ ┗ CommentSection.jsx
-┃ ┃ ┃ ┃ ┣ 📂post-action
-┃ ┃ ┃ ┃ ┃ ┣ CommentButton.jsx
-┃ ┃ ┃ ┃ ┃ ┣ LikeButton.jsx
-┃ ┃ ┃ ┃ ┃ ┗ PostAction.jsx
-┃ ┃ ┃ ┃ ┣ PostContent.jsx
-┃ ┃ ┃ ┃ ┗ PostImage.jsx
-┃ ┃ ┃ ┗ 📂post-create-edit
-┃ ┃ ┃ ┃ ┣ ImageUploadBtn.jsx
-┃ ┃ ┃ ┃ ┗ PostForm.jsx
-┃ ┃ ┣ 📂product
-┃ ┃ ┃ ┣ ProductForm.jsx
-┃ ┃ ┃ ┗ ProductImage.jsx
-┃ ┃ ┣ 📂profile
-┃ ┃ ┃ ┣ 📂portfolio
-┃ ┃ ┃ ┃ ┣ Portfolio.jsx
-┃ ┃ ┃ ┃ ┣ Portfolio.module.scss
-┃ ┃ ┃ ┃ ┗ PortfolioItem.jsx
-┃ ┃ ┃ ┣ 📂profile-info
-┃ ┃ ┃ ┃ ┣ PostGrid.jsx
-┃ ┃ ┃ ┃ ┣ PostList.jsx
-┃ ┃ ┃ ┃ ┣ ProfileActions.jsx
-┃ ┃ ┃ ┃ ┣ ProfileInfo.jsx
-┃ ┃ ┃ ┃ ┗ ProfileTabs.jsx
-┃ ┃ ┃ ┣ 📂profile-settings
-┃ ┃ ┃ ┃ ┣ ProfileForm.jsx
-┃ ┃ ┃ ┃ ┗ ProfileForm.module.scss
-┃ ┃ ┃ ┗ ProfileImage.jsx
-┃ ┃ ┣ 📂search
-┃ ┃ ┃ ┣ SearchResults.jsx
-┃ ┃ ┃ ┗ UserResult.jsx
-┃ ┃ ┗ 📂ui
-┃ ┃ ┃ ┣ 📂modal
-┃ ┃ ┃ ┃ ┣ ConfirmModal.jsx
-┃ ┃ ┃ ┃ ┣ Modal.module.scss
-┃ ┃ ┃ ┃ ┗ OptionsModal.jsx
-┃ ┃ ┃ ┣ Button.jsx
-┃ ┃ ┃ ┣ Button.module.scss
-┃ ┃ ┃ ┣ Button.scss
-┃ ┃ ┃ ┣ Input.jsx
-┃ ┃ ┃ ┣ Input.module.scss
-┃ ┃ ┃ ┣ InputField.jsx
-┃ ┃ ┃ ┗ Layout.jsx
-┃ ┣ 📂hooks
-┃ ┃ ┣ useAPI.js
-┃ ┃ ┗ useModal.js
-┃ ┣ 📂pages
-┃ ┃ ┣ 📂chat
+┃ ┣ 📂auth
+┃ ┃ ┣ AuthForm.jsx
+┃ ┃ ┣ AuthHeader.jsx
+┃ ┃ ┣ LoginForm.jsx
+┃ ┃ ┣ RedirectIfAuthenticated.jsx
+┃ ┃ ┗ SignupForm.jsx
+┃ ┣ 📂chat
+┃ ┃ ┣ ChatForm.jsx
+┃ ┃ ┗ ChatForm.module.scss
+┃ ┣ 📂feed
+┃ ┃ ┣ EmptyFeed.jsx
+┃ ┃ ┣ PostFeed.jsx
+┃ ┃ ┣ PostFeed.module.scss
+┃ ┃ ┗ PostItem.jsx
+┃ ┣ 📂follower
+┃ ┃ ┣ FollowerItem.jsx
+┃ ┃ ┗ FollowerList.jsx
+┃ ┣ 📂heart
+┃ ┃ ┗ HeartComponent.jsx
+┃ ┣ 📂layout
+┃ ┃ ┣ 📂bot-nav
+┃ ┃ ┃ ┣ BottomNavigation.jsx
+┃ ┃ ┃ ┗ BottomNavigation.module.scss
+┃ ┃ ┗ 📂top-nav
+┃ ┃ ┃ ┣ TopBasicNav.jsx
+┃ ┃ ┃ ┣ TopChatNav.jsx
+┃ ┃ ┃ ┣ TopMainNav.jsx
+┃ ┃ ┃ ┣ TopSearchNav.jsx
+┃ ┃ ┃ ┗ TopUploadNav.jsx
+┃ ┣ 📂post
+┃ ┃ ┣ 📂comment
+┃ ┃ ┃ ┗ CommentList.jsx
+┃ ┃ ┣ PostDetail.jsx
+┃ ┃ ┣ PostForm.jsx
+┃ ┃ ┗ PostForm.module.scss
+┃ ┣ 📂product
+┃ ┃ ┣ ProductForm.jsx
+┃ ┃ ┗ ProductImage.jsx
+┃ ┣ 📂profile
+┃ ┃ ┣ 📂portfolio
+┃ ┃ ┃ ┣ Portfolio.jsx
+┃ ┃ ┃ ┣ Portfolio.module.scss
+┃ ┃ ┃ ┗ PortfolioItem.jsx
+┃ ┃ ┗ 📂profile-info
+┃ ┃ ┃ ┣ PostGrid.jsx
+┃ ┃ ┃ ┣ PostList.jsx
+┃ ┃ ┃ ┣ ProfileActions.jsx
+┃ ┃ ┃ ┣ ProfileInfo.jsx
+┃ ┃ ┃ ┣ ProfileInfo.module.scss
+┃ ┃ ┃ ┗ ProfileTabs.jsx
+┃ ┣ 📂search
+┃ ┃ ┣ Search.module.scss
+┃ ┃ ┣ SearchInput.jsx
+┃ ┃ ┣ SearchResultItem.jsx
+┃ ┃ ┗ SearchResultsList.jsx
+┃ ┗ 📂ui
+┃ ┃ ┣ 📂button
+┃ ┃ ┃ ┣ BackButton.jsx
+┃ ┃ ┃ ┣ ImageUploadButton.jsx
+┃ ┃ ┃ ┗ VerticalButton.jsx
+┃ ┃ ┣ 📂modal
+┃ ┃ ┃ ┣ ConfirmModal.jsx
+┃ ┃ ┃ ┣ Modal.module.scss
+┃ ┃ ┃ ┗ OptionsModal.jsx
+┃ ┃ ┣ Button.jsx
+┃ ┃ ┣ Button.module.scss
+┃ ┃ ┣ Input.jsx
+┃ ┃ ┣ Input.module.scss
+┃ ┃ ┣ InputField.jsx
+┃ ┃ ┣ Layout.jsx
+┃ ┃ ┣ Loading.jsx
+┃ ┃ ┗ Loading.module.scss
+┣ 📂hooks
+┃ ┣ useAPI.js
+┃ ┗ useModal.js
+┣ 📂pages
+┃ ┣ 📂chat
 ┃ ┃ ┣ ChatRoomPage.jsx
 ┃ ┃ ┗ ChatRoomPage.module.scss
-┃ ┃ ┣ 📂error
-┃ ┃ ┃ ┣ NotFound.jsx
-┃ ┃ ┃ ┗ NotFound.module.scss
-┃ ┃ ┣ 📂followers-followings
-┃ ┃ ┃ ┣ followers.jsx
-┃ ┃ ┃ ┗ followings.jsx
-┃ ┃ ┣ 📂home
-┃ ┃ ┃ ┗ Home.jsx
-┃ ┃ ┣ 📂login
-┃ ┃ ┃ ┣ LoginEmail.jsx
-┃ ┃ ┃ ┗ LoginMain.jsx
-┃ ┃ ┣ 📂post
-┃ ┃ ┃ ┣ Post.jsx
-┃ ┃ ┃ ┣ PostCreate.jsx
-┃ ┃ ┃ ┗ PostEdit.jsx
-┃ ┃ ┣ 📂product
-┃ ┃ ┃ ┣ ProductCreate.jsx
-┃ ┃ ┃ ┗ ProductEdit.jsx
-┃ ┃ ┣ 📂profile
-┃ ┃ ┃ ┣ MyProfile.jsx
-┃ ┃ ┃ ┣ ProfileEdit.jsx
-┃ ┃ ┃ ┣ ProfileSetup.jsx
-┃ ┃ ┃ ┗ YourProfile.jsx
-┃ ┃ ┣ 📂search
-┃ ┃ ┃ ┗ Search.jsx
-┃ ┃ ┣ 📂signup
-┃ ┃ ┃ ┗ Signup.jsx
-┃ ┃ ┣ 📂splash-screen
-┃ ┃ ┃ ┗ SplashScreen.jsx
-┃ ┃ ┣ ModalExample.jsx
-┃ ┃ ┗ Page404.jsx
-┃ ┣ 📂redux
-┃ ┃ ┣ actions.js
-┃ ┃ ┣ modalSlice.js
-┃ ┃ ┣ reducers.js
-┃ ┃ ┗ store.js
+┃ ┣ 📂error
+┃ ┃ ┣ NotFound.jsx
+┃ ┃ ┗ NotFound.module.scss
+┃ ┣ 📂followers-followings
+┃ ┃ ┣ followers.jsx
+┃ ┃ ┗ followings.jsx
+┃ ┣ 📂home
+┃ ┃ ┗ Home.jsx
+┃ ┣ 📂login
+┃ ┃ ┣ LoginEmail.jsx
+┃ ┃ ┣ LoginMain.jsx
+┃ ┃ ┗ LoginMain.module.scss
+┃ ┣ 📂post
+┃ ┃ ┣ PostCreatePage.jsx
+┃ ┃ ┣ PostDetailPage.jsx
+┃ ┃ ┗ PostEditPage.jsx
+┃ ┣ 📂product
+┃ ┃ ┣ ProductCreate.jsx
+┃ ┃ ┗ ProductEdit.jsx
+┃ ┣ 📂profile
+┃ ┃ ┣ MyProfile.jsx
+┃ ┃ ┣ ProfileEdit.jsx
+┃ ┃ ┣ ProfileSetup.jsx
+┃ ┃ ┗ YourProfile.jsx
+┃ ┣ 📂search
+┃ ┃ ┗ SearchPage.jsx
+┃ ┣ 📂signup
+┃ ┃ ┗ Signup.jsx
+┃ ┗ 📂splash-screen
+┃ ┃ ┗ SplashScreen.jsx
+┣ 📂redux
+┃ ┣ apiSlice.js
+┃ ┣ ApiTest.jsx
+┃ ┣ bottomSlice.js
+┃ ┣ commentSlice.js
+┃ ┣ confirmModalSlice.js
+┃ ┣ optionsModalSlice.js
+┃ ┣ store.js
+┃ ┗ validationSlice.js
 ┃ ┣ App.jsx
 ┃ ┣ index.css
 ┃ ┣ main.jsx
