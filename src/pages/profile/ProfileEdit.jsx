@@ -8,6 +8,8 @@ import BackButton from "../../components/ui/button/BackButton";
 import ButtonComponent from "../../components/ui/Button";
 import ImageUploadButton from "../../components/ui/button/ImageUploadButton";
 import styles from "./ProfileEdit.module.scss";
+import { useDispatch } from "react-redux";
+import { setProfile } from "../../redux/apiSlice";
 
 const ProfileEdit = () => {
   const [username, setUsername] = useState("");
@@ -21,6 +23,7 @@ const ProfileEdit = () => {
 
   const { get, put, error, token } = useAPI();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // 현재 사용자 프로필 정보 가져오기
@@ -100,6 +103,9 @@ const ProfileEdit = () => {
     console.log(result);
 
     if (result.payload?.user) {
+      // 전역 상태에 사용자 프로필 데이터 업데이트
+      dispatch(setProfile(result?.payload?.user));
+
       navigate("/profile", { replace: true });
     } else {
       setWarningMessage("*" + result.payload.message);
