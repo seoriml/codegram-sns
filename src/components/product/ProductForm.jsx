@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import BackButton from "../ui/button/BackButton";
 import ButtonComponent from "../ui/Button";
 import Input from "../ui/Input";
@@ -22,14 +22,45 @@ export default function ProductForm({
   };
   // 이미지 미리보기 URL 생성 함수
   const imagePreviewUrl =
-    productImage instanceof File ? URL.createObjectURL(productImage) : null;
+    productImage instanceof File
+      ? URL.createObjectURL(productImage)
+      : `${import.meta.env.VITE_API_URL}/${productImage}`;
 
+  // 폼 유효성 검사 함수
+  const validateForm = () => {
+    if (!productImage) {
+      alert("대표 이미지를 업로드해주세요.");
+      return false;
+    }
+    if (!itemName.trim()) {
+      alert("사이트 이름을 입력해주세요.");
+      return false;
+    }
+    if (!link.trim()) {
+      alert("링크를 입력해주세요.");
+      return false;
+    }
+    if (!/^https?:\/\/\S+$/.test(link)) {
+      alert("유효한 URL을 입력해주세요.");
+      return false;
+    }
+    return true;
+  };
+
+  // 폼제출
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    onSubmit(e);
+  };
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <div>
           <BackButton />
-          <ButtonComponent buttonType="buttonPost" type="submit">
+          <ButtonComponent buttonType="saveType" type="submit">
             저장
           </ButtonComponent>
         </div>
@@ -48,7 +79,8 @@ export default function ProductForm({
                 justifyContent: "center",
               }}
             >
-              {imagePreviewUrl && ( // 이미지 미리보기를 위한 URL 사용
+              {imagePreviewUrl &&
+              imagePreviewUrl !== `${import.meta.env.VITE_API_URL}/null` ? (
                 <img
                   src={imagePreviewUrl}
                   alt="대표 이미지"
@@ -58,7 +90,7 @@ export default function ProductForm({
                     objectFit: "cover",
                   }}
                 />
-              )}
+              ) : null}
               <div
                 style={{
                   position: "absolute",

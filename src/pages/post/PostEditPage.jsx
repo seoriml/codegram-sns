@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PostForm from "../../components/post/PostForm";
 import useAPI from "../../hooks/useAPI";
 
@@ -16,7 +15,6 @@ export default function PostEditPage() {
 
   // 게시물 상세 정보 가져오기 함수
   const getPostDetail = async () => {
-    const token = localStorage.getItem("userToken");
     const response = await get(
       `${import.meta.env.VITE_API_URL}/post/${id}`,
       "application/json",
