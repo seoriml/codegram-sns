@@ -21,10 +21,17 @@
 
 .profileHeader {
   @include flex-center(row, space-between);
+  max-width: 480px;
   width: 100%;
   padding: 0 var(--side-padding-feed);
   height: 48px;
   border-bottom: 1px solid var(--color-element-gray);
+  background-color: var(--color-component-white);
+  transition: transform 0.2s ease;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+
   .leftGroup {
     display: flex;
     align-items: center;
@@ -35,9 +42,14 @@
   }
 }
 
+.headerHidden {
+  transform: translateY(-100%); /* 헤더를 위로 숨기기 */
+}
+
 .profileTopSection {
   @include flex-center(row, space-between);
   gap: 20px;
+  padding-top: 50px;
 }
 
 .profileImage {
