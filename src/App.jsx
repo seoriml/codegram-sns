@@ -23,6 +23,7 @@ import ProfileSetup from "./pages/profile/ProfileSetup";
 import SearchPage from "./pages/search/SearchPage";
 import ChatRoomPage from "./pages/chat/ChatRoomPage";
 import NotFound from "./pages/error/NotFound";
+import ProductCreatePage from "./pages/product/ProductCreatePage";
 
 function App() {
   const { isLoggedIn } = useAPI();
