@@ -60,7 +60,7 @@ export default function ProductForm({
       <form onSubmit={handleSubmit}>
         <div>
           <BackButton />
-          <ButtonComponent buttonType="buttonPost" type="submit">
+          <ButtonComponent buttonType="saveType" type="submit">
             저장
           </ButtonComponent>
         </div>
