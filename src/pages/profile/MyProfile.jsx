@@ -13,7 +13,11 @@ export default function MyProfile() {
 
   return (
     <div>
-      <ProfileInfo isMyProfile={true} onProfileLoad={handleProfileLoad} />
+      <ProfileInfo
+        accountname={myAccountName}
+        isMyProfile={true}
+        onProfileLoad={handleProfileLoad}
+      />
       {myAccountName && <ProfileTabs accountname={myAccountName} />}
     </div>
   );

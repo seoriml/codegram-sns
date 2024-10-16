@@ -4,12 +4,12 @@ import ProfileTabs from "../../components/profile/profile-info/ProfileTabs";
 import { useParams } from "react-router-dom";
 
 export default function YourProfile() {
-  const { accountName } = useParams();
+  const { accountname } = useParams();
 
   return (
     <div>
-      <ProfileInfo isMyProfile={false} accountname={accountName} />
-      <ProfileTabs accountname={accountName} />
+      <ProfileInfo isMyProfile={false} accountname={accountname} />
+      <ProfileTabs accountname={accountname} />
     </div>
   );
 }

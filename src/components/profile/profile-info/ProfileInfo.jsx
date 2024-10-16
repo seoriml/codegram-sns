@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useApi from "../../../hooks/useAPI";
 import ProfileImage from "../../../assets/images/user_profile.svg";
+import LogoImage from "../../../assets/images/symbol_logo_codegram_title.svg";
 import ProfileAction from "./ProfileActions";
 import BackButton from "../../ui/button/BackButton";
 import VerticalButton from "../../ui/button/VerticalButton";
@@ -12,6 +14,7 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
   const [followersCount, setFollowersCount] = useState(0);
   const [followingsCount, setFollowingsCount] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     // API를 통해 프로필 정보 가져오기
@@ -54,13 +57,24 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
     <div className={styles.profileInfo}>
       {/* 상단 바 - 백 버튼과 점 세개 버튼 */}
       <div className={styles.profileHeader}>
-        <BackButton />
+        <div className={styles.leftGroup}>
+          <BackButton />
+          <img
+            src={LogoImage}
+            alt="Logo"
+            className={styles.logo}
+            onClick={() => navigate("/home")}
+          />
+        </div>
         <VerticalButton />
       </div>
 
       <div className={styles.profileTopSection}>
         {/*팔로워/*/}
-        <div className={styles.profileFollow}>
+        <div
+          className={styles.profileFollow}
+          onClick={() => navigate(`/profile/${accountname}/followers`)}
+        >
           <div className={styles.followersCount}></div>
           {followersCount}
           <p className={styles.label}>followers</p>
@@ -73,7 +87,10 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
           className={styles.profileImage}
         />
         {/*팔로잉*/}
-        <div className={styles.profileFollow}>
+        <div
+          className={styles.profileFollow}
+          onClick={() => navigate(`/profile/${accountname}/followings`)}
+        >
           <div className={styles.followingsCount}>{followingsCount} </div>
           <p className={styles.label}>followings</p>
         </div>
