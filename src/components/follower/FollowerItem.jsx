@@ -13,7 +13,10 @@ const FollowerItem = ({ profile }) => {
 
   return (
     <li className={styles.followerItem}>
-      <Link to={profileLink} className={styles.followerInfo}>
+      <Link
+        to={`/profile/${profile.accountname}`}
+        className={styles.followerInfo}
+      >
         <img
           src={profileImageSrc}
           alt={`${profile.username}의 프로필사진`}
