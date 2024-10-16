@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../../hooks/useAPI";
+import useScrollHeader from "../../../hooks/useScrollHeader";
 import ProfileImage from "../../../assets/images/user_profile.svg";
 import LogoImage from "../../../assets/images/symbol_logo_codegram_title.svg";
 import ProfileAction from "./ProfileActions";
@@ -15,6 +16,7 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
   const [followingsCount, setFollowingsCount] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const isVisible = useScrollHeader();
 
   useEffect(() => {
     // API를 통해 프로필 정보 가져오기
@@ -56,7 +58,11 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
   return (
     <div className={styles.profileInfo}>
       {/* 상단 바 - 백 버튼과 점 세개 버튼 */}
-      <div className={styles.profileHeader}>
+      <div
+        className={`${styles.profileHeader} ${
+          isVisible ? "" : styles.headerHidden
+        }`}
+      >
         <div className={styles.leftGroup}>
           <BackButton />
           <img
