@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import useAPI from "../../hooks/useAPI";
 import styles from "./ChatForm.module.scss";
+import chatProfile from "../../assets/images/chat_profile.svg";
 
 export default function ChatForm() {
   const [question, setQuestion] = useState(""); // 사용자의 질문
@@ -38,29 +39,38 @@ export default function ChatForm() {
   };
 
   return (
-    <>
+    <main className={styles.chatContainer}>
       <ul className={styles.chatList}>
         {chatList.length > 0 ? (
           chatList.map((chat, index) => (
-            <li key={index} className={styles[chat.role]}>
-              {chat.content}
+            <li key={index} className={`${styles.messageWrapper} ${styles[chat.role]}`}>
+              {chat.role === 'assistant' && (
+                <img src={chatProfile} alt="Chat Bot" className={styles.chatProfile} />
+              )}
+              <div className={styles.message}>
+                {chat.content}
+              </div>
             </li>
           ))
         ) : (
-          <li>대화를 시작하세요.</li>
+          <li className={styles.messageWrapper}>
+            <div className={styles.message}>대화를 시작하세요.</div>
+          </li>
         )}
-        <div ref={chatEndRef} />
+        <li ref={chatEndRef} />
       </ul>
-      <form onSubmit={handleSubmit}>
+
+      <form onSubmit={handleSubmit} className={styles.chatForm}>
         <input
           type="text"
           value={question}
+          className={styles.chatInput}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="메시지를 입력하세요"
           autoFocus
         />
-        <button type="submit">전송</button>
+        <button type="submit" className={styles.forwardButton}>전송</button>
       </form>
-    </>
+    </main>
   );
 }
