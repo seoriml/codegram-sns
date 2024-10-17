@@ -72,7 +72,11 @@ const PostForm = ({
     <form onSubmit={onSubmit}>
       <header className="header">
         <BackButton />
-        <ButtonComponent buttonType="saveType" type="submit">
+        <ButtonComponent
+          buttonType="saveType"
+          type="submit"
+          className={styles.saveType}
+        >
           업로드
         </ButtonComponent>
       </header>
