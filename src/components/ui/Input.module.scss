@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 500px;
+  margin-bottom: 16px;
   &::after {
     content: var(--warning-message);
     padding-top: 6px;

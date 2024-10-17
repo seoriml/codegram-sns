@@ -1,0 +1,33 @@
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.profileEditMain {
+  @include flex-center;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.profileEditImages {
+  @include flex-center;
+  flex-direction: row;
+  position: relative;
+}
+
+.profileEditImg {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.imageUploadWrapper {
+  @include flex-center;
+  justify-content: center;
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  bottom: 0;
+  right: 0;
+}
