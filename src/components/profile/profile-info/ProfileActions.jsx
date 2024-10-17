@@ -52,7 +52,7 @@ const ProfileAction = ({
 
   useEffect(() => {
     if (profileData && profileData.profile) {
-      setIsFollowed(profileData.profile.isfollow);
+      setIsFollowed(profileData?.profile?.isfollow);
     } else if (error) {
       setErrorMessage("해당 계정이 존재하지 않습니다.");
     }

@@ -25,16 +25,17 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
       await get(`${import.meta.env.VITE_API_URL}/${reqUrl}`, "application/json", token);
     };
     fetchProfile();
-  }, [get, accountname, isMyProfile]);
+  }, []);
+  //[get, accountname, isMyProfile]
 
   useEffect(() => {
     // 데이터를 성공적으로 가져온 경우
-    if (profileData && (profileData.profile || profileData.user)) {
-      const profile = isMyProfile ? profileData.user : profileData.profile;
+    if (profileData && (profileData?.profile || profileData?.user)) {
+      const profile = isMyProfile ? profileData?.user : profileData?.profile;
       setProfile(profile);
-      setFollowersCount(profile.followerCount); // 초기 팔로워 수 설정
-      console.log(setFollowersCount);
-      setFollowingsCount(profile.followingCount); // 초기 팔로잉 수 설정
+      setFollowersCount(profile?.followerCount); // 초기 팔로워 수 설정
+      // console.log("profileInfo: ", setFollowersCount);
+      setFollowingsCount(profile?.followingCount); // 초기 팔로잉 수 설정
       if (onProfileLoad) {
         onProfileLoad(profile);
       }

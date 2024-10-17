@@ -34,15 +34,15 @@ export const executeRequest = createAsyncThunk(
 const apiSlice = createSlice({
   name: "api",
   initialState: {
-    data: null,
     token: localStorage.getItem("userToken"),
     isLoggedIn: !!localStorage.getItem("userToken"),
     loading: false,
     error: null,
     loginData: null, // 로그인하면 저장되는 데이터, 프로필 수정창 들어갈때 여기서 값 받아서 사용하면된다.
-    feedData: null, // home 화면에 뜨는 전체 피드 데이터
     profileData: null, // 사용자 프로필 데이터
+    feedData: null, // home 화면에 뜨는 전체 피드 데이터
     productData: null, // 상품 데이터
+    data: null,
   },
   reducers: {
     setCredentials: (state, action) => {
