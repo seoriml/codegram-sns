@@ -11,9 +11,13 @@ import {
   decrementCommentCount,
 } from "../../redux/commentSlice";
 import "../../assets/styles/common.scss";
+import useScrollHeader from "../../hooks/useScrollHeader";
+import logoIcon from "../../assets/images/symbol_logo_codegram_title.svg";
+import { Link } from "react-router-dom";
 
 export default function PostDetailComponent({ post }) {
   const dispatch = useDispatch();
+  const isVisible = useScrollHeader();
   const commentCount =
     useSelector((state) => state.comments[post.id]) || post.comments.length; // 전역 상태에서 댓글 수 가져오기
   const [comments, setComments] = useState(post.comments); // 댓글 내용은 로컬 상태로 관리
@@ -36,9 +40,19 @@ export default function PostDetailComponent({ post }) {
   };
 
   return (
-    <>
-      <header className="header">
-        <BackButton />
+    <div className="paddingTopForHeader">
+      <header className={`${isVisible ? "header" : "headerHidden"}`}>
+        <div>
+          <BackButton />
+          <Link to="/home">
+            <img
+              src={logoIcon}
+              alt="코드그램"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              style={{ cursor: "pointer", paddingLeft: "30px" }}
+            />
+          </Link>
+        </div>
       </header>
       <div className={styles.postsWrapper}>
         <PostItem post={post} commentCount={commentCount} />
@@ -48,6 +62,6 @@ export default function PostDetailComponent({ post }) {
           onDeleteComment={handleDeleteComment}
         />
       </div>
-    </>
+    </div>
   );
 }
