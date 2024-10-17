@@ -122,6 +122,7 @@ const ProfileEdit = () => {
           onClick={handleSubmit}
           buttonType="saveType"
           disabled={!username || !accountName || !intro}
+          className={styles.saveType}
         >
           저장
         </ButtonComponent>

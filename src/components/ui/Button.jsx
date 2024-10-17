@@ -2,12 +2,19 @@ import React from "react";
 import buttonStyles from "./Button.module.scss";
 
 const ButtonComponent = ({
-  children, onClick, disabled, buttonType="basicType", style
+  children,
+  onClick,
+  disabled,
+  buttonType = "basicType",
+  style,
+  className,
 }) => {
   // 항상 적용되는 기본 버튼타입 : basicType,
   // buttonStyles이 loginType 이라면 buttonStyles.loginType 적용
   const buttonStyle = `
-    ${buttonStyles.basicType} ${buttonStyles[buttonType] || buttonStyles.basicType}
+    ${buttonStyles.basicType} ${
+    buttonStyles[buttonType] || buttonStyles.basicType
+  } ${className}
   `;
 
   return (

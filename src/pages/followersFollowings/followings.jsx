@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom";
 import FollowerList from "../../components/follower/FollowerList";
 import useAPI from "../../hooks/useAPI";
 import BackButton from "../../components/ui/button/BackButton";
+import Loading from "../../components/ui/Loading";
 import styles from "../../components/follower/Follower.module.scss";
 
 const Followings = () => {
   const { accountname } = useParams();
-  const { get, error, token } = useAPI();
+  const { get, error, token, loading } = useAPI();
   const LIMIT = 10;
 
   // 팔로잉 리스트 데이터를 가져오는 함수
@@ -59,9 +60,9 @@ const Followings = () => {
   // 모든 페이지의 following 데이터를 하나로 병합
   const followings = data?.pages.flatMap((page) => page.followings) || [];
 
-  // data가 로드되지 않았거나 API 호출 실패 시 에러 메시지 표시
-  if (!data || !data.pages) {
-    return <p>데이터를 불러오는 데 문제가 발생했습니다.</p>;
+  // 로딩 중일 때 Loading 컴포넌트 표시
+  if (loading && !data) {
+    return <Loading />;
   }
 
   return (
@@ -75,7 +76,7 @@ const Followings = () => {
       ) : (
         followings.length > 0 && <FollowerList followers={followings} />
       )}
-      {isFetchingNextPage && <p>로딩 중...</p>}
+      {isFetchingNextPage && <Loading />}
     </div>
   );
 };
