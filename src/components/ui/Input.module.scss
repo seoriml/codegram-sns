@@ -15,10 +15,11 @@
 .inputLabel {
   color: var(--color-font-gray);
   font-size: var(--font-size-detail);
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 .inputField {
   border: 0;
+  margin-bottom: 16px;
   border-bottom: 1px solid var(--color-element-gray);
   font-size: var(--font-size-regular);
   padding-bottom: 9px;
@@ -27,4 +28,8 @@
   &:focus {
     outline: 0;
   }
+}
+
+input::placeholder {
+  color: var(--color-element-gray);
 }
