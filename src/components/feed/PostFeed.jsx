@@ -88,7 +88,7 @@ export default function Feed() {
     const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
-          document.documentElement.scrollHeight &&
+          document.documentElement.scrollHeight - 100 &&
         hasNextPage &&
         !isFetchingNextPage
       ) {
@@ -143,7 +143,11 @@ export default function Feed() {
               })}
             </React.Fragment>
           ))}
-          {isFetchingNextPage && <p>로딩중...</p>}
+          {isFetchingNextPage && (
+            <>
+              <Loading />
+            </>
+          )}
         </ul>
       )}
     </div>
