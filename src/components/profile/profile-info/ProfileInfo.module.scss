@@ -35,7 +35,7 @@
   .leftGroup {
     display: flex;
     align-items: center;
-    gap: 36px;
+    gap: 30px;
     .logo {
       cursor: pointer;
     }
@@ -104,10 +104,22 @@
 .profileAction {
   @include flex-center(row, center);
   padding: 25px;
-
   .myProfileButton {
     display: flex;
     gap: 10px;
+  }
+  .profileType {
+    &:hover {
+      background-color: #ededed;
+      transform: scale(0.98);
+      border: none;
+    }
+  }
+  .followType {
+    &:hover {
+      background-color: #0077ff;
+      transform: scale(0.98);
+    }
   }
 }
 
@@ -123,5 +135,9 @@
     width: 26px;
     height: 26px;
     cursor: pointer;
+    transition: transform 0.2s;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 }

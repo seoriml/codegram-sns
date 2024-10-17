@@ -5,6 +5,8 @@ import styles from "./PostForm.module.scss";
 import ButtonComponent from "../ui/Button";
 import removeIcon from "../../assets/images/icon_close.svg";
 import defaultProfileIcon from "../../assets/images/user_profile.svg";
+import "../../assets/styles/common.scss";
+import useScrollHeader from "../../hooks/useScrollHeader";
 
 const PostForm = ({
   onSubmit,
@@ -16,6 +18,8 @@ const PostForm = ({
   setPreviews,
   author,
 }) => {
+  const isVisible = useScrollHeader();
+
   // 게시글 내용 변경 함수
   const handleContentChange = (e) => {
     setContent(e.target.value);
@@ -68,13 +72,17 @@ const PostForm = ({
       : author?.image;
 
   return (
-    <form onSubmit={onSubmit}>
-      <div className={styles.header}>
+    <form onSubmit={onSubmit} className="paddingTopForHeader">
+      <header className={`${isVisible ? "header" : "headerHidden"}`}>
         <BackButton />
-        <ButtonComponent buttonType="saveType" type="submit">
+        <ButtonComponent
+          buttonType="saveType"
+          type="submit"
+          className={styles.saveType}
+        >
           업로드
         </ButtonComponent>
-      </div>
+      </header>
 
       <div className={styles.body}>
         {author && (

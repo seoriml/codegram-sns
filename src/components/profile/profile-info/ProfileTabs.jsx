@@ -8,6 +8,7 @@ import iconListOff from "../../../assets/images/icon_post_list_off.svg";
 import iconAlbumOn from "../../../assets/images/icon_post_album_on.svg";
 import iconAlbumOff from "../../../assets/images/icon_post_album_off.svg";
 import styles from "./ProfileInfo.module.scss";
+import Loading from "../../ui/Loading";
 
 const ProfileTabs = ({ accountname }) => {
   const [isListView, setIsListView] = useState(true);
@@ -45,7 +46,7 @@ const ProfileTabs = ({ accountname }) => {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + window.scrollY >=
+        window.innerHeight + window.scrollY - 100 >=
           document.documentElement.scrollHeight &&
         hasNextPage &&
         !isFetchingNextPage
@@ -63,7 +64,11 @@ const ProfileTabs = ({ accountname }) => {
 
   // data가 로드되지 않았거나 API 호출 실패 시 에러 메시지 표시
   if (!data || !data.pages) {
-    return <p>데이터를 불러오는 데 문제가 발생했습니다.</p>;
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   // 리스트 뷰와 그리드 뷰 간 전환
@@ -90,7 +95,11 @@ const ProfileTabs = ({ accountname }) => {
       {isListView ? <PostList posts={posts} /> : <PostGrid posts={posts} />}
 
       {/* 로딩 중 메시지 */}
-      {isFetchingNextPage && <p>로딩중...</p>}
+      {isFetchingNextPage && (
+        <>
+          <Loading />
+        </>
+      )}
     </div>
   );
 };

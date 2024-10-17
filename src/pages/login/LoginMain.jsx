@@ -9,10 +9,10 @@ export default function LoginMain() {
         <div className={styles.logo}></div>
       </section>
       <section className={styles.btnContainer}>
-        <Link to={"/login"} className={styles.btn1}>
+        <Link to={"/login"} className={styles.btnEmailLogin}>
           이메일로 로그인
         </Link>
-        <Link to={"/signup"} className={styles.btn1}>
+        <Link to={"/signup"} className={styles.btnSignUp}>
           회원가입
         </Link>
       </section>

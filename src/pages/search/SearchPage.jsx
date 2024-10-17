@@ -3,18 +3,20 @@ import { useState } from "react";
 import SearchInput from "../../components/search/SearchInput";
 import SearchResultList from "../../components/search/SearchResultsList";
 import BackButton from "../../components/ui/button/BackButton";
-import styles from "../../components/feed/PostFeed.module.scss";
+import "../../assets/styles/common.scss";
+import useScrollHeader from "../../hooks/useScrollHeader";
 
 export default function SearchPage() {
   const [results, setResults] = useState([]);
+  const isVisible = useScrollHeader();
 
   return (
-    <>
-      <div className={styles.header}>
+    <div className="paddingTopForHeader">
+      <header className={`${isVisible ? "header" : "headerHidden"}`}>
         <BackButton />
         <SearchInput setResults={setResults} />
-      </div>
+      </header>
       <SearchResultList results={results} />
-    </>
+    </div>
   );
 }

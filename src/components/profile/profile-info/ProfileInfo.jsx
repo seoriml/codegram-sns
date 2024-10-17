@@ -7,6 +7,7 @@ import LogoImage from "../../../assets/images/symbol_logo_codegram_title.svg";
 import ProfileAction from "./ProfileActions";
 import BackButton from "../../ui/button/BackButton";
 import VerticalButton from "../../ui/button/VerticalButton";
+import Loading from "../../ui/Loading";
 import styles from "./ProfileInfo.module.scss";
 
 const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
@@ -49,7 +50,7 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
     return <div>{errorMessage}</div>;
   }
   if (!profile) {
-    return <div>로딩 중입니다.</div>;
+    return <Loading />;
   }
 
   return (

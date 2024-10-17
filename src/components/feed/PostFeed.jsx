@@ -10,6 +10,8 @@ import logoIcon from "../../assets/images/symbol_logo_codegram_title.svg";
 import styles from "../feed/PostFeed.module.scss";
 import { setCommentCount } from "../../redux/commentSlice";
 import Loading from "../ui/Loading";
+import "../../assets/styles/common.scss";
+import useScrollHeader from "../../hooks/useScrollHeader";
 
 const LIMIT = 10; // 한 번에 불러올 게시물 수
 
@@ -20,6 +22,7 @@ export default function Feed() {
   const commentCounts = useSelector((state) => state.comments);
 
   const [selectedPost, setSelectedPost] = useState(null);
+  const isVisible = useScrollHeader();
 
   // 테스트용 팔로우함수
   // const follow = async () => {
@@ -85,7 +88,7 @@ export default function Feed() {
     const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
-          document.documentElement.scrollHeight &&
+          document.documentElement.scrollHeight - 100 &&
         hasNextPage &&
         !isFetchingNextPage
       ) {
@@ -107,15 +110,18 @@ export default function Feed() {
   }
 
   return (
-    <div>
-      <div className={styles.header}>
-        <h1 className={styles.title}>
-          <img src={logoIcon} alt="코드그램" />
-        </h1>
+    <div className="paddingTopForHeader">
+      <header className={`${isVisible ? "header" : "headerHidden"}`}>
+        <img
+          src={logoIcon}
+          alt="코드그램"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          style={{ cursor: "pointer" }}
+        />
         <Link to="/search">
           <img src={searchIcon} alt="검색버튼" />
         </Link>
-      </div>
+      </header>
 
       {data.pages[0].posts.length === 0 ? (
         <EmptyFeed />
@@ -137,7 +143,11 @@ export default function Feed() {
               })}
             </React.Fragment>
           ))}
-          {isFetchingNextPage && <p>로딩중...</p>}
+          {isFetchingNextPage && (
+            <>
+              <Loading />
+            </>
+          )}
         </ul>
       )}
     </div>

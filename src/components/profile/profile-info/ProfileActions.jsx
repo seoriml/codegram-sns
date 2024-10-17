@@ -62,16 +62,20 @@ const ProfileAction = ({
     <div className={styles.profileAction}>
       {isMyProfile ? (
         <div className={styles.myProfileButton}>
-          <ButtonComponent buttonType="profileType" onClick={handleProfileEdit}>
+          <ButtonComponent buttonType="profileType" onClick={handleProfileEdit} className={styles.profileType}>
             프로필 수정
           </ButtonComponent>
-          <ButtonComponent buttonType="profileType" onClick={handlePostCreate}>
-            내 링크 등록
+          <ButtonComponent buttonType="profileType" onClick={handlePostCreate} className={styles.profileType}>
+            내 작업 등록
           </ButtonComponent>
         </div>
       ) : (
         <div className={styles.yourProfileButton}>
-          <ButtonComponent buttonType={isFollowed ? "profileType" : "followType"} onClick={handleFollowClick}>
+          <ButtonComponent
+            buttonType={isFollowed ? "profileType" : "followType"}
+            onClick={handleFollowClick}
+            className={isFollowed ? styles.profileType : styles.followType}
+          >
             {isFollowed ? "언팔로우" : "팔로우"}
           </ButtonComponent>
           {errorMessage && <p>{errorMessage}</p>} {/* 에러 메시지 출력 */}
