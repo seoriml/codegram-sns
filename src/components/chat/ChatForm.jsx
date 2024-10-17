@@ -54,7 +54,10 @@ export default function ChatForm() {
           ))
         ) : (
           <li className={styles.messageWrapper}>
-            <div className={styles.message}>대화를 시작하세요.</div>
+            <h2 className={styles.message}>
+              안녕하세요! 코드, 기술, 프로젝트, 취업 또는 일상적인 궁금증까지 무엇이든 물어보세요.
+              고민이 있거나 해결하고 싶은 문제가 있다면 언제든 함께 해결해 드릴게요!
+            </h2>
           </li>
         )}
         <li ref={chatEndRef} />
