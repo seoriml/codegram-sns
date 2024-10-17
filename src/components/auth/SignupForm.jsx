@@ -100,7 +100,7 @@ export default function SignupForm() {
         disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
         buttonType="loginType"
         style={{
-          marginTop: "14px",
+          marginTop: "30px",
           position: "relative",
           left: "calc(50% - (322px / 2))",
           width: "100%",
