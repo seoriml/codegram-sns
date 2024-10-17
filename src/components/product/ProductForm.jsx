@@ -6,6 +6,7 @@ import ImageUploadButton from "../ui/button/ImageUploadButton";
 import Styles from "./ProductForm.module.scss";
 import "../../assets/styles/common.scss";
 import inputStyles from "../ui/Input.module.scss";
+import useScrollHeader from "../../hooks/useScrollHeader";
 
 export default function ProductForm({
   onSubmit,
@@ -16,6 +17,8 @@ export default function ProductForm({
   link,
   setLink,
 }) {
+  const isVisible = useScrollHeader();
+
   // 이미지 파일 선택 함수
   const handleImageChange = (files) => {
     if (files && files[0]) {
@@ -59,48 +62,46 @@ export default function ProductForm({
     onSubmit(e);
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <header className="header">
-          <BackButton />
-          <ButtonComponent buttonType="saveType" type="submit">
-            저장
-          </ButtonComponent>
-        </header>
+    <form onSubmit={handleSubmit} className="paddingTopForHeader">
+      <header className={`${isVisible ? "header" : "headerHidden"}`}>
+        <BackButton />
+        <ButtonComponent buttonType="saveType" type="submit">
+          저장
+        </ButtonComponent>
+      </header>
 
-        <div className={Styles.body}>
-          <>
-            <label className={inputStyles.inputLabel}>대표 이미지 등록</label>
-            <div className={Styles.imageWrapper}>
-              {imagePreviewUrl &&
-              imagePreviewUrl !== `${import.meta.env.VITE_API_URL}/null` ? (
-                <img src={imagePreviewUrl} alt="대표 이미지" />
-              ) : null}
-              <div className={Styles.imageUploadButton}>
-                <ImageUploadButton onChange={handleImageChange} />
-              </div>
+      <div className={Styles.body}>
+        <>
+          <label className={inputStyles.inputLabel}>대표 이미지 등록</label>
+          <div className={Styles.imageWrapper}>
+            {imagePreviewUrl &&
+            imagePreviewUrl !== `${import.meta.env.VITE_API_URL}/null` ? (
+              <img src={imagePreviewUrl} alt="대표 이미지" />
+            ) : null}
+            <div className={Styles.imageUploadButton}>
+              <ImageUploadButton onChange={handleImageChange} />
             </div>
-          </>
+          </div>
+        </>
 
-          <Input
-            name="itemName"
-            label="사이트 이름"
-            type="text"
-            value={itemName}
-            placeholder="2~15자 이내여야 합니다."
-            onChange={(e) => setItemName(e.target.value)}
-          />
+        <Input
+          name="itemName"
+          label="사이트 이름"
+          type="text"
+          value={itemName}
+          placeholder="2~15자 이내여야 합니다."
+          onChange={(e) => setItemName(e.target.value)}
+        />
 
-          <Input
-            name="link"
-            label="등록할 링크"
-            type="url"
-            value={link}
-            placeholder="URL을 입력해 주세요."
-            onChange={(e) => setLink(e.target.value)}
-          />
-        </div>
-      </form>
-    </div>
+        <Input
+          name="link"
+          label="등록할 링크"
+          type="url"
+          value={link}
+          placeholder="URL을 입력해 주세요."
+          onChange={(e) => setLink(e.target.value)}
+        />
+      </div>
+    </form>
   );
 }
