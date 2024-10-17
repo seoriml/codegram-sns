@@ -239,7 +239,16 @@ export default function CommentList({ postId }) {
           onInput={(e) => setNewComment(e.target.value)}
           placeholder="댓글 입력하기..."
         />
-        <button onClick={handleAddComment}>게시</button>
+        <button
+          onClick={handleAddComment}
+          style={{
+            color: newComment
+              ? "var(--color-element-blue)"
+              : "var(--color-element-gray)", // 입력값에 따라 배경색 변경
+          }}
+        >
+          게시
+        </button>
       </div>
       {isCommentModalOpen && (
         <OptionsModal actionHandlers={actionHandlersOptions} />
