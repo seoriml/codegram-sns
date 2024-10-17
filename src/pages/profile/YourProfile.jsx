@@ -2,6 +2,7 @@ import React from "react";
 import ProfileInfo from "../../components/profile/profile-info/ProfileInfo";
 import ProfileTabs from "../../components/profile/profile-info/ProfileTabs";
 import { useParams } from "react-router-dom";
+import Portfolio from "../../components/profile/portfolio/Portfolio";
 
 export default function YourProfile() {
   const { accountname } = useParams();
@@ -9,6 +10,7 @@ export default function YourProfile() {
   return (
     <div>
       <ProfileInfo isMyProfile={false} accountname={accountname} />
+      <Portfolio accountname={accountname} />
       <ProfileTabs accountname={accountname} />
     </div>
   );
