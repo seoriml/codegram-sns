@@ -3,6 +3,8 @@ import BackButton from "../ui/button/BackButton";
 import ButtonComponent from "../ui/Button";
 import Input from "../ui/Input";
 import ImageUploadButton from "../ui/button/ImageUploadButton";
+import Styles from "./ProductForm.module.scss";
+import "../../assets/styles/common.scss";
 
 export default function ProductForm({
   onSubmit,
@@ -58,12 +60,12 @@ export default function ProductForm({
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div>
+        <header className="header">
           <BackButton />
           <ButtonComponent buttonType="saveType" type="submit">
             저장
           </ButtonComponent>
-        </div>
+        </header>
 
         <div>
           <div>
