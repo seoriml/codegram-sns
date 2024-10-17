@@ -193,7 +193,7 @@ export default function AuthForm() {
           }
           buttonType="loginType"
           style={{
-            marginTop: "14px",
+            marginTop: "30px",
             textAlign: "center",
             position: "relative",
             left: "calc(50% - (322px / 2))",
