@@ -45,7 +45,7 @@ export default function ChatForm() {
           chatList.map((chat, index) => (
             <li key={index} className={`${styles.messageWrapper} ${styles[chat.role]}`}>
               {chat.role === 'assistant' && (
-                <img src={chatProfile} alt="Chat Bot" className={styles.chatProfile} />
+                <img src={chatProfile} alt="코드그램 챗봇 프로필" className={styles.chatProfile} />
               )}
               <div className={styles.message}>
                 {chat.content}
