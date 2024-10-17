@@ -64,7 +64,11 @@ const ProfileTabs = ({ accountname }) => {
 
   // data가 로드되지 않았거나 API 호출 실패 시 에러 메시지 표시
   if (!data || !data.pages) {
-    return <p>데이터를 불러오는 데 문제가 발생했습니다.</p>;
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   // 리스트 뷰와 그리드 뷰 간 전환
