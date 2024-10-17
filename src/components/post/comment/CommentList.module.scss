@@ -9,9 +9,8 @@
 
 .profileImg {
   width: 100%;
-  height: 100%;
   max-width: 42px;
-  max-height: 42px;
+  height: 42px;
   border-radius: 100%;
 }
 
@@ -78,6 +77,6 @@
   button {
     width: 100%;
     max-width: 26px;
-    color: var(--color-element-blue);
+    color: var(--color-element-gray);
   }
 }

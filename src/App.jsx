@@ -25,6 +25,7 @@ import ChatRoomPage from "./pages/chat/ChatRoomPage";
 import NotFound from "./pages/error/NotFound";
 import ProductCreatePage from "./pages/product/ProductCreatePage";
 import ProductEditPage from "./pages/product/ProductEditPage";
+import ScrollToTop from "./components/ui/ScrollToTop";
 
 function App() {
   const { isLoggedIn } = useAPI();
@@ -41,6 +42,7 @@ function App() {
   return (
     <Layout>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route
             path="/"
