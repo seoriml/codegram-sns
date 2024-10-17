@@ -29,8 +29,8 @@ const FollowerItem = ({ profile }) => {
       </Link>
       <ButtonComponent
         buttonType={isFollowed ? "miniCancelType" : "miniFollowType"}
+        className={isFollowed ? styles.miniCancelType : styles.miniFollowType}
         onClick={() => setIsFollowed((prev) => !prev)}
-        className={styles.followerButton}
       >
         {isFollowed ? "취소" : "팔로우"}
       </ButtonComponent>

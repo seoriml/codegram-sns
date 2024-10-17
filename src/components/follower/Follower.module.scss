@@ -48,8 +48,19 @@
       }
     }
 
-    .followerButton {
-      gap: 12px;
+    .miniCancelType {
+      &:hover {
+        background-color: var(--color-element-gray);
+        color: black;
+        transform: scale(0.99);
+        border: none;
+      }
+    }
+    .miniFollowType {
+      &:hover {
+        background-color: #0059ff;
+        transform: scale(0.99);
+      }
     }
   }
 }
