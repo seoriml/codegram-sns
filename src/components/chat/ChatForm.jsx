@@ -54,6 +54,7 @@ export default function ChatForm() {
           ))
         ) : (
           <li className={styles.messageWrapper}>
+            <img src={chatProfile} alt="코드그램 챗봇 프로필" className={styles.chatProfile} />
             <h2 className={styles.message}>
               안녕하세요! 코드, 기술, 프로젝트, 취업 또는 일상적인 궁금증까지 무엇이든 물어보세요.
               고민이 있거나 해결하고 싶은 문제가 있다면 언제든 함께 해결해 드릴게요!
