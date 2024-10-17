@@ -10,6 +10,7 @@ import {
   incrementCommentCount,
   decrementCommentCount,
 } from "../../redux/commentSlice";
+import "../../assets/styles/common.scss";
 
 export default function PostDetailComponent({ post }) {
   const dispatch = useDispatch();
@@ -36,9 +37,9 @@ export default function PostDetailComponent({ post }) {
 
   return (
     <>
-      <div className={styles.header}>
+      <header className="header">
         <BackButton />
-      </div>
+      </header>
       <div className={styles.postsWrapper}>
         <PostItem post={post} commentCount={commentCount} />
         <CommentList

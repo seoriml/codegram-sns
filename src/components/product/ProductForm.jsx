@@ -3,6 +3,9 @@ import BackButton from "../ui/button/BackButton";
 import ButtonComponent from "../ui/Button";
 import Input from "../ui/Input";
 import ImageUploadButton from "../ui/button/ImageUploadButton";
+import Styles from "./ProductForm.module.scss";
+import "../../assets/styles/common.scss";
+import inputStyles from "../ui/Input.module.scss";
 
 export default function ProductForm({
   onSubmit,
@@ -58,56 +61,33 @@ export default function ProductForm({
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div>
+        <header className="header">
           <BackButton />
           <ButtonComponent buttonType="saveType" type="submit">
             저장
           </ButtonComponent>
-        </div>
+        </header>
 
-        <div>
-          <div>
-            <label>대표 이미지 등록</label>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "204px",
-                background: "#ccc",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+        <div className={Styles.body}>
+          <>
+            <label className={inputStyles.inputLabel}>대표 이미지 등록</label>
+            <div className={Styles.imageWrapper}>
               {imagePreviewUrl &&
               imagePreviewUrl !== `${import.meta.env.VITE_API_URL}/null` ? (
-                <img
-                  src={imagePreviewUrl}
-                  alt="대표 이미지"
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: "100%",
-                    objectFit: "cover",
-                  }}
-                />
+                <img src={imagePreviewUrl} alt="대표 이미지" />
               ) : null}
-              <div
-                style={{
-                  position: "absolute",
-                  right: "10px",
-                  bottom: "10px",
-                }}
-              >
+              <div className={Styles.imageUploadButton}>
                 <ImageUploadButton onChange={handleImageChange} />
               </div>
             </div>
-          </div>
+          </>
 
           <Input
             name="itemName"
             label="사이트 이름"
             type="text"
             value={itemName}
+            placeholder="2~15자 이내여야 합니다."
             onChange={(e) => setItemName(e.target.value)}
           />
 
@@ -116,6 +96,7 @@ export default function ProductForm({
             label="등록할 링크"
             type="url"
             value={link}
+            placeholder="URL을 입력해 주세요."
             onChange={(e) => setLink(e.target.value)}
           />
         </div>

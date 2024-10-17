@@ -5,6 +5,7 @@ import styles from "./PostForm.module.scss";
 import ButtonComponent from "../ui/Button";
 import removeIcon from "../../assets/images/icon_close.svg";
 import defaultProfileIcon from "../../assets/images/user_profile.svg";
+import "../../assets/styles/common.scss";
 
 const PostForm = ({
   onSubmit,
@@ -69,7 +70,7 @@ const PostForm = ({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className={styles.header}>
+      <header className="header">
         <BackButton />
         <ButtonComponent
           buttonType="saveType"
@@ -78,7 +79,7 @@ const PostForm = ({
         >
           업로드
         </ButtonComponent>
-      </div>
+      </header>
 
       <div className={styles.body}>
         {author && (
