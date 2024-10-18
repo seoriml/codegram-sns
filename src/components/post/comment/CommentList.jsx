@@ -229,7 +229,9 @@ export default function CommentList({ postId }) {
           className={styles.profileImg}
           src={
             sessionProfileData?.user?.image ===
-            "http://146.56.183.55:5050/Ellipse.png"
+              "http://146.56.183.55:5050/Ellipse.png" ||
+            sessionProfileData?.user?.image ===
+              "https://estapi.mandarin.weniv.co.kr/undefined"
               ? defaultProfileIcon
               : sessionProfileData?.user?.image
           }
