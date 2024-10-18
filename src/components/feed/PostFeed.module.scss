@@ -38,6 +38,7 @@
       .textContent {
         font-size: var(--font-size-regular);
         padding: var(--side-padding-feed) 0;
+        white-space: pre-wrap;
       }
 
       .images {
