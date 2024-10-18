@@ -9,14 +9,15 @@ import ButtonComponent from "../ui/Button";
 import ProfileImagePlaceholder from "../../assets/images/user_profile.svg";
 import ImageUploadButton from "../ui/button/ImageUploadButton";
 import styles from "./AuthForm.module.scss";
+import Loading from "../ui/Loading";
 
 export default function AuthForm() {
   const [username, setUsername] = useState("");
   const [accountName, setAccountName] = useState("");
   const [intro, setIntro] = useState("");
-  const [profileImagePreview, setProfileImagePreview] = useState(ProfileImagePlaceholder);
-  const [img, setImg] = useState();
-  const [profileImg, setProfileImg] = useState("");
+  const [profileImagePreview, setProfileImagePreview] = useState(ProfileImagePlaceholder); // 처음 보여주는 기본프로필 이미지
+  const [img, setImg] = useState(); // 파일 불러오기 해서 가져온 파일 그대로의 이미지
+  const [profileImg, setProfileImg] = useState(""); // api 통신 후에 받아온 이미지 데이터
   const [warningMessage, setWarningMessage] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [accountNameError, setAccountNameError] = useState("");
@@ -142,7 +143,7 @@ export default function AuthForm() {
     }
   };
 
-  if (loading) return <div>로딩 중...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>에러: {error}</div>;
 
   return (
