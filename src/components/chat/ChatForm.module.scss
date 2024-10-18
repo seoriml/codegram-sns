@@ -17,7 +17,6 @@
     display: flex;
     align-items: flex-start;
     max-width: 322px;
-    width: 100%;
   }
   .chatProfile {
     margin-right: 12px;
@@ -26,8 +25,6 @@
   // 사용자 메시지 입력 전 인사 문구
   .message {
     display: flex;
-    max-width: calc(100% - 54px); // 프로파일 이미지 너비(42px)와 마진(12px)을 뺀 값
-    width: 100%;
     padding: 12px;
     border-radius: 10px;
     font-weight: 400;
