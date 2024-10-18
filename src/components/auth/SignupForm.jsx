@@ -6,6 +6,7 @@ import useAPI from "./../../hooks/useAPI";
 import { updateValidState } from "../../redux/validationSlice";
 import ButtonComponent from "../ui/Button";
 import Loading from "../ui/Loading";
+import styles from "./LoginForm.module.scss";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -96,19 +97,18 @@ export default function SignupForm() {
         onChange={handlePasswordChange}
         onBlur={() => validatePassword(password)}
       />
-      <ButtonComponent
-        children="다음"
-        disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
-        buttonType="loginType"
-        style={{
-          marginTop: "30px",
-          position: "relative",
-          left: "calc(50% - (322px / 2))",
-          width: "100%",
-          textAlign: "center",
-          padding: "13px 0",
-        }}
-      />
+      <div className={styles.btnContainer}>
+        <ButtonComponent
+          children="다음"
+          disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
+          buttonType="loginType"
+          style={{
+            marginTop: "15px",
+            textAlign: "center",
+            padding: "13px 0",
+          }}
+        />
+      </div>
     </form>
   );
 }

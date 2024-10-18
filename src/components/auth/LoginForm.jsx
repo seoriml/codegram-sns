@@ -84,19 +84,18 @@ export default function LoginForm() {
         onChange={handlePasswordChange}
         onBlur={() => validatePassword(password)}
       />
-      <ButtonComponent
-        children="로그인"
-        disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
-        buttonType="loginType"
-        style={{
-          marginTop: "30px",
-          position: "relative",
-          left: "calc(50% - (322px / 2))",
-          width: "100%",
-          textAlign: "center",
-          padding: "13px 0",
-        }}
-      />
+      <div className={styles.btnContainer}>
+        <ButtonComponent
+          children="로그인"
+          disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
+          buttonType="loginType"
+          style={{
+            marginTop: "15px",
+            textAlign: "center",
+            padding: "13px 0",
+          }}
+        />
+      </div>
     </form>
   );
 }
