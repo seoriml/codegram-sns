@@ -1,0 +1,22 @@
+.portfolioItem {
+  min-width: 140px;
+  height: 132px;
+  overflow: hidden;
+}
+
+.portfolioImage {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: var(--border-radius-post);
+}
+
+.portfolioItemTitle {
+  // padding: 0 0 4px 0;
+  font-size: var(--font-size-regular);
+}
+
+.portfolioItemDescription {
+  font-size: var(--font-size-detail);
+  color: var(--color-element-blue);
+}
