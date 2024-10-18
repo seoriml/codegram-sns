@@ -9,7 +9,9 @@ export default function ChatRoomPage() {
       <header className={styles.chatHeader}>
         <div className={styles.leftGroup}>
           <BackButton />
-          <h1 className={styles.chatTitle}>코드그램 챗봇</h1>
+          <h1 className={styles.chatTitle}>
+            코드그램 챗봇 &lt;<span className={styles.chatNickname}> 고드리 </span>&gt;
+          </h1>
         </div>
       </header>
       <section className={styles.chatFormMarginBottom}>

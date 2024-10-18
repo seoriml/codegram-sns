@@ -9,7 +9,8 @@ export default function ChatForm() {
   const [data, setData] = useState([
     {
       role: "system",
-      content: "assistant는 친절한 답변가이다. 그리고 it 관련 질문만 답을 해준다. 취업에 관련된 정확한 정보를 준다.",
+      content:
+        "assistant는 친절한 답변가이다. assistant의 이름은 고드리이다. it 관련 질문만 답을 해준다. 취업에 관련된 정확한 정보를 준다.",
     },
   ]); // 질문과 답변 저장
   const { loading, error, post } = useAPI();
@@ -44,20 +45,18 @@ export default function ChatForm() {
         {chatList.length > 0 ? (
           chatList.map((chat, index) => (
             <li key={index} className={`${styles.messageWrapper} ${styles[chat.role]}`}>
-              {chat.role === 'assistant' && (
+              {chat.role === "assistant" && (
                 <img src={chatProfile} alt="코드그램 챗봇 프로필" className={styles.chatProfile} />
               )}
-              <div className={styles.message}>
-                {chat.content}
-              </div>
+              <div className={styles.message}>{chat.content}</div>
             </li>
           ))
         ) : (
           <li className={styles.messageWrapper}>
             <img src={chatProfile} alt="코드그램 챗봇 프로필" className={styles.chatProfile} />
             <h2 className={styles.message}>
-              안녕하세요! 코드, 기술, 프로젝트, 취업 또는 일상적인 궁금증까지 무엇이든 물어보세요.
-              고민이 있거나 해결하고 싶은 문제가 있다면 언제든 함께 해결해 드릴게요!
+              안녕하세요! 저는 코드그램 챗봇, &lt;고드리&gt; 입니다.!! 코드, 기술, 프로젝트, 취업에 관한 모든 궁금증을
+              무엇이든 물어보세요. 고민이 있거나 해결하고 싶은 문제가 있다면 언제든 함께 해결해 드릴게요!
             </h2>
           </li>
         )}
@@ -73,7 +72,9 @@ export default function ChatForm() {
           placeholder="메시지를 입력하세요"
           autoFocus
         />
-        <button type="submit" className={styles.forwardButton}>전송</button>
+        <button type="submit" className={styles.forwardButton}>
+          전송
+        </button>
       </form>
     </main>
   );

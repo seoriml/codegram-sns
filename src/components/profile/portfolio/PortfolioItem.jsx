@@ -16,7 +16,7 @@ const PortfolioItem = ({ itemImage, itemName, link, id }) => {
   }, []);
 
   return (
-    <Link to={`/product/edit/${id}`} className={styles.portfolioItem}>
+    <Link to={`/product/detail/${id}`} className={styles.portfolioItem}>
       <img src={img} alt={itemName} className={styles.portfolioImage} />
       <h3 className={styles.portfolioItemTitle}>{itemName}</h3>
       <p className={styles.portfolioItemDescription}>{link}</p>
