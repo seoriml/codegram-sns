@@ -23,7 +23,11 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
     // API를 통해 프로필 정보 가져오기
     const fetchProfile = async () => {
       const reqUrl = isMyProfile ? `user/myinfo` : `profile/${accountname}`;
-      await get(`${import.meta.env.VITE_API_URL}/${reqUrl}`, "application/json", token);
+      await get(
+        `${import.meta.env.VITE_API_URL}/${reqUrl}`,
+        "application/json",
+        token
+      );
     };
     fetchProfile();
   }, []);
@@ -53,20 +57,38 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
     return <Loading />;
   }
 
+  const profileImageSrc =
+    profile?.image === "http://146.56.183.55:5050/Ellipse.png" ||
+    profile?.image === "https://estapi.mandarin.weniv.co.kr/undefined"
+      ? ProfileImage
+      : profile?.image;
+
   return (
     <div className={styles.profileInfo}>
       {/* 상단 바 - 백 버튼과 점 세개 버튼 */}
-      <div className={`${styles.profileHeader} ${isVisible ? "" : styles.headerHidden}`}>
+      <div
+        className={`${styles.profileHeader} ${
+          isVisible ? "" : styles.headerHidden
+        }`}
+      >
         <div className={styles.leftGroup}>
           <BackButton />
-          <img src={LogoImage} alt="Logo" className={styles.logo} onClick={() => navigate("/home")} />
+          <img
+            src={LogoImage}
+            alt="Logo"
+            className={styles.logo}
+            onClick={() => navigate("/home")}
+          />
         </div>
         <VerticalButton />
       </div>
 
       <div className={styles.profileTopSection}>
         {/*팔로워/*/}
-        <div className={styles.profileFollow} onClick={() => navigate(`/profile/${accountname}/followers`)}>
+        <div
+          className={styles.profileFollow}
+          onClick={() => navigate(`/profile/${accountname}/followers`)}
+        >
           <div className={styles.followersCount}></div>
           {followersCount}
           <p className={styles.label}>followers</p>
@@ -74,12 +96,15 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
 
         {/* 프로필 이미지 */}
         <img
-          src={profile?.image || ProfileImage}
+          src={profileImageSrc}
           alt={`${profile?.username || "사용자"}의 프로필 이미지`}
           className={styles.profileImage}
         />
         {/*팔로잉*/}
-        <div className={styles.profileFollow} onClick={() => navigate(`/profile/${accountname}/followings`)}>
+        <div
+          className={styles.profileFollow}
+          onClick={() => navigate(`/profile/${accountname}/followings`)}
+        >
           <div className={styles.followingsCount}>{followingsCount} </div>
           <p className={styles.label}>followings</p>
         </div>
