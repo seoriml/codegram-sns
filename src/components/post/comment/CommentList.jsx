@@ -192,7 +192,9 @@ export default function CommentList({ postId }) {
                     className={styles.profileImg}
                     src={
                       comment.author.image ===
-                      "http://146.56.183.55:5050/Ellipse.png"
+                        "http://146.56.183.55:5050/Ellipse.png" ||
+                      comment.author.image ===
+                        "https://estapi.mandarin.weniv.co.kr/undefined"
                         ? defaultProfileIcon
                         : comment.author.image
                     }
