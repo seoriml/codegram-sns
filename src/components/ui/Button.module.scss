@@ -1,117 +1,117 @@
-// 버튼 기본타입 → 프로파일 페이지 : 프로필 수정, 게시글 작성 버튼
-.buttonBasic {
+// Type으로 끝나는 class명은 컴포넌트에서 buttonStyles로 지정해 주세요!
+// @mixin 믹스인이름 (인자로 들어갈 수 있는 변수명) {css}
+@mixin commonStyles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-width: 322px;
-  width: 80% 70%;
-  padding: 8px 26px 8px 26px;
-  border: 1px solid var(--color-element-gray);
-  border-radius: var(--border-radius-regular);
-  font-size: var(--font-size-regular);
-  font-weight: normal;
+  text-align: center;
   white-space: nowrap;
-  color: var(--color-font-gray);
-  background-color: var(--color-component-white);
+}
+@mixin widthHeight($width, $height) {
+  width: $width;
+  height: $height;
+}
+@mixin font($fontWeight, $fontSize, $color) {
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+  color: $color;
+}
+@mixin border($border, $borderRadius) {
+  border: $border;
+  border-radius: $borderRadius;
+}
+@mixin backgroundColor($backgroundColor) {
+  background-color: $backgroundColor;
+}
+@mixin disabledButton($cursor, $backgroundColor) {
+  cursor: $cursor;
+  background-color: $backgroundColor;
 }
 
-// 로그인 페이지 : 활성화/비활성화 버튼
-.buttonLogin {
-  padding: 13px 135px 13px 135px;
-  border: none;
-  border-radius: var(--border-radius-large);
-  font-size: var(--font-size-regular);
-  font-weight: bold;
-  white-space: nowrap;
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+// 검색하기, 이전 페이지 버튼타입
+.basicType {
+  @include commonStyles;
+  @include widthHeight(120px, 45px);
+  @include border(none, var(--border-radius-large));
+  @include font(400, var(--font-size-regular), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
+}
+// 이메일로 로그인, 로그인, 다음, 코드그램 시작하기 버튼타입
+.loginType {
+  @include commonStyles;
+  @include widthHeight(322px, 45px);
+  @include border(none, var(--border-radius-large));
+  @include font(700, var(--font-size-regular), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
   &:disabled {
-    cursor: not-allowed;
-    background-color: var(--color-element-skyblue);
+    @include disabledButton(not-allowed, var(--color-element-skyblue));
   }
 }
-
-// 로그인 페이지 : 회원가입 버튼
-.buttonSignup {
-  padding: 13px 135px 13px 135px;
-  border: 1px solid var(--color-element-blue);
-  border-radius: var(--border-radius-large);
-  font-size: var(--font-size-regular);
-  font-weight: bold;
-  white-space: nowrap;
-  color: var(--color-font-gray);
-  background-color: var(--color-component-white);
+// 회원가입 버튼타입
+.signUpType {
+  @include commonStyles;
+  @include widthHeight(322px, 45px);
+  @include border(
+    1px solid var(--color-element-blue),
+    var(--border-radius-large)
+  );
+  @include font(700, var(--font-size-regular), var(--color-font-gray));
+  @include backgroundColor(var(--color-component-white));
 }
-
-// 페이지 버튼 : 페이지에 버튼만 있는 화면
-.buttonPage {
-  padding: 13px 30px 13px 30px;
-  border: none;
-  border-radius: var(--border-radius-large);
-  font-size: var(--font-size-regular);
-  white-space: nowrap;
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+// 팔로우 버튼타입
+.followType {
+  @include commonStyles;
+  @include widthHeight(120px, 35px);
+  @include border(none, var(--border-radius-regular));
+  @include font(500, var(--font-size-regular), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
 }
-
-// 프로파일 페이지 : 팔로우 버튼
-.buttonFollow {
-  padding: 8px 40px 8px 40px;
-  border: none;
-  border-radius: var(--border-radius-regular);
-  font-size: var(--font-size-regular);
-  white-space: nowrap;
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+// 언팔로우, 프로필 수정, 링크 등록 버튼타입
+.profileType {
+  @include commonStyles;
+  @include widthHeight(120px, 35px);
+  @include border(
+    1px solid var(--color-element-gray),
+    var(--border-radius-regular)
+  );
+  @include font(500, var(--font-size-regular), var(--color-font-gray));
+  @include backgroundColor(var(--color-component-white));
 }
-
-// 프로파일 페이지 : 언팔로우 버튼
-.buttonUnFollow {
-  padding: 8px 34px 8px 34px;
-  border: 1px solid var(--color-element-gray);
-  border-radius: var(--border-radius-regular);
-  font-size: var(--font-size-regular);
-  font-weight: normal;
-  white-space: nowrap;
-  color: var(--color-font-gray);
-  background-color: var(--color-component-white);
-  white-space: nowrap;
+// 미니 팔로우 버튼타입
+.miniFollowType {
+  @include commonStyles;
+  @include widthHeight(56px, 28px);
+  @include border(none, var(--border-radius-mini));
+  @include font(400, var(--font-size-detail), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
 }
-
-// 팔로워 페이지 : 작은 팔로우 버튼
-.buttonFollower {
-  padding: 7px 11px 7px 11px;
-  border: none;
-  border-radius: var(--border-radius-regular);
-  font-size: var(--font-size-detail);
-  white-space: nowrap;
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+// 미니 취소 버튼타입
+.miniCancelType {
+  @include commonStyles;
+  @include widthHeight(56px, 28px);
+  @include border(
+    1px solid var(--color-element-gray),
+    var(--border-radius-mini)
+  );
+  @include font(400, var(--font-size-detail), var(--color-font-gray));
+  @include backgroundColor(var(--color-component-white));
 }
-
-// 팔로워 페이지 : 작은 취소 버튼
-.buttonCancel {
-  padding: 7px 11px 7px 11px;
-  border: 1px solid var(--color-element-gray);
-  border-radius: var(--border-radius-regular);
-  font-size: var(--font-size-detail);
-  white-space: nowrap;
-  color: var(--color-font-gray);
-  background-color: var(--color-component-white);
-}
-
-// 게시글 작성 페이지 : 저장, 업로드 버튼
-.buttonPost {
-  width: 90px;
-  height: 32px;
-  line-height: 16px;
-  border-radius: var(--border-radius-small);
-  font-size: var(--font-size-regular);
-  color: var(--color-component-white);
-  background-color: var(--color-element-blue);
+// 저장, 업로드 버튼타입
+.saveType {
+  @include commonStyles;
+  @include widthHeight(90px, 32px);
+  @include border(none, var(--border-radius-small));
+  @include font(500, var(--font-size-regular), var(--color-component-white));
+  @include backgroundColor(var(--color-element-blue));
   &:disabled {
-    cursor: not-allowed;
-    background-color: var(--color-element-skyblue);
+    @include disabledButton(not-allowed, var(--color-element-skyblue));
   }
 }
-
+// 뒤로가기 버튼
 .backButton {
   width: 22px;
+  img {
+    transform: translateY(2px);
+  }
 }

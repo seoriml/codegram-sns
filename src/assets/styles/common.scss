@@ -1,0 +1,22 @@
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  height: 48px;
+  padding: 0 var(--side-padding-feed);
+  border-bottom: 1px solid var(--color-element-gray);
+  background-color: var(--color-component-white);
+  transition: transform 0.2s ease;
+}
+.headerHidden {
+  transform: translateY(-100%); /* 헤더를 위로 숨기기 */
+}
+
+.paddingTopForHeader {
+  padding-top: 48px;
+}

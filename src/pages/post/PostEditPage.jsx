@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PostForm from "../../components/post/PostForm";
 import useAPI from "../../hooks/useAPI";
+import Loading from "../../components/ui/Loading";
 
 export default function PostEditPage() {
   const { id } = useParams();
@@ -16,7 +16,6 @@ export default function PostEditPage() {
 
   // 게시물 상세 정보 가져오기 함수
   const getPostDetail = async () => {
-    const token = localStorage.getItem("userToken");
     const response = await get(
       `${import.meta.env.VITE_API_URL}/post/${id}`,
       "application/json",
@@ -126,7 +125,9 @@ export default function PostEditPage() {
           author={author}
         />
       ) : (
-        <p>게시물 정보를 로딩 중입니다...</p>
+        <>
+          <Loading />
+        </>
       )}
     </>
   );

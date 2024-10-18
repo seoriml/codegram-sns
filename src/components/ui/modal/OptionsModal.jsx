@@ -18,8 +18,8 @@ const OptionsModal = ({ actionHandlers }) => {
   };
 
   return (
-    <div className={styles["modal-overlay"]}>
-      <div className={styles["modal-content"]}>
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
         {options.map((option, index) => (
           <button
             key={index}

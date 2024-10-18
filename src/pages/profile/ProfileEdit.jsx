@@ -7,6 +7,9 @@ import ProfileImagePlaceholder from "../../assets/images/user_profile.svg";
 import BackButton from "../../components/ui/button/BackButton";
 import ButtonComponent from "../../components/ui/Button";
 import ImageUploadButton from "../../components/ui/button/ImageUploadButton";
+import styles from "./ProfileEdit.module.scss";
+import { useDispatch } from "react-redux";
+import { setProfile } from "../../redux/apiSlice";
 
 const ProfileEdit = () => {
   const [username, setUsername] = useState("");
@@ -18,13 +21,13 @@ const ProfileEdit = () => {
   const [accountNameError, setAccountNameError] = useState("");
   const [introError, setIntroError] = useState("");
 
-  const { get, put, error } = useAPI();
+  const { get, put, error, token } = useAPI();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // 현재 사용자 프로필 정보 가져오기
     const fetchProfile = async () => {
-      const token = localStorage.getItem("userToken");
       const response = await get(
         `${import.meta.env.VITE_API_URL}/user/myinfo`,
         "application/json",
@@ -83,7 +86,6 @@ const ProfileEdit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("userToken");
     const result = await put(
       `${import.meta.env.VITE_API_URL}/user`,
       {
@@ -101,6 +103,9 @@ const ProfileEdit = () => {
     console.log(result);
 
     if (result.payload?.user) {
+      // 전역 상태에 사용자 프로필 데이터 업데이트
+      dispatch(setProfile(result?.payload?.user));
+
       navigate("/profile", { replace: true });
     } else {
       setWarningMessage("*" + result.payload.message);
@@ -111,62 +116,69 @@ const ProfileEdit = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      <div className={styles.profileEditHeader}>
         <BackButton />
         <ButtonComponent
           onClick={handleSubmit}
-          buttonType="buttonPost"
+          buttonType="saveType"
           disabled={!username || !accountName || !intro}
-          style={{ width: "90px", height: "32px" }}
+          className={styles.saveType}
         >
           저장
         </ButtonComponent>
       </div>
-      <div>
-        <img
-          src={profileImage}
-          alt="프로필 이미지"
-          style={{ width: "110px", height: "110px", borderRadius: "50%" }}
-        />
-        <ImageUploadButton onChange={handleImageChange} />
-      </div>
 
-      <Input
-        name="username"
-        label="사용자 이름"
-        warningMessage={usernameError}
-        type="text"
-        value={username}
-        placeholder="2-10자 이내여야 합니다."
-        onChange={(e) => {
-          setUsername(e.target.value);
-          validateUsername(e.target.value);
-        }}
-      />
-      <Input
-        name="accountName"
-        label="계정 ID"
-        warningMessage={accountNameError}
-        type="text"
-        value={accountName}
-        placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
-        onChange={(e) => {
-          setAccountName(e.target.value);
-          validateAccountName(e.target.value);
-        }}
-      />
-      <Input
-        name="intro"
-        label="소개"
-        warningMessage={introError}
-        type="text"
-        value={intro}
-        placeholder="자신을 소개해 주세요!"
-        onChange={(e) => {
-          setIntro(e.target.value);
-          validateIntro(e.target.value);
-        }}
-      />
+      <div className={styles.profileEditMain}>
+        <div className={styles.profileEditImages}>
+          <img
+            className={styles.profileEditImg}
+            src={profileImage}
+            alt="프로필 이미지"
+          />
+          <div className={styles.imageUploadWrapper}>
+            <ImageUploadButton onChange={handleImageChange} />
+          </div>
+        </div>
+
+        <div className={styles.profileEditInput}>
+          <Input
+            name="username"
+            label="사용자 이름"
+            warningMessage={usernameError}
+            type="text"
+            value={username}
+            placeholder="2-10자 이내여야 합니다."
+            onChange={(e) => {
+              setUsername(e.target.value);
+              validateUsername(e.target.value);
+            }}
+          />
+          <Input
+            name="accountName"
+            label="계정 ID"
+            warningMessage={accountNameError}
+            type="text"
+            value={accountName}
+            placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+            onChange={(e) => {
+              setAccountName(e.target.value);
+              validateAccountName(e.target.value);
+            }}
+          />
+          <Input
+            name="intro"
+            label="소개"
+            warningMessage={introError}
+            type="text"
+            value={intro}
+            placeholder="자신을 소개해 주세요!"
+            onChange={(e) => {
+              setIntro(e.target.value);
+              validateIntro(e.target.value);
+            }}
+          />
+        </div>
+      </div>
     </form>
   );
 };

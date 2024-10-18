@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./BottomNavigation.module.scss";
 // 리덕스
 import { useDispatch, useSelector } from "react-redux";
@@ -21,16 +21,44 @@ const tabItem = [
 // 하단 탭 컴포넌트 정의
 const BottomTab = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const activeTab = useSelector((state) => state.bottom.activeTab);
+
+  // URL 변경 시 activeTab 업데이트
+  useEffect(() => {
+    const currentTab = tabItem.find(
+      (item) => item.path === location.pathname
+    )?.tab;
+    if (currentTab && currentTab !== activeTab) {
+      dispatch(setActiveTab(currentTab));
+    }
+  }, [location, dispatch, activeTab]);
 
   // 하단 탭 내용 정의
   return (
     <div className={styles.content}>
       <div className={styles.tab}>
         {tabItem.map(({ path, text, icon, tab }) => (
-          <Link key={tab} to={path} onClick={() => dispatch(setActiveTab(tab))} className={styles.link}>
-            <img src={icon} alt={text} className={`${styles.icon} ${activeTab === tab ? styles.activeIcon : ""}`} />
-            <div className={`${styles.text} ${activeTab === tab ? styles.activeText : ""}`}>{text}</div>
+          <Link
+            key={tab}
+            to={path}
+            onClick={() => dispatch(setActiveTab(tab))}
+            className={styles.link}
+          >
+            <img
+              src={icon}
+              alt={text}
+              className={`${styles.icon} ${
+                activeTab === tab ? styles.activeIcon : ""
+              }`}
+            />
+            <div
+              className={`${styles.text} ${
+                activeTab === tab ? styles.activeText : ""
+              }`}
+            >
+              {text}
+            </div>
           </Link>
         ))}
       </div>

@@ -20,19 +20,13 @@ const VerticalButton = () => {
     dispatch(
       openOptionsModal({
         modalType: "options",
-        options: [
-          { text: "설정 및 개인정보", actionId: "settings" },
-          { text: "로그아웃", actionId: "logout" },
-        ],
+        options: [{ text: "로그아웃", actionId: "logout" }],
       })
     );
   };
 
   // 옵션 모달에서 사용할 액션 핸들러
   const handleOptionActions = {
-    settings: () => {
-      console.log("설정 및 개인정보 클릭됨");
-    },
     logout: () => {
       // 로그아웃 확인 모달 열기
       dispatch(
@@ -60,7 +54,7 @@ const VerticalButton = () => {
 
   return (
     <div>
-      <button onClick={handleClick}>
+      <button onClick={handleClick} style={{ width: "100%" }}>
         <img src={moreIcon} alt="더보기" />
       </button>
       <OptionsModal actionHandlers={handleOptionActions} />

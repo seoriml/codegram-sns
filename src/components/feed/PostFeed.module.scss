@@ -1,28 +1,15 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 48px;
-  padding: 0 var(--side-padding-feed);
-  border-bottom: 1px solid var(--color-element-gray);
-
-  .title {
-    font-size: var(--font-size-large);
-  }
-}
-
 .postsWrapper {
-  padding: 20px var(--side-padding-feed);
-
   .feedItem {
     display: flex;
     gap: 12px;
+    padding: 20px var(--side-padding-feed);
     padding-bottom: 24px;
 
     .profileImg {
-      width: 42px;
+      width: 100%;
+      max-width: 42px;
       height: 42px;
-      border-radius: 42px;
+      border-radius: 100%;
       background-color: var(--color-element-gray);
     }
 
@@ -57,11 +44,28 @@
         border-radius: var(--border-radius-post);
         border: 0.5px solid var(--color-element-gray);
         text-align: center;
+        margin-bottom: 8px;
       }
 
       .date {
         font-size: var(--font-size-small);
         color: var(--color-font-gray);
+      }
+
+      .heartComments {
+        max-width: 98px;
+        padding-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: var(--color-font-gray);
+        button,
+        .commentCount {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: var(--font-size-detail);
+        }
       }
     }
   }

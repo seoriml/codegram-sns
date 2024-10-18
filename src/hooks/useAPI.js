@@ -4,9 +4,12 @@ import { executeRequest } from "../redux/apiSlice";
 
 const useAPI = () => {
   const dispatch = useDispatch();
-  const { data, loading, error, token, isLoggedIn } = useSelector((state) => state.api);
+  const { data, loading, error, token, isLoggedIn, loginData, profileData, productData } = useSelector(
+    (state) => state.api
+  );
 
   // 이미지 호출할 땐 content-type에 "multipart/form-data"
+  // "application/json" 일때는 매개변수에 안넣어도 됩니다.
 
   const executeRequestThunk = useCallback(
     (url, method = "GET", body = null, contentType = null, token = null) => {
@@ -32,7 +35,20 @@ const useAPI = () => {
     [executeRequestThunk]
   );
 
-  return { token, isLoggedIn, data, loading, error, get, post, put, del };
+  return {
+    productData,
+    profileData,
+    loginData,
+    token,
+    isLoggedIn,
+    data,
+    loading,
+    error,
+    get,
+    post,
+    put,
+    del,
+  };
 };
 
 export default useAPI;

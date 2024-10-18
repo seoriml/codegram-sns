@@ -1,0 +1,72 @@
+/* 공통 정렬 스타일 */
+@mixin flex-center($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+.followingsHeader,
+.followersHeader {
+  @include flex-center(flex-start);
+  width: 100%;
+  height: 48px;
+  gap: 13px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-element-gray);
+
+  .followerName {
+    font-size: var(--font-size-regular);
+    padding-bottom: 3px;
+  }
+}
+
+.profileFollowsWrapper {
+  padding: 16px var(--side-padding-feed);
+
+  .followerItem {
+    @include flex-center(space-between);
+    padding: 8px 0;
+
+    .followerInfo {
+      @include flex-center(row);
+      gap: 12px;
+
+      .profileImg {
+        width: 100%;
+        max-width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .username {
+        font-size: var(--font-size-regular);
+      }
+
+      .accountname {
+        font-size: var(--font-size-detail);
+        color: var(--color-font-gray);
+        padding-top: 6px;
+      }
+    }
+
+    .miniCancelType {
+      &:hover {
+        background-color: var(--color-element-gray);
+        color: black;
+        transform: scale(0.99);
+        border: none;
+      }
+    }
+    .miniFollowType {
+      &:hover {
+        background-color: #0059ff;
+        transform: scale(0.99);
+      }
+    }
+  }
+}
+
+.followerText {
+  padding: 20px;
+}
