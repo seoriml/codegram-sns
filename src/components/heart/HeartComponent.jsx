@@ -23,12 +23,13 @@ function HeartComponent({ hearts, postId, hearted }) {
         "application/json",
         token
       );
-      console.log("게시물 좋아요 성공");
+      alert("좋아요 했습니다.");
+      console.log("게시물 좋아요 성공", token);
     } catch (error) {
       // 게시물 좋아요 API 호출 실패 시 로컬 상태 되돌리기
       setHeartCount((prevCount) => prevCount - 1);
       setLocalHearted(false);
-      alert("좋아요 API 요청 중 에러 발생");
+      alert("좋아요에 실패했습니다.");
       console.error("좋아요 API 요청 중 에러 발생:", error);
     }
   };
@@ -44,12 +45,13 @@ function HeartComponent({ hearts, postId, hearted }) {
         "application/json",
         token
       );
-      console.log("게시물 좋아요 취소 성공");
+      alert("좋아요 취소했습니다.");
+      console.log("게시물 좋아요 취소 성공", token);
     } catch (error) {
       // 게시물 좋아요 취소 API 호출 실패 시 로컬 상태 되돌리기
       setHeartCount((prevCount) => prevCount + 1);
       setLocalHearted(true);
-      alert("좋아요 취소 API 요청 중 에러 발생");
+      alert("좋아요 취소에 실패했습니다.");
       console.error("좋아요 취소 API 요청 중 에러 발생:", error);
     }
   };
