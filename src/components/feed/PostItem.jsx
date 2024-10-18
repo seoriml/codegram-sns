@@ -127,7 +127,8 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
   };
 
   const profileImageSrc =
-    post.author.image === "http://146.56.183.55:5050/Ellipse.png"
+    post.author.image === "http://146.56.183.55:5050/Ellipse.png" ||
+    post.author.image === "https://estapi.mandarin.weniv.co.kr/undefined"
       ? defaultProfileIcon
       : post.author.image;
 
