@@ -89,7 +89,7 @@
       }
     }
   }
-  .chatInput:focus { outline: 2px solid var(--color-element-blue) };
+  .chatInput:focus { outline-color: var(--color-element-blue) };
   .forwardButton {
     padding: 20px 16px;
     border: none;
@@ -102,5 +102,5 @@
       color: var(--color-element-blue);
     }
   }
-  .forwardButton:focus { outline: 2px solid var(--color-element-blue) };
+  .forwardButton:focus { outline-color: var(--color-element-blue) };
 }
