@@ -181,27 +181,26 @@ export default function AuthForm() {
           placeholder="자신을 소개해 주세요.!"
           onChange={handleIntroChange}
         />
-        <ButtonComponent
-          children="코드그램 바로가기"
-          disabled={
-            !!usernameError ||
-            !!accountNameError ||
-            !username ||
-            !accountName ||
-            !!introError ||
-            !intro ||
-            !!warningMessage
-          }
-          buttonType="loginType"
-          style={{
-            marginTop: "30px",
-            textAlign: "center",
-            position: "relative",
-            left: "calc(50% - (322px / 2))",
-            width: "100%",
-            padding: "13px 0",
-          }}
-        />
+        <div className={styles.btnContainer}>
+          <ButtonComponent
+            children="코드그램 바로가기"
+            disabled={
+              !!usernameError ||
+              !!accountNameError ||
+              !username ||
+              !accountName ||
+              !!introError ||
+              !intro ||
+              !!warningMessage
+            }
+            buttonType="loginType"
+            style={{
+              marginTop: "15px",
+              textAlign: "center",
+              padding: "13px 0",
+            }}
+          />
+        </div>
       </form>
     </>
   );
