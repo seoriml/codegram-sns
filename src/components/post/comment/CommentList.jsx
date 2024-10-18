@@ -181,8 +181,9 @@ export default function CommentList({ postId }) {
             .flatMap((page) => page.comments)
             .map((comment) => {
               const isMyComment =
-                sessionProfileData?.username === comment.author.username ||
-                sessionProfileData?.accountname === comment.author.accountname;
+                sessionProfileData?.user.username === comment.author.username ||
+                sessionProfileData?.user.accountname ===
+                  comment.author.accountname;
 
               return (
                 <li key={comment.id} className={styles.commentItem}>
@@ -226,10 +227,10 @@ export default function CommentList({ postId }) {
         <img
           className={styles.profileImg}
           src={
-            sessionProfileData?.image ===
+            sessionProfileData?.user.image ===
             "http://146.56.183.55:5050/Ellipse.png"
               ? defaultProfileIcon
-              : sessionProfileData?.image
+              : sessionProfileData?.user.image
           }
         />
         <input

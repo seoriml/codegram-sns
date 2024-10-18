@@ -132,8 +132,8 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
       : post.author.image;
 
   const isMyPost =
-    sessionProfileData?.username === post.author.username ||
-    sessionProfileData?.accountname === post.author.accountname;
+    sessionProfileData?.user.username === post.author.username ||
+    sessionProfileData?.user.accountname === post.author.accountname;
 
   return (
     <>
