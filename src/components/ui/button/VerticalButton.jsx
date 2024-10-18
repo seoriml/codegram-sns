@@ -1,13 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import {
-  openOptionsModal,
-  closeOptionsModal,
-} from "../../../redux/optionsModalSlice";
-import {
-  openConfirmModal,
-  closeConfirmModal,
-} from "../../../redux/confirmModalSlice";
+import { openOptionsModal, closeOptionsModal } from "../../../redux/optionsModalSlice";
+import { openConfirmModal, closeConfirmModal } from "../../../redux/confirmModalSlice";
 import OptionsModal from "../modal/OptionsModal";
 import ConfirmModal from "../modal/ConfirmModal";
 import moreIcon from "../../../assets/images/icon_more_vertical.svg";
@@ -47,7 +41,7 @@ const VerticalButton = () => {
       console.log("로그아웃 확정됨");
       // 로그아웃 구현 (localStorage에서 토큰을 제거하고 로그인 페이지로 리다이렉트)
       localStorage.removeItem("userToken");
-      window.location.href = "/login";
+      window.location.href = "/";
       dispatch(closeConfirmModal()); // 확인 모달 닫기
     },
   };
