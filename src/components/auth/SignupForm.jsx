@@ -5,6 +5,7 @@ import { useNavigate, redirect } from "react-router-dom";
 import useAPI from "./../../hooks/useAPI";
 import { updateValidState } from "../../redux/validationSlice";
 import ButtonComponent from "../ui/Button";
+import Loading from "../ui/Loading";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -73,7 +74,7 @@ export default function SignupForm() {
     }
   };
 
-  if (loading) return <div>로딩 중...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>에러: {error}</div>;
 
   return (

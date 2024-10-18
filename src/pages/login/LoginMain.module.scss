@@ -1,3 +1,10 @@
+@mixin flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80%;
+}
+
 .container {
   background-color: var(--color-element-blue);
   height: 100vh;
@@ -10,6 +17,7 @@
 .logoContainer {
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -20,6 +28,18 @@
   background-image: url("../../assets/images/symbol_logo_white.svg");
   background-repeat: no-repeat;
   background-position: center, 60%;
+}
+.textLogo {
+  width: 200px;
+  height: 50px;
+  background-image: url("../../assets/images/codegram_logo_title_white.svg");
+  background-repeat: no-repeat;
+  background-position: center, 60%;
+  margin-top: 14px;
+}
+
+.description {
+  color: white;
 }
 
 .btnContainer {
@@ -35,25 +55,29 @@
 }
 
 .btnEmailLogin {
-  display: block;
-  width: 80%;
+  @include flex;
   padding: 11px;
-  margin: 50px 0 0 0;
+  margin: 40px 0 0 0;
   border: none;
   border-radius: var(--border-radius-large);
   background-color: var(--color-element-blue);
   color: var(--color-component-white);
-  text-align: center;
 }
 
 .btnSignUp {
-  display: block;
-  width: 80%;
+  @include flex;
   padding: 10px;
-  margin: 30px 0 0 0;
+  margin: 14px 0 0 0;
   border: 1px solid var(--color-element-blue);
-  color: var(--color-font-gray);
   border-radius: var(--border-radius-large);
   background-color: var(--color-component-white);
+  color: var(--color-font-gray);
+}
+.icon {
+  margin-left: 8px;
+}
+.text {
+  width: 100%;
   text-align: center;
+  padding-right: 24px;
 }
