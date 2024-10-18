@@ -6,6 +6,7 @@ import useAPI from "./../../hooks/useAPI";
 import { setCredentials } from "../../redux/apiSlice";
 import styles from "./LoginForm.module.scss";
 import ButtonComponent from "../ui/Button";
+import Loading from "../ui/Loading";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -64,7 +65,7 @@ export default function LoginForm() {
     }
   };
 
-  if (loading) return <div>로딩 중...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>에러: {error}</div>;
   return (
     <form onSubmit={handleSubmit} noValidate>
