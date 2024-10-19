@@ -67,7 +67,8 @@ const PostForm = ({
   };
 
   const profileImageSrc =
-    author?.image === "http://146.56.183.55:5050/Ellipse.png"
+    author?.image === "http://146.56.183.55:5050/Ellipse.png" ||
+    author?.image === "https://estapi.mandarin.weniv.co.kr/undefined"
       ? defaultProfileIcon
       : author?.image;
 

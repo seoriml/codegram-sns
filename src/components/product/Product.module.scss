@@ -1,0 +1,104 @@
+/* 공통 정렬 스타일 */
+@mixin flex-center($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+.followingsHeader,
+.followersHeader {
+  @include flex-center(flex-start);
+  width: 100%;
+  height: 48px;
+  gap: 13px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-element-gray);
+
+  .followerName {
+    font-size: var(--font-size-regular);
+    padding-bottom: 3px;
+  }
+}
+
+.profileFollowsWrapper {
+  padding: 16px var(--side-padding-feed);
+
+  .followerItem {
+    @include flex-center(space-between);
+    padding: 8px 0;
+
+    .followerInfo {
+      @include flex-center(row);
+      gap: 12px;
+
+      .profileImg {
+        width: 50px;
+        max-width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .username {
+        font-size: var(--font-size-regular);
+        width: 300px;
+      }
+
+      .accountname {
+        font-size: var(--font-size-detail);
+        color: var(--color-font-gray);
+        padding-top: 6px;
+      }
+    }
+
+    .miniCancelType {
+      &:hover {
+        background-color: var(--color-element-gray);
+        color: black;
+        transform: scale(0.99);
+        border: none;
+      }
+    }
+    .miniFollowType {
+      &:hover {
+        background-color: #0059ff;
+        transform: scale(0.99);
+      }
+    }
+  }
+}
+
+.followerText {
+  padding: 20px;
+  color: var(--color-font-gray);
+}
+
+.body {
+  padding: 30px 34px;
+}
+
+.imageWrapper {
+  margin-top: 18px;
+  margin-bottom: 30px;
+  width: 100%;
+  height: 204px;
+  position: relative;
+  background-color: var(--color-component-gray);
+  border-radius: var(--border-radius-post);
+  border: 1px solid var(--color-element-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .imageUploadButton {
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+  }
+}
