@@ -76,7 +76,7 @@ export default function ProductEditPage() {
       console.log(`error: ${response.payload}`);
     } else {
       alert("수정되었습니다.");
-      navigate(-1);
+      navigate(`/product/detail/${id}`);
     }
   };
 
