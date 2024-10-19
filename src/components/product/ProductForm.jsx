@@ -65,7 +65,11 @@ export default function ProductForm({
     <form onSubmit={handleSubmit} className="paddingTopForHeader">
       <header className={`${isVisible ? "header" : "headerHidden"}`}>
         <BackButton />
-        <ButtonComponent buttonType="saveType" type="submit">
+        <ButtonComponent
+          buttonType="saveType"
+          type="submit"
+          className={Styles.saveType}
+        >
           저장
         </ButtonComponent>
       </header>
