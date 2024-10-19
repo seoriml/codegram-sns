@@ -130,8 +130,8 @@
   height: 44px;
   gap: 15px;
   padding: 9px 16px;
-  border: 1px solid var(--color-element-gray);
-
+  border-top: 1px solid var(--color-element-gray);
+  border-bottom: 1px solid var(--color-element-gray);
   img {
     width: 26px;
     height: 26px;
