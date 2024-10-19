@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import ProductForm from "../../components/product/ProductForm";
 import useAPI from "../../hooks/useAPI";
 import { useNavigate, useParams } from "react-router-dom";
+import Loading from "../../components/ui/Loading";
 
 export default function ProductEditPage() {
   const { id } = useParams();
-  const { get, post, token } = useAPI();
+  const { get, post, token, loading } = useAPI();
   const [productImage, setProductImage] = useState(null);
   const [itemName, setItemName] = useState("");
   const [link, setLink] = useState("");
@@ -15,11 +16,7 @@ export default function ProductEditPage() {
 
   // 상품 상세 정보 가져오기 함수
   const getProductDetail = async () => {
-    const response = await get(
-      `${import.meta.env.VITE_API_URL}/product/detail/${id}`,
-      "application/json",
-      token
-    );
+    const response = await get(`${import.meta.env.VITE_API_URL}/product/detail/${id}`, "application/json", token);
     setProductImage(response.payload.product.itemImage);
     setItemName(response.payload.product.itemName);
     setLink(response.payload.product.link);
@@ -34,13 +31,10 @@ export default function ProductEditPage() {
     const formData = new FormData();
     formData.append("image", productImage);
 
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/image/uploadfile`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/image/uploadfile`, {
+      method: "POST",
+      body: formData,
+    });
     const json = await response.json();
     setProductImage(json.filename);
     return json.filename;
@@ -78,6 +72,8 @@ export default function ProductEditPage() {
       navigate(-1);
     }
   };
+
+  if (loading) return <Loading />;
 
   return (
     <div>
