@@ -28,11 +28,7 @@ const ProfileEdit = () => {
   useEffect(() => {
     // 현재 사용자 프로필 정보 가져오기
     const fetchProfile = async () => {
-      const response = await get(
-        `${import.meta.env.VITE_API_URL}/user/myinfo`,
-        "application/json",
-        token
-      );
+      const response = await get(`${import.meta.env.VITE_API_URL}/user/myinfo`, "application/json", token);
       const userData = response.payload.user;
       setUsername(userData.username);
       setAccountName(userData.accountname);
@@ -89,10 +85,7 @@ const ProfileEdit = () => {
           const maxHeight = 300;
 
           // 가로, 세로 비율을 유지하면서 크기를 조정
-          const scaleSize = Math.min(
-            maxWidth / img.width,
-            maxHeight / img.height
-          );
+          const scaleSize = Math.min(maxWidth / img.width, maxHeight / img.height);
           canvas.width = img.width * scaleSize;
           canvas.height = img.height * scaleSize;
 
@@ -129,7 +122,7 @@ const ProfileEdit = () => {
     if (result.payload?.user) {
       // 전역 상태에 사용자 프로필 데이터 업데이트
       dispatch(setProfile(result?.payload?.user)); // 이 부분 나중에 전역데이터 수정하면 변경될듯
-      // dispatch(setSessionStorageData(result?.payload));
+      dispatch(setSessionStorageData(result?.payload));
       navigate("/profile", { replace: true });
     } else {
       setWarningMessage("*" + result.payload.message);
@@ -160,11 +153,7 @@ const ProfileEdit = () => {
 
       <div className={styles.profileEditMain}>
         <div className={styles.profileEditImages}>
-          <img
-            className={styles.profileEditImg}
-            src={profileImageSrc}
-            alt="프로필 이미지"
-          />
+          <img className={styles.profileEditImg} src={profileImageSrc} alt="프로필 이미지" />
           <div className={styles.imageUploadWrapper}>
             <ImageUploadButton onChange={handleImageChange} />
           </div>
