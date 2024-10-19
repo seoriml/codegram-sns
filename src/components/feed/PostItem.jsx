@@ -28,6 +28,7 @@ const formatDate = (dateString) => {
 const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
   const location = useLocation();
   const path = location.pathname;
+  // console.log("path :", path);
 
   const { del, token } = useAPI();
   const imageArray = post.image
@@ -160,21 +161,31 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
               </button>
             )}
           </div>
-          <Link to={`/detail/${post.id}`}>
+          <Link
+            to={`/detail/${post.id}`}
+            style={{
+              cursor: path.includes("detail") ? "default" : "pointer",
+            }}
+          >
             <p className={styles.textContent}>{post.content}</p>
-            {imageArray.length > 0 &&
-              imageArray.map((image, index) => (
-                <img
-                  key={index}
-                  src={
-                    image.startsWith("http")
-                      ? image
-                      : `${import.meta.env.VITE_API_URL}/${image}`
-                  }
-                  alt={`게시물 이미지 ${index + 1}`}
-                  className={styles.images}
-                />
-              ))}
+            <div className={styles.imageWrapper}>
+              {imageArray.length > 0 &&
+                imageArray.map((image, index) => (
+                  <img
+                    key={index}
+                    src={
+                      image.startsWith("http")
+                        ? image
+                        : `${import.meta.env.VITE_API_URL}/${image}`
+                    }
+                    alt={`게시물 이미지 ${index + 1}`}
+                    className={styles.images}
+                    style={{
+                      height: path.includes("detail") ? "none" : "300px",
+                    }}
+                  />
+                ))}
+            </div>
           </Link>
           <div className={styles.heartComments}>
             <HeartComponent
@@ -182,7 +193,13 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
               postId={post.id}
               hearted={post.hearted}
             />
-            <Link to={`/detail/${post.id}`} className={styles.commentCount}>
+            <Link
+              to={`/detail/${post.id}`}
+              className={styles.commentCount}
+              style={{
+                cursor: path.includes("detail") ? "default" : "pointer",
+              }}
+            >
               <img src={commentsIcon} alt="댓글 수" />
               {commentCount}
             </Link>

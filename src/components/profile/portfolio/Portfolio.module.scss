@@ -8,6 +8,7 @@
 }
 
 .portfolioTitle {
+  display: inline-block;
   margin-bottom: 16px;
   font-size: var(--font-size-title);
 }
@@ -16,4 +17,16 @@
   display: flex;
   overflow-x: auto;
   gap: 10px;
+}
+.containerPortfolio {
+  width: 100%;
+  height: 100px;
+  padding-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .nonePortfolio {
+    font-size: var(--font-size-title);
+    color: var(--color-font-gray);
+  }
 }

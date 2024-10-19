@@ -26,6 +26,7 @@
     height: 42px;
     border-radius: 100%;
     background-color: var(--color-element-gray);
+    border: 1px solid var(--color-element-gray);
   }
 
   .uploadContainer {
@@ -47,14 +48,14 @@
 
       .previewWrapper {
         position: relative;
+        display: flex;
         flex-direction: column;
-        align-items: center;
-
-        .previewImages {
-          border-radius: var(--border-radius-post);
-          border: 0.5px solid var(--color-element-gray);
-          text-align: center;
-        }
+        align-content: center;
+        justify-items: center;
+        margin-bottom: 16px;
+        border: 0.5px solid var(--color-element-gray);
+        border-radius: var(--border-radius-post);
+        overflow: hidden;
 
         .removeButton img {
           position: absolute;

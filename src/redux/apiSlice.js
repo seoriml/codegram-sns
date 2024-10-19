@@ -64,6 +64,13 @@ const apiSlice = createSlice({
     setProductData: (state, action) => {
       state.productData = action.payload;
     },
+    setSessionStorageData: (state, action) => {
+      sessionStorage.setItem("accountname", action.payload.user.accountname);
+      state.loginData.accountname = action.payload.user.accountname;
+      state.loginData.image = action.payload.user.image;
+      state.loginData.intro = action.payload.user.intro;
+      state.loginData.username = action.payload.user.username;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -93,6 +100,7 @@ const apiSlice = createSlice({
         if (action.payload?.user?.token) {
           state.loginData = action.payload.user;
           state.profileData = action.payload;
+          sessionStorage.setItem("myAccountname", action.payload.user.accountname);
         }
       })
       .addCase(executeRequest.rejected, (state, action) => {

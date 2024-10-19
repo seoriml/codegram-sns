@@ -34,7 +34,6 @@
     border-radius: 0px 10px 10px 10px;
     color: var(--color-font-black);
     background-color: var(--color-component-white);
-    
   }
   // 사용자 메시지 말풍선
   .user {
@@ -80,13 +79,16 @@
     &::placeholder {
       color: var(--color-font-gray-light);
     }
-    &:not(:placeholder-shown) { // 입력 필드에 텍스트가 없을 때 스타일
+    &:not(:placeholder-shown) {
+      // 입력 필드에 텍스트가 없을 때 스타일
       & + .forwardButton {
         color: var(--color-element-blue);
       }
     }
   }
-  .chatInput:focus { outline-color: var(--color-element-blue) };
+  .chatInput:focus {
+    outline-color: var(--color-element-blue);
+  }
   .forwardButton {
     padding: 20px 16px;
     border: none;
@@ -99,5 +101,11 @@
       color: var(--color-element-blue);
     }
   }
-  .forwardButton:focus { outline-color: var(--color-element-blue) };
+  .forwardButton:focus {
+    outline-color: var(--color-element-blue);
+  }
+}
+
+.chatNickname {
+  color: var(--color-element-blue);
 }

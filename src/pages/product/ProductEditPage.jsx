@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import ProductForm from "../../components/product/ProductForm";
 import useAPI from "../../hooks/useAPI";
 import { useNavigate, useParams } from "react-router-dom";
+import Loading from "../../components/ui/Loading";
 
 export default function ProductEditPage() {
   const { id } = useParams();
-  const { get, post, token } = useAPI();
+  const { get, put, token, loading } = useAPI();
   const [productImage, setProductImage] = useState(null);
   const [itemName, setItemName] = useState("");
   const [link, setLink] = useState("");
@@ -57,7 +58,7 @@ export default function ProductEditPage() {
     } else {
       filename = productImage;
     }
-    const response = await post(
+    const response = await put(
       `${import.meta.env.VITE_API_URL}/product/${id}`,
       {
         product: {
@@ -75,9 +76,11 @@ export default function ProductEditPage() {
       console.log(`error: ${response.payload}`);
     } else {
       alert("수정되었습니다.");
-      navigate(-1);
+      navigate(`/product/detail/${id}`);
     }
   };
+
+  if (loading) return <Loading />;
 
   return (
     <div>
