@@ -27,3 +27,10 @@
     bottom: 8px;
   }
 }
+
+.saveType {
+  &:hover {
+    background-color: #0077ff;
+    transform: scale(0.98);
+  }
+}

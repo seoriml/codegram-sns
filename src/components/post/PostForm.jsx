@@ -104,22 +104,24 @@ const PostForm = ({
             />
             {previewArray.length > 0 && (
               <>
-                {previewArray.map((preview, index) => (
-                  <div className={styles.previewWrapper} key={index}>
-                    <img
-                      src={preview}
-                      alt={`업로드 이미지 ${index + 1}`}
-                      className={styles.previewImages}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeImage(index)}
-                      className={styles.removeButton}
-                    >
-                      <img src={removeIcon} alt="이미지 삭제" />
-                    </button>
-                  </div>
-                ))}
+                <div className={styles.previewContainer}>
+                  {previewArray.map((preview, index) => (
+                    <div className={styles.previewWrapper} key={index}>
+                      <img
+                        src={preview}
+                        alt={`업로드 이미지 ${index + 1}`}
+                        className={styles.previewImages}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index)}
+                        className={styles.removeButton}
+                      >
+                        <img src={removeIcon} alt="이미지 삭제" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </>
             )}
           </div>
