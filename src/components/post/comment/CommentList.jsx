@@ -120,7 +120,6 @@ export default function CommentList({ postId }) {
 
     if (response && response.payload.comment) {
       dispatch(incrementCommentCount(postId)); // Redux에서 댓글 수 증가
-      alert("댓글이 추가되었습니다.");
       setNewComment("");
       refetch();
     } else {
@@ -192,7 +191,9 @@ export default function CommentList({ postId }) {
                     className={styles.profileImg}
                     src={
                       comment.author.image ===
-                      "http://146.56.183.55:5050/Ellipse.png"
+                        "http://146.56.183.55:5050/Ellipse.png" ||
+                      comment.author.image ===
+                        "https://estapi.mandarin.weniv.co.kr/undefined"
                         ? defaultProfileIcon
                         : comment.author.image
                     }
@@ -248,7 +249,7 @@ export default function CommentList({ postId }) {
           style={{
             color: newComment
               ? "var(--color-element-blue)"
-              : "var(--color-element-gray)", // 입력값에 따라 배경색 변경
+              : "var(--color-element-gray)",
           }}
         >
           게시

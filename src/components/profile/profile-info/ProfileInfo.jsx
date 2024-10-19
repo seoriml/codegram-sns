@@ -89,8 +89,7 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
           className={styles.profileFollow}
           onClick={() => navigate(`/profile/${accountname}/followers`)}
         >
-          <div className={styles.followersCount}></div>
-          {followersCount}
+          <div className={styles.followersCount}>{followersCount}</div>
           <p className={styles.label}>followers</p>
         </div>
 

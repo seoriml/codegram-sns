@@ -10,7 +10,8 @@ const FollowerItem = ({ profile }) => {
   const { token } = useAPI();
 
   const profileImageSrc =
-    profile.image === "http://146.56.183.55:5050/Ellipse.png"
+    profile.image === "http://146.56.183.55:5050/Ellipse.png" ||
+    profile.image === "https://estapi.mandarin.weniv.co.kr/undefined"
       ? defaultProfileImage
       : profile.image;
 

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import ProductForm from "../../components/product/ProductForm";
 import useAPI from "../../hooks/useAPI";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCreatePage() {
+  const navigate = useNavigate();
   const { post, token } = useAPI();
   const [productImage, setProductImage] = useState(null);
   const [itemName, setItemName] = useState("");
@@ -77,6 +79,8 @@ export default function ProductCreatePage() {
       setItemName("");
       setLink("");
       setProductImage(null);
+      const productId = response.payload.product.id;
+      navigate(`/product/detail/${productId}`);
     }
   };
 
