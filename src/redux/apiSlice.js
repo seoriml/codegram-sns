@@ -66,10 +66,7 @@ const apiSlice = createSlice({
     },
     setSessionStorageData: (state, action) => {
       sessionStorage.setItem("myAccountname", action.payload.user.accountname);
-      state.loginData.accountname = action.payload.user.accountname;
-      state.loginData.image = action.payload.user.image;
-      state.loginData.intro = action.payload.user.intro;
-      state.loginData.username = action.payload.user.username;
+      state.loginData = action.payload.user;
     },
   },
   extraReducers: (builder) => {
