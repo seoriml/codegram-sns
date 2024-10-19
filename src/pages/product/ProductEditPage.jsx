@@ -6,7 +6,7 @@ import Loading from "../../components/ui/Loading";
 
 export default function ProductEditPage() {
   const { id } = useParams();
-  const { get, post, token, loading } = useAPI();
+  const { get, put, token, loading } = useAPI();
   const [productImage, setProductImage] = useState(null);
   const [itemName, setItemName] = useState("");
   const [link, setLink] = useState("");
@@ -16,7 +16,11 @@ export default function ProductEditPage() {
 
   // 상품 상세 정보 가져오기 함수
   const getProductDetail = async () => {
-    const response = await get(`${import.meta.env.VITE_API_URL}/product/detail/${id}`, "application/json", token);
+    const response = await get(
+      `${import.meta.env.VITE_API_URL}/product/detail/${id}`,
+      "application/json",
+      token
+    );
     setProductImage(response.payload.product.itemImage);
     setItemName(response.payload.product.itemName);
     setLink(response.payload.product.link);
@@ -31,10 +35,13 @@ export default function ProductEditPage() {
     const formData = new FormData();
     formData.append("image", productImage);
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/image/uploadfile`, {
-      method: "POST",
-      body: formData,
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/image/uploadfile`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const json = await response.json();
     setProductImage(json.filename);
     return json.filename;
@@ -51,7 +58,7 @@ export default function ProductEditPage() {
     } else {
       filename = productImage;
     }
-    const response = await post(
+    const response = await put(
       `${import.meta.env.VITE_API_URL}/product/${id}`,
       {
         product: {
@@ -69,7 +76,7 @@ export default function ProductEditPage() {
       console.log(`error: ${response.payload}`);
     } else {
       alert("수정되었습니다.");
-      navigate(-1);
+      navigate(`/product/detail/${id}`);
     }
   };
 

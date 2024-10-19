@@ -6,7 +6,7 @@ import Loading from "../../components/ui/Loading";
 
 export default function PostEditPage() {
   const { id } = useParams();
-  const { get, put, token } = useAPI();
+  const { get, put, token, loading } = useAPI();
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
@@ -107,13 +107,15 @@ export default function PostEditPage() {
       }
     } else {
       alert("수정되었습니다.");
-      navigate(-1);
+      navigate(`/detail/${id}`);
     }
   };
 
   return (
     <>
-      {content ? (
+      {loading ? ( // 로딩 상태 확인
+        <Loading />
+      ) : (
         <PostForm
           onSubmit={handleUpdatePost}
           content={content}
@@ -124,10 +126,6 @@ export default function PostEditPage() {
           setPreviews={setPreviews}
           author={author}
         />
-      ) : (
-        <>
-          <Loading />
-        </>
       )}
     </>
   );

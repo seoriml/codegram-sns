@@ -95,6 +95,7 @@ export default function ProductForm({
           value={itemName}
           placeholder="2~15자 이내여야 합니다."
           onChange={(e) => setItemName(e.target.value)}
+          maxLength={15}
         />
 
         <Input
