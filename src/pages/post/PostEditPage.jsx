@@ -107,7 +107,7 @@ export default function PostEditPage() {
       }
     } else {
       alert("수정되었습니다.");
-      navigate(-1);
+      navigate(`/detail/${id}`);
     }
   };
 
