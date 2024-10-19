@@ -88,8 +88,14 @@ function App() {
           <Route path="/profile/edit" element={<ProfileEditPage />} />
           <Route path="/profile/:accountname" element={<YourProfile />} />
           <Route path="/profile/:accountname" element={<MyProfile />} />
-          <Route path="/profile/:accountname/followers" element={<Followers />} />
-          <Route path="/profile/:accountname/followings" element={<Followings />} />
+          <Route
+            path="/profile/:accountname/followers"
+            element={<Followers />}
+          />
+          <Route
+            path="/profile/:accountname/followings"
+            element={<Followings />}
+          />
           <Route path="/product/create" element={<ProductCreatePage />} />
           <Route path="/product/edit/:id" element={<ProductEditPage />} />
           <Route path="/product/detail/:id" element={<ProductDetailPage />} />

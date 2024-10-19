@@ -168,19 +168,24 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
             }}
           >
             <p className={styles.textContent}>{post.content}</p>
-            {imageArray.length > 0 &&
-              imageArray.map((image, index) => (
-                <img
-                  key={index}
-                  src={
-                    image.startsWith("http")
-                      ? image
-                      : `${import.meta.env.VITE_API_URL}/${image}`
-                  }
-                  alt={`게시물 이미지 ${index + 1}`}
-                  className={styles.images}
-                />
-              ))}
+            <div className={styles.imageWrapper}>
+              {imageArray.length > 0 &&
+                imageArray.map((image, index) => (
+                  <img
+                    key={index}
+                    src={
+                      image.startsWith("http")
+                        ? image
+                        : `${import.meta.env.VITE_API_URL}/${image}`
+                    }
+                    alt={`게시물 이미지 ${index + 1}`}
+                    className={styles.images}
+                    style={{
+                      height: path.includes("detail") ? "none" : "300px",
+                    }}
+                  />
+                ))}
+            </div>
           </Link>
           <div className={styles.heartComments}>
             <HeartComponent
