@@ -11,47 +11,43 @@ function HeartComponent({ hearts, postId, hearted }) {
   const { post, del } = useAPI();
   const token = localStorage.getItem("userToken");
 
-  // 게시물 좋아요
+  // 좋아요
   const handleHeart = async () => {
     // 즉시 로컬 상태 업데이트
     setHeartCount((prevCount) => prevCount + 1);
     setLocalHearted(true);
     try {
-      await post(
+      const response = await post(
         `${import.meta.env.VITE_API_URL}/post/${postId}/heart`,
         "",
         "application/json",
         token
       );
-      alert("좋아요 했습니다.");
-      console.log("게시물 좋아요 성공", token);
+      console.log("좋아요 성공", token, response);
     } catch (error) {
-      // 게시물 좋아요 API 호출 실패 시 로컬 상태 되돌리기
+      // 좋아요 API 호출 실패 시 로컬 상태 되돌리기
       setHeartCount((prevCount) => prevCount - 1);
       setLocalHearted(false);
-      alert("좋아요에 실패했습니다.");
       console.error("좋아요 API 요청 중 에러 발생:", error);
     }
   };
 
-  // 게시물 좋아요 취소
+  // 좋아요 취소
   const handleUnHeart = async () => {
     // 즉시 로컬 상태 업데이트
     setHeartCount((prevCount) => prevCount - 1);
     setLocalHearted(false);
     try {
-      await del(
+      const response = await del(
         `${import.meta.env.VITE_API_URL}/post/${postId}/unheart`,
         "application/json",
         token
       );
-      alert("좋아요 취소했습니다.");
-      console.log("게시물 좋아요 취소 성공", token);
+      console.log("좋아요 취소 성공", token, response);
     } catch (error) {
-      // 게시물 좋아요 취소 API 호출 실패 시 로컬 상태 되돌리기
+      // 좋아요 취소 API 호출 실패 시 로컬 상태 되돌리기
       setHeartCount((prevCount) => prevCount + 1);
       setLocalHearted(true);
-      alert("좋아요 취소에 실패했습니다.");
       console.error("좋아요 취소 API 요청 중 에러 발생:", error);
     }
   };
@@ -60,7 +56,7 @@ function HeartComponent({ hearts, postId, hearted }) {
     <>
       {localHearted ? (
         <button onClick={handleUnHeart}>
-          <img src={fillHeart} alt="이미 좋아요를 한 게시글입니다." />
+          <img src={fillHeart} alt="이미 좋아요 한 게시글입니다." />
           <span>{heartCount}</span>
         </button>
       ) : (
