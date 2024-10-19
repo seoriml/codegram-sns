@@ -9,7 +9,7 @@ import ButtonComponent from "../../components/ui/Button";
 import ImageUploadButton from "../../components/ui/button/ImageUploadButton";
 import styles from "./ProfileEdit.module.scss";
 import { useDispatch } from "react-redux";
-import { setProfile } from "../../redux/apiSlice";
+import { setProfile, setSessionStorageData } from "../../redux/apiSlice";
 
 const ProfileEdit = () => {
   const [username, setUsername] = useState("");
