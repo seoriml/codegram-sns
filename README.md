@@ -2,6 +2,12 @@
 개발자들이 직접 작성한 코드, 프로젝트, 기술과 일상을 공유하고, 피드백을 주고받을 수 있는 웹앱 커뮤니티입니다!<br>
 팔로우/팔로잉 기능을 통해 관심 있는 개발자를 구독하고, 게시글에 답글을 달거나 좋아요를 누르며 상호작용할 수 있습니다.
 
+
+## 팀원 구성
+| **이서림** | **이다빈** | **윤혜림** | **양현우** |
+| :------: |  :------: | :------: | :------: |
+| [<img src="" height=150 width=150> <br/>@seoriml](https://github.com/seoriml) |[<img src="" height=150 width=150> <br/> @Yeon-seong](https://github.com/Yeon-seong) |[<img src="" height=150 width=150> <br/> @lia006](https://github.com/lia006) |[<img src="" height=150 width=150> <br/> @yhwoooo](https://github.com/yhwoooo) |
+
 ## 목차
 - [개요](#개요)
 - [타입 리스트](#타입-리스트)
