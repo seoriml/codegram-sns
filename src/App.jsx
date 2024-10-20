@@ -5,9 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/home/Home";
 import PostCreatePage from "./pages/post/PostCreatePage";
-import Profile from "./pages/profile/MyProfile";
-import YourProfile from "./pages/profile/YourProfile";
 import MyProfile from "./pages/profile/MyProfile";
+import YourProfile from "./pages/profile/YourProfile";
 import Followers from "./pages/followersFollowings/followers";
 import Followings from "./pages/followersFollowings/followings";
 import ProfileEditPage from "./pages/profile/ProfileEdit";
@@ -84,10 +83,9 @@ function App() {
           <Route path="/edit/:id" element={<PostEditPage />} />
           <Route path="/chat" element={<ChatRoomPage />} />
           <Route path="/post/create" element={<PostCreatePage />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/profile/edit" element={<ProfileEditPage />} />
+          <Route path="/profile" element={<MyProfile />} />
           <Route path="/profile/:accountname" element={<YourProfile />} />
-          <Route path="/profile/:accountname" element={<MyProfile />} />
           <Route
             path="/profile/:accountname/followers"
             element={<Followers />}
