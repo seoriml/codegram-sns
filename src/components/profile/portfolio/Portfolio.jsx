@@ -14,7 +14,7 @@ export default function Portfolio({ accountname }) {
   useEffect(() => {
     const fetchPortfolio = async () => {
       const response = await get(`${import.meta.env.VITE_API_URL}/product/${accountname}`, "application/json", token);
-      console.log("portfolio:", response);
+      // console.log("portfolio:", response);
       setPortfolios(response.payload?.product);
     };
     if (accountname) {
