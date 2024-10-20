@@ -9,6 +9,8 @@ import BackButton from "../../ui/button/BackButton";
 import VerticalButton from "../../ui/button/VerticalButton";
 import Loading from "../../ui/Loading";
 import styles from "./ProfileInfo.module.scss";
+import { useDispatch } from "react-redux";
+import { setSessionStorageData } from "../../../redux/apiSlice";
 
 const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
   const { data, get, error, token, profileData } = useApi();
@@ -18,16 +20,16 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const isVisible = useScrollHeader();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // API를 통해 프로필 정보 가져오기
     const fetchProfile = async () => {
       const reqUrl = isMyProfile ? `user/myinfo` : `profile/${accountname}`;
-      await get(
-        `${import.meta.env.VITE_API_URL}/${reqUrl}`,
-        "application/json",
-        token
-      );
+      const res = await get(`${import.meta.env.VITE_API_URL}/${reqUrl}`, "application/json", token);
+      if (reqUrl === `user/myinfo`) {
+        dispatch(setSessionStorageData(res.payload));
+      }
     };
     fetchProfile();
   }, []);
@@ -66,29 +68,17 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
   return (
     <div className={styles.profileInfo}>
       {/* 상단 바 - 백 버튼과 점 세개 버튼 */}
-      <div
-        className={`${styles.profileHeader} ${
-          isVisible ? "" : styles.headerHidden
-        }`}
-      >
+      <div className={`${styles.profileHeader} ${isVisible ? "" : styles.headerHidden}`}>
         <div className={styles.leftGroup}>
           <BackButton />
-          <img
-            src={LogoImage}
-            alt="Logo"
-            className={styles.logo}
-            onClick={() => navigate("/home")}
-          />
+          <img src={LogoImage} alt="Logo" className={styles.logo} onClick={() => navigate("/home")} />
         </div>
         <VerticalButton />
       </div>
 
       <div className={styles.profileTopSection}>
         {/*팔로워/*/}
-        <div
-          className={styles.profileFollow}
-          onClick={() => navigate(`/profile/${accountname}/followers`)}
-        >
+        <div className={styles.profileFollow} onClick={() => navigate(`/profile/${accountname}/followers`)}>
           <div className={styles.followersCount}>{followersCount}</div>
           <p className={styles.label}>followers</p>
         </div>
@@ -100,10 +90,7 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
           className={styles.profileImage}
         />
         {/*팔로잉*/}
-        <div
-          className={styles.profileFollow}
-          onClick={() => navigate(`/profile/${accountname}/followings`)}
-        >
+        <div className={styles.profileFollow} onClick={() => navigate(`/profile/${accountname}/followings`)}>
           <div className={styles.followingsCount}>{followingsCount} </div>
           <p className={styles.label}>followings</p>
         </div>
