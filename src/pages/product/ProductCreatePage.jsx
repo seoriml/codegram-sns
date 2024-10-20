@@ -72,7 +72,7 @@ export default function ProductCreatePage() {
     if (response.meta.rejectedWithValue) {
       // console.log(`error: ${response.payload}`);
     } else {
-      alert("링크가 등록되었습니다.");
+      // alert("링크가 등록되었습니다.");
       setItemName("");
       setLink("");
       setProductImage(null);

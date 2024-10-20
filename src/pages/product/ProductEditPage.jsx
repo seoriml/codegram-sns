@@ -68,7 +68,7 @@ export default function ProductEditPage() {
     if (response.meta.rejectedWithValue) {
       // console.log(`error: ${response.payload}`);
     } else {
-      alert("수정되었습니다.");
+      // alert("수정되었습니다.");
       navigate(`/product/detail/${id}`);
     }
   };

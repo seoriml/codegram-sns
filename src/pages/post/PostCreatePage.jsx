@@ -23,13 +23,10 @@ export default function PostCreatePage() {
       formData.append("image", image);
     });
 
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/image/uploadfiles`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/image/uploadfiles`, {
+      method: "POST",
+      body: formData,
+    });
     const json = await response.json();
     return json.map((img) => img.filename).join(",") || "";
   };
@@ -59,9 +56,9 @@ export default function PostCreatePage() {
     );
 
     if (response.meta.rejectedWithValue) {
-      alert(`error: ${response.payload}`);
+      console.log(`error: ${response.payload}`);
     } else {
-      alert("게시글이 업로드되었습니다.");
+      // alert("게시글이 업로드되었습니다.");
       const postId = response.payload.post.id;
       navigate(`/detail/${postId}`);
     }

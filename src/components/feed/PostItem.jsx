@@ -3,10 +3,7 @@ import React, { useEffect, useState } from "react";
 import useAPI from "../../hooks/useAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  openOptionsModal,
-  closeOptionsModal,
-} from "../../redux/optionsModalSlice";
+import { openOptionsModal, closeOptionsModal } from "../../redux/optionsModalSlice";
 import { openConfirmModal } from "../../redux/confirmModalSlice";
 import OptionsModal from "../ui/modal/OptionsModal";
 import ConfirmModal from "../ui/modal/ConfirmModal";
@@ -32,9 +29,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
 
   const { del, token } = useAPI();
   const imageArray = post.image
-    ? post.image
-        .split(",")
-        .filter((url) => url && url !== `${import.meta.env.VITE_API_URL}/`)
+    ? post.image.split(",").filter((url) => url && url !== `${import.meta.env.VITE_API_URL}/`)
     : [];
 
   const dispatch = useDispatch();
@@ -48,18 +43,12 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
     }
   }, [profileData]);
 
-  const sessionProfileData = JSON.parse(
-    sessionStorage.getItem("sessionProfileData")
-  );
+  const sessionProfileData = JSON.parse(sessionStorage.getItem("sessionProfileData"));
 
   // 게시글 삭제 함수
   const handleDelete = async () => {
     {
-      const response = await del(
-        `${import.meta.env.VITE_API_URL}/post/${post.id}`,
-        "application/json",
-        token
-      );
+      const response = await del(`${import.meta.env.VITE_API_URL}/post/${post.id}`, "application/json", token);
 
       if (response.meta?.rejectedWithValue) {
         if (response.payload === "HTTP error.! status: 403") {
@@ -72,7 +61,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
           alert(`${response.payload.message || "게시글 삭제에 실패했습니다."}`);
         }
       } else {
-        alert("삭제되었습니다.");
+        // alert("삭제되었습니다.");
         if (path.includes("detail")) {
           navigate(-1);
         } else {
@@ -140,11 +129,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
   return (
     <>
       <div className={styles.feedItem}>
-        <img
-          className={styles.profileImg}
-          src={profileImageSrc}
-          alt={`${post.author.username}의 프로필사진`}
-        />
+        <img className={styles.profileImg} src={profileImageSrc} alt={`${post.author.username}의 프로필사진`} />
         <div className={styles.postContent}>
           <div className={styles.author}>
             <div>
@@ -152,11 +137,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
               <p className={styles.accountname}>@{post.author.accountname}</p>
             </div>
             {isMyPost && (
-              <button
-                className={styles.openModal}
-                onClick={handleOpenOptionsModal}
-                aria-label="옵션 열기"
-              >
+              <button className={styles.openModal} onClick={handleOpenOptionsModal} aria-label="옵션 열기">
                 <img src={moreIcon} alt="더보기" />
               </button>
             )}
@@ -173,11 +154,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
                 imageArray.map((image, index) => (
                   <img
                     key={index}
-                    src={
-                      image.startsWith("http")
-                        ? image
-                        : `${import.meta.env.VITE_API_URL}/${image}`
-                    }
+                    src={image.startsWith("http") ? image : `${import.meta.env.VITE_API_URL}/${image}`}
                     alt={`게시물 이미지 ${index + 1}`}
                     className={styles.images}
                     style={{
@@ -188,11 +165,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
             </div>
           </Link>
           <div className={styles.heartComments}>
-            <HeartComponent
-              hearts={post.heartCount}
-              postId={post.id}
-              hearted={post.hearted}
-            />
+            <HeartComponent hearts={post.heartCount} postId={post.id} hearted={post.hearted} />
             <Link
               to={`/detail/${post.id}`}
               className={styles.commentCount}

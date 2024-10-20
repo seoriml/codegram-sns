@@ -33,7 +33,9 @@ export default function Portfolio({ accountname }) {
       </Link>
       {!portfolios || portfolios.length === 0 ? (
         <div className={styles.containerPortfolio}>
-          <p className={styles.nonePortfolio}>본인의 작업을 등록해 보세요.</p>
+          <Link to={`/product/create`}>
+            <p className={styles.nonePortfolio}>본인의 작업을 등록해 보세요.</p>
+          </Link>
         </div>
       ) : (
         <div className={styles.portfolioScroll}>

@@ -8,15 +8,7 @@ import "../../assets/styles/common.scss";
 import inputStyles from "../ui/Input.module.scss";
 import useScrollHeader from "../../hooks/useScrollHeader";
 
-export default function ProductForm({
-  onSubmit,
-  productImage,
-  setProductImage,
-  itemName,
-  setItemName,
-  link,
-  setLink,
-}) {
+export default function ProductForm({ onSubmit, productImage, setProductImage, itemName, setItemName, link, setLink }) {
   const isVisible = useScrollHeader();
 
   // 이미지 파일 선택 함수
@@ -65,11 +57,7 @@ export default function ProductForm({
     <form onSubmit={handleSubmit} className="paddingTopForHeader">
       <header className={`${isVisible ? "header" : "headerHidden"}`}>
         <BackButton />
-        <ButtonComponent
-          buttonType="saveType"
-          type="submit"
-          className={Styles.saveType}
-        >
+        <ButtonComponent buttonType="saveType" type="submit" className={Styles.saveType}>
           저장
         </ButtonComponent>
       </header>
@@ -78,8 +66,7 @@ export default function ProductForm({
         <>
           <label className={inputStyles.inputLabel}>대표 이미지 등록</label>
           <div className={Styles.imageWrapper}>
-            {imagePreviewUrl &&
-            imagePreviewUrl !== `${import.meta.env.VITE_API_URL}/null` ? (
+            {imagePreviewUrl && imagePreviewUrl !== `${import.meta.env.VITE_API_URL}/null` ? (
               <img src={imagePreviewUrl} alt="대표 이미지" />
             ) : null}
             <div className={Styles.imageUploadButton}>
@@ -93,7 +80,8 @@ export default function ProductForm({
           label="사이트 이름"
           type="text"
           value={itemName}
-          placeholder="2~15자 이내여야 합니다."
+          // placeholder="2~15자 이내여야 합니다."
+          placeholder="사이트 이름을 입력해 주세요."
           onChange={(e) => setItemName(e.target.value)}
           maxLength={15}
         />
