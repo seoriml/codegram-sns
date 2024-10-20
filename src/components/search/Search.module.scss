@@ -30,6 +30,7 @@
       height: 50px;
       border-radius: 100%;
       border: 1px solid var(--color-element-gray);
+      object-fit: cover;
     }
     .username {
       font-size: var(--font-size-regular);
