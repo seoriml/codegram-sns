@@ -14,7 +14,7 @@ export default function Portfolio({ accountname }) {
   useEffect(() => {
     const fetchPortfolio = async () => {
       const response = await get(`${import.meta.env.VITE_API_URL}/product/${accountname}`, "application/json", token);
-      console.log("portfolio:", response);
+      // console.log("portfolio:", response);
       setPortfolios(response.payload?.product);
     };
     if (accountname) {
@@ -31,7 +31,7 @@ export default function Portfolio({ accountname }) {
       <Link to={`/product/${accountname}`} state={portfolios}>
         <h2 className={styles.portfolioTitle}>내 작업 목록</h2>
       </Link>
-      {!portfolios ? (
+      {!portfolios || portfolios.length === 0 ? (
         <div className={styles.containerPortfolio}>
           <p className={styles.nonePortfolio}>본인의 작업을 등록해 보세요.</p>
         </div>

@@ -22,7 +22,7 @@ export default function ProductListPage() {
         <BackButton />
         <h1 className={styles.followerName}>{accountname}의 작품 목록</h1>
       </div>
-      {!portfolios ? (
+      {!portfolios || portfolios.length === 0 ? (
         <p className={styles.followerText}>작업이 존재하지 않습니다.</p>
       ) : (
         <ProductList portfolios={portfolios} />
