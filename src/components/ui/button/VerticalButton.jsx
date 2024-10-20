@@ -38,7 +38,7 @@ const VerticalButton = () => {
   // 로그아웃 확인 모달에서 사용할 액션 핸들러
   const handleConfirmActions = {
     confirmLogout: () => {
-      console.log("로그아웃 확정됨");
+      // console.log("로그아웃 확정됨");
       // 로그아웃 구현 (localStorage에서 토큰을 제거하고 로그인 페이지로 리다이렉트)
       localStorage.removeItem("userToken");
       window.location.href = "/";

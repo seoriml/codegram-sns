@@ -31,10 +31,10 @@ export default function ChatForm() {
     setData(newData);
     setChatList((prev) => [...prev, { role: "user", content: question }]);
     setQuestion("");
-    console.log(newData);
+    // console.log(newData);
     const result = await post(url, newData);
     const assistantResponse = result.payload.choices?.[0]?.message.content;
-    console.log(assistantResponse);
+    // console.log(assistantResponse);
     setData((prev) => [...prev, { role: "assistant", content: assistantResponse }]);
     setChatList((prev) => [...prev, { role: "assistant", content: assistantResponse }]);
   };
