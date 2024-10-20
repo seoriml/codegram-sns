@@ -65,11 +65,8 @@ const apiSlice = createSlice({
       state.productData = action.payload;
     },
     setSessionStorageData: (state, action) => {
-      sessionStorage.setItem("accountname", action.payload.user.accountname);
-      state.loginData.accountname = action.payload.user.accountname;
-      state.loginData.image = action.payload.user.image;
-      state.loginData.intro = action.payload.user.intro;
-      state.loginData.username = action.payload.user.username;
+      sessionStorage.setItem("myAccountname", action.payload.user.accountname);
+      state.loginData = action.payload.user;
     },
   },
   extraReducers: (builder) => {
@@ -124,7 +121,8 @@ const apiSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout, setFeedData, setProductData, setProfile } = apiSlice.actions;
+export const { setCredentials, logout, setFeedData, setProductData, setProfile, setSessionStorageData } =
+  apiSlice.actions;
 export default apiSlice.reducer;
 
 // export const selectCurrentToken = (state) => state.auth.token;
