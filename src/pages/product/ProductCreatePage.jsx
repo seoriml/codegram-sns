@@ -1,20 +1,39 @@
 import React, { useState } from "react";
 import ProductForm from "../../components/product/ProductForm";
 import useAPI from "../../hooks/useAPI";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCreatePage() {
+  const navigate = useNavigate();
   const { post, token } = useAPI();
   const [productImage, setProductImage] = useState(null);
   const [itemName, setItemName] = useState("");
   const [link, setLink] = useState("");
-  const [price, setPrice] = useState(1);
+  const price = 1;
+
+  // 폼 유효성 검사 함수
+  const validateForm = () => {
+    if (!productImage) {
+      alert("대표 이미지를 업로드해주세요.");
+      return false;
+    }
+    if (!itemName.trim()) {
+      alert("사이트 이름을 입력해주세요.");
+      return false;
+    }
+    if (!link.trim()) {
+      alert("링크를 입력해주세요.");
+      return false;
+    }
+    if (!/^https?:\/\/\S+$/.test(link)) {
+      alert("유효한 URL을 입력해주세요.");
+      return false;
+    }
+    return true;
+  };
 
   // 이미지 업로드 함수
   const uploadImage = async (productImage) => {
-    if (!productImage) {
-      alert("등록된 이미지가 없습니다");
-      return "";
-    }
     const formData = new FormData();
     formData.append("image", productImage);
 
@@ -33,8 +52,12 @@ export default function ProductCreatePage() {
   // 게시글 업로드 함수
   const handleUploadProduct = async (e) => {
     e.preventDefault();
-    const filename = await uploadImage(productImage);
 
+    if (!validateForm()) {
+      return;
+    }
+
+    const filename = await uploadImage(productImage);
     const response = await post(
       `${import.meta.env.VITE_API_URL}/product`,
       {
@@ -50,13 +73,14 @@ export default function ProductCreatePage() {
     );
 
     if (response.meta.rejectedWithValue) {
-      alert(`error: ${response.payload}`);
+      console.log(`error: ${response.payload}`);
     } else {
       alert("링크가 등록되었습니다.");
       setItemName("");
       setLink("");
       setProductImage(null);
-      setPrice(1);
+      const productId = response.payload.product.id;
+      navigate(`/product/detail/${productId}`);
     }
   };
 
@@ -69,7 +93,6 @@ export default function ProductCreatePage() {
         link={link}
         setLink={setLink}
         price={price}
-        setPrice={setPrice}
         productImage={productImage}
         setProductImage={setProductImage}
       />

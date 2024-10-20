@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import useAPI from "../../../hooks/useAPI";
 import {
@@ -12,6 +12,7 @@ import OptionsModal from "../../ui/modal/OptionsModal";
 import defaultProfileIcon from "../../../assets/images/user_profile.svg";
 import styles from "./CommentList.module.scss";
 import moreIcon from "../../../assets/images/icon_more_vertical_mini.svg";
+import Loading from "../../../components/ui/Loading";
 
 const LIMIT = 10; // 한 번에 불러올 댓글 수
 
@@ -34,8 +35,20 @@ const timeAgo = (date) => {
 
 export default function CommentList({ postId }) {
   const dispatch = useDispatch();
-  const { get, post, del, token } = useAPI();
-  const [comments, setComments] = useState([]); //////
+  const profileData = useSelector((state) => state.api.profileData);
+
+  useEffect(() => {
+    if (profileData) {
+      sessionStorage.setItem("sessionProfileData", JSON.stringify(profileData));
+    }
+  }, [profileData]);
+
+  const sessionProfileData = JSON.parse(
+    sessionStorage.getItem("sessionProfileData")
+  );
+
+  const { get, post, del, token, loading } = useAPI();
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [selectedCommentId, setSelectedCommentId] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
@@ -107,7 +120,6 @@ export default function CommentList({ postId }) {
 
     if (response && response.payload.comment) {
       dispatch(incrementCommentCount(postId)); // Redux에서 댓글 수 증가
-      alert("댓글이 추가되었습니다.");
       setNewComment("");
       refetch();
     } else {
@@ -158,36 +170,55 @@ export default function CommentList({ postId }) {
   return (
     <>
       <ul className={styles.commentsWrapper}>
+        {loading && (
+          <div>
+            <Loading />
+          </div>
+        )}
         {data?.pages.flatMap((page) => page.comments).length > 0 ? (
           data.pages
             .flatMap((page) => page.comments)
-            .map((comment) => (
-              <li key={comment.id} className={styles.commentItem}>
-                <img
-                  className={styles.profileImg}
-                  src={
-                    comment.author.image ===
-                    "http://146.56.183.55:5050/Ellipse.png"
-                      ? defaultProfileIcon
-                      : comment.author.image
-                  }
-                  alt={`${comment.author.username}의 프로필사진`}
-                />
-                <div className={styles.content}>
-                  <div className={styles.commentHeader}>
-                    <div className={styles.commentAuthor}>
-                      <span>{comment.author.username}</span>
-                      <time>{timeAgo(comment.createdAt)}</time>
-                    </div>
-                    <button onClick={() => handleOpenOptionsModal(comment.id)}>
-                      <img src={moreIcon} alt="더보기" />
-                    </button>
-                  </div>
+            .map((comment) => {
+              const isMyComment =
+                sessionProfileData?.user?.username ===
+                  comment.author.username ||
+                sessionProfileData?.user?.accountname ===
+                  comment.author.accountname;
 
-                  <p className={styles.emptyComment}>{comment.content}</p>
-                </div>
-              </li>
-            ))
+              return (
+                <li key={comment.id} className={styles.commentItem}>
+                  <img
+                    className={styles.profileImg}
+                    src={
+                      comment.author.image ===
+                        "http://146.56.183.55:5050/Ellipse.png" ||
+                      comment.author.image ===
+                        "https://estapi.mandarin.weniv.co.kr/undefined"
+                        ? defaultProfileIcon
+                        : comment.author.image
+                    }
+                    alt={`${comment.author.username}의 프로필사진`}
+                  />
+                  <div className={styles.content}>
+                    <div className={styles.commentHeader}>
+                      <div className={styles.commentAuthor}>
+                        <span>{comment.author.username}</span>
+                        <time>{timeAgo(comment.createdAt)}</time>
+                      </div>
+                      {isMyComment && (
+                        <button
+                          onClick={() => handleOpenOptionsModal(comment.id)}
+                        >
+                          <img src={moreIcon} alt="더보기" />
+                        </button>
+                      )}
+                    </div>
+
+                    <p className={styles.emptyComment}>{comment.content}</p>
+                  </div>
+                </li>
+              );
+            })
         ) : (
           <li className={styles.emptyComment}>
             <p>아직 댓글이 없습니다.</p>
@@ -198,12 +229,13 @@ export default function CommentList({ postId }) {
         <img
           className={styles.profileImg}
           src={
-            defaultProfileIcon
-            // comment.author.image === "http://146.56.183.55:5050/Ellipse.png"
-            //   ? defaultProfileIcon
-            //   : comment.author.image
+            sessionProfileData?.user?.image ===
+              "http://146.56.183.55:5050/Ellipse.png" ||
+            sessionProfileData?.user?.image ===
+              "https://estapi.mandarin.weniv.co.kr/undefined"
+              ? defaultProfileIcon
+              : sessionProfileData?.user?.image
           }
-          // alt={`${comment.author.username}의 프로필사진`}
         />
         <input
           className={styles.inputComment}
@@ -212,7 +244,16 @@ export default function CommentList({ postId }) {
           onInput={(e) => setNewComment(e.target.value)}
           placeholder="댓글 입력하기..."
         />
-        <button onClick={handleAddComment}>게시</button>
+        <button
+          onClick={handleAddComment}
+          style={{
+            color: newComment
+              ? "var(--color-element-blue)"
+              : "var(--color-element-gray)",
+          }}
+        >
+          게시
+        </button>
       </div>
       {isCommentModalOpen && (
         <OptionsModal actionHandlers={actionHandlersOptions} />

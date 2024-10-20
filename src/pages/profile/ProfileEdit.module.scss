@@ -13,6 +13,13 @@
   height: 48px;
   padding: 0 var(--side-padding-feed);
   border-bottom: 1px solid var(--color-element-gray);
+  .saveType {
+    &:hover {
+      background-color: #0077ff;
+      border: none;
+      transform: scale(0.98);
+    }
+  }
 }
 
 .profileEditMain {
@@ -32,6 +39,7 @@
   height: 110px;
   border-radius: 50%;
   object-fit: cover;
+  border: 1px solid var(--color-element-gray);
 }
 
 .imageUploadWrapper {

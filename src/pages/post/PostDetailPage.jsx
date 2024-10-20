@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import PostDetailComponent from "../../components/post/PostDetail";
+import Loading from "../../components/ui/Loading";
 
 export default function PostDetailPage() {
   const { id } = useParams();
@@ -26,7 +27,11 @@ export default function PostDetailPage() {
   }, [id]);
 
   if (!post) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   return (

@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, redirect } from "react-router-dom";
 import useAPI from "./../../hooks/useAPI";
 import { updateValidState } from "../../redux/validationSlice";
+import ButtonComponent from "../ui/Button";
+import Loading from "../ui/Loading";
+import styles from "./LoginForm.module.scss";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -68,10 +71,11 @@ export default function SignupForm() {
       navigate("/profile/setup");
     } else {
       setWarningMessage("*" + result.payload.message);
+      setPassword("");
     }
   };
 
-  if (loading) return <div>로딩 중...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>에러: {error}</div>;
 
   return (
@@ -93,13 +97,18 @@ export default function SignupForm() {
         onChange={handlePasswordChange}
         onBlur={() => validatePassword(password)}
       />
-      <button
-        type="submit"
-        style={{ border: "1px solid black", margin: "10px" }}
-        disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
-      >
-        다음
-      </button>
+      <div className={styles.btnContainer}>
+        <ButtonComponent
+          children="다음"
+          disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
+          buttonType="loginType"
+          style={{
+            marginTop: "15px",
+            textAlign: "center",
+            padding: "13px 0",
+          }}
+        />
+      </div>
     </form>
   );
 }

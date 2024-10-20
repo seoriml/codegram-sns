@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PostForm from "../../components/post/PostForm";
 import useAPI from "../../hooks/useAPI";
+import Loading from "../../components/ui/Loading";
 
 export default function PostEditPage() {
   const { id } = useParams();
-  const { get, put, token } = useAPI();
+  const { get, put, token, loading } = useAPI();
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
@@ -16,7 +16,6 @@ export default function PostEditPage() {
 
   // 게시물 상세 정보 가져오기 함수
   const getPostDetail = async () => {
-    const token = localStorage.getItem("userToken");
     const response = await get(
       `${import.meta.env.VITE_API_URL}/post/${id}`,
       "application/json",
@@ -108,13 +107,15 @@ export default function PostEditPage() {
       }
     } else {
       alert("수정되었습니다.");
-      navigate(-1);
+      navigate(`/detail/${id}`);
     }
   };
 
   return (
     <>
-      {content ? (
+      {loading ? ( // 로딩 상태 확인
+        <Loading />
+      ) : (
         <PostForm
           onSubmit={handleUpdatePost}
           content={content}
@@ -125,8 +126,6 @@ export default function PostEditPage() {
           setPreviews={setPreviews}
           author={author}
         />
-      ) : (
-        <p>게시물 정보를 로딩 중입니다...</p>
       )}
     </>
   );

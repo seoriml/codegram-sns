@@ -16,13 +16,13 @@ export const executeRequest = createAsyncThunk(
       }
       // console.log(options);
       const response = await fetch(url, options);
-      console.log(response);
+      // console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error.! status: ${response.status}`);
       }
       const result = await response.json();
 
-      console.log(result);
+      // console.log(result);
       return result;
     } catch (error) {
       console.error("API 요청 중 에러 발생:", error);
@@ -34,16 +34,15 @@ export const executeRequest = createAsyncThunk(
 const apiSlice = createSlice({
   name: "api",
   initialState: {
-    data: null,
     token: localStorage.getItem("userToken"),
     isLoggedIn: !!localStorage.getItem("userToken"),
     loading: false,
     error: null,
     loginData: null, // 로그인하면 저장되는 데이터, 프로필 수정창 들어갈때 여기서 값 받아서 사용하면된다.
-    feedData: null, // home 화면에 뜨는 전체 피드 데이터
     profileData: null, // 사용자 프로필 데이터
-    feedByUser: null, // 사용자별 피드 데이터
-    codeByUser: null, // 사용자별 코드 데이터
+    feedData: null, // home 화면에 뜨는 전체 피드 데이터
+    productData: null, // 상품 데이터
+    data: null,
   },
   reducers: {
     setCredentials: (state, action) => {
@@ -60,13 +59,14 @@ const apiSlice = createSlice({
       state.feedData = action.payload;
     },
     setProfile: (state, action) => {
-      state.profile = action.payload;
+      state.profileData = action.payload;
     },
-    setFeedByUser: (state, action) => {
-      state.feedByUser = action.payload;
+    setProductData: (state, action) => {
+      state.productData = action.payload;
     },
-    setCodeByUser: (state, action) => {
-      state.codeByUser = action.payload;
+    setSessionStorageData: (state, action) => {
+      sessionStorage.setItem("myAccountname", action.payload.user.accountname);
+      state.loginData = action.payload.user;
     },
   },
   extraReducers: (builder) => {
@@ -77,20 +77,51 @@ const apiSlice = createSlice({
       })
       .addCase(executeRequest.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.error = null;
+        if (action.payload?.user) {
+          state.data = action.payload;
+          state.profileData = action.payload;
+        }
+        if (action.payload?.profile) {
+          state.data = action.payload;
+          state.profileData = action.payload;
+        }
+        if (action.payload?.post) {
+          state.data = action.payload;
+          state.feedData = action.payload;
+        }
+        if (action.payload?.product) {
+          state.data = action.payload;
+          state.productData = action.payload;
+        }
         if (action.payload?.user?.token) {
           state.loginData = action.payload.user;
-          state.profileData = action.payload.user;
+          state.profileData = action.payload;
+          sessionStorage.setItem("myAccountname", action.payload.user.accountname);
         }
       })
       .addCase(executeRequest.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
+    // .addMatcher(
+    //   (action) => action.type.endsWith("/fulfilled"),
+    //   (state, action) => {
+    //     if (action.type.startsWith(`user/`)) {
+    //       state.data = action.payload;
+    //     } else if (action.type.startsWith(`profile/`)) {
+    //       state.data = action.payload;
+    //     } else if (action.type.startsWith(`post/`)) {
+    //       state.data = action.payload;
+    //     } else if (action.type.startsWith(`product/`)) {
+    //       state.codeByUser = action.payload;
+    //     }
+    //   }
+    // );
   },
 });
 
-export const { setCredentials, logout, setFeedData, setCodeByUser, setFeedByUser, setHeart, setProfile, setUnHeart } =
+export const { setCredentials, logout, setFeedData, setProductData, setProfile, setSessionStorageData } =
   apiSlice.actions;
 export default apiSlice.reducer;
 

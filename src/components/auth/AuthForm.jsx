@@ -5,11 +5,21 @@ import { useNavigate, redirect } from "react-router-dom";
 import useAPI from "./../../hooks/useAPI";
 import { updateValidState2 } from "../../redux/validationSlice";
 import { setCredentials } from "../../redux/apiSlice";
+import ButtonComponent from "../ui/Button";
+import ProfileImagePlaceholder from "../../assets/images/user_profile.svg";
+import ImageUploadButton from "../ui/button/ImageUploadButton";
+import styles from "./AuthForm.module.scss";
+import Loading from "../ui/Loading";
 
 export default function AuthForm() {
   const [username, setUsername] = useState("");
   const [accountName, setAccountName] = useState("");
   const [intro, setIntro] = useState("");
+  const [profileImagePreview, setProfileImagePreview] = useState(
+    ProfileImagePlaceholder
+  ); // 처음 보여주는 기본프로필 이미지
+  const [img, setImg] = useState(); // 파일 불러오기 해서 가져온 파일 그대로의 이미지
+  const [profileImg, setProfileImg] = useState(""); // api 통신 후에 받아온 이미지 데이터
   const [warningMessage, setWarningMessage] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [accountNameError, setAccountNameError] = useState("");
@@ -18,7 +28,9 @@ export default function AuthForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { emailValue, passwordValue } = useSelector((state) => state.validation);
+  const { emailValue, passwordValue } = useSelector(
+    (state) => state.validation
+  );
 
   const validateUsername = (username) => {
     if (!username) {
@@ -70,13 +82,84 @@ export default function AuthForm() {
     validateIntro(value);
   };
 
+  const handleImageChange = async (files) => {
+    if (files && files[0]) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.src = e.target.result;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          // 이미지 크기 조정
+          const maxWidth = 300;
+          const maxHeight = 300;
+
+          // 가로, 세로 비율을 유지하면서 크기를 조정
+          const scaleSize = Math.min(
+            maxWidth / img.width,
+            maxHeight / img.height
+          );
+          canvas.width = img.width * scaleSize;
+          canvas.height = img.height * scaleSize;
+
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          // 압축된 이미지 생성
+          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.7); // 압축 정도 0.7
+          setProfileImagePreview(compressedDataUrl); // 압축된 이미지를 미리보기로 설정
+
+          console.log("압축된 이미지 크기:", compressedDataUrl.length);
+
+          // 이미지 파일로 다시 변환 후 업로드
+          fetch(compressedDataUrl)
+            .then((res) => res.blob())
+            .then((blob) => {
+              const file = new File([blob], "profile.jpg", {
+                type: "image/jpeg",
+              });
+              uploadImage(file); // 서버로 업로드
+            });
+        };
+      };
+      reader.readAsDataURL(file); // 파일을 읽어와서 데이터 URL로 변환
+    }
+  };
+
+  // 이미지 업로드 함수
+  const uploadImage = async (img) => {
+    const formData = new FormData();
+    formData.append("image", img);
+    console.log(img);
+
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/image/uploadfile`,
+      {
+        method: "post",
+        // headers: {
+        //   "content-type": "multipart/form-data",
+        // },
+        body: formData,
+      }
+    );
+    const result = await response.json();
+    setProfileImg(result); // 서버에서 반환된 이미지 데이터 저장
+    return result;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await post(`${import.meta.env.VITE_API_URL}/user/accountnamevalid`, {
-      user: {
-        accountname: accountName,
-      },
-    });
+    console.log(profileImg);
+    const result = await post(
+      `${import.meta.env.VITE_API_URL}/user/accountnamevalid`,
+      {
+        user: {
+          accountname: accountName,
+        },
+      }
+    );
     console.log(result);
     if (result.payload?.message === "사용 가능한 계정ID 입니다.") {
       const result2 = await post(`${import.meta.env.VITE_API_URL}/user`, {
@@ -86,7 +169,7 @@ export default function AuthForm() {
           password: passwordValue,
           accountname: accountName,
           intro: intro,
-          image: "",
+          image: `${import.meta.env.VITE_API_URL}/${profileImg.filename}` || "",
         },
       });
       console.log(result2);
@@ -105,12 +188,24 @@ export default function AuthForm() {
     }
   };
 
-  if (loading) return <div>로딩 중...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>에러: {error}</div>;
 
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <div className={styles.profileEditMain}>
+          <div className={styles.profileEditImages}>
+            <img
+              className={styles.profileEditImg}
+              src={profileImagePreview}
+              alt="프로필 이미지"
+            />
+            <div className={styles.imageUploadWrapper}>
+              <ImageUploadButton onChange={handleImageChange} />
+            </div>
+          </div>
+        </div>
         <Input
           name="username"
           label="사용자 이름"
@@ -135,21 +230,26 @@ export default function AuthForm() {
           placeholder="자신을 소개해 주세요.!"
           onChange={handleIntroChange}
         />
-        <button
-          type="submit"
-          style={{ border: "1px solid black", margin: "10px" }}
-          disabled={
-            !!usernameError ||
-            !!accountNameError ||
-            !username ||
-            !accountName ||
-            !!introError ||
-            !intro ||
-            !!warningMessage
-          }
-        >
-          코드그램 시작하기
-        </button>
+        <div className={styles.btnContainer}>
+          <ButtonComponent
+            children="코드그램 바로가기"
+            disabled={
+              !!usernameError ||
+              !!accountNameError ||
+              !username ||
+              !accountName ||
+              !!introError ||
+              !intro ||
+              !!warningMessage
+            }
+            buttonType="loginType"
+            style={{
+              marginTop: "15px",
+              textAlign: "center",
+              padding: "13px 0",
+            }}
+          />
+        </div>
       </form>
     </>
   );

@@ -24,6 +24,10 @@ import SearchPage from "./pages/search/SearchPage";
 import ChatRoomPage from "./pages/chat/ChatRoomPage";
 import NotFound from "./pages/error/NotFound";
 import ProductCreatePage from "./pages/product/ProductCreatePage";
+import ProductEditPage from "./pages/product/ProductEditPage";
+import ScrollToTop from "./components/ui/ScrollToTop";
+import ProductDetailPage from "./pages/product/ProductDetailPage";
+import ProductListPage from "./pages/product/ProductListPage";
 
 function App() {
   const { isLoggedIn } = useAPI();
@@ -40,6 +44,7 @@ function App() {
   return (
     <Layout>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route
             path="/"
@@ -91,6 +96,10 @@ function App() {
             path="/profile/:accountname/followings"
             element={<Followings />}
           />
+          <Route path="/product/create" element={<ProductCreatePage />} />
+          <Route path="/product/edit/:id" element={<ProductEditPage />} />
+          <Route path="/product/detail/:id" element={<ProductDetailPage />} />
+          <Route path="/product/:accountname" element={<ProductListPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isLoggedIn && <BottomTab />}

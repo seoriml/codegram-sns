@@ -21,30 +21,44 @@
 
 .profileHeader {
   @include flex-center(row, space-between);
+  max-width: 480px;
   width: 100%;
   padding: 0 var(--side-padding-feed);
   height: 48px;
   border-bottom: 1px solid var(--color-element-gray);
+  background-color: var(--color-component-white);
+  transition: transform 0.2s ease;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+
   .leftGroup {
     display: flex;
     align-items: center;
-    gap: 36px;
+    gap: 30px;
     .logo {
       cursor: pointer;
     }
   }
 }
 
+.headerHidden {
+  transform: translateY(-100%); /* 헤더를 위로 숨기기 */
+}
+
 .profileTopSection {
   @include flex-center(row, space-between);
   gap: 20px;
+  padding-top: 50px;
 }
 
 .profileImage {
   width: 110px;
   height: 110px;
   border-radius: 50%;
+  border: 1px solid var(--color-element-gray);
   margin: 30px;
+  object-fit: cover;
 }
 
 .profileFollow {
@@ -57,7 +71,7 @@
   }
 
   .followingsCount {
-    @include count-style(var(--color-font-gray));
+    @include count-style(var(--color-font-black));
   }
 
   .label {
@@ -92,10 +106,22 @@
 .profileAction {
   @include flex-center(row, center);
   padding: 25px;
-
   .myProfileButton {
     display: flex;
     gap: 10px;
+  }
+  .profileType {
+    &:hover {
+      background-color: #ededed;
+      transform: scale(0.98);
+      border: none;
+    }
+  }
+  .followType {
+    &:hover {
+      background-color: #0077ff;
+      transform: scale(0.98);
+    }
   }
 }
 
@@ -105,11 +131,16 @@
   height: 44px;
   gap: 15px;
   padding: 9px 16px;
-  border: 1px solid var(--color-element-gray);
+  border-top: 1px solid var(--color-element-gray);
+  border-bottom: 1px solid var(--color-element-gray);
 
   img {
     width: 26px;
     height: 26px;
     cursor: pointer;
+    transition: transform 0.2s;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 }

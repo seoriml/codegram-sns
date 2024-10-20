@@ -3,17 +3,19 @@ import React, { useEffect, useState } from "react";
 import Input from "../../components/ui/Input";
 import useAPI from "../../hooks/useAPI";
 import { useNavigate } from "react-router-dom";
-import ProfileImagePlaceholder from "../../assets/images/user_profile.svg";
+import defaultProfileImage from "../../assets/images/user_profile.svg";
 import BackButton from "../../components/ui/button/BackButton";
 import ButtonComponent from "../../components/ui/Button";
 import ImageUploadButton from "../../components/ui/button/ImageUploadButton";
 import styles from "./ProfileEdit.module.scss";
+import { useDispatch } from "react-redux";
+import { setProfile, setSessionStorageData } from "../../redux/apiSlice";
 
 const ProfileEdit = () => {
   const [username, setUsername] = useState("");
   const [accountName, setAccountName] = useState("");
   const [intro, setIntro] = useState("");
-  const [profileImage, setProfileImage] = useState(ProfileImagePlaceholder);
+  const [profileImage, setProfileImage] = useState(defaultProfileImage);
   const [warningMessage, setWarningMessage] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [accountNameError, setAccountNameError] = useState("");
@@ -21,20 +23,17 @@ const ProfileEdit = () => {
 
   const { get, put, error, token } = useAPI();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // 현재 사용자 프로필 정보 가져오기
     const fetchProfile = async () => {
-      const response = await get(
-        `${import.meta.env.VITE_API_URL}/user/myinfo`,
-        "application/json",
-        token
-      );
+      const response = await get(`${import.meta.env.VITE_API_URL}/user/myinfo`, "application/json", token);
       const userData = response.payload.user;
       setUsername(userData.username);
       setAccountName(userData.accountname);
       setIntro(userData.intro);
-      setProfileImage(userData.image || ProfileImagePlaceholder); // 기존 프로필 이미지 가져오기
+      setProfileImage(userData.image || defaultProfileImage); // 기존 프로필 이미지 가져오기
     };
     fetchProfile();
   }, [get]);
@@ -75,7 +74,28 @@ const ProfileEdit = () => {
       const file = files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
-        setProfileImage(e.target.result); // 업로드한 이미지 미리보기 설정
+        const img = new Image();
+        img.src = e.target.result;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          // 이미지 크기 조정
+          const maxWidth = 300;
+          const maxHeight = 300;
+
+          // 가로, 세로 비율을 유지하면서 크기를 조정
+          const scaleSize = Math.min(maxWidth / img.width, maxHeight / img.height);
+          canvas.width = img.width * scaleSize;
+          canvas.height = img.height * scaleSize;
+
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          // 압축된 이미지 생성
+          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.7); // 압축 정도 0.7
+
+          setProfileImage(compressedDataUrl); // 압축된 이미지를 profileImage로 설정
+        };
       };
       reader.readAsDataURL(file); // 파일을 읽어와서 데이터 URL로 변환
     }
@@ -100,6 +120,9 @@ const ProfileEdit = () => {
     console.log(result);
 
     if (result.payload?.user) {
+      // 전역 상태에 사용자 프로필 데이터 업데이트
+      dispatch(setProfile(result?.payload?.user)); // 이 부분 나중에 전역데이터 수정하면 변경될듯
+      dispatch(setSessionStorageData(result?.payload));
       navigate("/profile", { replace: true });
     } else {
       setWarningMessage("*" + result.payload.message);
@@ -108,14 +131,21 @@ const ProfileEdit = () => {
 
   if (error) return <div>에러: {error}</div>;
 
+  const profileImageSrc =
+    profileImage === "http://146.56.183.55:5050/Ellipse.png" ||
+    profileImage === "https://estapi.mandarin.weniv.co.kr/undefined"
+      ? defaultProfileImage
+      : profileImage;
+
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.profileEditHeader}>
         <BackButton />
         <ButtonComponent
           onClick={handleSubmit}
-          buttonType="buttonPost"
+          buttonType="saveType"
           disabled={!username || !accountName || !intro}
+          className={styles.saveType}
         >
           저장
         </ButtonComponent>
@@ -123,11 +153,7 @@ const ProfileEdit = () => {
 
       <div className={styles.profileEditMain}>
         <div className={styles.profileEditImages}>
-          <img
-            className={styles.profileEditImg}
-            src={profileImage}
-            alt="프로필 이미지"
-          />
+          <img className={styles.profileEditImg} src={profileImageSrc} alt="프로필 이미지" />
           <div className={styles.imageUploadWrapper}>
             <ImageUploadButton onChange={handleImageChange} />
           </div>

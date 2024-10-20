@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, redirect } from "react-router-dom";
 import useAPI from "./../../hooks/useAPI";
 import { setCredentials } from "../../redux/apiSlice";
+import styles from "./LoginForm.module.scss";
+import ButtonComponent from "../ui/Button";
+import Loading from "../ui/Loading";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -58,10 +61,11 @@ export default function LoginForm() {
       navigate("/home");
     } else {
       setWarningMessage("*" + result.payload.message);
+      setPassword("");
     }
   };
 
-  if (loading) return <div>로딩 중...</div>;
+  if (loading) return <Loading />;
   if (error) return <div>에러: {error}</div>;
   return (
     <form onSubmit={handleSubmit} noValidate>
@@ -80,13 +84,18 @@ export default function LoginForm() {
         onChange={handlePasswordChange}
         onBlur={() => validatePassword(password)}
       />
-      <button
-        type="submit"
-        style={{ border: "1px solid black", margin: "10px" }}
-        disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
-      >
-        Login button
-      </button>
+      <div className={styles.btnContainer}>
+        <ButtonComponent
+          children="로그인"
+          disabled={!!emailError || !!passwordError || !email || !password || !!warningMessage}
+          buttonType="loginType"
+          style={{
+            marginTop: "15px",
+            textAlign: "center",
+            padding: "13px 0",
+          }}
+        />
+      </div>
     </form>
   );
 }

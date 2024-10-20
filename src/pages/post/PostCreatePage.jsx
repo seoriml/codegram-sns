@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import PostForm from "../../components/post/PostForm";
 import useAPI from "../../hooks/useAPI";
+import { useNavigate } from "react-router-dom";
 
 export default function PostCreatePage() {
   const { post, token } = useAPI();
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
+
+  const navigate = useNavigate();
 
   // 이미지 업로드 함수
   const uploadImages = async (images) => {
@@ -59,6 +62,8 @@ export default function PostCreatePage() {
       alert(`error: ${response.payload}`);
     } else {
       alert("게시글이 업로드되었습니다.");
+      const postId = response.payload.post.id;
+      navigate(`/detail/${postId}`);
     }
 
     setContent("");

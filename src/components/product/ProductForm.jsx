@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import BackButton from "../ui/button/BackButton";
 import ButtonComponent from "../ui/Button";
 import Input from "../ui/Input";
 import ImageUploadButton from "../ui/button/ImageUploadButton";
+import Styles from "./ProductForm.module.scss";
+import "../../assets/styles/common.scss";
+import inputStyles from "../ui/Input.module.scss";
+import useScrollHeader from "../../hooks/useScrollHeader";
 
 export default function ProductForm({
   onSubmit,
@@ -13,6 +17,8 @@ export default function ProductForm({
   link,
   setLink,
 }) {
+  const isVisible = useScrollHeader();
+
   // 이미지 파일 선택 함수
   const handleImageChange = (files) => {
     if (files && files[0]) {
@@ -22,72 +28,85 @@ export default function ProductForm({
   };
   // 이미지 미리보기 URL 생성 함수
   const imagePreviewUrl =
-    productImage instanceof File ? URL.createObjectURL(productImage) : null;
+    productImage instanceof File
+      ? URL.createObjectURL(productImage)
+      : `${import.meta.env.VITE_API_URL}/${productImage}`;
 
+  // 폼 유효성 검사 함수
+  const validateForm = () => {
+    if (!productImage) {
+      alert("대표 이미지를 업로드해주세요.");
+      return false;
+    }
+    if (!itemName.trim()) {
+      alert("사이트 이름을 입력해주세요.");
+      return false;
+    }
+    if (!link.trim()) {
+      alert("링크를 입력해주세요.");
+      return false;
+    }
+    if (!/^https?:\/\/\S+$/.test(link)) {
+      alert("유효한 URL을 입력해주세요.");
+      return false;
+    }
+    return true;
+  };
+
+  // 폼제출
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    onSubmit(e);
+  };
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <div>
-          <BackButton />
-          <ButtonComponent buttonType="buttonPost" type="submit">
-            저장
-          </ButtonComponent>
-        </div>
+    <form onSubmit={handleSubmit} className="paddingTopForHeader">
+      <header className={`${isVisible ? "header" : "headerHidden"}`}>
+        <BackButton />
+        <ButtonComponent
+          buttonType="saveType"
+          type="submit"
+          className={Styles.saveType}
+        >
+          저장
+        </ButtonComponent>
+      </header>
 
-        <div>
-          <div>
-            <label>대표 이미지 등록</label>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "204px",
-                background: "#ccc",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {imagePreviewUrl && ( // 이미지 미리보기를 위한 URL 사용
-                <img
-                  src={imagePreviewUrl}
-                  alt="대표 이미지"
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-              )}
-              <div
-                style={{
-                  position: "absolute",
-                  right: "10px",
-                  bottom: "10px",
-                }}
-              >
-                <ImageUploadButton onChange={handleImageChange} />
-              </div>
+      <div className={Styles.body}>
+        <>
+          <label className={inputStyles.inputLabel}>대표 이미지 등록</label>
+          <div className={Styles.imageWrapper}>
+            {imagePreviewUrl &&
+            imagePreviewUrl !== `${import.meta.env.VITE_API_URL}/null` ? (
+              <img src={imagePreviewUrl} alt="대표 이미지" />
+            ) : null}
+            <div className={Styles.imageUploadButton}>
+              <ImageUploadButton onChange={handleImageChange} />
             </div>
           </div>
+        </>
 
-          <Input
-            name="itemName"
-            label="사이트 이름"
-            type="text"
-            value={itemName}
-            onChange={(e) => setItemName(e.target.value)}
-          />
+        <Input
+          name="itemName"
+          label="사이트 이름"
+          type="text"
+          value={itemName}
+          placeholder="2~15자 이내여야 합니다."
+          onChange={(e) => setItemName(e.target.value)}
+          maxLength={15}
+        />
 
-          <Input
-            name="link"
-            label="등록할 링크"
-            type="url"
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-          />
-        </div>
-      </form>
-    </div>
+        <Input
+          name="link"
+          label="등록할 링크"
+          type="url"
+          value={link}
+          placeholder="URL을 입력해 주세요."
+          onChange={(e) => setLink(e.target.value)}
+        />
+      </div>
+    </form>
   );
 }

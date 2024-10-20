@@ -5,7 +5,8 @@ import defaultProfileIcon from "../../assets/images/user_profile.svg";
 
 const SearchResultItem = ({ user }) => {
   const profileImageSrc =
-    user.image === "http://146.56.183.55:5050/Ellipse.png"
+    user.image === "http://146.56.183.55:5050/Ellipse.png" ||
+    user.image === "https://estapi.mandarin.weniv.co.kr/undefined"
       ? defaultProfileIcon
       : user.image;
 

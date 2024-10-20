@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 500px;
+  margin-bottom: 16px;
   &::after {
     content: var(--warning-message);
     padding-top: 6px;
@@ -15,16 +16,20 @@
 .inputLabel {
   color: var(--color-font-gray);
   font-size: var(--font-size-detail);
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 .inputField {
   border: 0;
   border-bottom: 1px solid var(--color-element-gray);
   font-size: var(--font-size-regular);
-  padding-bottom: 9px;
+  padding-bottom: 8px;
   line-height: 14px;
   color: var(--color-font-black);
   &:focus {
     outline: 0;
   }
+}
+
+input::placeholder {
+  color: var(--color-element-gray);
 }

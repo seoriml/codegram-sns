@@ -5,6 +5,8 @@ import styles from "./PostForm.module.scss";
 import ButtonComponent from "../ui/Button";
 import removeIcon from "../../assets/images/icon_close.svg";
 import defaultProfileIcon from "../../assets/images/user_profile.svg";
+import "../../assets/styles/common.scss";
+import useScrollHeader from "../../hooks/useScrollHeader";
 
 const PostForm = ({
   onSubmit,
@@ -16,6 +18,8 @@ const PostForm = ({
   setPreviews,
   author,
 }) => {
+  const isVisible = useScrollHeader();
+
   // 게시글 내용 변경 함수
   const handleContentChange = (e) => {
     setContent(e.target.value);
@@ -63,18 +67,23 @@ const PostForm = ({
   };
 
   const profileImageSrc =
-    author?.image === "http://146.56.183.55:5050/Ellipse.png"
+    author?.image === "http://146.56.183.55:5050/Ellipse.png" ||
+    author?.image === "https://estapi.mandarin.weniv.co.kr/undefined"
       ? defaultProfileIcon
       : author?.image;
 
   return (
-    <form onSubmit={onSubmit}>
-      <div className={styles.header}>
+    <form onSubmit={onSubmit} className="paddingTopForHeader">
+      <header className={`${isVisible ? "header" : "headerHidden"}`}>
         <BackButton />
-        <ButtonComponent buttonType="buttonPost" type="submit">
+        <ButtonComponent
+          buttonType="saveType"
+          type="submit"
+          className={styles.saveType}
+        >
           업로드
         </ButtonComponent>
-      </div>
+      </header>
 
       <div className={styles.body}>
         {author && (
@@ -95,22 +104,24 @@ const PostForm = ({
             />
             {previewArray.length > 0 && (
               <>
-                {previewArray.map((preview, index) => (
-                  <div className={styles.previewWrapper} key={index}>
-                    <img
-                      src={preview}
-                      alt={`업로드 이미지 ${index + 1}`}
-                      className={styles.previewImages}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeImage(index)}
-                      className={styles.removeButton}
-                    >
-                      <img src={removeIcon} alt="이미지 삭제" />
-                    </button>
-                  </div>
-                ))}
+                <div className={styles.previewContainer}>
+                  {previewArray.map((preview, index) => (
+                    <div className={styles.previewWrapper} key={index}>
+                      <img
+                        src={preview}
+                        alt={`업로드 이미지 ${index + 1}`}
+                        className={styles.previewImages}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index)}
+                        className={styles.removeButton}
+                      >
+                        <img src={removeIcon} alt="이미지 삭제" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </>
             )}
           </div>
