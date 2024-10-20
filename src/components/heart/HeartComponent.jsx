@@ -4,10 +4,13 @@ import useAPI from "../../hooks/useAPI";
 import emptyHeart from "../../assets/images/icon_heart.svg";
 import fillHeart from "../../assets/images/icon_heart_fill.svg";
 
-// hearts: 초기 좋아요 수, hearted: 사용자의 초기 좋아요 상태
+// hearts: 초기 좋아요 수,
+// hearted: 사용자의 초기 좋아요 상태,
+// isProcessing: 요청 처리 중인지 확인하는 상태
 function HeartComponent({ hearts, postId, hearted }) {
   const [heartCount, setHeartCount] = useState(hearts);
   const [localHearted, setLocalHearted] = useState(hearted);
+  const [isProcessing, setIsProcessing] = useState(false);
   const { post, del } = useAPI();
   const token = localStorage.getItem("userToken");
 
@@ -19,6 +22,8 @@ function HeartComponent({ hearts, postId, hearted }) {
 
   // 좋아요
   const handleHeart = async () => {
+    if (isProcessing) return; // 이미 요청이 진행 중이면 중복 방지
+    setIsProcessing(true);    // 요청 시작
     const response = await post(
       `${import.meta.env.VITE_API_URL}/post/${postId}/heart`,
       "",
@@ -30,14 +35,16 @@ function HeartComponent({ hearts, postId, hearted }) {
       setLocalHearted(true);
       console.log("좋아요 성공", token, response);
     } catch (error) {
-      setHeartCount((prevHeartCount) => prevHeartCount - 1);
-      setLocalHearted(false);
       console.error("좋아요 API 요청 중 에러 발생:", error);
+    } finally {
+      setIsProcessing(false); // 요청 끝
     }
   };
 
   // 좋아요 취소
   const handleUnHeart = async () => {
+    if (isProcessing) return; // 이미 요청이 진행 중이면 중복 방지
+    setIsProcessing(true);    // 요청 시작
     const response = await del(
       `${import.meta.env.VITE_API_URL}/post/${postId}/unheart`,
       "application/json",
@@ -48,9 +55,9 @@ function HeartComponent({ hearts, postId, hearted }) {
       setLocalHearted(false);
       console.log("좋아요 취소 성공", token, response);
     } catch (error) {
-      setHeartCount((prevHeartCount) => prevHeartCount + 1);
-      setLocalHearted(true);
       console.error("좋아요 취소 API 요청 중 에러 발생:", error);
+    } finally {
+      setIsProcessing(false); // 요청 끝
     }
   };
 
