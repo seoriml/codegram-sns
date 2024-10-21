@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import FollowerList from "../../components/follower/FollowerList";
@@ -10,6 +10,7 @@ import styles from "../../components/follower/Follower.module.scss";
 const Followings = () => {
   const { accountname } = useParams();
   const { get, error, token, loading } = useAPI();
+  const [myAccountName, setMyAccountName] = useState(null);
   const LIMIT = 10;
 
   // 팔로잉 리스트 데이터를 가져오는 함수
@@ -26,6 +27,21 @@ const Followings = () => {
       nextSkip: pageParam + LIMIT,
     };
   };
+
+  // 내 계정명 가져오는 함수
+  useEffect(() => {
+    const fetchMyProfile = async () => {
+      const response = await get("/user/myinfo", token);
+      console.log("내 계정", response); // API 응답 확인
+
+      if (response && response.payload) {
+        setMyAccountName(response.payload.user.accountname); // 내 계정명 저장
+      } else {
+        console.error("내 계정 정보를 가져오는 데 실패했습니다: ", response);
+      }
+    };
+    fetchMyProfile();
+  }, [get, token]);
 
   // useInfiniteQuery로 무한 스크롤 구현
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
@@ -71,10 +87,12 @@ const Followings = () => {
         <BackButton />
         <h1 className={styles.followerName}>팔로잉</h1>
       </div>
-      {error ? (
-        <p className={styles.followerText}>해당 계정이 존재하지 않습니다.</p>
+      {!loading && error ? (
+        <p className={styles.followerText}>.</p>
       ) : (
-        followings.length > 0 && <FollowerList followers={followings} />
+        followings.length > 0 && (
+          <FollowerList followers={followings} myAccountName={myAccountName} />
+        )
       )}
       {isFetchingNextPage && <Loading />}
     </div>

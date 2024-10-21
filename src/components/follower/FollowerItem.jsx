@@ -5,7 +5,7 @@ import ButtonComponent from "../ui/Button";
 import styles from "./Follower.module.scss";
 import useAPI from "../../hooks/useAPI";
 
-const FollowerItem = ({ profile }) => {
+const FollowerItem = ({ profile, myAccountName }) => {
   const [isFollowed, setIsFollowed] = useState(profile.isfollow);
   const { token } = useAPI();
 
@@ -45,10 +45,12 @@ const FollowerItem = ({ profile }) => {
     }
   };
 
+  const isMyProfile = profile.accountname === myAccountName;
+
   return (
     <li className={styles.followerItem}>
       <Link
-        to={`/profile/${profile.accountname}`}
+        to={isMyProfile ? `/profile` : `/profile/${profile.accountname}`}
         className={styles.followerInfo}
       >
         <img
