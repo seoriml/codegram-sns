@@ -16,13 +16,13 @@ export const executeRequest = createAsyncThunk(
       }
       // console.log(options);
       const response = await fetch(url, options);
-      console.log(response);
+      // console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error.! status: ${response.status}`);
       }
       const result = await response.json();
 
-      console.log(result);
+      // console.log(result);
       return result;
     } catch (error) {
       console.error("API 요청 중 에러 발생:", error);
@@ -42,7 +42,6 @@ const apiSlice = createSlice({
     profileData: null, // 사용자 프로필 데이터
     feedData: null, // home 화면에 뜨는 전체 피드 데이터
     productData: null, // 상품 데이터
-    data: null,
   },
   reducers: {
     setCredentials: (state, action) => {
@@ -79,19 +78,15 @@ const apiSlice = createSlice({
         state.loading = false;
         state.error = null;
         if (action.payload?.user) {
-          state.data = action.payload;
           state.profileData = action.payload;
         }
         if (action.payload?.profile) {
-          state.data = action.payload;
           state.profileData = action.payload;
         }
         if (action.payload?.post) {
-          state.data = action.payload;
           state.feedData = action.payload;
         }
         if (action.payload?.product) {
-          state.data = action.payload;
           state.productData = action.payload;
         }
         if (action.payload?.user?.token) {

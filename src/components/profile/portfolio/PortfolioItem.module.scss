@@ -14,9 +14,15 @@
 .portfolioItemTitle {
   // padding: 0 0 4px 0;
   font-size: var(--font-size-regular);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .portfolioItemDescription {
   font-size: var(--font-size-detail);
-  color: var(--color-element-blue);
+  color: var(--color-font-gray);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

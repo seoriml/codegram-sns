@@ -73,7 +73,7 @@ export default function ProductDetailPage() {
           alert(`${response.payload.message || "상품 삭제에 실패했습니다."}`);
         }
       } else {
-        alert("삭제되었습니다.");
+        // alert("삭제되었습니다.");
         if (path.includes("detail")) {
           navigate(-1);
         } else {

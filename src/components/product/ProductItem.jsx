@@ -5,7 +5,7 @@ import useAPI from "../../hooks/useAPI";
 import defaultImage from "../../assets/images/user_profile.svg";
 import Loading from "../ui/Loading";
 
-export default function ProductItem({ itemImage, itemName, id }) {
+export default function ProductItem({ itemImage, itemName, id, link }) {
   const { token, loading } = useAPI();
 
   const [img, setImg] = useState("");
@@ -28,11 +28,9 @@ export default function ProductItem({ itemImage, itemName, id }) {
         <img src={img} alt={`${itemName} 썸네일`} className={styles.profileImg} />
         <div>
           <h3 className={styles.username}>{itemName}</h3>
+          <p className={styles.accountname}>{link}</p>
         </div>
       </Link>
     </li>
   );
-}
-{
-  /* <p className={styles.accountname}>@{profile.accountname}</p> */
 }

@@ -55,7 +55,7 @@ export default function LoginForm() {
         password: password,
       },
     });
-    console.log(result);
+    // console.log(result);
     if (result.payload?.user?.token) {
       dispatch(setCredentials(result.payload.user));
       navigate("/home");

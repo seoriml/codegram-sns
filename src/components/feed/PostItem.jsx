@@ -72,7 +72,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
           alert(`${response.payload.message || "게시글 삭제에 실패했습니다."}`);
         }
       } else {
-        alert("삭제되었습니다.");
+        // alert("삭제되었습니다.");
         if (path.includes("detail")) {
           navigate(-1);
         } else {
@@ -134,7 +134,6 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
       : post.author.image;
 
   const isMyPost =
-    sessionProfileData?.user?.username === post.author.username ||
     sessionProfileData?.user?.accountname === post.author.accountname;
 
   return (
