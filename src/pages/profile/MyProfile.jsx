@@ -15,7 +15,7 @@ export default function MyProfile() {
   return (
     <div>
       <ProfileInfo accountname={myAccountName} isMyProfile={true} onProfileLoad={handleProfileLoad} />
-      <Portfolio accountname={myAccountName} />
+      <Portfolio accountname={myAccountName} isMyProfile={true} />
       {myAccountName && <ProfileTabs accountname={myAccountName} />}
     </div>
   );
