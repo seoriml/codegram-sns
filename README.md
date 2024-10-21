@@ -1,5 +1,5 @@
 # 👨‍💻코드그램(CodeGram)👩‍💻
-<img src="https://estapi.mandarin.weniv.co.kr/1729476095754.jpg" width=1000 height=600 alt="코드그램 메인배경" />
+<img src="https://ibb.co/7NdYVh5" width=1000 height=600 alt="코드그램 메인배경" />
 
 <br />
 
@@ -71,23 +71,25 @@ CodeGram은 개발자들이 작업물과 프로젝트를 공유하고, 다양한
   - 이미지 업로드 기능
 - **그 외**
   - 팀 회의록 작성
-  - 코드그램 로고 제작
+  - 보고서 작성 (프로젝트 수행 결과, 자체평가의견)
+  - 코드그램 로고 수정, 로그인/회원가입 디자인 개선
 
 <br>
 
 ### 👩‍💻 이다빈(팀원)
 - **UI**
   - 페이지
-    - 코드봇 채팅방/채팅폼 스타일링
     - 404 페이지
-    - CSS 전역 변수정의
   - 공통 컴포넌트
     - 버튼 컴포넌트
     - 로딩 컴포넌트
+  - 스타일링
+    - 챗봇 스타일링
+    - CSS 전역 변수정의
 - **기능**
   - 좋아요/좋아요 취소 토글
 - **그 외**
-  - Figma 페이지 디자인
+  - Figma 페이지 디자인 개선
   - 코드그램 로고 제작
   - Readme 작성
 
@@ -110,6 +112,7 @@ CodeGram은 개발자들이 작업물과 프로젝트를 공유하고, 다양한
   - Vertical 메뉴 버튼
 - **그 외**
   - Jira 일정관리 세팅
+  - 보고서 작성 (프로젝트 개요, 팀구성 및 역할, 수행절차 및 방법)
 
 <br>
 
@@ -208,6 +211,7 @@ CodeGram은 개발자들이 작업물과 프로젝트를 공유하고, 다양한
 <img src="https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white" alt="Jira" />
 
 - [**Jira**](https://codegram.atlassian.net/jira/core/projects/CODE/board) : 프로젝트 관리 및 일정관리
+- **회의록** : https://codegram.atlassian.net/wiki/spaces/KB/overview
 
 <img src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white" alt="Figma" />
 
