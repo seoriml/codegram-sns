@@ -65,6 +65,7 @@ const apiSlice = createSlice({
     },
     setSessionStorageData: (state, action) => {
       sessionStorage.setItem("myAccountname", action.payload.user.accountname);
+      sessionStorage.setItem("MyProfileImage", action.payload.user.image);
       state.loginData = action.payload.user;
     },
   },
@@ -93,6 +94,7 @@ const apiSlice = createSlice({
           state.loginData = action.payload.user;
           state.profileData = action.payload;
           sessionStorage.setItem("myAccountname", action.payload.user.accountname);
+          sessionStorage.setItem("MyProfileImage", action.payload.user.image);
         }
       })
       .addCase(executeRequest.rejected, (state, action) => {
