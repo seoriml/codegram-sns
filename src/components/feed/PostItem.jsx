@@ -40,17 +40,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const profileData = useSelector((state) => state.api.profileData);
-
-  useEffect(() => {
-    if (profileData) {
-      sessionStorage.setItem("sessionProfileData", JSON.stringify(profileData));
-    }
-  }, [profileData]);
-
-  const sessionProfileData = JSON.parse(
-    sessionStorage.getItem("sessionProfileData")
-  );
+  const sessionMyAccountname = sessionStorage.getItem("myAccountname");
 
   // 게시글 삭제 함수
   const handleDelete = async () => {
@@ -133,8 +123,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
       ? defaultProfileIcon
       : post.author.image;
 
-  const isMyPost =
-    sessionProfileData?.user?.accountname === post.author.accountname;
+  const isMyPost = sessionMyAccountname === post.author.accountname;
 
   return (
     <>
