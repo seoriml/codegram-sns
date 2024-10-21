@@ -8,11 +8,13 @@
 팔로우/팔로잉 기능을 통해 관심 있는 개발자를 구독하고, 게시글에 답글을 달거나 좋아요를 누르며 상호작용할 수 있습니다.
 <br />
 
+
 ## 팀원 구성
 | **이서림** | **이다빈** | **윤혜림** | **양현우** |
 | :------: |  :------: | :------: | :------: |
-| [<img src="https://ifh.cc/g/X8zsd1.png" width=150 height=150> <br/>@seoriml](https://github.com/seoriml) |[<img src="https://ifh.cc/g/nryplm.jpg" width=150 height=150> <br/> @Yeon-seong](https://github.com/Yeon-seong) |[<img src="https://ifh.cc/g/X8zsd1.png" width=150 height=150> <br/> @lia006](https://github.com/lia006) |[<img src="https://ifh.cc/g/X8zsd1.png" width=150 height=150> <br/> @yhwoooo](https://github.com/yhwoooo) |
+| [<img src="https://ifh.cc/g/X8zsd1.png" width=150 height=150> <br/>@seoriml](https://github.com/seoriml) |[<img src="https://ifh.cc/g/nryplm.jpg" width=150 height=150> <br/> @Yeon-seong](https://github.com/Yeon-seong) |[<img src="https://ifh.cc/g/X8zsd1.png" width=150 height=150> <br/> @lia006](https://github.com/lia006) |[<img src="https://ifh.cc/g/FPGGzr.jpg" width=150 height=150> <br/> @yhwoooo](https://github.com/yhwoooo) |
 <br />
+
 
 ## 목차
 - [개요](#개요)
@@ -22,84 +24,76 @@
 - [프로젝트 후기](#프로젝트-후기)
 <br />
 
+
 ## 개요
 - 프로젝트 이름: [코드그램(Codegram)](https://codegram-sns.vercel.app/)
 - 프로젝트 기간: 2024.09.23 - 2024.10.22
 - 프로젝트 일정 관리 : Jira
-- 멤버: 이서림, 이다빈, 윤혜림, 양현우
-- 개발 언어
-  <!-- HTML5 아이콘 배지 -->
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
-  <!-- CSS3 아이콘 배지 -->
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
-  <!-- JavaScript 아이콘 배지 -->
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/>
-  <!-- React.js 아이콘 배지 -->
-  <img src="https://img.shields.io/badge/React.js-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/><br>
-  <!-- Redux 아이콘 배지 -->
-  <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white" />
-  <!-- Sass 아이콘 배지 -->
-  <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=Sass&logoColor=white" />
-  <!-- Node.js 아이콘 배지 -->
-  <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white"/>
-  <!-- Vite 아이콘 배지 -->
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white" />
-
-<!-- ## 명명 규칙
-변수 및 함수 클래스
-- 변수: camelCase (예: userName, postCount)
-- 함수: camelCase (예: fetchUserData, handleSubmit)
-- 클래스 및 ID: camelCase
-### 상수
-- UPPER_SNAKE_CASE (예: MAX_LENGTH, API_URL) -->
 
 
+## 1. 개발 환경
+### 프론트엔드(Front end)
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
+<img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=Sass&logoColor=white" />
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/>
 
+* HTML : 웹페이지의 구조와 콘텐츠를 배치,
+* CSS : 웹 페이지의 색상, 폰트 스타일, 레이아웃, 애니메이션 등 모든 시각적인 요소를 제어.
+* SASS : CSS의 유지보수성과 재사용성을 높이기 위해 SCSS문법을 채택하여 스타일 관리.<br>
+* JavaScript : 사용자와의 상호작용을 가능하게 하는 웹 페이지의 동작을 구현.
+<br>
 
-<!-- ## 컴포넌트 구성
-UI 컴포넌트
-- Button: 여러 유형의 버튼을 위한 공통 컴포넌트
-- Modal: 모달 공통 컴포넌트
-- Input: 텍스트 입력, 체크박스, 라디오 버튼 공통 컴포넌트
-- Loading: 페이지 로딩 시 나타나는 로딩 컴포넌트
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white" />
+<img src="https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white"/>
 
-### 폼 컴포넌트
-- LoginForm: 로그인 입력 필드 및 버튼
-- SignupForm: 회원가입 입력 필드 및 버튼
-- PostForm: 게시글 작성을 위한 입력 필드 및 버튼
+* React : 컴포넌트 기반 구조로 UI를 모듈화하고 효율적으로 관리.<br>
+* Redux Toolkit : 전역 상태 관리 및 API 호출 간소화.<br>
+* React Query : 피드 데이터 패칭 및 무한 스크롤 구현.<br>
 
+### 백엔드(Back end)
+<img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white"/>
 
-### 페이지별 컴포넌트
-각 페이지에 필요한 컴포넌트를 별도의 폴더로 구성하여 관련 기능을 묶음.
+* Node.js : 브라우저 내에서 말고도 다른 환경에서 JavaScript를 실행.
+* API : 제공된 RESTful API 활용.
 
-### 재사용 가능한 훅
-useAPI: API 호출 관리 훅 (fetch와 async/await를 사용하여 API를 관리하는 훅)
-useModal: 모달 상태 관리를 위한 훅
+### 서비스 배포 환경
+<img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=Vite&logoColor=white" />
+<img src="https://img.shields.io/badge/Vercel-20232A?style=for-the-badge&logo=Vercel&logoColor=61DAFB"/>
 
-## API 호출 규칙
-훅을 통해 API 호출의 로직을 중앙에서 관리
-로딩 상태 및 오류 처리를 통일
-컴포넌트는 훅을 호출하여 필요한 API 데이터를 손쉽게 가져도록 함
+* Vite : 프로젝트 초기 설정과 빠른 개발 환경 구축.<br>
+* Vercel : GitHub와 연동해 코드 변경 시 자동 배포.<br>
 
-## 브랜치 전략
-main 브랜치: 배포 가능한 안정 버전이 포함된 브랜치.
-develop 브랜치: 기능 개발이 끝나면 이 브랜치에 병합.
-기능별 브랜치: 새로운 기능을 추가할 때마다 feature/기능이름 브랜치를 생성해 작업.
+### 협업 환경
+<img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" />
 
-## 코드 리뷰 및 병합 프로세스
-모든 팀원은 개발 브랜치에서 기능별로 자신이 작업한 부분을 pull request (PR)로 제출
-팀원 전원이 해당 PR을 검토하고 문제가 없을 시 승인
-승인된 PR은 develop 브랜치에 병합하여 통합 테스트 진행
-테스트 완료 후 main 브랜치에 병합하여 실제 배포 -->
+- 버전 및 이슈관리 : Github, Github Pull requests
+
+<img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white" />
+
+- 협업 툴 : Discord
+
+<img src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=whit" />
+
+- 디자인 : [Figma](https://www.figma.com/design/BOWqiGyimXDKi3oSwytrxU/%EC%BD%94%EB%93%9C%EA%B7%B8%EB%9E%A8?node-id=113664-1337&node-type=frame&t=KHXfPMLzz9staN7z-0)
+
 <br />
 
-## 개발 환경
+- [커밋 컨벤션]()
+- [코드 컨벤션]()
 <br />
 
 ## 채택한 개발 기술과 브랜치 전략
 <br />
 
+
+
 ## 타입 리스트
+<details>
+<summary>타입 리스트 토글 접기/펼치기</summary>
+<div markdown="1">
+
 ```
 → feat: 기능 개발
 → fix: 버그 수정
@@ -115,9 +109,14 @@ develop 브랜치: 기능 개발이 끝나면 이 브랜치에 병합.
 → rename: 파일 혹은 폴더명을 수정하거나 옮기는 작업만 한 경우
 → remove: 파일을 삭제하는 작업만 수행한 경우
 ```
+</div>
+</details>
 <br />
 
 ## 프로젝트 폴더구조
+<details>
+<summary>프로젝트 폴더구조 타입 리스트 토글 접기/펼치기</summary>
+<div markdown="1">
 ```
 ┌ codegram-sns(Root)
 ├ 📂.git
@@ -308,35 +307,46 @@ develop 브랜치: 기능 개발이 끝나면 이 브랜치에 병합.
 ├── vercel.json
 └━━ vite.config.js
 ```
+</div>
+</details>
 <br />
 
 ## 역할 분담
 
 ### 👩‍💻 이서림
 - **UI**
-  -
-  -
+-
+-
 - **기능**
-  -
-  -
+-
+-
+- **그 외**
+-
+-
 <br>
 
 ### 👩‍💻 이다빈
 - **UI**
-  -
-  -
+-
+-
 - **기능**
-  -
-  -
+-
+-
+- **그 외**
+-
+-
 <br>
 
 ### 👩‍💻 윤혜림
 - **UI**
-  -
-  -
+-
+-
 - **기능**
-  -
-  -
+-
+-
+- **그 외**
+-
+-
 <br>
 
 ### 👨‍💻 양현우
@@ -346,6 +356,9 @@ develop 브랜치: 기능 개발이 끝나면 이 브랜치에 병합.
 - **기능**
   -
   -
+- **그 외**
+-
+-
 <br>
 
 ## 개발 기간 및 작업 관리
