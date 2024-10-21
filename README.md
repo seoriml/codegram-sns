@@ -211,7 +211,6 @@ CodeGram은 개발자들이 작업물과 프로젝트를 공유하고, 다양한
 <img src="https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white" alt="Jira" />
 
 - [**Jira**](https://codegram.atlassian.net/jira/core/projects/CODE/board) : 프로젝트 관리 및 일정관리
-- **회의록** : https://codegram.atlassian.net/wiki/spaces/KB/overview
 
 <img src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white" alt="Figma" />
 
@@ -679,3 +678,8 @@ feature/login과 같이 타입과 기능을 나타내는 짧고 명확한 이름
 ### 👨‍💻 양현우
 
 <br>
+
+### 회의록
+[회의록]([https://github.com/seoriml/codegram-sns/wiki/2024-09-19-%ED%9A%8C%EC%9D%98%EB%A1%9D](https://github.com/seoriml/codegram-sns/wiki/2024%E2%80%9009%E2%80%9019-%ED%9A%8C%EC%9D%98%EB%A1%9D))
+
+
