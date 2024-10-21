@@ -32,14 +32,16 @@ const timeAgo = (date) => {
 export default function CommentList({ postId }) {
   const dispatch = useDispatch();
   const profileData = useSelector((state) => state.api.profileData);
-
   useEffect(() => {
     if (profileData) {
       sessionStorage.setItem("sessionProfileData", JSON.stringify(profileData));
     }
   }, [profileData]);
 
-  const sessionProfileData = JSON.parse(sessionStorage.getItem("sessionProfileData"));
+  const sessionProfileData = JSON.parse(
+    sessionStorage.getItem("sessionProfileData")
+  );
+  const sessionMyAccountname = sessionStorage.getItem("myAccountname");
 
   const { get, post, del, token, loading } = useAPI();
   const [comments, setComments] = useState([]);
@@ -167,7 +169,8 @@ export default function CommentList({ postId }) {
           data.pages
             .flatMap((page) => page.comments)
             .map((comment) => {
-              const isMyComment = sessionProfileData?.user?.accountname === comment.author.accountname;
+              const isMyComment =
+                sessionMyAccountname === comment.author.accountname;
 
               return (
                 <li key={comment.id} className={styles.commentItem}>
