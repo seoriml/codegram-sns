@@ -10,7 +10,7 @@ export default function YourProfile() {
   return (
     <div>
       <ProfileInfo isMyProfile={false} accountname={accountname} />
-      <Portfolio accountname={accountname} />
+      <Portfolio accountname={accountname} isMyProfile={false} />
       <ProfileTabs accountname={accountname} />
     </div>
   );
