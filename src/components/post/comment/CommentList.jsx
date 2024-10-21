@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import useAPI from "../../../hooks/useAPI";
-import { setCommentCount, incrementCommentCount, decrementCommentCount } from "../../../redux/commentSlice";
+import {
+  setCommentCount,
+  incrementCommentCount,
+  decrementCommentCount,
+} from "../../../redux/commentSlice";
 import { openOptionsModal } from "../../../redux/optionsModalSlice";
 import OptionsModal from "../../ui/modal/OptionsModal";
 import defaultProfileIcon from "../../../assets/images/user_profile.svg";
@@ -39,7 +43,9 @@ export default function CommentList({ postId }) {
     }
   }, [profileData]);
 
-  const sessionProfileData = JSON.parse(sessionStorage.getItem("sessionProfileData"));
+  const sessionProfileData = JSON.parse(
+    sessionStorage.getItem("sessionProfileData")
+  );
 
   const { get, post, del, token, loading } = useAPI();
   const [comments, setComments] = useState([]);
@@ -50,7 +56,9 @@ export default function CommentList({ postId }) {
   // 댓글 목록 불러오기
   const getCommentsList = async ({ pageParam = 0 }) => {
     const response = await get(
-      `${import.meta.env.VITE_API_URL}/post/${postId}/comments/?limit=${LIMIT}&skip=${pageParam}`,
+      `${
+        import.meta.env.VITE_API_URL
+      }/post/${postId}/comments/?limit=${LIMIT}&skip=${pageParam}`,
       "application/json",
       token
     );
@@ -66,19 +74,21 @@ export default function CommentList({ postId }) {
   };
 
   // useInfiniteQuery를 사용하여 댓글 목록 불러오기
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({
-    queryKey: ["comments", postId],
-    queryFn: getCommentsList,
-    getNextPageParam: (lastPage) => {
-      return lastPage.comments.length < LIMIT ? undefined : lastPage.nextSkip;
-    },
-  });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
+    useInfiniteQuery({
+      queryKey: ["comments", postId],
+      queryFn: getCommentsList,
+      getNextPageParam: (lastPage) => {
+        return lastPage.comments.length < LIMIT ? undefined : lastPage.nextSkip;
+      },
+    });
 
   // 스크롤 이벤트로 무한 스크롤 감지
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100 &&
+        window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight - 100 &&
         hasNextPage &&
         !isFetchingNextPage
       ) {
@@ -126,11 +136,13 @@ export default function CommentList({ postId }) {
     );
 
     if (response && response.payload.status === "200") {
-      const updatedComments = comments.filter((comment) => comment.id !== commentId);
+      const updatedComments = comments.filter(
+        (comment) => comment.id !== commentId
+      );
       setComments(updatedComments);
       dispatch(decrementCommentCount(postId));
       refetch();
-      console.log("댓글이 삭제되었습니다.");
+      alert("댓글이 삭제되었습니다.");
     } else {
       alert("댓글 삭제에 실패했습니다.");
     }
@@ -168,16 +180,20 @@ export default function CommentList({ postId }) {
             .flatMap((page) => page.comments)
             .map((comment) => {
               const isMyComment =
-                sessionProfileData?.user?.username === comment.author.username ||
-                sessionProfileData?.user?.accountname === comment.author.accountname;
+                sessionProfileData?.user?.username ===
+                  comment.author.username ||
+                sessionProfileData?.user?.accountname ===
+                  comment.author.accountname;
 
               return (
                 <li key={comment.id} className={styles.commentItem}>
                   <img
                     className={styles.profileImg}
                     src={
-                      comment.author.image === "http://146.56.183.55:5050/Ellipse.png" ||
-                      comment.author.image === "https://estapi.mandarin.weniv.co.kr/undefined"
+                      comment.author.image ===
+                        "http://146.56.183.55:5050/Ellipse.png" ||
+                      comment.author.image ===
+                        "https://estapi.mandarin.weniv.co.kr/undefined"
                         ? defaultProfileIcon
                         : comment.author.image
                     }
@@ -190,7 +206,9 @@ export default function CommentList({ postId }) {
                         <time>{timeAgo(comment.createdAt)}</time>
                       </div>
                       {isMyComment && (
-                        <button onClick={() => handleOpenOptionsModal(comment.id)}>
+                        <button
+                          onClick={() => handleOpenOptionsModal(comment.id)}
+                        >
                           <img src={moreIcon} alt="더보기" />
                         </button>
                       )}
@@ -211,8 +229,11 @@ export default function CommentList({ postId }) {
         <img
           className={styles.profileImg}
           src={
-            sessionProfileData?.user?.image === "http://146.56.183.55:5050/Ellipse.png" ||
-            sessionProfileData?.user?.image === "https://estapi.mandarin.weniv.co.kr/undefined"
+            !sessionProfileData?.user?.image ||
+            sessionProfileData?.user?.image ===
+              "http://146.56.183.55:5050/Ellipse.png" ||
+            sessionProfileData?.user?.image ===
+              "https://estapi.mandarin.weniv.co.kr/undefined"
               ? defaultProfileIcon
               : sessionProfileData?.user?.image
           }
@@ -227,13 +248,17 @@ export default function CommentList({ postId }) {
         <button
           onClick={handleAddComment}
           style={{
-            color: newComment ? "var(--color-element-blue)" : "var(--color-element-gray)",
+            color: newComment
+              ? "var(--color-element-blue)"
+              : "var(--color-element-gray)",
           }}
         >
           게시
         </button>
       </div>
-      {isCommentModalOpen && <OptionsModal actionHandlers={actionHandlersOptions} />}
+      {isCommentModalOpen && (
+        <OptionsModal actionHandlers={actionHandlersOptions} />
+      )}
     </>
   );
 }
