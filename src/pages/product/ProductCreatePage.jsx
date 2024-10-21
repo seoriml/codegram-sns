@@ -37,13 +37,10 @@ export default function ProductCreatePage() {
     const formData = new FormData();
     formData.append("image", productImage);
 
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/image/uploadfile`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/image/uploadfile`, {
+      method: "POST",
+      body: formData,
+    });
     const json = await response.json();
     setProductImage(json.filename);
     return json.filename;
@@ -73,9 +70,9 @@ export default function ProductCreatePage() {
     );
 
     if (response.meta.rejectedWithValue) {
-      console.log(`error: ${response.payload}`);
+      // console.log(`error: ${response.payload}`);
     } else {
-      alert("링크가 등록되었습니다.");
+      // alert("링크가 등록되었습니다.");
       setItemName("");
       setLink("");
       setProductImage(null);

@@ -24,29 +24,10 @@ export default function Feed() {
   const [selectedPost, setSelectedPost] = useState(null);
   const isVisible = useScrollHeader();
 
-  // 테스트용 팔로우함수
-  // const follow = async () => {
-  //   const testUserId = "String2";
-
-  //   const response = await post(
-  //     ${import.meta.env.VITE_API_URL}/profile/${testUserId}/follow,
-  //     "application/json",
-  //     token
-  //   );
-
-  //   if (response.meta?.rejectedWithValue) {
-  //     console.error(Error following: ${response.payload});
-  //   } else {
-  //     console.log("팔로우 되었습니다.");
-  //   }
-  // };
-
   // 피드 데이터를 불러오는 함수
   const fetchFeed = async ({ pageParam = 0 }) => {
     const response = await get(
-      `${
-        import.meta.env.VITE_API_URL
-      }/post/feed?limit=${LIMIT}&skip=${pageParam}`,
+      `${import.meta.env.VITE_API_URL}/post/feed?limit=${LIMIT}&skip=${pageParam}`,
       "application/json",
       token
     );
@@ -57,16 +38,15 @@ export default function Feed() {
   };
 
   // useInfiniteQuery를 사용한 무한 스크롤
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ["feed"], // 쿼리식별키
-      queryFn: fetchFeed, // 데이터를 가져오는 함수
-      getNextPageParam: (lastPage) => {
-        // 다음페이지를 불러오기위한 조건 설정
-        // 마지막 페이지의 posts 배열이 LIMIT보다 작으면 undefined, 아니면 nextSkip으로 다음페이지 불러옴.
-        return lastPage.posts.length < LIMIT ? undefined : lastPage.nextSkip;
-      },
-    });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+    queryKey: ["feed"], // 쿼리식별키
+    queryFn: fetchFeed, // 데이터를 가져오는 함수
+    getNextPageParam: (lastPage) => {
+      // 다음페이지를 불러오기위한 조건 설정
+      // 마지막 페이지의 posts 배열이 LIMIT보다 작으면 undefined, 아니면 nextSkip으로 다음페이지 불러옴.
+      return lastPage.posts.length < LIMIT ? undefined : lastPage.nextSkip;
+    },
+  });
 
   //댓글 수 업데이트
   useEffect(() => {
@@ -74,9 +54,7 @@ export default function Feed() {
       data.pages.forEach((page) => {
         page.posts.forEach((post) => {
           if (commentCounts[post.id] !== post.comments.length) {
-            dispatch(
-              setCommentCount({ postId: post.id, count: post.comments.length })
-            );
+            dispatch(setCommentCount({ postId: post.id, count: post.comments.length }));
           }
         });
       });
@@ -87,8 +65,7 @@ export default function Feed() {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + window.scrollY >=
-          document.documentElement.scrollHeight - 100 &&
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100 &&
         hasNextPage &&
         !isFetchingNextPage
       ) {

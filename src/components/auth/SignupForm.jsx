@@ -64,7 +64,7 @@ export default function SignupForm() {
         email: email,
       },
     });
-    console.log(result);
+    // console.log(result);
     if (result.payload?.message === "사용 가능한 이메일 입니다.") {
       dispatch(updateValidState({ name: "emailValid", value: true, name2: "passwordValid", value2: true }));
       dispatch(updateValidState({ name: "emailValue", value: email, name2: "passwordValue", value2: password }));

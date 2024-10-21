@@ -16,17 +16,11 @@ export default function PostEditPage() {
 
   // 게시물 상세 정보 가져오기 함수
   const getPostDetail = async () => {
-    const response = await get(
-      `${import.meta.env.VITE_API_URL}/post/${id}`,
-      "application/json",
-      token
-    );
+    const response = await get(`${import.meta.env.VITE_API_URL}/post/${id}`, "application/json", token);
 
     setContent(response.payload.post.content);
     const postImages = response.payload.post.image.split(",").map((img) => {
-      return img.startsWith("http")
-        ? img
-        : `${import.meta.env.VITE_API_URL}/${img}`;
+      return img.startsWith("http") ? img : `${import.meta.env.VITE_API_URL}/${img}`;
     });
     setImages(postImages);
     setPreviews(postImages);
@@ -49,13 +43,10 @@ export default function PostEditPage() {
       formData.append("image", image);
     });
 
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/image/uploadfiles`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/image/uploadfiles`, {
+      method: "POST",
+      body: formData,
+    });
     const json = await response.json();
     return json.map((img) => img.filename).join(",") || "";
   };
@@ -80,9 +71,7 @@ export default function PostEditPage() {
       newImageString = await uploadImages(newImages);
     }
 
-    const imageString = [...existingImages, ...newImageString.split(",")]
-      .filter(Boolean)
-      .join(",");
+    const imageString = [...existingImages, ...newImageString.split(",")].filter(Boolean).join(",");
 
     const response = await put(
       `${import.meta.env.VITE_API_URL}/post/${id}`,
@@ -106,7 +95,7 @@ export default function PostEditPage() {
         alert(`${response.payload.message || "게시글 수정에 실패했습니다."}`);
       }
     } else {
-      alert("수정되었습니다.");
+      // alert("수정되었습니다.");
       navigate(`/detail/${id}`);
     }
   };

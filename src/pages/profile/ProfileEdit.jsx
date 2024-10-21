@@ -117,7 +117,7 @@ const ProfileEdit = () => {
       token
     );
 
-    console.log(result);
+    // console.log(result);
 
     if (result.payload?.user) {
       // 전역 상태에 사용자 프로필 데이터 업데이트
