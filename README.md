@@ -1,5 +1,5 @@
 # 👨‍💻코드그램(CodeGram)👩‍💻
-<img src="https://i.ibb.co/tPTmcRt/2024-10-21-224957.png" width=1000 height=600 alt="코드그램 메인배경" />
+<img src="https://i.ibb.co/tPTmcRt/2024-10-21-224957.png" alt="코드그램 메인배경" />
 
 <br />
 
