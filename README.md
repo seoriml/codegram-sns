@@ -679,7 +679,7 @@ feature/login과 같이 타입과 기능을 나타내는 짧고 명확한 이름
 
 <br>
 
-### 회의록
+## 회의록
 
 [회의록](https://github.com/seoriml/codegram-sns/wiki/2024%E2%80%9009%E2%80%9019-%ED%9A%8C%EC%9D%98%EB%A1%9D)
 
