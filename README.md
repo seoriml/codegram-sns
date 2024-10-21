@@ -1,4 +1,5 @@
 # CodeGram 💬
+[]()
 - 배포 URL : https://codegram-sns.vercel.app
 - 테스트 Email : codegram@codegram.com
 - 테스트 Password : codegram
@@ -97,19 +98,19 @@
 <div markdown="1">
 
 ```
-─→ feat: 기능 개발
-─→ fix: 버그 수정
-─→ refactor: 리팩토링
-─→ design: CSS 등 사용자 UI 디자인 변경
-─→ comment: 필요한 주석 추가 및 변경
-─→ style: 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)
-─→ docs: 문서 수정 (문서 추가, 수정, 삭제, README)
-─→ test: 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)
-─→ test: 테스트 코드 추가/수정
-─→ chore : 기타 변경사항 (빌드 스크립트 수정, assets, 패키지 매니저 등)
-─→ init: 초기 파일 생성
-─→ rename: 파일 혹은 폴더명을 수정하거나 옮기는 작업만 한 경우
-─→ remove: 파일을 삭제하는 작업만 수행한 경우
+→ feat: 기능 개발
+→ fix: 버그 수정
+→ refactor: 리팩토링
+→ design: CSS 등 사용자 UI 디자인 변경
+→ comment: 필요한 주석 추가 및 변경
+→ style: 스타일 (코드 형식, 세미콜론 추가: 비즈니스 로직에 변경 없음)
+→ docs: 문서 수정 (문서 추가, 수정, 삭제, README)
+→ test: 테스트 (테스트 코드 추가, 수정, 삭제: 비즈니스 로직에 변경 없음)
+→ test: 테스트 코드 추가/수정
+→ chore : 기타 변경사항 (빌드 스크립트 수정, assets, 패키지 매니저 등)
+→ init: 초기 파일 생성
+→ rename: 파일 혹은 폴더명을 수정하거나 옮기는 작업만 한 경우
+→ remove: 파일을 삭제하는 작업만 수행한 경우
 ```
 </div>
 </details>
@@ -129,14 +130,15 @@
 
 ```
 ┌ codegram-sns(Root)
-├ 📂.git
-├ 📂public
+│ │ ├ 📂auth        # 인증 컴포넌트(로그인, 회원가입)
+├ 📂.git            # git이 관리
+├ 📂public          # 전역에서 사용할 파일
 │ ├── favicon.ico
 │ ├── loading.gif
 │ └── vite.svg
 ├ 📂src
-│ ├ 📂assets
-│ │ ├ 📂images
+│ ├ 📂assets        # 컴포넌트 내에서만 사용할 파일
+│ │ ├ 📂images      # 이미지 파일
 │ │ │ ├── chat_profile.svg
 │ │ │ ├── codegram_logo_title_white.svg
 │ │ │ ├── file_upload_button.svg
@@ -176,7 +178,7 @@
 │ │ └ 📂styles
 │ │ │ └── common.scss
 │ ├ 📂components
-│ │ ├ 📂auth
+│ │ ├ 📂auth            # 인증 컴포넌트(로그인, 회원가입)
 │ │ │ ├── AuthForm.jsx
 │ │ │ ├── AuthForm.module.scss
 │ │ │ ├── AuthHeader.jsx
@@ -184,38 +186,39 @@
 │ │ │ ├── LoginForm.module.scss
 │ │ │ ├── RedirectIfAuthenticated.jsx
 │ │ │ └── SignupForm.jsx
-│ │ ├ 📂chat
+│ │ ├ 📂chat                    # 채팅봇 컴포넌트
 │ │ │ ├── ChatForm.jsx
 │ │ │ └── ChatForm.module.scss
-│ │ ├ 📂feed
+│ │ ├ 📂feed                    # 피드 컴포넌트
 │ │ │ ├── EmptyFeed.jsx
 │ │ │ ├── PostFeed.jsx
 │ │ │ ├── PostFeed.module.scss
 │ │ │ └── PostItem.jsx
-│ │ ├ 📂follower
+│ │ ├ 📂follower                # 팔로워 컴포넌트
 │ │ │ ├── Follower.module.scss
 │ │ │ ├── FollowerItem.jsx
 │ │ │ └── FollowerList.jsx
-│ │ ├ 📂heart
+│ │ ├ 📂heart                   # 좋아요 컴포넌트
 │ │ │ └── HeartComponent.jsx
-│ │ ├ 📂layout
+│ │ ├ 📂layout                  # 하단 네비게이션 바 레이아웃 컴포넌트
 │ │ │ └── 📂bot-nav
 │ │ │ │ ├── BottomNavigation.jsx
 │ │ │ │ └── BottomNavigation.module.scss
-│ │ ├ 📂post
-│ │ │ ├ 📂comment
+│ │ ├ 📂post                          # 게시글 컴포넌트
+│ │ │ ├ 📂comment                     # 댓글 컴포넌트
 │ │ │ │ ├── CommentList.jsx
 │ │ │ │ └── CommentList.module.scss
 │ │ │ ├── PostDetail.jsx
 │ │ │ ├── PostForm.jsx
 │ │ │ └── PostForm.module.scss
-│ │ ├ 📂product
+│ │ ├ 📂product                       # 포트폴리오 등록 컴포넌트
+│ ├── App.jsx                         # 메인 앱 컴포넌트
 │ │ │ ├── Product.module.scss
 │ │ │ ├── ProductForm.jsx
 │ │ │ ├── ProductForm.module.scss
 │ │ │ ├── ProductItem.jsx
 │ │ │ └── ProductList.jsx
-│ │ ├ 📂profile
+│ │ ├ 📂profile                       # 프로필 컴포넌트
 │ │ │ ├── 📂portfolio
 │ │ │ │ ├── Portfolio.jsx
 │ │ │ │ ├── Portfolio.module.scss
@@ -228,34 +231,34 @@
 │ │ │ │ ├── ProfileInfo.jsx
 │ │ │ │ ├── ProfileInfo.module.scss
 │ │ │ │ └── ProfileTabs.jsx
-│ │ ├ 📂search
+│ │ ├ 📂search                        # 검색 컴포넌트
 │ │ │ ├ Search.module.scss
 │ │ │ ├ SearchInput.jsx
 │ │ │ ├ SearchResultItem.jsx
 │ │ │ └ SearchResultsList.jsx
-│ │ └ 📂ui
-│ │ │ ├ 📂button
-│ │ │ │ ├── BackButton.jsx
-│ │ │ │ ├── ImageUploadButton.jsx
-│ │ │ │ └── VerticalButton.jsx
+│ │ └ 📂ui                            # 공통 컴포넌트
+│ │ │ ├ 📂button                      # 버튼 모음
+│ │ │ │ ├── BackButton.jsxx            # 뒤로가기 버튼
+│ │ │ │ ├── ImageUploadButton.jsxx     # 이미지 업로드 버튼
+│ │ │ │ └── VerticalButton.jsx         # 햄버거 버튼
 │ │ │ ├ 📂modal
 │ │ │ │ ├── ConfirmModal.jsx
-│ │ │ │ ├── Modal.module.scss
+│ │ │ │ ├── Modal.module.scss          # 공통 모달 컴포넌트
 │ │ │ │ └── OptionsModal.jsx
-│ │ │ ├── Button.jsx
+│ │ │ ├── Button.jsx                   # 공통 버튼 컴포넌트
 │ │ │ ├── Button.module.scss
-│ │ │ ├── Input.jsx
+│ │ │ ├── Input.jsx                    # 공통 인풋 컴포넌트
 │ │ │ ├── Input.module.scss
 │ │ │ ├── InputField.jsx
 │ │ │ ├── Layout.jsx
-│ │ │ ├── Loading.jsx
+│ │ │ ├── Loading.jsx                  # 공통 로딩 컴포넌트
 │ │ │ ├── Loading.module.scss
 │ │ │ └── ScrollToTop.jsx
-│ ├ 📂hooks
-│ │ ├── useAPI.js
-│ │ ├── useModal.js
+│ ├ 📂hooks                            # 커스텀 훅
+│ │ ├── useAPI.js                      # API 호출을 위한 커스텀 훅
+│ │ ├── useModal.js                    # 모달 관리를 위한 커스텀 훅
 │ │ └── useScrollHeader.js
-│ ├ 📂pages
+│ ├ 📂pages                            # 각 페이지 컴포넌트
 │ │ ├ 📂chat
 │ │ │ ├── ChatRoomPage.jsx
 │ │ │ └── ChatRoomPage.module.scss
@@ -303,17 +306,17 @@
 │ │ ├── optionsModalSlice.js
 │ │ ├── store.js
 │ │ └── validationSlice.js
-│ ├── App.jsx
-│ ├── index.css
+│ ├── App.jsx                 # 메인 앱 컴포넌트
+│ ├── index.css               # 전역 스타일 CSS
 │ ├── main.jsx
-│ └── reset.css
+│ └── reset.css               # 리셋 스타일 CSS
 ├── .env
-├── .gitignore
+├── .gitignore                # git 업로드 제외
 ├── eslint.config.js
-├── index.html
+├── index.html                # HTML 템플릿
 ├── package-lock.json
-├── package.json
-├── README.md
+├── package.json              # 프로젝트 설정 및 의존성
+├── README.md                 # 프로젝트 설명 문서
 ├── vercel.json
 └━━ vite.config.js
 ```
@@ -324,7 +327,7 @@
 
 
 ## 역할 분담
-### 👩‍💻 이서림
+### 👩‍💻 이서림
 - **UI**
   - 페이지 : 홈화면 피드, 검색, 게시글 작성/수정/상세, 내작업 등록/수정, 
   - 공통 컴포넌트 : 모달컴포넌트, 이미지 업로드버튼, 뒤로가기 버튼
@@ -334,9 +337,9 @@
   - 팀 회의록 작성, 코드그램 로고 제작
 <br>
 
-### 👩‍💻 이다빈
+### 👩‍💻 이다빈
 - **UI**
-  - 페이지 : 코드봇 채팅방/채팅폼, 404 페이지, 전역 CSS 제작
+  - 페이지 : 코드봇 채팅방/채팅폼, 404 페이지, 전역 스타일 컨벤션 제작
   - 공통 컴포넌트 : 버튼 컴포넌트, 로딩 컴포넌트
 - **기능**
   - 좋아요/좋아요 취소 토글 버튼
@@ -354,7 +357,7 @@
   - ~
 <br>
 
-### 👨‍💻 양현우
+### 👨‍💻 양현우
 - **UI**
   - 페이지 : 
   - 공통 컴포넌트 : 
@@ -365,10 +368,12 @@
 <br>
 
 ## 개발 기간 및 작업 관리
+### 개발 기간
 - 전체 개발 기간 : 2024.09.23 - 2024.10.22
-- UI 구현 : 
-- 기능 구현 : 
-- 오류 해결 : ~ 2024.10.21
+- UI 구현 기간 : ~ 2024.10.17
+- 기능 구현 기간 : 
+- 오류 해결 기간 : ~ 2024.10.21
+<br />
 
 ### 개발 기간
 <br />
@@ -380,12 +385,37 @@
 <br />
 
 ## 페이지별 기능
+| 초기화면 |
+|--------------------|
+|![]()|
 <br />
 
 ## 트러블 슈팅
+### 이서림
+[PostItem 컴포넌트의 모달 중복 렌더링 문제](https://github.com/seoriml/codegram-sns/wiki/PostItem-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%9D%98-%EB%AA%A8%EB%8B%AC-%EC%A4%91%EB%B3%B5-%EB%A0%8C%EB%8D%94%EB%A7%81-%EB%AC%B8%EC%A0%9C)
+
+### 이다빈
+
+### 윤혜림
+
+### 양현우
+
 <br />
 
+## 아쉬운 점
+- **테스트 부족**
+  - 기능 구현 후 충분한 테스트를 진행할 시간이 부족하여 일부 버그가 발견되었습니다. 이러한 오류를 고치기는 했지만, 충분한 시간을 할애하지 못하여 사용자에게 불편을 초래할 가능성이 있었습니다. 향후 프로젝트에서는 테스트를 보다 철저히 진행하고, 오류 수정에 충분한 시간을 할애해야겠다고 느꼈습니다.
+
+- **기술적 및 소통의 어려움**
+  - 프로젝트 진행 중 기술적인 부분에서 어려움이 있었고, 이에 따라 팀원 간의 소통이 원활하지 않아 프로젝트가 지연되기도 하였습니다. 이러한 점을 개선하기 위해 앞으로는 초기 단계부터 팀원 간의 소통을 강화하고 기술적 지원을 제공할 필요성이 있음을 깨달았습니다.
+
+- **기능 구현의 일부 대체**
+  - 초기 기획 단계에서 고려했던 사용자 간의 채팅 기능을 챗봇 기능으로 대체하였습니다. 사용자 소통을 강화하려고 했지만, 직접적인 사용자 간의 소통을 통한 깊이 있는 경험은 부족한 점이 아쉬웠습니다. 그러나 챗봇 기능이 제공하는 자동화된 응답과 정보 제공은 오히려 더 효율적이고 유용한 부분도 있었습니다. 향후 프로젝트에서는 채팅 기능을 포함하는 방향으로 다시 검토할 계획입니다.
+
 ## 개선 목표
+- **코드 하이라이팅 지원**
+  - 사용자가 코드를 공유하면 어떤 언어인지에 따라서 코드가 강조되어 표시되는 라이브러리 사용해보기, 코드를 
+
 <br />
 
 ## 프로젝트 후기
@@ -393,12 +423,16 @@
 ### 👩‍💻 이서림
 이번 팀 프로젝트를 통해 기획, 개발, 테스트의 전 과정을 경험하면서 많은 것을 배웠습니다. 팀워크의 중요성을 깊이 깨달았고, 원활한 소통이 프로젝트 성공에 얼마나 중요한지 실감했습니다. 초기 기획 단계에서 핵심 기능을 선정하고 각자의 역할을 명확히 하여 프로젝트 방향성을 설정한 경험이 특히 기억에 남습니다.미리 설정된 팀 프로세스는 협업을 강화하는 데 큰 도움이 되었고, 재사용 가능한 컴포넌트와 훅을 설계하면서 그 가치를 체감하게 되었습니다. 문제 발생 시 팀원들과 논의하며 해결하는 과정은 제 문제 해결 능력을 한층 더 키울 수 있는 기회가 되었습니다.
 이 프로젝트를 통해 팀과 함께 성장해 나가는 것의 소중함을 느꼈고, 앞으로도 더 나은 결과를 위해 계속해서 노력하겠습니다. 팀원분들 모두 고생 많으셨습니다! 
+
 <br>
 
 ### 👩‍💻 이다빈
+첫 팀 프로젝트
+그동안은 
 <br>
 
 ### 👩‍💻 윤혜림
+
 <br>
 
 ### 👨‍💻 양현우
