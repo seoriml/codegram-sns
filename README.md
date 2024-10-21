@@ -1,38 +1,43 @@
-# CodeGram 💬
-[]()
-- 배포 URL : https://codegram-sns.vercel.app
-- 테스트 Email : codegram@codegram.com
-- 테스트 Password : codegram
+# 👨‍💻코드그램(CodeGram)👩‍💻
+<img src="https://estapi.mandarin.weniv.co.kr/1729476095754.jpg" alt="코드그램 메인배경" />
 
-## 프로젝트 소개
+<br />
+
+- **배포 URL** : https://codegram-sns.vercel.app
+- **테스트 Email** : codegram@codegram.com
+- **테스트 Password** : codegram
+<!-- - 프로젝트 기간: 2024.09.23 - 2024.10.22 -->
+
+
+## 1. 프로젝트 소개
+<!-- - 코드그램(CodeGram)은 
+
+- README는 책을 좋아하는 사람들이 자신의 책 취향을 공유하고, 다 읽은 책을 판매할 수 있는 SNS입니다.
+- 개인의 프로필 페이지에 좋아하는 구절 등 책에 대한 정보를 작성하고 판매하고 싶은 책을 등록할 수 있습니다.
+- 검색을 통해 책 취향이 비슷한 다른 유저들의 피드를 구경할 수 있습니다.
+- 다양한 유저들을 팔로우하며 마음에 드는 게시글에 좋아요를 누르거나 댓글을 작성할 수 있습니다.
+
 개발자들이 직접 작성한 코드, 프로젝트, 기술과 일상을 공유하고, 피드백을 주고받을 수 있는 웹앱 커뮤니티입니다!<br>
-팔로우/팔로잉 기능을 통해 관심 있는 개발자를 구독하고, 게시글에 답글을 달거나 좋아요를 누르며 상호작용할 수 있습니다.
+팔로우/팔로잉 기능을 통해 관심 있는 개발자를 구독하고, 게시글에 댓글을 달거나 좋아요를 누르며 상호작용할 수 있습니다.
+- 자기가 만든 포트폴리오와 함께 배포 링크를 공유할 수 있습니다. -->
+### 주제 및 선정 배경
+
 <br />
 
 
-## 팀원 구성
+## 2. 팀원 구성
+
+<div align="center">
+
 | **이서림** | **이다빈** | **윤혜림** | **양현우** |
 | :------: |  :------: | :------: | :------: |
-| [<img src="https://ifh.cc/g/X8zsd1.png" width=150 height=150> <br/>@seoriml](https://github.com/seoriml) |[<img src="https://ifh.cc/g/nryplm.jpg" width=150 height=150> <br/> @Yeon-seong](https://github.com/Yeon-seong) |[<img src="https://ifh.cc/g/X8zsd1.png" width=150 height=150> <br/> @lia006](https://github.com/lia006) |[<img src="https://ifh.cc/g/FPGGzr.jpg" width=150 height=150> <br/> @yhwoooo](https://github.com/yhwoooo) |
+| [<img src="https://ifh.cc/g/VWMCP6.jpg" width=150 height=150> <br/>@seoriml](https://github.com/seoriml) |[<img src="https://ifh.cc/g/nryplm.jpg" width=150 height=150> <br/> @Yeon-seong](https://github.com/Yeon-seong) |[<img src="https://ifh.cc/g/StYRwo.jpg" width=150 height=150> <br/> @lia006](https://github.com/lia006) |[<img src="https://ifh.cc/g/FPGGzr.jpg" width=150 height=150> <br/> @yhwoooo](https://github.com/yhwoooo) |
+
+</div>
+
 <br />
 
-
-## 목차
-- [개요](#개요)
-- [타입 리스트](#타입-리스트)
-- [파일 및 폴더구조](#파일-및-폴더구조)
-- [개선 목표](#개선-목표)
-- [프로젝트 후기](#프로젝트-후기)
-<br />
-
-
-## 개요
-- 프로젝트 이름: [코드그램(Codegram)](https://codegram-sns.vercel.app/)
-- 프로젝트 기간: 2024.09.23 - 2024.10.22
-- 프로젝트 일정 관리 : Jira
-
-
-## 1. 개발 환경
+## 3. 개발 환경
 ### 프론트엔드(Front end)
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML" />
 
@@ -78,21 +83,32 @@
 * **Vercel** : GitHub와 연동해 코드 변경 시 자동 배포.<br>
 
 ### 협업 환경
-<img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="" />
+<img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
 
-- 버전 및 이슈관리 : Github, Github Pull requests
+- **Github, Github Pull requests** : 버전 및 이슈관리
 
-<img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white" alt="" />
+<img src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white" alt="Figma" />
 
-- 온라인 소통 : Discord
+- [**Figma**](https://www.figma.com/design/BOWqiGyimXDKi3oSwytrxU/%EC%BD%94%EB%93%9C%EA%B7%B8%EB%9E%A8?node-id=113664-1337&node-type=frame&t=KHXfPMLzz9staN7z-0) : 페이지 디자인 작업
 
-<img src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=whit" alt="" />
+<img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" />
 
-- 디자인 : [Figma](https://www.figma.com/design/BOWqiGyimXDKi3oSwytrxU/%EC%BD%94%EB%93%9C%EA%B7%B8%EB%9E%A8?node-id=113664-1337&node-type=frame&t=KHXfPMLzz9staN7z-0)
+- **Discord** : 온라인 음성 회의 툴
+- 커밋 컨벤션, 코딩 컨벤션을 공유합니다.
+- 진행 상황을 바탕으로 회의록을 작성합니다.
+- 에러가 발생했을 경우 push하지 않고
+
 
 <br />
 
-## 커밋 컨벤션
+
+## 브랜치 전략
+- **main** 브랜치는 실제 배포를 하는 브랜치로 사용하였습니다.
+- 브랜치는 기능별로 따로 만들어서 관리. 
+feature/login과 같이 타입과 기능을 나타내는 짧고 명확한 이름을 사용.
+<br />
+
+### 커밋 컨벤션
 <details>
 <summary>타입 리스트 접기/펼치기</summary>
 <div markdown="1">
@@ -116,12 +132,9 @@
 </details>
 <br />
 
-- [코드 컨벤션]()
+### 코딩 컨벤션
+- [코딩 컨벤션]()
 <br />
-
-## 채택한 개발 기술과 브랜치 전략
-<br />
-
 
 ## 프로젝트 폴더구조
 <details>
@@ -129,16 +142,16 @@
 <div markdown="1">
 
 ```
-┌ codegram-sns(Root)
-│ │ ├ 📂auth        # 인증 컴포넌트(로그인, 회원가입)
-├ 📂.git            # git이 관리
-├ 📂public          # 전역에서 사용할 파일
+┌─ codegram-sns(Root)
+├ 📂.git                        # git이 관리할 폴더
+├ 📂node_modules
+├ 📂public                      # 전역에서 사용할 파일
 │ ├── favicon.ico
 │ ├── loading.gif
 │ └── vite.svg
 ├ 📂src
-│ ├ 📂assets        # 컴포넌트 내에서만 사용할 파일
-│ │ ├ 📂images      # 이미지 파일
+│ ├ 📂assets                    # 컴포넌트 내에서만 사용할 파일
+│ │ ├ 📂images                  # 이미지 파일
 │ │ │ ├── chat_profile.svg
 │ │ │ ├── codegram_logo_title_white.svg
 │ │ │ ├── file_upload_button.svg
@@ -178,7 +191,7 @@
 │ │ └ 📂styles
 │ │ │ └── common.scss
 │ ├ 📂components
-│ │ ├ 📂auth            # 인증 컴포넌트(로그인, 회원가입)
+│ │ ├ 📂auth                    # 인증 컴포넌트(로그인, 회원가입)
 │ │ │ ├── AuthForm.jsx
 │ │ │ ├── AuthForm.module.scss
 │ │ │ ├── AuthHeader.jsx
@@ -204,7 +217,7 @@
 │ │ │ └── 📂bot-nav
 │ │ │ │ ├── BottomNavigation.jsx
 │ │ │ │ └── BottomNavigation.module.scss
-│ │ ├ 📂post                          # 게시글 컴포넌트
+│ │ ├ 📂post
 │ │ │ ├ 📂comment                     # 댓글 컴포넌트
 │ │ │ │ ├── CommentList.jsx
 │ │ │ │ └── CommentList.module.scss
@@ -260,38 +273,38 @@
 │ │ └── useScrollHeader.js
 │ ├ 📂pages                            # 각 페이지 컴포넌트
 │ │ ├ 📂chat
-│ │ │ ├── ChatRoomPage.jsx
+│ │ │ ├── ChatRoomPage.jsx             # 채팅방 페이지 컴포넌트 
 │ │ │ └── ChatRoomPage.module.scss
 │ │ ├ 📂error
-│ │ │ ├── NotFound.jsx
+│ │ │ ├── NotFound.jsx                 # 404 페이지 컴포넌트
 │ │ │ └── NotFound.module.scss
-│ │ ├ 📂followersFollowings
+│ │ ├ 📂followersFollowings           # 팔로워, 팔로잉 페이지 컴포넌트
 │ │ │ ├── followers.jsx
 │ │ │ └── followings.jsx
-│ │ ├ 📂home
-│ │ │ └── Home.jsx
-│ │ ├ 📂login
+│ │ ├ 📂home                          # 홈 페이지 컴포넌트
+│ │ │ └── Home.jsx    
+│ │ ├ 📂login                         # 로그인 페이지 컴포넌트
 │ │ │ ├── LoginEmail.jsx
 │ │ │ ├── LoginEmail.module.scss
 │ │ │ ├── LoginMain.jsx
 │ │ │ └── LoginMain.module.scss
-│ │ ├ 📂post
+│ │ ├ 📂post                          # 게시글 페이지 컴포넌트
 │ │ │ ├── PostCreatePage.jsx
 │ │ │ ├── PostDetailPage.jsx
 │ │ │ └── PostEditPage.jsx
-│ │ ├ 📂product
+│ │ ├ 📂product                       # 포트폴리오 페이지 컴포넌트
 │ │ │ ├── ProductCreatePage.jsx
 │ │ │ ├── ProductDetailPage.jsx
 │ │ │ ├── ProductEditPage.jsx
 │ │ │ └── ProductListPage.jsx
-│ │ ├ 📂profile
+│ │ ├ 📂profile                       # 프로필 페이지 컴포넌트
 │ │ │ ├── MyProfile.jsx
 │ │ │ ├── ProfileEdit.jsx
 │ │ │ ├── ProfileEdit.module.scss
 │ │ │ ├── ProfileSetup.jsx
 │ │ │ ├── ProfileSetup.module.scss
 │ │ │ └── YourProfile.jsx
-│ │ ├ 📂search
+│ │ ├ 📂search                        # 검색 페이지 컴포넌트
 │ │ │ └── SearchPage.jsx
 │ │ ├ 📂signup
 │ │ │ └── Signup.jsx
@@ -318,7 +331,7 @@
 ├── package.json              # 프로젝트 설정 및 의존성
 ├── README.md                 # 프로젝트 설명 문서
 ├── vercel.json
-└━━ vite.config.js
+└── vite.config.js
 ```
 
 </div>
@@ -327,44 +340,87 @@
 
 
 ## 역할 분담
-### 👩‍💻 이서림
+### 👩‍💻 이서림(팀장)
 - **UI**
-  - 페이지 : 홈화면 피드, 검색, 게시글 작성/수정/상세, 내작업 등록/수정, 
-  - 공통 컴포넌트 : 모달컴포넌트, 이미지 업로드버튼, 뒤로가기 버튼
+  - 페이지
+    - 홈화면 피드
+    - 유저검색
+    - 게시글 작성/수정/상세
+    - 내 작업 등록/수정
+    - 댓글
+  - 공통 컴포넌트
+    - 모달 컴포넌트
+    - 이미지 업로드 버튼
+    - 뒤로가기 버튼
 - **기능**
-  - 홈화면 피드 불러오기, 유저검색, 게시물 생성/수정/상세/삭제, 댓글 생성/목록/삭제, 상품 등록 및 수정, 팔로잉리스트의 팔로우 및 언팔로우 api연결
+  - 홈화면 피드 불러오기
+  - 유저검색
+  - 게시물 생성/수정/상세/삭제
+  - 댓글 생성/목록/삭제
+  - 내 작업 등록 및 수정
+  - 팔로잉리스트의 팔로우 및 언팔로우 api연결
+  - 모달 훅
+  - 무한 스크롤
+  - 이미지 업로드 기능
 - **그 외**
-  - 팀 회의록 작성, 코드그램 로고 제작
+  - 팀 회의록 작성
+  - 코드그램 로고 제작
+
 <br>
 
-### 👩‍💻 이다빈
+### 👩‍💻 이다빈(팀원)
 - **UI**
-  - 페이지 : 코드봇 채팅방/채팅폼, 404 페이지, 전역 스타일 컨벤션 제작
-  - 공통 컴포넌트 : 버튼 컴포넌트, 로딩 컴포넌트
+  - 페이지
+    - 코드봇 채팅방/채팅폼 스타일링
+    - 404 페이지
+    - CSS 전역 변수정의
+  - 공통 컴포넌트
+    - 버튼 컴포넌트
+    - 로딩 컴포넌트
 - **기능**
-  - 좋아요/좋아요 취소 토글 버튼
+  - 좋아요/좋아요 취소 토글
 - **그 외**
-  - Figma를 사용한 페이지 디자인, 코드그램 로고 제작, Readme 작성
+  - Figma 페이지 디자인
+  - 코드그램 로고 제작
+  - Readme 작성
+
 <br>
 
-### 👩‍💻 윤혜림
+### 👩‍💻 윤혜림(팀원)
 - **UI**
-  - 페이지 : 
-  - 공통 컴포넌트 : 
+  - 페이지
+    - 프로필 페이지
+    - 프로필 수정
+    - 팔로워/팔로잉 리스트
+  - 공통 컴포넌트
+    - 하단 탭 메뉴
 - **기능**
-  - ~
+  - 헤더 스크롤 관리 훅
+  - 프로필 수정
+  - 팔로우/언팔로우
+  - 팔로워/팔로잉 리스트
+  - 사용자 목록형/앨범형 게시물 
+  - Vertical 메뉴 버튼
 - **그 외**
-  - ~
+  - Jira 일정관리 세팅
+
 <br>
 
-### 👨‍💻 양현우
+### 👨‍💻 양현우(팀원)
 - **UI**
-  - 페이지 : 
-  - 공통 컴포넌트 : 
+  - 페이지
+    - 로그인
+    - 회원가입
+    - 프로필 설정
+  - 공통 컴포넌트 : 인풋 컴포넌트
 - **기능**
-  - ~
-- **그 외**
-  - ~
+  - API 호출 훅
+  - 로그인
+  - 회원가입
+  - 프로필 설정
+  - 챗봇 기능구현
+  - 내 작업 목록/상세/삭제
+
 <br>
 
 ## 개발 기간 및 작업 관리
@@ -375,19 +431,55 @@
 - 오류 해결 기간 : ~ 2024.10.21
 <br />
 
-### 개발 기간
-<br />
-
 ### 작업 관리
+프로젝트 일정 관리 : Jira
 <br />
 
-## 신경 쓴 부분
-<br />
 
 ## 페이지별 기능
 | 초기화면 |
 |--------------------|
 |![]()|
+
+<br />
+
+### 회원가입
+| 회원가입 |
+|--------------------|
+|![]()|
+
+<br />
+
+<!-- ### 프로필 설정
+- 
+| 프로필 설정 |
+|--------------------|
+|![]()|
+
+<br />
+
+| 초기화면 |
+|--------------------|
+|![]()|
+
+<br />
+
+| 초기화면 |
+|--------------------|
+|![]()|
+
+<br />
+
+| 초기화면 |
+|--------------------|
+|![]()|
+
+<br />
+
+| 초기화면 |
+|--------------------|
+|![]()| -->
+
 <br />
 
 ## 트러블 슈팅
@@ -412,10 +504,11 @@
 - **기능 구현의 일부 대체**
   - 초기 기획 단계에서 고려했던 사용자 간의 채팅 기능을 챗봇 기능으로 대체하였습니다. 사용자 소통을 강화하려고 했지만, 직접적인 사용자 간의 소통을 통한 깊이 있는 경험은 부족한 점이 아쉬웠습니다. 그러나 챗봇 기능이 제공하는 자동화된 응답과 정보 제공은 오히려 더 효율적이고 유용한 부분도 있었습니다. 향후 프로젝트에서는 채팅 기능을 포함하는 방향으로 다시 검토할 계획입니다.
 
-## 개선 목표
+## 추후 개선 목표
 - **코드 하이라이팅 지원**
-  - 사용자가 코드를 공유하면 어떤 언어인지에 따라서 코드가 강조되어 표시되는 라이브러리 사용해보기, 코드를 
-
+  - 사용자가 코드를 공유하면 어떤 언어인지에 따라서 코드가 강조되어 표시되는 라이브러리 사용해보기
+  - 주 사용자 직업이 개발자인 만큼, 가독성 관련 편의성을 높여야 합니다.
+**사용자 채팅기능**
 <br />
 
 ## 프로젝트 후기
@@ -427,12 +520,16 @@
 <br>
 
 ### 👩‍💻 이다빈
-첫 팀 프로젝트
-그동안은 
+<!-- 첫 팀 프로젝트 -->
+
 <br>
 
 ### 👩‍💻 윤혜림
-
+팀 프로젝트를 진행하며 프론트엔드 개발에서 중요한 다양한 기술들을 실습하고 적용할 수 있었습니다. 부족한 부분은 공부를 통해 보완해 나갔고, 각종 기술 스택을 활용해 실무적인 문제를 해결하는 경험은 저에게 큰 성장의 기회가 되었습니다.
+또한, 팀워크의 중요성을 다시 한번 느낄 수 있었습니다. 각 팀원이 맡은 역할을 책임감 있게 수행하고, Pull Requsets를 통해 주기적으로 코드를 리뷰하며 피드백을 주고받음으로써 코드의 품질을 향상시키고 서로의 아이디어를 반영해 프로젝트의 완성도를 높일 수 있었습니다. 이 과정에서 협업의 상호 보완적인 역할 분담과 의견 조율의 중요성도 느낄 수 있었고, 이를 통해 더 나은 결과물을 만들어낼 수 있었습니다.
+앞으로도 이러한 경험을 바탕으로 더 발전된 개발자로 성장하도록 노력하겠습니다. 한 달이라는 기간 동안 동일한 목표를 향해 함께 노력한 만큼 좋은 성과를 이룰 수 있었다고 생각합니다. 어려움이 많았지만 팀원분들 덕분에 많이 배울 수 있었습니다. 모두 고생 많으셨습니다!
 <br>
 
 ### 👨‍💻 양현우
+
+<br>
