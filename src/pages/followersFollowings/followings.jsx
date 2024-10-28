@@ -12,20 +12,20 @@ const Followings = () => {
   const { get, error, token, loading } = useAPI();
   const LIMIT = 10;
 
-  // 내 계정명 가져오는 함수
-  useEffect(() => {
-    const fetchMyProfile = async () => {
-      const response = await get("/user/myinfo", token);
-      console.log("내 계정", response); // API 응답 확인
-
-      if (response && response.payload) {
-        setMyAccountName(response.payload.user.accountname); // 내 계정명 저장
-      } else {
-        console.error("내 계정 정보를 가져오는 데 실패했습니다: ", response);
-      }
+  // 팔로잉 리스트 데이터를 가져오는 함수
+  const fetchFollowings = async ({ pageParam = 0 }) => {
+    const response = await get(
+      `${
+        import.meta.env.VITE_API_URL
+      }/profile/${accountname}/following?limit=${LIMIT}&skip=${pageParam}`,
+      "application/json",
+      token
+    );
+    return {
+      followings: response.payload,
+      nextSkip: pageParam + LIMIT,
     };
-    fetchMyProfile();
-  }, [get, token]);
+  };
 
   // useInfiniteQuery로 무한 스크롤 구현
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =

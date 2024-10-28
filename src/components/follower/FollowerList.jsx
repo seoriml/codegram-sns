@@ -3,7 +3,6 @@ import FollowerItem from "./FollowerItem";
 import styles from "./Follower.module.scss";
 
 const FollowerList = ({ followers }) => {
-  console.log(myAccountName);
   return (
     <ul className={styles.profileFollowsWrapper}>
       {followers.map((profile) => (
