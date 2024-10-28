@@ -35,17 +35,8 @@ const timeAgo = (date) => {
 
 export default function CommentList({ postId }) {
   const dispatch = useDispatch();
-  const profileData = useSelector((state) => state.api.profileData);
-
-  useEffect(() => {
-    if (profileData) {
-      sessionStorage.setItem("sessionProfileData", JSON.stringify(profileData));
-    }
-  }, [profileData]);
-
-  const sessionProfileData = JSON.parse(
-    sessionStorage.getItem("sessionProfileData")
-  );
+  const sessionMyAccountname = sessionStorage.getItem("myAccountname");
+  const sessionMyProfileImage = sessionStorage.getItem("MyProfileImage");
 
   const { get, post, del, token, loading } = useAPI();
   const [comments, setComments] = useState([]);
@@ -103,7 +94,7 @@ export default function CommentList({ postId }) {
   // 댓글 등록
   const handleAddComment = async () => {
     if (!newComment) {
-      alert("댓글을 입력해주세요.");
+      // alert("댓글을 입력해주세요.");
       return;
     }
 
@@ -142,7 +133,7 @@ export default function CommentList({ postId }) {
       setComments(updatedComments);
       dispatch(decrementCommentCount(postId));
       refetch();
-      alert("댓글이 삭제되었습니다.");
+      // alert("댓글이 삭제되었습니다.");
     } else {
       alert("댓글 삭제에 실패했습니다.");
     }
@@ -180,8 +171,7 @@ export default function CommentList({ postId }) {
             .flatMap((page) => page.comments)
             .map((comment) => {
               const isMyComment =
-                sessionProfileData?.user?.accountname ===
-                comment.author.accountname;
+                sessionMyAccountname === comment.author.accountname;
 
               return (
                 <li key={comment.id} className={styles.commentItem}>
@@ -227,13 +217,12 @@ export default function CommentList({ postId }) {
         <img
           className={styles.profileImg}
           src={
-            !sessionProfileData?.user?.image ||
-            sessionProfileData?.user?.image ===
-              "http://146.56.183.55:5050/Ellipse.png" ||
-            sessionProfileData?.user?.image ===
+            !sessionMyProfileImage ||
+            sessionMyProfileImage === "http://146.56.183.55:5050/Ellipse.png" ||
+            sessionMyProfileImage ===
               "https://estapi.mandarin.weniv.co.kr/undefined"
               ? defaultProfileIcon
-              : sessionProfileData?.user?.image
+              : sessionMyProfileImage
           }
         />
         <input

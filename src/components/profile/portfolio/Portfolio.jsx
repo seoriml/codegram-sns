@@ -5,7 +5,7 @@ import useAPI from "../../../hooks/useAPI";
 import { Link } from "react-router-dom";
 import Loading from "../../ui/Loading";
 
-export default function Portfolio({ accountname }) {
+export default function Portfolio({ accountname, isMyProfile }) {
   const { get, token, loading } = useAPI();
   const [portfolios, setPortfolios] = useState([]);
   // console.log(accountname);
@@ -33,9 +33,13 @@ export default function Portfolio({ accountname }) {
       </Link>
       {!portfolios || portfolios.length === 0 ? (
         <div className={styles.containerPortfolio}>
-          <Link to={`/product/create`}>
+          {isMyProfile ? (
+            <Link to={`/product/create`}>
+              <p className={styles.nonePortfolio}>본인의 작업을 등록해 보세요.</p>
+            </Link>
+          ) : (
             <p className={styles.nonePortfolio}>본인의 작업을 등록해 보세요.</p>
-          </Link>
+          )}
         </div>
       ) : (
         <div className={styles.portfolioScroll}>
