@@ -10,23 +10,7 @@ import styles from "../../components/follower/Follower.module.scss";
 const Followings = () => {
   const { accountname } = useParams();
   const { get, error, token, loading } = useAPI();
-  const [myAccountName, setMyAccountName] = useState(null);
   const LIMIT = 10;
-
-  // 팔로잉 리스트 데이터를 가져오는 함수
-  const fetchFollowings = async ({ pageParam = 0 }) => {
-    const response = await get(
-      `${
-        import.meta.env.VITE_API_URL
-      }/profile/${accountname}/following?limit=${LIMIT}&skip=${pageParam}`,
-      "application/json",
-      token
-    );
-    return {
-      followings: response.payload,
-      nextSkip: pageParam + LIMIT,
-    };
-  };
 
   // 내 계정명 가져오는 함수
   useEffect(() => {
@@ -90,9 +74,7 @@ const Followings = () => {
       {!loading && error ? (
         <p className={styles.followerText}>.</p>
       ) : (
-        followings.length > 0 && (
-          <FollowerList followers={followings} myAccountName={myAccountName} />
-        )
+        followings.length > 0 && <FollowerList followers={followings} />
       )}
       {isFetchingNextPage && <Loading />}
     </div>

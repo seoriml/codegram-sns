@@ -14,12 +14,13 @@ export default function MyProfile() {
 
   return (
     <div>
-      <ProfileInfo accountname={myAccountName} isMyProfile={true} onProfileLoad={handleProfileLoad} />
+      <ProfileInfo
+        accountname={myAccountName}
+        isMyProfile={true}
+        onProfileLoad={handleProfileLoad}
+      />
       <Portfolio accountname={myAccountName} isMyProfile={true} />
       {myAccountName && <ProfileTabs accountname={myAccountName} />}
     </div>
   );
 }
-
-// "codegram1"
-// "String2"

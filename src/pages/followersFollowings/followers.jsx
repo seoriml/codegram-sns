@@ -10,23 +10,7 @@ import styles from "../../components/follower/Follower.module.scss";
 const Followers = () => {
   const { accountname } = useParams();
   const { get, token, error, loading } = useAPI();
-  const [myAccountName, setMyAccountName] = useState(null);
   const LIMIT = 10;
-
-  // 내 계정 데이터 가져오는 함수
-  useEffect(() => {
-    const fetchMyProfile = async () => {
-      const response = await get("/user/myinfo", token);
-      console.log("내 계정", response); // API 응답 확인
-
-      if (response && response.payload) {
-        setMyAccountName(response.payload.user.accountname); // 내 계정명 저장
-      } else {
-        console.error("내 계정 정보를 가져오는 데 실패했습니다: ", response);
-      }
-    };
-    fetchMyProfile();
-  }, [get, token]);
 
   // 팔로워 리스트 데이터를 가져오는 함수
   const fetchFollowers = async ({ pageParam = 0 }) => {
@@ -90,9 +74,7 @@ const Followers = () => {
       {!loading && error ? (
         <p className={styles.followerText}>해당 계정이 존재하지 않습니다.</p>
       ) : (
-        followers.length > 0 && (
-          <FollowerList followers={followers} myAccountName={myAccountName} />
-        )
+        followers.length > 0 && <FollowerList followers={followers} />
       )}
       {isFetchingNextPage && <Loading />}
     </div>
