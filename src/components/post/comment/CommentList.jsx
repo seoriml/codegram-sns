@@ -196,6 +196,7 @@ export default function CommentList({ postId }) {
                       {isMyComment && (
                         <button
                           onClick={() => handleOpenOptionsModal(comment.id)}
+                          aria-label="댓글 옵션 열기" 
                         >
                           <img src={moreIcon} alt="더보기" />
                         </button>
