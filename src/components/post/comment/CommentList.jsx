@@ -191,7 +191,7 @@ export default function CommentList({ postId }) {
                     <div className={styles.commentHeader}>
                       <div className={styles.commentAuthor}>
                         <span>{comment.author.username}</span>
-                        <time>{timeAgo(comment.createdAt)}</time>
+                        <time datetime={comment.createdAt}>{timeAgo(comment.createdAt)}</time>
                       </div>
                       {isMyComment && (
                         <button
@@ -216,6 +216,7 @@ export default function CommentList({ postId }) {
       <div className={styles.inputCommentWrapper}>
         <img
           className={styles.profileImg}
+          alt="프로필 사진"
           src={
             !sessionMyProfileImage ||
             sessionMyProfileImage === "http://146.56.183.55:5050/Ellipse.png" ||
