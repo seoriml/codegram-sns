@@ -89,13 +89,17 @@ export default function Feed() {
   return (
     <div className="paddingTopForHeader">
       <header className={`${isVisible ? "header" : "headerHidden"}`}>
-        <img
-          src={logoIcon}
-          alt="코드그램"
+        <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          style={{ cursor: "pointer" }}
-        />
-        <Link to="/search">
+          style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
+          aria-label="최상단으로 스크롤"
+        >
+          <img
+            src={logoIcon}
+            alt="코드그램 로고"
+          />
+        </button>
+        <Link to="/search" aria-label="검색 페이지로 이동">
           <img src={searchIcon} alt="검색버튼" />
         </Link>
       </header>

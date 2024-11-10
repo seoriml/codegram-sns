@@ -28,7 +28,6 @@ const formatDate = (dateString) => {
 const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
   const location = useLocation();
   const path = location.pathname;
-  // console.log("path :", path);
 
   const { del, token } = useAPI();
   const imageArray = post.image
@@ -126,8 +125,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
   const isMyPost = sessionMyAccountname === post.author.accountname;
 
   return (
-    <>
-      <div className={styles.feedItem}>
+      <article className={styles.feedItem}>
         <img
           className={styles.profileImg}
           src={profileImageSrc}
@@ -192,7 +190,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
               {commentCount}
             </Link>
           </div>
-          <p className={styles.date}>{formatDate(post.createdAt)}</p>
+          <time dateTime={post.createdAt} className={styles.date}>{formatDate(post.createdAt)}</time>
         </div>
         {(path.includes("detail") || selectedPost === post.id) && (
           <>
@@ -200,8 +198,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
             <ConfirmModal actionHandlers={actionHandlersConfirm} />
           </>
         )}
-      </div>
-    </>
+      </article>
   );
 };
 
