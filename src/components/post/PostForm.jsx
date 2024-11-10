@@ -75,7 +75,7 @@ const PostForm = ({
   return (
     <form onSubmit={onSubmit} className="paddingTopForHeader">
       <header className={`${isVisible ? "header" : "headerHidden"}`}>
-        <BackButton />
+        <BackButton aria-label="뒤로 가기" />
         <ButtonComponent
           buttonType="saveType"
           type="submit"
@@ -95,6 +95,9 @@ const PostForm = ({
         )}
         <div className={styles.uploadContainer}>
           <div className={styles.contentsWrapper}>
+            <label htmlFor="content"  className="hiddenLabel">
+              게시글 내용 입력
+            </label>
             <textarea
               id="content"
               value={content}
