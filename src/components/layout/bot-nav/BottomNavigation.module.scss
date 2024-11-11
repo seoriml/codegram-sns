@@ -19,6 +19,12 @@
   height: 60px;
 }
 
+.listItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .icon {
   width: 24px;
   height: 24px;
@@ -29,6 +35,8 @@
 }
 
 .text {
+  display: flex;
+  justify-content: center;
   font-size: 10px;
   color: #767676;
   &.activeText {
