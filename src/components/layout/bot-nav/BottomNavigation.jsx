@@ -26,7 +26,9 @@ const BottomTab = () => {
 
   // URL 변경 시 activeTab 업데이트
   useEffect(() => {
-    const currentTab = tabItem.find((item) => item.path === location.pathname)?.tab;
+    const currentTab = tabItem.find(
+      (item) => item.path === location.pathname
+    )?.tab;
     if (currentTab && currentTab !== activeTab) {
       dispatch(setActiveTab(currentTab));
     }
@@ -34,16 +36,34 @@ const BottomTab = () => {
 
   // 하단 탭 내용 정의
   return (
-    <div className={styles.content}>
-      <div className={styles.tab}>
+    <nav className={styles.content}>
+      <ul className={styles.tab}>
         {tabItem.map(({ path, text, icon, tab }) => (
-          <Link key={tab} to={path} onClick={() => dispatch(setActiveTab(tab))} className={styles.link}>
-            <img src={icon} alt={text} className={`${styles.icon} ${activeTab === tab ? styles.activeIcon : ""}`} />
-            <div className={`${styles.text} ${activeTab === tab ? styles.activeText : ""}`}>{text}</div>
-          </Link>
+          <li key={tab} className={styles.listItem}>
+            <Link
+              to={path}
+              onClick={() => dispatch(setActiveTab(tab))}
+              className={styles.link}
+            >
+              <img
+                src={icon}
+                alt={text}
+                className={`${styles.icon} ${
+                  activeTab === tab ? styles.activeIcon : ""
+                }`}
+              />
+              <span
+                className={`${styles.text} ${
+                  activeTab === tab ? styles.activeText : ""
+                }`}
+              >
+                {text}
+              </span>
+            </Link>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </nav>
   );
 };
 

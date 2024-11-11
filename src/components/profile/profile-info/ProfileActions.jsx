@@ -28,15 +28,26 @@ const ProfileAction = ({
     }
 
     // API를 통해 팔로우/언팔로우 정보 가져오기
-    const reqUrl = isFollowed ? `profile/${accountname}/unfollow` : `profile/${accountname}/follow`;
+    const reqUrl = isFollowed
+      ? `profile/${accountname}/unfollow`
+      : `profile/${accountname}/follow`;
 
     if (isFollowed) {
       // 언팔로우 요청
-      await del(`${import.meta.env.VITE_API_URL}/${reqUrl}`, "application/json", token);
+      await del(
+        `${import.meta.env.VITE_API_URL}/${reqUrl}`,
+        "application/json",
+        token
+      );
       setFollowersCount(followersCount - 1);
     } else {
       // 팔로우 요청
-      await post(`${import.meta.env.VITE_API_URL}/${reqUrl}`, null, "application/json", token);
+      await post(
+        `${import.meta.env.VITE_API_URL}/${reqUrl}`,
+        null,
+        "application/json",
+        token
+      );
       setFollowersCount(followersCount + 1);
     }
   };
@@ -59,18 +70,26 @@ const ProfileAction = ({
   }, [profileData, error]);
 
   return (
-    <div className={styles.profileAction}>
+    <ul className={styles.profileAction}>
       {isMyProfile ? (
-        <div className={styles.myProfileButton}>
-          <ButtonComponent buttonType="profileType" onClick={handleProfileEdit} className={styles.profileType}>
+        <li className={styles.myProfileButton}>
+          <ButtonComponent
+            buttonType="profileType"
+            onClick={handleProfileEdit}
+            className={styles.profileType}
+          >
             프로필 수정
           </ButtonComponent>
-          <ButtonComponent buttonType="profileType" onClick={handlePostCreate} className={styles.profileType}>
+          <ButtonComponent
+            buttonType="profileType"
+            onClick={handlePostCreate}
+            className={styles.profileType}
+          >
             내 작업 등록
           </ButtonComponent>
-        </div>
+        </li>
       ) : (
-        <div className={styles.yourProfileButton}>
+        <li className={styles.yourProfileButton}>
           <ButtonComponent
             buttonType={isFollowed ? "profileType" : "followType"}
             onClick={handleFollowClick}
@@ -79,10 +98,11 @@ const ProfileAction = ({
             {isFollowed ? "언팔로우" : "팔로우"}
           </ButtonComponent>
           {errorMessage && <p>{errorMessage}</p>} {/* 에러 메시지 출력 */}
-          {error && <p>{error.message}</p>} {/* API 호출에서 발생한 에러 출력 */}
-        </div>
+          {error && <p>{error.message}</p>}{" "}
+          {/* API 호출에서 발생한 에러 출력 */}
+        </li>
       )}
-    </div>
+    </ul>
   );
 };
 

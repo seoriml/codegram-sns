@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const PostGrid = ({ posts }) => {
   const navigate = useNavigate();
   return (
-    <div
+    <section
       style={{
         backgroundColor: posts.length === 0 ? "#F2F2F2" : "#ffffff",
         width: "100%",
@@ -27,7 +27,7 @@ const PostGrid = ({ posts }) => {
             .map((post) => {
               const imageArray = post.image.split(",");
               return (
-                <div
+                <article
                   key={post.id}
                   style={{
                     position: "relative",
@@ -65,11 +65,11 @@ const PostGrid = ({ posts }) => {
                       }}
                     />
                   )}
-                </div>
+                </article>
               );
             })}
       </div>
-    </div>
+    </section>
   );
 };
 
