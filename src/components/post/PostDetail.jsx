@@ -43,11 +43,11 @@ export default function PostDetailComponent({ post }) {
     <div className="paddingTopForHeader">
       <header className={`${isVisible ? "header" : "headerHidden"}`}>
         <div>
-          <BackButton />
-          <Link to="/home">
+          <BackButton aria-label="뒤로 가기" />
+          <Link to="/home" aria-label="홈으로 이동">
             <img
               src={logoIcon}
-              alt="코드그램"
+              alt="코드그램 로고"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               style={{ cursor: "pointer", paddingLeft: "30px" }}
             />

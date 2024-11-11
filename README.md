@@ -687,6 +687,11 @@ CodeGram은 개발자들이 작업물과 프로젝트를 공유하고, 다양한
 
 <br>
 
+## 시연 영상
+[코드그램 시연 영상 보기](https://youtu.be/9CL5SN3xBEg)
+
+<br>
+
 ## 회의록
 
 [회의록](https://github.com/seoriml/codegram-sns/wiki/2024%E2%80%9009%E2%80%9019-%ED%9A%8C%EC%9D%98%EB%A1%9D)
