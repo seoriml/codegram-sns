@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./BottomNavigation.module.scss";
-// 리덕스
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveTab } from "../../../redux/bottomSlice";
-// 아이콘
 import homeIcon from "../../../assets/images/tab_icon_home.svg";
 import chatIcon from "../../../assets/images/tab_icon_chat.svg";
 import postIcon from "../../../assets/images/tab_icon_post.svg";
 import profileIcon from "../../../assets/images/tab_icon_profile.svg";
 
-// 하단 탭 구성 요소 배열
 const tabItem = [
   { path: "/home", text: "홈", icon: homeIcon, tab: "home" },
   { path: "/chat", text: "코드챗", icon: chatIcon, tab: "chat" },
@@ -18,7 +15,6 @@ const tabItem = [
   { path: "/profile", text: "프로필", icon: profileIcon, tab: "profile" },
 ];
 
-// 하단 탭 컴포넌트 정의
 const BottomTab = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -34,7 +30,6 @@ const BottomTab = () => {
     }
   }, [location, dispatch, activeTab]);
 
-  // 하단 탭 내용 정의
   return (
     <nav className={styles.content}>
       <ul className={styles.tab}>

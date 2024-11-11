@@ -21,13 +21,11 @@ const ProfileAction = ({
   const navigate = useNavigate();
 
   const handleFollowClick = async () => {
-    // 자기 자신을 팔로우하려고 할 때
     if (isMyProfile) {
       setErrorMessage("자기 자신을 팔로우 할 수 없습니다.");
       return;
     }
 
-    // API를 통해 팔로우/언팔로우 정보 가져오기
     const reqUrl = isFollowed
       ? `profile/${accountname}/unfollow`
       : `profile/${accountname}/follow`;
@@ -51,14 +49,13 @@ const ProfileAction = ({
       setFollowersCount(followersCount + 1);
     }
   };
-  // console.log(setFollowersCount);
 
   const handleProfileEdit = () => {
-    navigate(`/profile/edit`); // 프로필 수정 페이지로 이동
+    navigate(`/profile/edit`);
   };
 
   const handlePostCreate = () => {
-    navigate(`/product/create`); // 게시글 작성 페이지로 이동
+    navigate(`/product/create`);
   };
 
   useEffect(() => {

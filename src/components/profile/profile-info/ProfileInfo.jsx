@@ -23,7 +23,6 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // API를 통해 프로필 정보 가져오기
     const fetchProfile = async () => {
       const reqUrl = isMyProfile ? `user/myinfo` : `profile/${accountname}`;
       const res = await get(
@@ -37,16 +36,13 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
     };
     fetchProfile();
   }, []);
-  //[get, accountname, isMyProfile]
 
   useEffect(() => {
-    // 데이터를 성공적으로 가져온 경우
     if (profileData && (profileData?.profile || profileData?.user)) {
       const profile = isMyProfile ? profileData?.user : profileData?.profile;
       setProfile(profile);
-      setFollowersCount(profile?.followerCount); // 초기 팔로워 수 설정
-      // console.log("profileInfo: ", setFollowersCount);
-      setFollowingsCount(profile?.followingCount); // 초기 팔로잉 수 설정
+      setFollowersCount(profile?.followerCount);
+      setFollowingsCount(profile?.followingCount);
       if (onProfileLoad) {
         onProfileLoad(profile);
       }
@@ -55,7 +51,6 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
     }
   }, [profileData, error, isMyProfile, onProfileLoad]);
 
-  // 프로필 정보가 없고 에러가 있을 경우 에러 메시지 출력
   if (error) {
     return <div>{errorMessage}</div>;
   }
