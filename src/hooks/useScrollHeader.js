@@ -8,11 +8,10 @@ const useScrollHeader = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // 스크롤 내릴 때 헤더 숨김, 올릴 때 헤더 표시
       if (currentScrollY > lastScrollY) {
-        setIsVisible(false); // 헤더 숨김
+        setIsVisible(false);
       } else {
-        setIsVisible(true); // 헤더 표시
+        setIsVisible(true);
       }
 
       setLastScrollY(currentScrollY);
