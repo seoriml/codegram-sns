@@ -1,7 +1,7 @@
 // components/PostItem.jsx
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useAPI from "../../hooks/useAPI";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   openOptionsModal,
@@ -11,12 +11,13 @@ import { openConfirmModal } from "../../redux/confirmModalSlice";
 import OptionsModal from "../ui/modal/OptionsModal";
 import ConfirmModal from "../ui/modal/ConfirmModal";
 import moreIcon from "../../assets/images/icon_more_vertical_mini.svg";
+import { getProfileImageSrc } from '../utils/profileImageUtils';
 import defaultProfileIcon from "../../assets/images/user_profile.svg";
 import styles from "../feed/PostFeed.module.scss";
 import HeartComponent from "../heart/HeartComponent";
 import commentsIcon from "../../assets/images/icon_chat.svg";
 
-// 날짜 포맷팅 함수
+// 날짜 포맷팅 함수c
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -116,11 +117,7 @@ const PostItem = ({ post, selectedPost, setSelectedPost, commentCount }) => {
     );
   };
 
-  const profileImageSrc =
-    post.author.image === "http://146.56.183.55:5050/Ellipse.png" ||
-    post.author.image === "https://estapi.mandarin.weniv.co.kr/undefined"
-      ? defaultProfileIcon
-      : post.author.image;
+  const profileImageSrc = getProfileImageSrc(post.author.image, defaultProfileIcon);
 
   const isMyPost = sessionMyAccountname === post.author.accountname;
 

@@ -1,14 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Search.module.scss";
+import { getProfileImageSrc } from '../utils/profileImageUtils';
 import defaultProfileIcon from "../../assets/images/user_profile.svg";
 
 const SearchResultItem = ({ user }) => {
-  const profileImageSrc =
-    user.image === "http://146.56.183.55:5050/Ellipse.png" ||
-    user.image === "https://estapi.mandarin.weniv.co.kr/undefined"
-      ? defaultProfileIcon
-      : user.image;
+  const profileImageSrc = getProfileImageSrc(user.image, defaultProfileIcon);
 
   return (
     <li>

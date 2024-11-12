@@ -9,6 +9,7 @@ import {
 } from "../../../redux/commentSlice";
 import { openOptionsModal } from "../../../redux/optionsModalSlice";
 import OptionsModal from "../../ui/modal/OptionsModal";
+import { getProfileImageSrc } from '../../utils/profileImageUtils';
 import defaultProfileIcon from "../../../assets/images/user_profile.svg";
 import styles from "./CommentList.module.scss";
 import moreIcon from "../../../assets/images/icon_more_vertical_mini.svg";
@@ -177,14 +178,7 @@ export default function CommentList({ postId }) {
                 <li key={comment.id} className={styles.commentItem}>
                   <img
                     className={styles.profileImg}
-                    src={
-                      comment.author.image ===
-                        "http://146.56.183.55:5050/Ellipse.png" ||
-                      comment.author.image ===
-                        "https://estapi.mandarin.weniv.co.kr/undefined"
-                        ? defaultProfileIcon
-                        : comment.author.image
-                    }
+                    src={getProfileImageSrc(comment.author.image, defaultProfileIcon)}
                     alt={`${comment.author.username}의 프로필사진`}
                   />
                   <div className={styles.content}>
@@ -218,14 +212,7 @@ export default function CommentList({ postId }) {
         <img
           className={styles.profileImg}
           alt="프로필 사진"
-          src={
-            !sessionMyProfileImage ||
-            sessionMyProfileImage === "http://146.56.183.55:5050/Ellipse.png" ||
-            sessionMyProfileImage ===
-              "https://estapi.mandarin.weniv.co.kr/undefined"
-              ? defaultProfileIcon
-              : sessionMyProfileImage
-          }
+          src={getProfileImageSrc(sessionMyProfileImage, defaultProfileIcon)}
         />
         <input
           className={styles.inputComment}
