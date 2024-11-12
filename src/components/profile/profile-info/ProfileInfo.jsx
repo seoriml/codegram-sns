@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useApi from "../../../hooks/useAPI";
 import useScrollHeader from "../../../hooks/useScrollHeader";
+import { getProfileImageSrc } from '../../utils/profileImageUtils';
 import ProfileImage from "../../../assets/images/user_profile.svg";
 import LogoImage from "../../../assets/images/symbol_logo_codegram_title.svg";
 import ProfileAction from "./ProfileActions";
@@ -58,11 +59,7 @@ const ProfileInfo = ({ accountname, isMyProfile, onProfileLoad }) => {
     return <Loading />;
   }
 
-  const profileImageSrc =
-    profile?.image === "http://146.56.183.55:5050/Ellipse.png" ||
-    profile?.image === "https://estapi.mandarin.weniv.co.kr/undefined"
-      ? ProfileImage
-      : profile?.image;
+  const profileImageSrc = getProfileImageSrc(profile?.image, ProfileImage);
 
   return (
     <div className={styles.profileInfo}>

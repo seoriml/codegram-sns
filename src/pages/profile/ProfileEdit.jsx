@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Input from "../../components/ui/Input";
 import useAPI from "../../hooks/useAPI";
 import { useNavigate } from "react-router-dom";
+import { getProfileImageSrc } from '../../components/utils/profileImageUtils';
 import defaultProfileImage from "../../assets/images/user_profile.svg";
 import BackButton from "../../components/ui/button/BackButton";
 import ButtonComponent from "../../components/ui/Button";
@@ -131,11 +132,7 @@ const ProfileEdit = () => {
 
   if (error) return <div>에러: {error}</div>;
 
-  const profileImageSrc =
-    profileImage === "http://146.56.183.55:5050/Ellipse.png" ||
-    profileImage === "https://estapi.mandarin.weniv.co.kr/undefined"
-      ? defaultProfileImage
-      : profileImage;
+  const profileImageSrc = getProfileImageSrc(profileImage, defaultProfileImage);
 
   return (
     <form onSubmit={handleSubmit}>

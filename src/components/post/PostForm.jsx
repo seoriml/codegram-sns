@@ -4,6 +4,7 @@ import ImageUploadButton from "../ui/button/ImageUploadButton";
 import styles from "./PostForm.module.scss";
 import ButtonComponent from "../ui/Button";
 import removeIcon from "../../assets/images/icon_close.svg";
+import { getProfileImageSrc } from '../utils/profileImageUtils';
 import defaultProfileIcon from "../../assets/images/user_profile.svg";
 import "../../assets/styles/common.scss";
 import useScrollHeader from "../../hooks/useScrollHeader";
@@ -66,11 +67,7 @@ const PostForm = ({
     }
   };
 
-  const profileImageSrc =
-    author?.image === "http://146.56.183.55:5050/Ellipse.png" ||
-    author?.image === "https://estapi.mandarin.weniv.co.kr/undefined"
-      ? defaultProfileIcon
-      : author?.image;
+  const profileImageSrc = getProfileImageSrc(author?.image, defaultProfileIcon);
 
   return (
     <form onSubmit={onSubmit} className="paddingTopForHeader">
