@@ -24,7 +24,7 @@ const PostList = ({ posts }) => {
   }, [dispatch, posts, commentCounts]);
 
   return (
-    <div
+    <section
       style={{
         backgroundColor: posts.length === 0 ? "#F2F2F2" : "#ffffff",
         width: "100%",
@@ -47,7 +47,7 @@ const PostList = ({ posts }) => {
             </li>
           ))}
       </ul>
-    </div>
+    </section>
   );
 };
 

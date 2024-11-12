@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { getProfileImageSrc } from '../utils/profileImageUtils';
 import defaultProfileImage from "../../assets/images/user_profile.svg";
 import ButtonComponent from "../ui/Button";
 import styles from "./Follower.module.scss";
@@ -12,12 +13,7 @@ const FollowerItem = ({ profile }) => {
   const [isFollowed, setIsFollowed] = useState(profile.isfollow);
   const { token } = useAPI();
 
-  const profileImageSrc =
-    profile.image === "http://146.56.183.55:5050/Ellipse.png" ||
-    profile.image === "https://estapi.mandarin.weniv.co.kr/undefined"
-      ? defaultProfileImage
-      : profile.image;
-
+  const profileImageSrc = getProfileImageSrc(profile.image, defaultProfileImage);
   const handleFollow = async () => {
     const apiUrl = isFollowed
       ? `${import.meta.env.VITE_API_URL}/profile/${

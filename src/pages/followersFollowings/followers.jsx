@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import FollowerList from "../../components/follower/FollowerList";
@@ -71,7 +71,7 @@ const Followers = () => {
         <BackButton />
         <h1 className={styles.followerName}>팔로워</h1>
       </div>
-      {error ? (
+      {!loading && error ? (
         <p className={styles.followerText}>해당 계정이 존재하지 않습니다.</p>
       ) : (
         followers.length > 0 && <FollowerList followers={followers} />
