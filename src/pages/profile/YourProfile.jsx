@@ -15,9 +15,3 @@ export default function YourProfile() {
     </div>
   );
 }
-
-// 확인용 서버 계정
-// accountname = {"ali"}
-// export default function YourProfile() {
-//   return <ProfileInfo isMyProfile={false} accountname={"ali"} />;
-// }
