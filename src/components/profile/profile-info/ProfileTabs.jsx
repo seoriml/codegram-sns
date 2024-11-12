@@ -15,7 +15,6 @@ const ProfileTabs = ({ accountname }) => {
   const { get, token } = useAPI();
   const LIMIT = 10;
 
-  // 데이터 가져오기 함수
   const fetchPosts = async ({ pageParam = 0 }) => {
     const response = await get(
       `${
@@ -27,7 +26,7 @@ const ProfileTabs = ({ accountname }) => {
     return {
       posts: response.payload.post,
       nextSkip: pageParam + LIMIT,
-    }; // posts와 nextSkip 반환
+    };
   };
 
   // useInfiniteQuery를 사용한 무한 스크롤 구현
@@ -36,7 +35,6 @@ const ProfileTabs = ({ accountname }) => {
       queryKey: ["userPosts", accountname],
       queryFn: fetchPosts,
       getNextPageParam: (lastPage) => {
-        // console.log("Last page:", lastPage); // 현재 페이지 정보 확인
         return lastPage.posts.length < LIMIT ? undefined : lastPage.nextSkip;
       },
       enabled: !!accountname,
@@ -51,7 +49,7 @@ const ProfileTabs = ({ accountname }) => {
         hasNextPage &&
         !isFetchingNextPage
       ) {
-        fetchNextPage(); // 페이지 끝에 도달하면 다음 페이지 요청
+        fetchNextPage();
       }
     };
 
@@ -62,7 +60,6 @@ const ProfileTabs = ({ accountname }) => {
   // 모든 페이지의 post 데이터를 하나로 병합
   const posts = data?.pages.flatMap((page) => page.posts) || [];
 
-  // data가 로드되지 않았거나 API 호출 실패 시 에러 메시지 표시
   if (!data || !data.pages) {
     return (
       <>
@@ -77,8 +74,8 @@ const ProfileTabs = ({ accountname }) => {
   };
 
   return (
-    <div>
-      <div className={styles.profileTabs}>
+    <ul>
+      <li className={styles.profileTabs}>
         <img
           src={isListView ? iconListOn : iconListOff}
           alt="리스트 뷰 아이콘"
@@ -89,7 +86,7 @@ const ProfileTabs = ({ accountname }) => {
           alt="앨범 뷰 아이콘"
           onClick={() => tabView(false)}
         />
-      </div>
+      </li>
 
       {/* 게시물 렌더링 */}
       {isListView ? <PostList posts={posts} /> : <PostGrid posts={posts} />}
@@ -100,7 +97,7 @@ const ProfileTabs = ({ accountname }) => {
           <Loading />
         </>
       )}
-    </div>
+    </ul>
   );
 };
 
