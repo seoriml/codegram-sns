@@ -12,7 +12,6 @@ const Followings = () => {
   const { get, error, token, loading } = useAPI();
   const LIMIT = 10;
 
-  // 팔로잉 리스트 데이터를 가져오는 함수
   const fetchFollowings = async ({ pageParam = 0 }) => {
     const response = await get(
       `${
@@ -40,7 +39,6 @@ const Followings = () => {
       enabled: !!accountname,
     });
 
-  // 스크롤 이벤트로 무한 스크롤 감지
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -49,7 +47,7 @@ const Followings = () => {
         hasNextPage &&
         !isFetchingNextPage
       ) {
-        fetchNextPage(); // 페이지 끝에 도달하면 다음 페이지 요청
+        fetchNextPage();
       }
     };
 
@@ -57,20 +55,18 @@ const Followings = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  // 모든 페이지의 following 데이터를 하나로 병합
   const followings = data?.pages.flatMap((page) => page.followings) || [];
 
-  // 로딩 중일 때 Loading 컴포넌트 표시
   if (loading && !data) {
     return <Loading />;
   }
 
   return (
     <div>
-      <div className={styles.followingsHeader}>
+      <header className={styles.followingsHeader}>
         <BackButton />
         <h1 className={styles.followerName}>팔로잉</h1>
-      </div>
+      </header>
       {!loading && error ? (
         <p className={styles.followerText}>.</p>
       ) : (
