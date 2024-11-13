@@ -14,6 +14,7 @@ const confirmModalSlice = createSlice({
   initialState,
   reducers: {
     openConfirmModal: (state, action) => {
+      document.body.style.overflow = "hidden";
       return {
         ...state,
         isOpen: true,
@@ -21,6 +22,7 @@ const confirmModalSlice = createSlice({
       };
     },
     closeConfirmModal: (state) => {
+      document.body.style.overflow = "";
       return {
         ...state,
         isOpen: false,

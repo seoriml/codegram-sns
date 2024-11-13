@@ -11,13 +11,16 @@ const optionsModalSlice = createSlice({
   initialState,
   reducers: {
     openOptionsModal: (state, action) => {
+      document.body.style.overflow = "hidden";
       return {
         ...state,
         isOpen: true,
         ...action.payload,
       };
+      
     },
     closeOptionsModal: (state) => {
+      document.body.style.overflow = "";
       return {
         ...state,
         isOpen: false,
